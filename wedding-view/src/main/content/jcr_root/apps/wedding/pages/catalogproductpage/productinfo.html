@@ -1,0 +1,99 @@
+<sly data-sly-use.productInfoModel="wedding.models.pages.ProductInfoModel">
+
+    <div class="product-info-model">
+
+        <div class="comeBack">
+            <sly data-sly-list.parentItem="${productInfoModel.parentList}">
+                <a class="comeBackLink" href="${parentItem.path}.html">${parentItem.title} - </a>
+            </sly>
+            <a class="comeBackLink" href="${currentPage.path}.html">${currentPage.title}</a>
+        </div>
+
+        <div class="product-general-info">
+
+            <div class="general-info">
+               <span class="productTitle">
+                    <h4>${properties.brand ? properties.brand :currentPage.parent.title} ${properties.model ? properties.model : currentPage.title}</h4>
+                </span>
+                <img alt="image" id="device-header-image" src="${productInfoModel.imgPath}" heigth="121" width="170">
+            </div>
+
+            <div class="contact-info">
+                <div data-sly-test="${properties.contacts}">
+                    <h3>Контакты:</h3>
+                    <sly data-sly-list.itemContact="${properties.contacts}">
+                        <div data-sly-use.contactHelper="${'contactHelper.js' @ contact=itemContact}">
+                                <img class="contact-type" src="${contactHelper.imagePath}" heigth="30" width="30">
+                                <span class="contact-value">${contactHelper.contactValue}</span>
+                        </div>
+                    </sly>
+                </div>
+            </div>
+            <div class="price-info">
+                <div class="price-info-block" data-sly-test="${properties.priceFrom}">
+                    <span>Цена от </span>
+                    <span class="price-from">${properties.priceFrom}</span>
+                    <span class="price-To"> до ${properties.priceTo || "..."}</span>
+                </div>
+            </div>
+        </div>
+        <sly data-sly-resource="text"></sly>
+        <div class="product-description">
+            ${properties.text || properties.discription}
+        </div>
+        <div id="photo-grid-gallery">
+            <sly data-sly-test="${ProductInfoModel.photosList}">
+                <h4>Фото</h4>
+            </sly>
+            <sly data-sly-list.fileName="${ProductInfoModel.photosList}">
+                <div class="photo-item" data-mfp-src="${fileName}">
+                    <div class="wrapper-img">
+                        <a href='${fileName}'>
+                            <img src='${fileName}' alt="">
+                        </a>
+                    </div>
+                </div>
+            </sly>
+        </div>
+        <div id="external-video-grid-gallery">
+            <sly data-sly-test="${properties.videoLinks}">
+                <h4>Видео</h4>
+            </sly>
+            <sly data-sly-list.externalVideo="${properties.videoLinks}">
+                <div class="video-item" data-url="${externalVideo}">
+                    <iframe width="700" height="400" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </sly>
+        </div>
+        <div class="itemsInfo">
+            <table class="product-specs__table">
+                <colgroup>
+                    <col width="10%">
+                    <col width="90%">
+                </colgroup>
+                <tbody>
+                <sly data-sly-list.itemProperties="${productInfoModel.itemProperties}">
+                    <tr class="property-table-row">
+                        <td>
+                                <span class="product-info-property-name">
+                                    ${itemProperties.propertyName}
+                                </span>
+                        </td>
+                        <td>
+                            <span class="product-info-property-value">
+         						<sly data-sly-use.helper="${'helper.js' @ type=itemProperties.propertyType, value=itemProperties.propertyValue, count=itemProperties.count}">
+                                    <div data-sly-test="${helper.isNumberBoolean}">
+                                        <img alt="image" src="${helper.path}" heigth="30" width="30">
+                                        <span data-sly-test="${helper.isMultiply}">${helper.count}</span>
+                                    </div>
+                                    ${helper.value}
+                                </sly>
+                            </span>
+                        </td>
+                    </tr>
+                </sly>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</sly>

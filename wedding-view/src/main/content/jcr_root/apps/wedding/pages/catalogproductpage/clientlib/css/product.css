@@ -1,0 +1,102 @@
+.product-info-model{
+    margin-left: 100px;
+}
+
+.comeBack{
+    font-size: 20px;
+    margin-top: 20px;
+    font-family: 'oswald-regular';
+}
+
+.comeBack a{
+    color: rgb(125, 102, 102);
+    text-decoration: none;
+}
+
+.product-general-info{
+    margin:40px;
+    display: flex;
+    flex-direction: row;
+}
+
+.productTitle h4{
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    font-family: 'oswald-regular';
+    color: #565050;
+}
+
+.seller-info{
+    margin-left: 300px;
+    color : rgba(210, 158, 42, 0.85);
+    font-size: 18px;
+    font-family: 'oswald-light';
+    margin-top: 17px;
+}
+
+.seller-item{
+    border-bottom: 1px solid #b3b3b3;
+    border-left: 1px solid #b3b3b3;
+    padding: 5px;
+}
+
+.itemsInfo{
+    margin-top: 50px;
+}
+
+.product-specs__table {
+    border-collapse: collapse;
+}
+
+.product-specs__table td {
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+
+.property-table-row{
+    border-bottom: 1px solid #b3b3b3;
+}
+
+.product-info-property-name , .product-info-property-value{
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'oswald-light';
+}
+
+.product-info-property-value{
+
+    color: #696969;
+}
+
+.product-info-description{
+    font-size: 13px;
+    font-weight: 200;
+    font-family: inherit;
+    color: #696969;
+}
+
+.photo-item img{
+    width: 200px;
+    height: 90px;
+}
+
+.photo-item{
+    margin: 15px;
+}
+#photo-grid-gallery{
+    padding-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.contact-info{
+    margin-left: 200px;
+}
+
+.price-info{
+    margin-left: 200px;
+}
+
+

@@ -1,0 +1,40 @@
+.promoProduct{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.promoProductItem{
+    margin-top: 10px;
+    line-height: 150px;
+    color: white;
+    font-weight: bold;
+    font-size: 3em;
+    text-align: center;
+    padding: 6px;
+}
+
+.promoProductItem:hover{
+    border-top: 4px solid rgba(234, 54, 54, 0.9);
+}
+
+.promoProductItem img{
+
+}
+
+.promoProductItem h3{
+    position: absolute;
+    text-decoration: none;
+    color: white;
+    font-family: fantasy;
+    font-size: 30px;
+}

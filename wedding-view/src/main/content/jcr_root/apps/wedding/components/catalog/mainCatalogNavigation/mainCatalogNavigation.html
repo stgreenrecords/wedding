@@ -1,0 +1,22 @@
+<sly data-sly-use.catalogNavigationModel="wedding.models.components.CatalogNavigationModel">
+    <div id="mainCatalog_navigation_block">
+        <nav class="mainCatalog_categories_nav">
+                <sly data-sly-list.category="${catalogNavigationModel.catalogList}">
+                    <li class="mainCatalog_categories_nav_item">
+                        <a href="${category.pagePath}.html" class="mainCatalog_categories_nav_item_link">
+                            <span class="mainCategoryImageTitle">${category.pageTitle}</span>
+                            <img class="mainCategoryImage" src="${category.mainCategoryImage}"/>
+                        </a>
+                    </li>
+                </sly>
+        </nav>
+    </div>
+</sly>
+
+
+
+
+
+
+
+

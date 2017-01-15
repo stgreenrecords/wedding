@@ -1,0 +1,19 @@
+<sly data-sly-use.bestProductsModel="BestProductsModel">
+    <div class="best-product-block">
+        <H3>Top popular products</H3>
+        <H3>__________________________________________________</H3>
+        <div class="best-product-content">
+            <sly data-sly-list.bestProduct="${bestProductsModel.bestProductsList}">
+                <div class="best-product-item">
+                    <a href="${bestProduct.pagePath}.html">
+                        <div class="best-product-item-photo">
+                            <img src="${bestProduct.imgPath}">
+                        </div>
+                        <span>${bestProduct.brand} ${bestProduct.model}</span>
+                        <div class="best-product-price">${bestProduct.bestPrice} BYN.</div>
+                    </a>
+                </div>
+            </sly>
+        </div>
+    </div>
+</sly>
