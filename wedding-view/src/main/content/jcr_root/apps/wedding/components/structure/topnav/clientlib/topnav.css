@@ -10,6 +10,10 @@
     list-style: none;
 }
 
+.img-topnav{
+    height: 75px;
+}
+
 .main_top_nav li.logo_nav {
     padding-right: 400px;
     margin-top: 5px;
@@ -32,7 +36,6 @@
     font-family: 'oswald-regular',helvetica,sans-serif,arial;
     position: relative;
     display: inline-block;
-    padding: 0 14px;
     text-transform: uppercase;
     color: #464547;
 }

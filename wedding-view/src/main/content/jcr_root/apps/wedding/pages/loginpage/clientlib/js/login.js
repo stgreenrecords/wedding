@@ -11,6 +11,22 @@ var PORTAL = (function (PORTAL, $) {
         var typeAction;
         var validationStatus = true;
 
+        var $baseForm = $self.find(".base-form");
+        var $formForSelf = $self.find(".form-for-self");
+        var $formForCompany = $self.find(".form-for-company");
+        var $formForDisplay = $self.find(".displayed-form");
+
+        var radioCompany = $self.find("input[type=radio][name=kind-partner]").change(function(){
+            var selectedRadio = $(this);
+          if (selectedRadio.val() == "company"){
+              $formForDisplay.children().remove();
+              $formForDisplay.append($formForCompany).append($baseForm);
+          } else {
+              $formForDisplay.children().remove();
+              $formForDisplay.append($formForSelf).append($baseForm);
+          }
+        });
+
         if (location.href.indexOf("?verifyStatus=true") != -1){
             $messageBlock.text("Validation succeed. Try to login.");
         }

@@ -58,3 +58,11 @@
   color: white;
   cursor: pointer;
 }
+
+.form-templates{
+  display: none;
+}
+
+.base-form{
+  margin-top: 20px
+}

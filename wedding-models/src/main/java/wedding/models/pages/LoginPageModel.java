@@ -7,6 +7,8 @@ import wedding.core.services.RecaptchaService;
 import wedding.models.BaseModel;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class LoginPageModel extends BaseModel {
@@ -27,6 +29,13 @@ public class LoginPageModel extends BaseModel {
             fullReferrer = "/content/wedding.html";
         }
         return fullReferrer;
+    }
+
+    public List<CatalogCategoryPageModel> getListOfPartners() {
+        List<CatalogCategoryPageModel> catalogCategoryPageModels = new ArrayList<>();
+        getCatalogRootPage().listChildren().forEachRemaining(
+                categoryPage -> catalogCategoryPageModels.add(categoryPage.getContentResource().adaptTo(CatalogCategoryPageModel.class)));
+        return catalogCategoryPageModels;
     }
 
     public String getRecaptchKey() {
