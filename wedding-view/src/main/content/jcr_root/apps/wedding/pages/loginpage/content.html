@@ -19,6 +19,36 @@
                         <input id="lastNameRegistrationInput" type="text" placeholder="Фамилия" class="registrationBlock_input">
                     </div>
                     <div class="base-form">
+                        <div class="city-select-container">
+                            <div class="main-city">
+                                <input type="checkbox" class="checkbox-city">
+                                <span class="checkbox-title">Минск</span>
+                            </div>
+                            <div class="main-city">
+                                <input type="checkbox" class="checkbox-city">
+                                <span class="checkbox-title">Гомель</span>
+                            </div>
+                            <div class="main-city">
+                                <input type="checkbox" class="checkbox-city">
+                                <span class="checkbox-title">Могилёв</span>
+                            </div>
+                            <div class="main-city">
+                                <input type="checkbox" class="checkbox-city">
+                                <span class="checkbox-title">Витебск</span>
+                            </div>
+                            <div class="main-city">
+                                <input type="checkbox" class="checkbox-city">
+                                <span class="checkbox-title">Гродно</span>
+                            </div>
+                            <div class="main-city">
+                                <input type="checkbox" class="checkbox-city">
+                                <span class="checkbox-title">Брест</span>
+                            </div>
+                            <div class="button-count-all">
+                                <span class="enum">Показать все города&nbsp;</span>
+                                <span class="button-count-all-arrow enum">&#9654;</span>
+                            </div>
+                        </div>
                         <select class="registrationBlock_input">
                             <option>
                                 Оказываемоя услуга&nbsp&nbsp&nbsp▽
@@ -33,7 +63,6 @@
                         <input id="passRegistrationInput" type="password" placeholder="Пароль" class="registrationBlock_input">
                         <input id="passRegistrationAgainInput" type="password" placeholder="Пароль ещё раз"
                                class="registrationBlock_input">
-
                         <div class="g-recaptcha" data-sitekey="${loginPageModel.recaptchKey}"></div>
                         <input id="submitRegistrationInput" data-type="registration" type="submit" value="Зарегистрироваться"
                                class="registrationBlock_input">
