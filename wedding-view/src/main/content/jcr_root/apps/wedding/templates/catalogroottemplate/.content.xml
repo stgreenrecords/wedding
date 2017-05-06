@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Template"
+    jcr:title="Шаблон основной каталога страницы"
+    allowedChildren="[/apps/wedding/templates/catalogcategorytemplate]"
+    allowedParents="[/apps/wedding/templates/landingtemplate]"
+    ranking="{Long}50">
+    <jcr:content
+        jcr:primaryType="cq:PageContent"
+        sling:resourceType="wedding/pages/rootcatalogpage">
+        <topnav
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wedding/components/structure/topnav"/>
+        <parsys
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="wcm/foundation/components/parsys">
+        </parsys>
+        <footer
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="wedding/components/structure/footer"/>
+    </jcr:content>
+</jcr:root>
