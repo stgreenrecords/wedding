@@ -1,0 +1,33 @@
+.large-image{
+    height: 800px;
+}
+
+.large-image-block .left-top{
+    padding-top: 100px;
+    padding-left: 200px;
+    max-width: 560px;
+}
+
+
+.large-image-block .left-bottom{
+    padding-left: 200px;
+    max-width: 560px;
+    padding-top: 250px;
+}
+
+.large-image-button{
+    width: 360px;
+    height: 60px;
+    font-size: 29px;
+    background-color: #ec995e;
+    color: white;
+    border-radius: 5%;
+}
+
+
+.large-image-block p{
+	color: #6d6458;
+    font-size: 46px;
+    font-family: 'oswald-regular';
+    font-weight: 700;
+}
