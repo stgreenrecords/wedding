@@ -128,6 +128,7 @@
                     <path
                         jcr:primaryType="cq:Widget"
                         name="./path"
+                        fieldLabel="Путь к картинке"
                         xtype="pathfield"/>
                 </items>
             </advance>
