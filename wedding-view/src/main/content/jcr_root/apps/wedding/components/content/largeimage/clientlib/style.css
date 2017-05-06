@@ -2,19 +2,6 @@
     height: 800px;
 }
 
-.large-image-block .left-top{
-    padding-top: 100px;
-    padding-left: 200px;
-    max-width: 560px;
-}
-
-
-.large-image-block .left-bottom{
-    padding-left: 200px;
-    max-width: 560px;
-    padding-top: 250px;
-}
-
 .large-image-button{
     width: 360px;
     height: 60px;
@@ -30,4 +17,67 @@
     font-size: 46px;
     font-family: 'oswald-regular';
     font-weight: 700;
+}
+
+.large-image-block .left-center {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    max-width: 500px;
+}
+
+.large-image-block .left-bottom {
+    position: absolute;
+    top: 60%;
+    left: 10%;
+    max-width: 500px;
+}
+
+.large-image-block .left-top {
+    position: absolute;
+    top: 25%;
+    left: 10%;
+    max-width: 500px;
+}
+
+.large-image-block .top-center {
+    position: absolute;
+    top: 25%;
+    left: 40%;
+    max-width: 500px;
+}
+
+.large-image-block .bottom-center {
+    position: absolute;
+    top: 60%;
+    left: 40%;
+    max-width: 500px;
+}
+
+.large-image-block .center {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    max-width: 500px;
+}
+
+.large-image-block .right-center {
+    position: absolute;
+    top: 40%;
+    left: 70%;
+    max-width: 500px;
+}
+
+.large-image-block .right-top {
+    position: absolute;
+    top: 25%;
+    left: 70%;
+    max-width: 500px;
+}
+
+.large-image-block .right-bottom {
+    position: absolute;
+    top: 60%;
+    left: 70%;
+    max-width: 500px;
 }
