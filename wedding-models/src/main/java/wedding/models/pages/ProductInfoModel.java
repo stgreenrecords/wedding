@@ -188,5 +188,4 @@ public class ProductInfoModel extends BaseModel {
         }
         return videoList;
     }
-
 }

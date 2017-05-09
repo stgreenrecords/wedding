@@ -6,6 +6,7 @@ import com.day.cq.search.QueryBuilder;
 import com.day.cq.search.result.Hit;
 import com.day.cq.search.result.SearchResult;
 import com.day.cq.wcm.api.Page;
+import com.day.cq.wcm.api.PageManager;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ValueMap;
@@ -161,5 +162,9 @@ public class BaseModel {
 
     public Page getCurrentPage() {
         return currentPage;
+    }
+
+    public PageManager getPageManager(){
+        return resourceResolver != null ? resourceResolver.adaptTo(PageManager.class) : null;
     }
 }

@@ -97,6 +97,8 @@ public class Constants {
 
     public static final String RICH_TEXT_PROPERTY = "text";
 
+    public static final String OUR_PARTNERS_PROPERTY_PATHS = "paths";
+
     public static final String RESOURCE_TYPE__NAVIGATION = "wedding/components/structure/topnav";
 
     public static final String RESOURCE_TYPE__FOOTER = "wedding/components/structure/footer";
