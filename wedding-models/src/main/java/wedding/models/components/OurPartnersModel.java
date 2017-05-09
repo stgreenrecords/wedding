@@ -20,7 +20,7 @@ public class OurPartnersModel extends BaseModel {
     public List<ProductInfoModel> getPartners(){
         List<ProductInfoModel> partnerList = new ArrayList<>();
         if (getComponentProperties().containsKey(Constants.OUR_PARTNERS_PROPERTY_PATHS)){
-            String[] paths = selfResource.getValueMap().get(Constants.OUR_PARTNERS_PROPERTY_PATHS, String[].class);
+            String[] paths = getComponentProperties().get(Constants.OUR_PARTNERS_PROPERTY_PATHS, String[].class);
             for(String path: paths){
                 Resource partnerResource = getResourceResolver().getResource(path);
                 if(partnerResource != null){
