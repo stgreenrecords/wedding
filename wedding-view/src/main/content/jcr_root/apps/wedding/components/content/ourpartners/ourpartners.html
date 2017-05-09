@@ -3,13 +3,13 @@
 </sly>
 <sly data-sly-use.ourPartnersModel="wedding.models.components.OurPartnersModel">
     <div class="our-partners-block">
-        <h2>УЖЕ С НАМИ</h2>
+        <h1>УЖЕ С НАМИ</h1>
         <div class="partners">
             <sly data-sly-list.partner="${ourPartnersModel.partners}">
                 <div class="partner">
                     <img src="${partner.imgPath}" alt="" class="partner-image">
                     <h3>${partner.pageTitle}</h3>
-                    <p>${partner.description}</p>
+                    <p>${partner.microDescription}</p>
                 </div>
             </sly>
         </div>

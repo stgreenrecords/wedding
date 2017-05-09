@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import wedding.core.data.Constants;
 import wedding.models.BaseModel;
-import wedding.models.pages.ProductInfoModel;
+import wedding.models.pages.PartnerPageModel;
 
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -28,8 +28,8 @@ public class BestProductsModel extends BaseModel {
         super(resource);
     }
 
-    public List<ProductInfoModel> getBestProductsList() {
-        List<ProductInfoModel> productInfoModelTreeMap = new ArrayList<ProductInfoModel>();
+    public List<PartnerPageModel> getBestProductsList() {
+        List<PartnerPageModel> partnerPageModelTreeMap = new ArrayList<PartnerPageModel>();
         List<String> propertiesList = new ArrayList();
         Map<String, String> predicates = new HashMap<String, String>();
         predicates.put("path", Constants.CATALOG_PATH);
@@ -49,9 +49,9 @@ public class BestProductsModel extends BaseModel {
             } catch (RepositoryException e) {
                 LOG.error(e.getMessage());
             }
-            productInfoModelTreeMap.add(productInfoResource.adaptTo(ProductInfoModel.class));
+            partnerPageModelTreeMap.add(productInfoResource.adaptTo(PartnerPageModel.class));
         }
-        return productInfoModelTreeMap;
+        return partnerPageModelTreeMap;
     }
 
 

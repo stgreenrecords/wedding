@@ -1,0 +1,40 @@
+.partner-image{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+}
+
+.our-partners-block{
+    width: 85%;
+    margin: 0 auto;
+    background-color: rgba(169, 134, 88, 0.22);
+    margin-top: 50px;
+}
+
+.our-partners-block h1{
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 30px;
+}
+
+.partners{
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 40px;
+}
+
+.partner{
+    padding: 10px;
+    text-align: center;
+}
+
+.partner h3{
+    font-size: 22px;
+    font-family: 'oswald-regular';
+    font-weight: 700;
+}
+
+.partner p{
+    font-family: 'oswald-light';
+    font-size: 19px;
+}

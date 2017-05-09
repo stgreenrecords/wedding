@@ -23,9 +23,9 @@ import javax.jcr.Value;
 import java.util.*;
 
 @Model(adaptables = Resource.class)
-public class ProductInfoModel extends BaseModel {
+public class PartnerPageModel extends BaseModel {
 
-    public ProductInfoModel(Resource resource) {
+    public PartnerPageModel(Resource resource) {
         super(resource);
     }
 
@@ -187,5 +187,9 @@ public class ProductInfoModel extends BaseModel {
             }
         }
         return videoList;
+    }
+
+    public String getMicroDescription(){
+      return getComponentProperties().get("microdescription", String.class);
     }
 }

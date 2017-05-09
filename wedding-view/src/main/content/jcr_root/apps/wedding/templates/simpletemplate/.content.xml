@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
-    jcr:description="Template for initial or main page of the site."
+    jcr:description="Шаблон для создания основных разделов сайта"
     jcr:primaryType="cq:Template"
     jcr:title="Шаблон страницы раздела навигации"
     allowedParents="[/apps/wedding/templates/landingtemplate]"
@@ -14,10 +14,6 @@
         <catalognavigation
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="wedding/components/catalog/catalogNavigation"/>
-        <columns
-                jcr:primaryType="nt:unstructured"
-                sling:resourceType="wedding/components/structure/column-control"
-                columns="100"/>
         <parsys
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="wcm/foundation/components/parsys">

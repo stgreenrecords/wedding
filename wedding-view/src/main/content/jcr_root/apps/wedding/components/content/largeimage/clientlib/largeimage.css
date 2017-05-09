@@ -1,20 +1,25 @@
 .large-image{
     height: 800px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
 .large-image-button{
-    width: 360px;
-    height: 60px;
-    font-size: 29px;
-    background-color: #ec995e;
-    color: white;
-    border-radius: 5%;
+    width: 260px;
+    height: 55px;
+    font-size: 24px;
+    background-color: rgba(140, 15, 15, 0.26);
+    color: #fff;
+    border-radius: 30% 30% 0 0;
+    font-family: 'oswald-light';
+    text-transform: uppercase;
 }
 
 
 .large-image-block p{
-	color: #6d6458;
-    font-size: 46px;
+    color: #f1efed;
+    font-size: 70px;
     font-family: 'oswald-regular';
     font-weight: 700;
 }
@@ -34,7 +39,7 @@
 }
 
 .large-image-block .left-top {
-    position: absolute;
+    position: relative;
     top: 25%;
     left: 10%;
     max-width: 500px;
@@ -76,8 +81,16 @@
 }
 
 .large-image-block .right-bottom {
-    position: absolute;
-    top: 60%;
-    left: 70%;
+    position: relative;
+    top: 40%;
+    left: 72%;
     max-width: 500px;
+}
+
+@media screen and (max-width: 1366px) {
+
+    .large-image{
+        height: 600px;
+    }
+
 }

@@ -5,7 +5,7 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import wedding.core.data.Constants;
 import wedding.models.BaseModel;
-import wedding.models.pages.ProductInfoModel;
+import wedding.models.pages.PartnerPageModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,15 +17,15 @@ public class OurPartnersModel extends BaseModel {
         super(resource);
     }
 
-    public List<ProductInfoModel> getPartners(){
-        List<ProductInfoModel> partnerList = new ArrayList<>();
+    public List<PartnerPageModel> getPartners(){
+        List<PartnerPageModel> partnerList = new ArrayList<>();
         if (getComponentProperties().containsKey(Constants.OUR_PARTNERS_PROPERTY_PATHS)){
             String[] paths = getComponentProperties().get(Constants.OUR_PARTNERS_PROPERTY_PATHS, String[].class);
             for(String path: paths){
                 Resource partnerResource = getResourceResolver().getResource(path);
                 if(partnerResource != null){
                     Page partnerPage = partnerResource.adaptTo(Page.class);
-                    ProductInfoModel partnerModel = partnerPage.getContentResource().adaptTo(ProductInfoModel.class);
+                    PartnerPageModel partnerModel = partnerPage.getContentResource().adaptTo(PartnerPageModel.class);
                     partnerList.add(partnerModel);
                 }
             }
