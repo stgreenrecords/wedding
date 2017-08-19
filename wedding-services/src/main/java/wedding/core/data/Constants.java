@@ -59,6 +59,9 @@ public class Constants {
 
     public static final String RE_CAPTCHA_REQUEST_PARAMETER = "responseFromCaptcha";
 
+    public static final String USER_ID_PARAMETER = "userID";
+    public static final String AUTH_TYPE_PARAMETER = "authType";
+
     public static final String STATUS_REGISTRATION_SUCCESS = "registrationSuccess";
 
     public static final String STATUS_USER_DOESNOT_EXIST = "user with that name doesn't exist";
@@ -113,6 +116,8 @@ public class Constants {
     public static final String RESOURCE_TYPE_CQ_PAGE = "cq:Page";
 
     public static final String SUBCATEGORY_PROPERTY = "subCategory";
+
+
 
 
 }

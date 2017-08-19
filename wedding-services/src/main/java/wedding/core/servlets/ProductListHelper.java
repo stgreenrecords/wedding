@@ -58,7 +58,7 @@ public class ProductListHelper extends SlingAllMethodsServlet {
             try {
                 Iterator<Page> categoryPageIterator = request.getResourceResolver().getResource(currentPath).adaptTo(Page.class).listChildren();
                 resultJsonObject = new JsonObject();
-                JsonArray itemsArray = new JsonArray();
+                JsonArray itemsArray = new JsonArray();  ;
                 while (categoryPageIterator.hasNext()) {
                     Iterator<Page> brandIterator = categoryPageIterator.next().listChildren();
                     while (brandIterator.hasNext()) {

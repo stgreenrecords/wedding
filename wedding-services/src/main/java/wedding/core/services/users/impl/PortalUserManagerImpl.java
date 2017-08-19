@@ -157,6 +157,21 @@ public class PortalUserManagerImpl implements PortalUserManager {
         return portalUser;
     }
 
+    @Override
+    public boolean isUserExist(String userID, String authType) {
+        Map<String, String> predicates = new HashMap<String, String>();
+        predicates.put("path", "/home/users/wedding/users");
+        predicates.put("1_property", "userID");
+        predicates.put("1_property.value", userID);
+        predicates.put("2_property", "authType");
+        predicates.put("2_property.value", authType);
+
+
+        Query query = queryBuilder.createQuery(PredicateGroup.create(predicates), weddingUtils.getAdminSession());
+        SearchResult result = query.getResult();
+        return !result.getHits().isEmpty();
+    }
+
     public JsonObject getPortalUserInfoAsJson(String email) {
         PortalUser portalUser = getPortalUser(email);
         JsonObject jsonUser = new JsonObject();

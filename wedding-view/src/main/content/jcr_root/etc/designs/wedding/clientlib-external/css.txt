@@ -3,7 +3,7 @@ bootstrap.css
 bootstrap-theme.css
 
 #base=css/photoGallery
-magnific-popup.less
+magnific-popup.css
 
 #base=css/jquery-ui
 jquery-ui.min.css

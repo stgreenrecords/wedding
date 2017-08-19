@@ -1,0 +1,119 @@
+<sly data-sly-use.registrationModel="wedding.models.components.LoginRegistrationModel">
+
+
+    <div class="login-registration-block">
+        <a id="login-registration-link" href="#login-popup">Войти/Регистрация</a>
+
+        <div id="vk_auth"></div>
+
+        <div id="login-popup" class="white-popup mfp-hide">
+            <div class="registration">
+                <h3>Войдите, используя свой аккаунт в социальной сети.</h3>
+                <ul>
+                    <li class="vk-icon">
+                        <a href="#" id="vk-login-button">
+                            <img src="/etc/designs/wedding/clientlib-site/images/vk.png" alt="">
+                        </a>
+                    </li>
+                    <li class="facebook-icon">
+                        <a href="#" id="facebook-login-button">
+                            <img src="/etc/designs/wedding/clientlib-site/images/facebook.png" alt="">
+                        </a>
+                    </li>
+                    <li class="gmail-icon">
+                        <a href="#" id="gmail-login-button">
+                            <img src="/etc/designs/wedding/clientlib-site/images/gmail.png" alt="">
+                        </a>
+                    </li>
+                    <li class="odn-icon">
+                        <a href="#" id="odn-login-button">
+                            <img src="/etc/designs/wedding/clientlib-site/images/odn.png" alt="">
+                        </a>
+                    </li>
+                </ul>
+                <a style="display: none" id="registration-newAcc" href="#registration-popup-first-step"></a>
+            </div>
+            <div class="login">
+                <div class="loginBlock">
+                    <h3>Войти на сайт</h3>
+                    <input id="emailLoginInput" type="text" placeholder="e-mail" class="registrationBlock_input">
+                    <input id="passLoginInput" type="password" placeholder="Пароль" class="registrationBlock_input">
+                    <input id="submitLoginInput" type="submit" data-type="login" value="Войти"
+                           class="registrationBlock_input">
+                </div>
+            </div>
+        </div>
+
+        <div id="registration-popup-first-step" class="white-popup mfp-hide">
+            <div class="first-step-wrapper">
+                <div id="first-step-private" class="select-block">
+                    <h4>Невеста, жених, молодожёны</h4>
+                    <h3>Личный аккант</h3>
+                </div>
+                <div id="first-step-partner" class="select-block">
+                    <h4>Фотографы, видеографы и другие профессионалы, а также владельцы бизнеса</h4>
+                    <h3>Партнёр</h3>
+                </div>
+            </div>
+            <a style="display: none" id="registration-firstStep" href="#">Делее</a>
+        </div>
+        <div id="registration-popup-second-step-private" class="white-popup mfp-hide">
+            <div class="form-item-wrapper">
+                <div class="form-item">
+                    <span>Имя</span>
+                    <input type="text" id="registration-private-firstName" class="form-item-input">
+                </div>
+                <div class="form-item">
+                    <span>Фамилия</span>
+                    <input type="text" id="registration-private-lastName" class="form-item-input">
+                </div>
+                <div class="form-item">
+                    <span>Город</span>
+                    <input type="text" id="registration-private-city" class="form-item-input">
+                </div>
+                <div class="form-item">
+                    <span>Эл. почта</span>
+                    <input type="text" id="registration-private-email" class="form-item-input">
+                </div>
+                <div class="form-item">
+                    <input type="submit" class="registration-submit" id="registration-newPrivate"
+                           value="Создать аккаунт">
+                </div>
+            </div>
+        </div>
+
+        <div id="registration-popup-second-step-partner" class="white-popup mfp-hide">
+            <div class="form-item-wrapper">
+                <div class="form-item">
+                    <select class="registrationBlock_input" id="registration-partner-speciality">
+                        <option>
+                            Оказываемоя услуга
+                        </option>
+                        <sly data-sly-list.partnersList="${registrationModel.categoryList}">
+                            <option>
+                                ${partnersList.pageTitle}
+                            </option>
+                        </sly>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <span>Город</span>
+                    <input type="text" id="registration-partner-city" class="form-item-input">
+                </div>
+                <div class="form-item">
+                    <span>Эл. почта</span>
+                    <input type="text" id="registration-partner-email" class="form-item-input">
+                </div>
+                <div class="form-item">
+                    <span>Телефон</span>
+                    <input type="text" id="registration-partner-phone" class="form-item-input">
+                </div>
+                <div class="form-item">
+                    <input type="submit" class="registration-submit" id="registration-newPartner"
+                           value="Создать аккаунт">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</sly>

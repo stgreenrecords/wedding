@@ -23,6 +23,8 @@ public interface PortalUserManager {
 
     PortalUser getPortalUser(String email);
 
+    boolean isUserExist(String userID, String authType);
+
     public JsonObject getPortalUserInfoAsJson(String email);
 
 }

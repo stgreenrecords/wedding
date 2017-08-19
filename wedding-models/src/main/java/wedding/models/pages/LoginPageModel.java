@@ -21,7 +21,7 @@ public class LoginPageModel extends BaseModel {
     private RecaptchaService recaptchaService;
 
     public String getReferrer() {
-        String fullReferrer = null/*getRequest().getHeader("referer")*/;
+        String fullReferrer = null;
         if (fullReferrer != null && fullReferrer.contains("wedding") && !fullReferrer.contains("/wedding/registration.html")) {
             String withOutScheme = fullReferrer.substring(fullReferrer.indexOf("//") + 2, fullReferrer.length());
             return withOutScheme.substring(withOutScheme.indexOf("/"), withOutScheme.length());
@@ -31,7 +31,7 @@ public class LoginPageModel extends BaseModel {
         return fullReferrer;
     }
 
-    public List<CatalogCategoryPageModel> getListOfPartners() {
+    public List<CatalogCategoryPageModel> getCategoryList() {
         List<CatalogCategoryPageModel> catalogCategoryPageModels = new ArrayList<>();
         getCatalogRootPage().listChildren().forEachRemaining(
                 categoryPage -> catalogCategoryPageModels.add(categoryPage.getContentResource().adaptTo(CatalogCategoryPageModel.class)));

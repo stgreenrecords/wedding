@@ -1,12 +1,10 @@
 #base=js
 jquery-2.2.3.min.js
 bootstrap.js
+vk.js
 
 #base=js/photoGallery
-jquery.magnific-popup.min.js
-
-#base=js/google
-recaptcha.js
+jquery.magnific-popup.js
 
 #base=js/jquery-ui
 jquery-ui.min.js

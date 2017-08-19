@@ -1,0 +1,105 @@
+#login-popup, #registration-popup-first-step, #registration-popup-second-step-partner, #registration-popup-second-step-private{
+    width: 781px;
+    height: 549px;
+    background-color: white;
+    margin: auto;
+}
+
+.registration{
+    padding-top: 20px;
+}
+
+#login-popup h3{
+    text-align: center;
+}
+
+.registration ul{
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.registration ul li{
+    margin: 20px;
+}
+
+.loginBlock{
+    width: 250px;
+    margin: auto;
+}
+
+.registrationBlock_input {
+    width: 100%;
+    padding: 14px 20px 12px;
+    margin: 0 0 -1px;
+    position: relative;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    box-sizing: border-box;
+    font-size: 19px;
+    transition: border-color .1s linear;
+    -webkit-appearance: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: Arial, Helvetica, sans-serif;
+    border-color: #b4b4b4;
+    z-index: 2;
+}
+
+#registration-newAcc{
+    text-align: center;
+    font-size: 25px;
+    color: #717171;
+    border: 1px solid darkgrey;
+    max-width: 400px;
+    margin: auto;
+    border-radius: 5%;
+}
+
+.select-block{
+    width: 360px;
+    height: 130px;
+    border: 1px solid #bbbbbb;
+    text-align: center;
+    color: #7b7b7b;
+    cursor: pointer;
+}
+
+.select-block:hover{
+    background-color: lightgray;
+}
+
+.first-step-wrapper{
+    display: flex;
+    width: 600px;
+    margin: auto;
+    padding-top: 200px;
+}
+
+#registration-firstStep{
+    text-align: center;
+    font-size: 25px;
+    color: #717171;
+    border: 1px solid darkgrey;
+    max-width: 200px;
+    margin: auto;
+    border-radius: 5%;
+    margin-top: 50px;
+    background-color: aquamarine;
+}
+
+.form-item-wrapper{
+    padding-top: 100px;
+}
+
+.form-item{
+    width: 400px;
+    margin: auto;
+    font-size: 18px;
+    color: #797979;
+    padding-top: 20px;
+}
+
+.form-item-input{
+    float: right;
+}
