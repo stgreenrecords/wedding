@@ -327,7 +327,7 @@
 
   // PostMessage cover
   if (w.postMessage) {
-    env.protocol = 'p';
+    env.protocol = 'w';
     env.send = function(xdm, strData) {
       var win = (xdm.frame ? xdm.frame.contentWindow : xdm.caller);
       if (win) {
@@ -2590,7 +2590,7 @@ if (!VK.Retargeting) {
         return;
       }
 
-      (window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=' + this.pixelCode + (event ? ('&event=' + event) : '');
+      (window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?w=' + this.pixelCode + (event ? ('&event=' + event) : '');
     },
     Hit: function () {
       this.Event();
@@ -2600,7 +2600,7 @@ if (!VK.Retargeting) {
         return;
       }
 
-      (window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?p=' + this.pixelCode + '&audience=' + audienceID;
+      (window.Image ? (new Image()) : document.createElement('img')).src = 'https://vk.com/rtrg?w=' + this.pixelCode + '&audience=' + audienceID;
     }
   };
 }

@@ -3,5 +3,6 @@
     <filter root="/apps/wedding"/>
     <filter root="/apps/sling"/>
     <filter root="/apps/cq"/>
+    <filter root="/home" mode="update"/>
     <filter root="/etc/designs/wedding"/>
 </workspaceFilter>

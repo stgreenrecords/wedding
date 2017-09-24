@@ -3,9 +3,9 @@
 
     <div class="login-registration-block">
         <a id="login-registration-link" href="#login-popup">Войти/Регистрация</a>
+        <div class="userProfile" style="display: none">
 
-        <div id="vk_auth"></div>
-
+        </div>
         <div id="login-popup" class="white-popup mfp-hide">
             <div class="registration">
                 <h3>Войдите, используя свой аккаунт в социальной сети.</h3>
@@ -76,7 +76,7 @@
                     <input type="text" id="registration-private-email" class="form-item-input">
                 </div>
                 <div class="form-item">
-                    <input type="submit" class="registration-submit" id="registration-newPrivate"
+                    <input type="submit" class="registration-submit-private" id="registration-newPrivate"
                            value="Создать аккаунт">
                 </div>
             </div>
@@ -85,10 +85,8 @@
         <div id="registration-popup-second-step-partner" class="white-popup mfp-hide">
             <div class="form-item-wrapper">
                 <div class="form-item">
+                    <span>Оказываемоя услуга</span>
                     <select class="registrationBlock_input" id="registration-partner-speciality">
-                        <option>
-                            Оказываемоя услуга
-                        </option>
                         <sly data-sly-list.partnersList="${registrationModel.categoryList}">
                             <option>
                                 ${partnersList.pageTitle}
@@ -97,23 +95,34 @@
                     </select>
                 </div>
                 <div class="form-item">
+                    <span>Название организации</span>
+                    <input type="text" id="registration-partner-name" class="form-item-input">
+                </div>
+                <div class="form-item">
                     <span>Город</span>
                     <input type="text" id="registration-partner-city" class="form-item-input">
                 </div>
                 <div class="form-item">
                     <span>Эл. почта</span>
-                    <input type="text" id="registration-partner-email" class="form-item-input">
+                    <input type="email" id="registration-partner-email" class="form-item-input">
                 </div>
                 <div class="form-item">
                     <span>Телефон</span>
                     <input type="text" id="registration-partner-phone" class="form-item-input">
                 </div>
                 <div class="form-item">
-                    <input type="submit" class="registration-submit" id="registration-newPartner"
+                    <input type="submit" class="registration-submit-partner" id="registration-newPartner"
                            value="Создать аккаунт">
                 </div>
             </div>
         </div>
+    </div>
+    <div class="user-menu-block" style="display: none">
+        <span class="user-name-title"></span>
+        <ul>
+            <li><a href="/content/wedding/user.html"  x-cq-linkchecker="skip">Моя страница</a></li>
+            <li><a class="user-logout-link" href="#">Выйти</a></li>
+        </ul>
     </div>
 
 </sly>

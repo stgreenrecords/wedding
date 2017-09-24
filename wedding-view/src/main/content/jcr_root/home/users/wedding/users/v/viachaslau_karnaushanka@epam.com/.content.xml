@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:rep="internal"
+    jcr:mixinTypes="[rep:AccessControllable]"
+    jcr:primaryType="rep:User"
+    jcr:uuid="bbdea1d1-5d29-3c74-842c-8cbaf3529e37"
+    rep:authorizableId="viachaslau_karnaushanka@epam.com"
+    rep:password="\{SHA-256}0d5c3e68b90c13c5-1000-ccd498ce73267022420122e789c5c3328602f286ddc3caf6ec80591db557cc77"
+    rep:principalName="viachaslau_karnaushanka@epam.com"
+    verifiedStatus="{Boolean}false">
+    <preferences jcr:primaryType="nt:unstructured">
+        <mailer jcr:primaryType="nt:unstructured">
+            <HtmlEmail-155505925
+                jcr:mixinTypes="[cq:mailerMessage]"
+                jcr:primaryType="nt:unstructured"
+                messageStatus="NO_ADDRESS"/>
+        </mailer>
+    </preferences>
+    <profile
+        jcr:primaryType="nt:unstructured"
+        email="viachaslau_karnaushanka@epam.com">
+        <newsletter
+            jcr:primaryType="nt:unstructured"
+            bounceCounter="{Long}0"/>
+    </profile>
+</jcr:root>

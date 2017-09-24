@@ -117,7 +117,7 @@ public class BaseModel {
         map.put("path", path);
         map.put("property", "sling:resourceType");
         map.put("property.value", resourceType);
-        map.put("p.limit", "-1");
+        map.put("w.limit", "-1");
 
         Query query = queryBuilder.createQuery(PredicateGroup.create(map), resourceResolver.adaptTo(Session.class));
         SearchResult result = query.getResult();

@@ -1,10 +1,5 @@
 package wedding.core.services.users.impl;
 
-import com.day.cq.search.PredicateGroup;
-import com.day.cq.search.Query;
-import com.day.cq.search.QueryBuilder;
-import com.day.cq.search.result.Hit;
-import com.day.cq.search.result.SearchResult;
 import com.google.gson.JsonObject;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
@@ -23,9 +18,13 @@ import wedding.core.services.users.beans.PortalUser;
 import wedding.core.utils.WeddingUtils;
 
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Value;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryResult;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Component
@@ -34,13 +33,14 @@ public class PortalUserManagerImpl implements PortalUserManager {
 
     private static final Logger LOG = LoggerFactory.getLogger(PortalUserManagerImpl.class);
 
+    private static final String QUERY_USER_EXIST = "/jcr:root/home/users/wedding/users//*[@userID = '%s' and @authType = '%s']";
+
+    private static final String QUERY_GET_USER = "/jcr:root%s/catalog//*[@isActive = 'true']";
+
     @Reference
     private WeddingUtils weddingUtils;
 
-    @Reference
-    private QueryBuilder queryBuilder;
-
-    public boolean addPortalUser(final String email, String pass) {
+    public boolean addPortalUserViaEmail(final String email, String pass) {
         LOG.info("TRY ADD NEW USER WITH NAME : " + email);
         User user = null;
         try {
@@ -130,54 +130,138 @@ public class PortalUserManagerImpl implements PortalUserManager {
         portalUser.setEmail(email);
         try {
             Authorizable authorizable = weddingUtils.getAdminSession().getUserManager().getAuthorizable(email);
-            List<PortalProduct> productList = new ArrayList();
-            Map<String, String> predicates = new HashMap<String, String>();
-            predicates.put("path", authorizable.getPath() + "/catalog");
-            predicates.put("property", "isActive");
-            predicates.put("property.value", "true");
-            predicates.put("w.limit", "-1");
-
-            Query query = queryBuilder.createQuery(PredicateGroup.create(predicates), weddingUtils.getAdminSession());
-            SearchResult result = query.getResult();
-
-            for (Hit hit : result.getHits()) {
-                Node searchNode = null;
-                try {
-                    searchNode = hit.getNode();
-                    PortalProduct portalProduct = new PortalProduct();
-                    productList.add(portalProduct);
-                } catch (RepositoryException e) {
-                    LOG.error(e.getMessage());
-                }
+            QueryResult result = weddingUtils.getAdminSession().getWorkspace().getQueryManager().
+                    createQuery(String.format(QUERY_GET_USER, authorizable.getPath()), Query.XPATH).execute();
+            NodeIterator nodeIterator = result.getNodes();
+            while (nodeIterator.hasNext()) {
+                Node searchNode = nodeIterator.nextNode();
+                PortalProduct portalProduct = new PortalProduct();
             }
-            portalUser.setProductList(productList);
         } catch (RepositoryException e) {
-            LOG.error("FAILT TO BUILD USER. Details:" + e.getMessage());
+            LOG.error("FAIL TO BUILD USER. Details:" + e.getMessage());
+        }
+        return portalUser;
+    }
+
+    @Override
+    public PortalUser getPortalUser(String id, String authType) {
+        PortalUser portalUser = new PortalUser();
+        try {
+            QueryResult queryResult = weddingUtils.getAdminSession().getWorkspace().getQueryManager().
+                    createQuery(String.format(QUERY_USER_EXIST, id, authType), Query.XPATH).execute();
+            NodeIterator nodeIterator = queryResult.getNodes();
+            if (nodeIterator.hasNext()) {
+                Node profile = nodeIterator.nextNode();
+                portalUser.setFirstName(profile.getProperty("firstName").getString());
+                portalUser.setLastName(profile.getProperty("lastName").getString());
+                portalUser.setEmail(profile.getProperty("email").getString());
+                portalUser.setCity(profile.getProperty("city").getString());
+            }
+        } catch (RepositoryException e) {
+            LOG.error(e.getMessage());
         }
         return portalUser;
     }
 
     @Override
     public boolean isUserExist(String userID, String authType) {
-        Map<String, String> predicates = new HashMap<String, String>();
-        predicates.put("path", "/home/users/wedding/users");
-        predicates.put("1_property", "userID");
-        predicates.put("1_property.value", userID);
-        predicates.put("2_property", "authType");
-        predicates.put("2_property.value", authType);
-
-
-        Query query = queryBuilder.createQuery(PredicateGroup.create(predicates), weddingUtils.getAdminSession());
-        SearchResult result = query.getResult();
-        return !result.getHits().isEmpty();
+        try {
+            QueryResult queryResult = weddingUtils.getAdminSession().getWorkspace().getQueryManager().
+                    createQuery(String.format(QUERY_USER_EXIST, userID, authType), Query.XPATH).execute();
+            return queryResult.getNodes().hasNext();
+        } catch (RepositoryException e) {
+            LOG.error(e.getMessage());
+        }
+        return false;
     }
 
     public JsonObject getPortalUserInfoAsJson(String email) {
         PortalUser portalUser = getPortalUser(email);
         JsonObject jsonUser = new JsonObject();
         jsonUser.addProperty("name", portalUser.getEmail());
-        jsonUser.addProperty("basketCount", portalUser.getProductList().size());
         return jsonUser;
+    }
+
+    @Override
+    public boolean addPortalUserViaSocial(String userID, String type, String email, String firstName, String lastName, String city, String authType) {
+        LOG.info("TRY ADD NEW USER WITH NAME : " + email);
+        User user = null;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
+            String pathToNewUserFolder = "/home/users/wedding/users" + "/" + email.substring(0, 1) + "/" + dateFormat.format(new Date());
+            PrincipalManager principalManager = getJackrabbitSession().getPrincipalManager();
+            Principal principal = principalManager.getPrincipal(email);
+            if (principal == null) {
+                user = getJackrabbitSession().getUserManager().createUser(email, "user", new Principal() {
+                    public String getName() {
+                        return email;
+                    }
+                }, pathToNewUserFolder);
+                user.setProperty("./profile/userID", ValueFactoryImpl.getInstance().createValue(userID));
+                user.setProperty("./profile/email", ValueFactoryImpl.getInstance().createValue(email));
+                user.setProperty("./profile/authType", ValueFactoryImpl.getInstance().createValue(authType));
+                user.setProperty("./profile/type", ValueFactoryImpl.getInstance().createValue(type));
+                user.setProperty("./profile/firstName", ValueFactoryImpl.getInstance().createValue(firstName));
+                user.setProperty("./profile/lastName", ValueFactoryImpl.getInstance().createValue(lastName));
+                user.setProperty("./profile/city", ValueFactoryImpl.getInstance().createValue(city));
+                user.setProperty("verifiedStatus", ValueFactoryImpl.getInstance().createValue(true));
+                Group portalUsers = (Group) getJackrabbitSession().getUserManager().getAuthorizable("wedding-users");
+                Authorizable authorizable = getJackrabbitSession().getUserManager().getAuthorizable(user.getPrincipal());
+                portalUsers.addMember(authorizable);
+                getJackrabbitSession().move(user.getPath(), pathToNewUserFolder + "/" + email);
+                getJackrabbitSession().save();
+                LOG.info("USER SUCCESS CREATE");
+                return true;
+            } else {
+                LOG.info("USER WITH THAT NAME ALREADY EXIST : " + email);
+                return false;
+            }
+        } catch (RepositoryException e) {
+            LOG.error(e.getMessage());
+        }
+        LOG.info("FAILED ADD NEW USER");
+        return false;
+    }
+
+    @Override
+    public boolean addPartner(String userID, String type, String email, String speciality, String name, String city, String phone, String authType) {
+        LOG.info("TRY ADD NEW USER WITH NAME : " + email);
+        User user = null;
+        try {
+            String pathToNewUserFolder = "/home/users/wedding/users" + "/" + email.substring(0, 1);
+            PrincipalManager principalManager = getJackrabbitSession().getPrincipalManager();
+            Principal principal = principalManager.getPrincipal(email);
+            if (principal == null) {
+                user = getJackrabbitSession().getUserManager().createUser(email, "user", new Principal() {
+                    public String getName() {
+                        return email;
+                    }
+                }, pathToNewUserFolder);
+                user.setProperty("./profile/type", ValueFactoryImpl.getInstance().createValue(type));
+                user.setProperty("./profile/userID", ValueFactoryImpl.getInstance().createValue(userID));
+                user.setProperty("./profile/authType", ValueFactoryImpl.getInstance().createValue(authType));
+                user.setProperty("./profile/email", ValueFactoryImpl.getInstance().createValue(email));
+                user.setProperty("./profile/name", ValueFactoryImpl.getInstance().createValue(name));
+                user.setProperty("./profile/speciality", ValueFactoryImpl.getInstance().createValue(speciality));
+                user.setProperty("./profile/phone", ValueFactoryImpl.getInstance().createValue(phone));
+                user.setProperty("./profile/city", ValueFactoryImpl.getInstance().createValue(city));
+                user.setProperty("verifiedStatus", ValueFactoryImpl.getInstance().createValue(true));
+                Group portalUsers = (Group) getJackrabbitSession().getUserManager().getAuthorizable("wedding-users");
+                Authorizable authorizable = getJackrabbitSession().getUserManager().getAuthorizable(user.getPrincipal());
+                portalUsers.addMember(authorizable);
+                getJackrabbitSession().move(user.getPath(), pathToNewUserFolder + "/" + email);
+                getJackrabbitSession().save();
+                LOG.info("USER SUCCESS CREATE");
+                return true;
+            } else {
+                LOG.info("USER WITH THAT NAME ALREADY EXIST : " + email);
+                return false;
+            }
+        } catch (RepositoryException e) {
+            LOG.error(e.getMessage());
+        }
+        LOG.info("FAILED ADD NEW USER");
+        return false;
     }
 
     public JackrabbitSession getJackrabbitSession() {

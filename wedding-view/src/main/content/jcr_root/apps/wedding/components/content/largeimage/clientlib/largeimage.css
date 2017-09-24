@@ -5,18 +5,6 @@
     background-position: center;
 }
 
-.large-image-button{
-    width: 260px;
-    height: 55px;
-    font-size: 24px;
-    background-color: rgba(140, 15, 15, 0.26);
-    color: #fff;
-    border-radius: 30% 30% 0 0;
-    font-family: 'oswald-light';
-    text-transform: uppercase;
-}
-
-
 .large-image-block p{
     color: #f1efed;
     font-size: 70px;

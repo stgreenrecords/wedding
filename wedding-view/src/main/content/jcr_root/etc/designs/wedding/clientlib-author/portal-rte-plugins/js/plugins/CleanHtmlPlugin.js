@@ -2,9 +2,9 @@
 /**
  * @class CQ.form.rte.plugins.SubSuperScriptPlugin
  * @extends CQ.form.rte.plugins.Plugin
- * <p>This class implements sub- and superscript as a plugin.</p>
- * <p>The plugin ID is "<b>subsuperscript</b>".</p>
- * <p><b>Features</b></p>
+ * <w>This class implements sub- and superscript as a plugin.</w>
+ * <w>The plugin ID is "<b>subsuperscript</b>".</w>
+ * <w><b>Features</b></w>
  * <ul>
  *   <li><b>subscript</b> - adds a button to format the selected text with subscript</li>
  *   <li><b>superscript</b> - adds a button to format the selected text with superscript

@@ -16,29 +16,12 @@ public class PortalUser {
     private String phoneNumber;
     private String email;
     private String photoLink;
+    private String city;
+    private String path;
 
-    private List<Comment> commentList;
-
-    private List<PortalProduct> productList;
 
     public PortalUser() {
 
-    }
-
-    public List<PortalProduct> getProductList() {
-        return productList;
-    }
-
-    public void setProductList(List<PortalProduct> productList) {
-        this.productList = productList;
-    }
-
-    public List<Comment> getCommentList() {
-        return commentList;
-    }
-
-    public void setCommentList(List<Comment> commentList) {
-        this.commentList = commentList;
     }
 
     public Date getDateOfRegistration() {
@@ -105,4 +88,27 @@ public class PortalUser {
         this.photoLink = photoLink;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"firstName\":\"" + firstName +
+                "\", \"lastName\":\"" + lastName +
+                "\", \"age\":\"" + age +
+                "\", \"sex\":\"" + sex +
+                "\", \"dateOfRegistration\":\"" + dateOfRegistration +
+                "\", \"birthday\":\"" + birthday +
+                "\", \"phoneNumber\":\"" + phoneNumber +
+                "\", \"email\":\"" + email +
+                "\", \"photoLink\":\"" + photoLink +
+                "\", \"city\":\"" + city +
+                "\"}";
+    }
 }

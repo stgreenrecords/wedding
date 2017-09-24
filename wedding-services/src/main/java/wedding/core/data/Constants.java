@@ -62,7 +62,7 @@ public class Constants {
     public static final String USER_ID_PARAMETER = "userID";
     public static final String AUTH_TYPE_PARAMETER = "authType";
 
-    public static final String STATUS_REGISTRATION_SUCCESS = "registrationSuccess";
+    public static final String STATUS_REGISTRATION_SUCCESS = "Новый аккаунт был создан.";
 
     public static final String STATUS_USER_DOESNOT_EXIST = "user with that name doesn't exist";
 
@@ -72,7 +72,7 @@ public class Constants {
 
     public static final String STATUS_SUCCESS_LOGIN = "successLogin";
 
-    public static final String STATUS_REGISTRATION_FAIL = "registrationFail";
+    public static final String STATUS_REGISTRATION_FAIL = "Что-то пошло не так. Попробуйте загерестрироваться позже или упритесь в стену.";
 
     public static final String AUTH_COOKIE_NAME = "wedding-session-id";
 

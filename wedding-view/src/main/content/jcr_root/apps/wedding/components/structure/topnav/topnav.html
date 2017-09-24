@@ -9,7 +9,9 @@
                                                           class="${currentPage.path == item.path ? 'is_active_page' : ''}">${item.title}</a>
                     </li>
                 </sly>
-                <li data-sly-resource="${ @ path='login-registration' ,resourceType='wedding/components/structure/login-registration'}"></li>
+                <li class="user-login-registration">
+                    <sly data-sly-resource="${ @ path='login-registration' ,resourceType='wedding/components/structure/login-registration'}"></sly>
+                </li>
             </ul>
             <label for="css-toggle-menu"></label>
         </nav>

@@ -49,7 +49,7 @@ public class SignInServlet extends SlingAllMethodsServlet {
         PortalUserManager portalUserManager = new PortalUserManagerImpl(request.getResourceResolver());
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
-        if (portalUserManager.addPortalUser(email, pass)) {
+        if (portalUserManager.addPortalUserViaEmail(email, pass)) {
             if (true*//*mailService.sendRegistrationMail(request)*//*) {
                 return "registrationLetterSuccessSend";
             } else {

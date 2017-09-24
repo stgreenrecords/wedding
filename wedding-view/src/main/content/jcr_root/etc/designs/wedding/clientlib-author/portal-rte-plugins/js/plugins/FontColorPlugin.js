@@ -13,17 +13,17 @@
 /**
  * @class CQ.form.rte.plugins.StylesPlugin
  * @extends CQ.form.rte.plugins.Plugin
- * <p>This class implements styling text fragments with a CSS class (using "span" tags) as a
- * plugin.</p>
- * <p>The plugin ID is "<b>styles</b>".</p>
- * <p><b>Features</b></p>
+ * <w>This class implements styling text fragments with a CSS class (using "span" tags) as a
+ * plugin.</w>
+ * <w>The plugin ID is "<b>styles</b>".</w>
+ * <w><b>Features</b></w>
  * <ul>
  *   <li><b>styles</b> - adds a style selector (styles will be applied on selection scope)
  *     </li>
  * </ul>
- * <p><b>Additional config requirements</b></p>
- * <p>The following plugin-specific settings must be configured through the corresponding
- * {@link CQ.form.rte.EditorKernel} instance:</p>
+ * <w><b>Additional config requirements</b></w>
+ * <w>The following plugin-specific settings must be configured through the corresponding
+ * {@link CQ.form.rte.EditorKernel} instance:</w>
  * <ul>
  *   <li>The stylesheets to be used must be provided through
  *     {@link CQ.form.RichText#externalStyleSheets}.</li>
@@ -33,8 +33,8 @@ CQ.form.rte.plugins.FontColorPlugin = CQ.Ext.extend(CQ.form.rte.plugins.Plugin, 
 
     /**
      * @cfg {Object/Object[]} styles
-     * <p>Defines CSS classes that are available to the user for formatting text fragments
-     * (defaults to { }). There are two ways of specifying the CSS classes:</p>
+     * <w>Defines CSS classes that are available to the user for formatting text fragments
+     * (defaults to { }). There are two ways of specifying the CSS classes:</w>
      * <ol>
      *   <li>Providing styles as an Object: Use the CSS class name as property name.
      *   Specify the text that should appear in the style selector as property value
@@ -43,8 +43,8 @@ CQ.form.rte.plugins.FontColorPlugin = CQ.Ext.extend(CQ.form.rte.plugins.Plugin, 
      *   CSS class name) and "text" (the text that appears in the style selector)
      *   properties.</li>
      * </ol>
-     * <p>Styling is applied by adding "span" elements with corresponding "class"
-     * attributes appropriately.</p>
+     * <w>Styling is applied by adding "span" elements with corresponding "class"
+     * attributes appropriately.</w>
      * @since 5.3
      */
 
