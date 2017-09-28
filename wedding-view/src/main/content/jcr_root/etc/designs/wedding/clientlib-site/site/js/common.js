@@ -38,7 +38,7 @@ var PORTAL = function (PORTAL, $) {
             path = "/";
         }
         document.cookie = name + "=" + escape(value) + "; expires=" + expires.toGMTString() + "; path=" + path;
-    }
+    };
 
     PORTAL.utils.getQueryParameterFromUrl = function (url, queryParameter) {
         var resultParameter;
@@ -51,7 +51,7 @@ var PORTAL = function (PORTAL, $) {
             });
         }
         return resultParameter;
-    }
+    };
 
     return PORTAL;
 

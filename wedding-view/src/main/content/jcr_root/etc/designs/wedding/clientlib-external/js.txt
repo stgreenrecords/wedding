@@ -2,6 +2,8 @@
 jquery-2.2.3.min.js
 bootstrap.js
 vk.js
+gmail-api.js
+facebooksdk.js
 
 #base=js/photoGallery
 jquery.magnific-popup.js

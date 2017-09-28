@@ -9,7 +9,8 @@ var PORTAL = (function (PORTAL, $) {
     var expires = new Date(currentDate.getTime() + 600000*60*60*3);
     var magnificPopup = $.magnificPopup.instance;
     var authorizationType;
-    var userID;
+    var GoogleAuth;
+    var GoogleUser;
 
     var $loginRegistrationLink;
 
@@ -36,7 +37,8 @@ var PORTAL = (function (PORTAL, $) {
 
         "logout": function () {
             VK.Auth.logout(function (response) {
-
+                PORTAL.utils.set_cookie("authType", authorizationType);
+                PORTAL.utils.set_cookie("authStatus", "authorized");
             });
         },
         "status": function () {
@@ -53,6 +55,74 @@ var PORTAL = (function (PORTAL, $) {
 
     };
 
+    PORTAL.modules.LoginRegistration.AUTH.FACEBOOK = {
+
+        "login": function () {
+            FB.login(function(response){
+                if (response.status === "connected") {
+                    FB.api('/me',
+                        {fields: "id,first_name,link,last_name,name"},
+                        function(response) {
+                            var responseUser = response;
+                            socialUser.id = responseUser.hasOwnProperty("id") ? responseUser.id : "";
+                            socialUser.firstName = responseUser.hasOwnProperty("first_name") ? responseUser.first_name : "";
+                            socialUser.lastName = responseUser.hasOwnProperty("last_name") ? responseUser.last_name : "";
+                            socialUser.nickname = responseUser.hasOwnProperty("name") ? responseUser.name : "";
+                            socialUser.href = responseUser.hasOwnProperty("link") ? responseUser.link : "";
+                            socialUser.authType = "FACEBOOK";
+                            checkIfUserExist(socialUser, authorizationType);
+                            PORTAL.utils.set_cookie("authType", authorizationType, expires);
+                            PORTAL.utils.set_cookie("authStatus", "authorized", expires);
+                    });
+                }
+            });
+        },
+
+        "logout": function () {
+            FB.logout(function(response) {
+                PORTAL.utils.set_cookie("authType", authorizationType);
+                PORTAL.utils.set_cookie("authStatus", "authorized");
+            });
+        },
+        "status": function () {
+        }
+
+    };
+
+    PORTAL.modules.LoginRegistration.AUTH.GMAIL = {
+
+        "login": function () {
+            GoogleAuth.signIn();
+        },
+
+        "logout": function () {
+            GoogleAuth.signOut();
+            PORTAL.utils.set_cookie("authType", authorizationType);
+            PORTAL.utils.set_cookie("authStatus", "authorized");
+        },
+        "status": function () {
+            console.log(GoogleAuth);
+            googleStatus(GoogleAuth.isSignedIn.get());
+        }
+
+    };
+
+    var googleStatus = function (responce) {
+        if (responce){
+            GoogleUser = GoogleAuth.currentUser.get();
+            var gUser = GoogleUser.getBasicProfile();
+            socialUser.authType = "GMAIL";
+            socialUser.id = gUser.getId();
+            socialUser.firstName = gUser.getGivenName();
+            socialUser.lastName = gUser.getFamilyName();
+            socialUser.nickname = gUser.getName();
+            socialUser.email = gUser.getEmail();
+            checkIfUserExist(socialUser, authorizationType);
+            PORTAL.utils.set_cookie("authType", authorizationType, expires);
+            PORTAL.utils.set_cookie("authStatus", "authorized", expires);
+        }
+    };
+
     PORTAL.modules.LoginRegistration.init = function ($self) {
         console.log('Component: "LoginRegistration"');
 
@@ -61,6 +131,40 @@ var PORTAL = (function (PORTAL, $) {
         VK.init({
             apiId: 6153660
         });
+
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId            : '119308788738222',
+                autoLogAppEvents : true,
+                cookie     : true,
+                status : true,
+                xfbml            : true,
+                version          : 'v2.10'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        gapi.load('client:auth2', initClient);
+
+        FB.Event.subscribe('auth.statusChange', function(response) {
+            if (response.status === "connected") {
+                authStatus = true;
+                socialUser.id = response.authResponse.userID;
+                socialUser.authType = "FACEBOOK";
+                drawUser();
+            }
+        });
+
+        function initClient() {
+            gapi.client.init({
+                clientId: "531603681534-tc9n7lqrfghupn8iv99jc08778raqlp7.apps.googleusercontent.com",
+                scope: 'https://www.googleapis.com/auth/drive.metadata.readonly'
+            }).then(function () {
+                GoogleAuth = gapi.auth2.getAuthInstance();
+                GoogleAuth.isSignedIn.listen(googleStatus);
+                PORTAL.modules.LoginRegistration.AUTH[authType].status();
+            });
+        }
 
         var authStatusFromCookie = PORTAL.utils.get_cookie("authStatus");
         var authType = PORTAL.utils.get_cookie("authType");
@@ -78,14 +182,13 @@ var PORTAL = (function (PORTAL, $) {
         var $firstStepSubmit = $self.find("#registration-firstStep");
 
         $(".user-logout-link").click(function(){
-            PORTAL.modules.LoginRegistration.AUTH[authType].logout();
+            PORTAL.modules.LoginRegistration.AUTH[socialUser.authType].logout();
             $loginRegistrationLink.css("display","block");
             $(".user-menu-block").css("display","none");
         });
 
         $(".user-name-title").click(function(){
             var menu = $(".user-menu-block ul");
-            console.log(menu.css("display"));
             if (menu.css("display") === 'none'){
                 menu.css("display","flex");
             } else {
@@ -97,10 +200,16 @@ var PORTAL = (function (PORTAL, $) {
             $firstStepSubmit.attr("href","#registration-popup-second-step-private").css("display", "block");
             $self.find("#registration-private-firstName").val(socialUser.firstName);
             $self.find("#registration-private-lastName").val(socialUser.lastName);
+            if (socialUser.email){
+                $self.find("#registration-private-email").val(socialUser.email);
+            }
         });
 
         $self.find("#first-step-partner").click(function(){
             $firstStepSubmit.attr("href","#registration-popup-second-step-partner").css("display", "block");
+            if (socialUser.email){
+                $self.find("#registration-partner-email").val(socialUser.email);
+            }
         });
 
         $loginRegistrationLink = $self.find("#login-registration-link");
@@ -115,6 +224,16 @@ var PORTAL = (function (PORTAL, $) {
         $self.find("#vk-login-button").click(function () {
             authorizationType = "VK";
             PORTAL.modules.LoginRegistration.AUTH.VK.login();
+        });
+
+        $self.find("#facebook-login-button").click(function () {
+            authorizationType = "FACEBOOK";
+            PORTAL.modules.LoginRegistration.AUTH.FACEBOOK.login();
+        });
+
+        $self.find("#gmail-login-button").click(function(){
+            authorizationType = "GMAIL";
+            PORTAL.modules.LoginRegistration.AUTH.GMAIL.login();
         });
 
         $self.find(".registration-submit-partner").click(function(){
