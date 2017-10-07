@@ -4,9 +4,18 @@ var PORTAL = (function (PORTAL, $) {
 
     PORTAL.modules.LoginRegistration.selfSelector = ".login-registration-block";
 
-    var socialUser = {'id' : '', 'firstName' : '', 'lastName' : '', 'email' : '', 'phone' : '', 'nickname' : '', 'href' : '', "authType" : ""};
+    var socialUser = {
+        'id': '',
+        'firstName': '',
+        'lastName': '',
+        'email': '',
+        'phone': '',
+        'nickname': '',
+        'href': '',
+        "authType": ""
+    };
     var currentDate = new Date();
-    var expires = new Date(currentDate.getTime() + 600000*60*60*3);
+    var expires = new Date(currentDate.getTime() + 600000 * 60 * 60 * 3);
     var magnificPopup = $.magnificPopup.instance;
     var authorizationType;
     var GoogleAuth;
@@ -58,11 +67,11 @@ var PORTAL = (function (PORTAL, $) {
     PORTAL.modules.LoginRegistration.AUTH.FACEBOOK = {
 
         "login": function () {
-            FB.login(function(response){
+            FB.login(function (response) {
                 if (response.status === "connected") {
                     FB.api('/me',
                         {fields: "id,first_name,link,last_name,name"},
-                        function(response) {
+                        function (response) {
                             var responseUser = response;
                             socialUser.id = responseUser.hasOwnProperty("id") ? responseUser.id : "";
                             socialUser.firstName = responseUser.hasOwnProperty("first_name") ? responseUser.first_name : "";
@@ -73,13 +82,13 @@ var PORTAL = (function (PORTAL, $) {
                             checkIfUserExist(socialUser, authorizationType);
                             PORTAL.utils.set_cookie("authType", authorizationType, expires);
                             PORTAL.utils.set_cookie("authStatus", "authorized", expires);
-                    });
+                        });
                 }
             });
         },
 
         "logout": function () {
-            FB.logout(function(response) {
+            FB.logout(function (response) {
                 PORTAL.utils.set_cookie("authType", authorizationType);
                 PORTAL.utils.set_cookie("authStatus", "authorized");
             });
@@ -101,14 +110,13 @@ var PORTAL = (function (PORTAL, $) {
             PORTAL.utils.set_cookie("authStatus", "authorized");
         },
         "status": function () {
-            console.log(GoogleAuth);
             googleStatus(GoogleAuth.isSignedIn.get());
         }
 
     };
 
     var googleStatus = function (responce) {
-        if (responce){
+        if (responce) {
             GoogleUser = GoogleAuth.currentUser.get();
             var gUser = GoogleUser.getBasicProfile();
             socialUser.authType = "GMAIL";
@@ -132,21 +140,21 @@ var PORTAL = (function (PORTAL, $) {
             apiId: 6153660
         });
 
-        window.fbAsyncInit = function() {
+        window.fbAsyncInit = function () {
             FB.init({
-                appId            : '119308788738222',
-                autoLogAppEvents : true,
-                cookie     : true,
-                status : true,
-                xfbml            : true,
-                version          : 'v2.10'
+                appId: '119308788738222',
+                autoLogAppEvents: true,
+                cookie: true,
+                status: true,
+                xfbml: true,
+                version: 'v2.10'
             });
             FB.AppEvents.logPageView();
         };
 
         gapi.load('client:auth2', initClient);
 
-        FB.Event.subscribe('auth.statusChange', function(response) {
+        FB.Event.subscribe('auth.statusChange', function (response) {
             if (response.status === "connected") {
                 authStatus = true;
                 socialUser.id = response.authResponse.userID;
@@ -162,7 +170,9 @@ var PORTAL = (function (PORTAL, $) {
             }).then(function () {
                 GoogleAuth = gapi.auth2.getAuthInstance();
                 GoogleAuth.isSignedIn.listen(googleStatus);
-                PORTAL.modules.LoginRegistration.AUTH[authType].status();
+                if (authType == "GMAIL"){
+                    PORTAL.modules.LoginRegistration.AUTH[authType].status();
+                }
             });
         }
 
@@ -181,39 +191,45 @@ var PORTAL = (function (PORTAL, $) {
 
         var $firstStepSubmit = $self.find("#registration-firstStep");
 
-        $(".user-logout-link").click(function(){
+        $(".user-logout-link").click(function () {
             PORTAL.modules.LoginRegistration.AUTH[socialUser.authType].logout();
-            $loginRegistrationLink.css("display","block");
-            $(".user-menu-block").css("display","none");
+            $loginRegistrationLink.css("display", "block");
+            $(".user-menu-block").css("display", "none");
         });
 
-        $(".user-name-title").click(function(){
+        $(".user-name-title").click(function () {
             var menu = $(".user-menu-block ul");
-            if (menu.css("display") === 'none'){
-                menu.css("display","flex");
+            if (menu.css("display") === 'none') {
+                menu.css("display", "flex");
             } else {
-                menu.css("display","none");
+                menu.css("display", "none");
             }
         });
 
-        $self.find("#first-step-private").click(function(){
-            $firstStepSubmit.attr("href","#registration-popup-second-step-private").css("display", "block");
+        $self.find("#first-step-private").click(function () {
+            $(this).addClass("selected-item");
+            $("#first-step-partner").removeClass("selected-item");
+            $firstStepSubmit.attr("href", "#registration-popup-second-step-private").css("display", "block");
             $self.find("#registration-private-firstName").val(socialUser.firstName);
             $self.find("#registration-private-lastName").val(socialUser.lastName);
-            if (socialUser.email){
+            if (socialUser.email) {
                 $self.find("#registration-private-email").val(socialUser.email);
             }
         });
 
-        $self.find("#first-step-partner").click(function(){
-            $firstStepSubmit.attr("href","#registration-popup-second-step-partner").css("display", "block");
-            if (socialUser.email){
+        $self.find("#first-step-partner").click(function () {
+            $(this).addClass("selected-item");
+            $("#first-step-private").removeClass("selected-item");
+            $firstStepSubmit.attr("href", "#registration-popup-second-step-partner").css("display", "block");
+            if (socialUser.email) {
                 $self.find("#registration-partner-email").val(socialUser.email);
             }
         });
 
         $loginRegistrationLink = $self.find("#login-registration-link");
         $loginRegistrationLink.magnificPopup(configForPopUp);
+
+        $self.find("#button-top-became-partner").magnificPopup(configForPopUp);
 
         $self.find("#registration-newAcc").magnificPopup(configForPopUp);
 
@@ -231,61 +247,61 @@ var PORTAL = (function (PORTAL, $) {
             PORTAL.modules.LoginRegistration.AUTH.FACEBOOK.login();
         });
 
-        $self.find("#gmail-login-button").click(function(){
+        $self.find("#gmail-login-button").click(function () {
             authorizationType = "GMAIL";
             PORTAL.modules.LoginRegistration.AUTH.GMAIL.login();
         });
 
-        $self.find(".registration-submit-partner").click(function(){
-           var name = $("#registration-partner-name").val();
-           var speciality = $("#registration-partner-speciality").find("option:selected").text();
-           var city = $("#registration-partner-city").val();
-           var email = $("#registration-partner-email").val();
-           var phone = $("#registration-partner-phone").val();
-           if (name && speciality && city && email && phone && email.match("^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.([a-z][a-z][a-z]|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$")){
-               $.ajax({
-                   url: "/services/registration",
-                   type: "POST",
-                   data: {
-                       'type' : 'partner',
-                       'userID' : socialUser.id,
-                       'name': name,
-                       'speciality': speciality,
-                       'city' : city,
-                       'authType' : authorizationType,
-                       'email' : email,
-                       'phone' : phone
-                   },
-                   success: function (data) {
-                       if (data) {
-                           alert(data);
-                           magnificPopup.close();
-                           drawUser();
-                       }
-                   }
-               });
-           } else {
-               alert("Все поля должны быть заполнены. Поле Эл. Почта в формате example@domain.com");
-           }
-        });
-
-        $self.find(".registration-submit-private").click(function(){
-            var firstName = $("#registration-private-firstName").val();
-            var lastName = $("#registration-private-lastName").val();
-            var city = $("#registration-private-city").val();
-            var email = $("#registration-private-email").val();
-            if (firstName && lastName && city && email && email.match("^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.([a-z][a-z][a-z]|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$")){
+        $self.find(".registration-submit-partner").click(function () {
+            var name = $("#registration-partner-name").val();
+            var speciality = $("#registration-partner-speciality").find("option:selected").text();
+            var city = $("#registration-partner-city").val();
+            var email = $("#registration-partner-email").val();
+            var phone = $("#registration-partner-phone").val();
+            if (name && speciality && city && email && phone && email.match("^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.([a-z][a-z][a-z]|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$")) {
                 $.ajax({
                     url: "/services/registration",
                     type: "POST",
                     data: {
-                        'type' : 'private',
-                        'authType' : authorizationType,
-                        'userID' : socialUser.id,
+                        'type': 'partner',
+                        'userID': socialUser.id,
+                        'name': name,
+                        'speciality': speciality,
+                        'city': city,
+                        'authType': authorizationType,
+                        'email': email,
+                        'phone': phone
+                    },
+                    success: function (data) {
+                        if (data) {
+                            alert(data);
+                            magnificPopup.close();
+                            drawUser();
+                        }
+                    }
+                });
+            } else {
+                alert("Все поля должны быть заполнены. Поле Эл. Почта в формате example@domain.com");
+            }
+        });
+
+        $self.find(".registration-submit-private").click(function () {
+            var firstName = $("#registration-private-firstName").val();
+            var lastName = $("#registration-private-lastName").val();
+            var city = $("#registration-private-city").val();
+            var email = $("#registration-private-email").val();
+            if (firstName && lastName && city && email && email.match("^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.([a-z][a-z][a-z]|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$")) {
+                $.ajax({
+                    url: "/services/registration",
+                    type: "POST",
+                    data: {
+                        'type': 'private',
+                        'authType': authorizationType,
+                        'userID': socialUser.id,
                         'firstName': firstName,
-                        'lastName' : lastName,
-                        'city' : city,
-                        'email' : email
+                        'lastName': lastName,
+                        'city': city,
+                        'email': email
                     },
                     success: function (data) {
                         if (data) {
@@ -331,14 +347,14 @@ var PORTAL = (function (PORTAL, $) {
             },
             success: function (user) {
                 if (user) {
-                    $loginRegistrationLink.css("display","none");
+                    $loginRegistrationLink.css("display", "none");
                     var $userBlock = $(".user-menu-block");
-                    $userBlock.css("display","flex");
+                    $userBlock.css("display", "flex");
                     var userName = "";
-                    if (user.firstName){
+                    if (user.firstName) {
                         userName = userName + user.firstName;
                     }
-                    if (user.lastName){
+                    if (user.lastName) {
                         userName = userName === "" ? user.lastName : userName + " " + user.lastName;
                     }
                     $userBlock.find(".user-name-title").text(userName);
@@ -352,22 +368,52 @@ var PORTAL = (function (PORTAL, $) {
 
     var registerNewUser = function (user) {
         var userName;
-        if (user.firstName || user.lastName){
+        if (user.firstName || user.lastName) {
             userName = user.firstName + " " + user.lastName;
         }
-        if (!userName && user.nickname){
+        if (!userName && user.nickname) {
             userName = user.nickname;
         }
-        if (!userName && user.href){
+        if (!userName && user.href) {
             userName = user.href;
         }
-        if (userName){
+        if (userName) {
             $("#registration-newAcc").css("display", "block").text("Создать аккаунт для " + userName);
         } else {
             $("#registration-newAcc").css("display", "block").text("Создать новый аккаун");
         }
 
     };
+
+    $('#with-us-carousel').owlCarousel({
+        loop: true,
+        margin: 50,
+        nav: false,
+        dots: true,
+        autoplay: false,
+//                smartSpeed:1000,
+//                autoplayTimeout:2000,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 2
+            },
+        }
+    });
+
+    $('#benefits-carousel').owlCarousel({
+        items: 1,
+        loop: true,
+        nav: false,
+        dots: true,
+        autoplay: false,
+//                smartSpeed:1000,
+//                autoplayTimeout:2000,
+
+    });
+
 
     return PORTAL;
 

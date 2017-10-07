@@ -1,6 +1,47 @@
 <meta charset="utf-8" data-sly-use.head="head.js">
 <title>${currentPage.title || currentPage.name}</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="keywords" content="${head.keywords}"/>
 <meta name="description" content="${properties.jcr:description}"/>
 <link data-sly-test="${head.favIcon}" rel="icon" href="${head.favIcon}"/>
+
+<!-- Required meta tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<script>
+    window.onload = function(){
+
+        function timer(){
+            var day = document.getElementById('day').innerHTML;
+            var hour = document.getElementById('hour').innerHTML;
+            var minute = document.getElementById('minute').innerHTML;
+            var second = document.getElementById('second').innerHTML;
+            var end = false;
+
+            if( second > 0 ) second--;
+            else{
+                second = 60;
+
+                if( minute > 0 ) minute--;
+                else{
+                    second = 60;
+
+                    if( hour > 0 ) hour--;
+                    else end = true;
+                }
+            }
+
+            if(end){
+                clearInterval(intervalID);
+                alert("Таймер сработал!");
+            }else{
+                document.getElementById('day').innerHTML = day;
+                document.getElementById('hour').innerHTML = hour;
+                document.getElementById('minute').innerHTML = minute;
+                document.getElementById('second').innerHTML = second;
+            }
+        }
+        window.intervalID = setInterval(timer, 1000);
+    }
+
+
+</script>

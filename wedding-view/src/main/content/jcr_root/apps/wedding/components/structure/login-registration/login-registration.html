@@ -2,44 +2,50 @@
 
 
     <div class="login-registration-block">
-        <a id="login-registration-link" href="#login-popup">Войти/Регистрация</a>
+        <a id="login-registration-link" href="#login-popup">Вход | Регистрация</a>
         <div class="userProfile" style="display: none">
 
         </div>
         <div id="login-popup" class="white-popup mfp-hide">
-            <div class="registration">
-                <h3>Войдите, используя свой аккаунт в социальной сети.</h3>
-                <ul>
-                    <li class="vk-icon">
-                        <a href="#" id="vk-login-button">
-                            <img src="/etc/designs/wedding/clientlib-site/images/vk.png" alt="">
-                        </a>
-                    </li>
-                    <li class="facebook-icon">
-                        <a href="#" id="facebook-login-button">
-                            <img src="/etc/designs/wedding/clientlib-site/images/facebook.png" alt="">
-                        </a>
-                    </li>
-                    <li class="gmail-icon">
-                        <a href="#" id="gmail-login-button">
-                            <img src="/etc/designs/wedding/clientlib-site/images/gmail.png" alt="">
-                        </a>
-                    </li>
-                    <li class="odn-icon">
-                        <a href="#" id="odn-login-button">
-                            <img src="/etc/designs/wedding/clientlib-site/images/odn.png" alt="">
-                        </a>
-                    </li>
-                </ul>
-                <a style="display: none" id="registration-newAcc" href="#registration-popup-first-step"></a>
-            </div>
-            <div class="login">
-                <div class="loginBlock">
-                    <h3>Войти на сайт</h3>
-                    <input id="emailLoginInput" type="text" placeholder="e-mail" class="registrationBlock_input">
-                    <input id="passLoginInput" type="password" placeholder="Пароль" class="registrationBlock_input">
-                    <input id="submitLoginInput" type="submit" data-type="login" value="Войти"
-                           class="registrationBlock_input">
+            <div class="login-popup-wrapper">
+                <div class="registration">
+                    <h4>ВХОД</h4>
+                    <ul>
+                        <li class="vk-icon">
+                            <a href="#" id="vk-login-button">
+                                <img src="/content/dam/wedding/components/registration/vk.png" alt="">
+                            </a>
+                        </li>
+                        <li class="facebook-icon">
+                            <a href="#" id="facebook-login-button">
+                                <img src="/content/dam/wedding/components/registration/facebook.png" alt="">
+                            </a>
+                        </li>
+                        <li class="gmail-icon">
+                            <a href="#" id="gmail-login-button">
+                                <img src="/content/dam/wedding/components/registration/g+.png" alt="">
+                            </a>
+                        </li>
+                        <li class="odn-icon">
+                            <a href="#" id="odn-login-button">
+                                <img src="/content/dam/wedding/components/registration/ok.png" alt="">
+                            </a>
+                        </li>
+                    </ul>
+                    <a style="display: none" id="registration-newAcc" href="#registration-popup-first-step"></a>
+                </div>
+                <div class="login-vs-email">
+                    <div class="loginBlock">
+                        <h4>ИЛИ</h4>
+                        <div class="login-vs-email-wrapper">
+                            <input id="emailLoginInput" type="text" placeholder="e-mail"
+                                   class="registrationBlock_input">
+                            <input id="passLoginInput" type="password" placeholder="Пароль"
+                                   class="registrationBlock_input">
+                            <div class="recover-pass"><a href="#">Забыли пароль?</a></div>
+                            <input id="submitLoginInput" type="submit" data-type="login" value="Войти">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -47,15 +53,19 @@
         <div id="registration-popup-first-step" class="white-popup mfp-hide">
             <div class="first-step-wrapper">
                 <div id="first-step-private" class="select-block">
-                    <h4>Невеста, жених, молодожёны</h4>
-                    <h3>Личный аккант</h3>
+                    <div class="first-step-text-wrapper">
+                        <p>Невеста, жених, молодожёны</p>
+                        <h4>Личный аккант</h4>
+                    </div>
                 </div>
                 <div id="first-step-partner" class="select-block">
-                    <h4>Фотографы, видеографы и другие профессионалы, а также владельцы бизнеса</h4>
-                    <h3>Партнёр</h3>
+                    <div class="first-step-text-wrapper">
+                        <p>Фотографы, видеографы и другие профессионалы, а также владельцы бизнеса</p>
+                        <h4>Партнёр</h4>
+                    </div>
                 </div>
             </div>
-            <a style="display: none" id="registration-firstStep" href="#">Делее</a>
+            <a style="display: none" id="registration-firstStep" href="#"></a>
         </div>
         <div id="registration-popup-second-step-private" class="white-popup mfp-hide">
             <div class="form-item-wrapper">
@@ -120,7 +130,7 @@
     <div class="user-menu-block" style="display: none">
         <span class="user-name-title"></span>
         <ul>
-            <li><a href="/content/wedding/user.html"  x-cq-linkchecker="skip">Моя страница</a></li>
+            <li><a href="/content/wedding/user.html" x-cq-linkchecker="skip">Моя страница</a></li>
             <li><a class="user-logout-link" href="#">Выйти</a></li>
         </ul>
     </div>

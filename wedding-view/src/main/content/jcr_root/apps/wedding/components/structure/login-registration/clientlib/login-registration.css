@@ -1,31 +1,64 @@
 #login-popup, #registration-popup-first-step, #registration-popup-second-step-partner, #registration-popup-second-step-private{
-    width: 781px;
-    height: 549px;
-    background-color: white;
+    background-color: rgb(244, 244, 244);
+    width: 70%;
+    height: 570px;
     margin: auto;
 }
 
 .registration{
-    padding-top: 20px;
+    padding-top: 50px;
 }
 
-#login-popup h3{
+#login-popup h4{
     text-align: center;
+    color: rgb(94, 94, 94);
+    font-family: 'GothaReg';
+    font-size: 30px;
+}
+
+#login-popup .login-vs-email h4{
+    text-align: center;
+    color: rgb(94, 94, 94);
+    font-family: 'GothaReg';
+    font-size: 26px;
 }
 
 .registration ul{
     display: flex;
     justify-content: center;
     padding: 0;
+    list-style: none;
 }
 
 .registration ul li{
-    margin: 20px;
+    margin-top: 20px;
+    margin-left: 15px;
 }
 
 .loginBlock{
-    width: 250px;
     margin: auto;
+}
+
+.login-popup-wrapper{
+    width: 350px;
+    margin: 0 auto;
+}
+
+.login-vs-email{
+    margin-top: 30px;
+    padding-left: 15px;
+}
+
+.login-vs-email-wrapper{
+    margin-top: 30px;
+}
+
+.recover-pass{
+    margin-top: 10px;
+}
+
+.recover-pass a{
+    font-size: 11px;
 }
 
 .registrationBlock_input {
@@ -34,30 +67,38 @@
     margin: 0 0 -1px;
     position: relative;
     display: block;
-    border: 1px solid #ddd;
     border-radius: 0;
     box-sizing: border-box;
-    font-size: 19px;
-    transition: border-color .1s linear;
-    -webkit-appearance: none;
-    -webkit-font-smoothing: antialiased;
-    font-family: Arial, Helvetica, sans-serif;
-    border-color: #b4b4b4;
-    z-index: 2;
+    margin-top: 10px;
+    border: none;
+}
+
+#submitLoginInput:hover {
+    background-color: #909090;
+}
+
+#submitLoginInput{
+    color: #505050;
+    cursor: pointer;
+    width: 120px;
+    margin: 0 auto;
+    margin-top: 20px;
+    display: block;
+    height: 40px;
+    font-size: 15px;
 }
 
 #registration-newAcc{
     text-align: center;
     font-size: 25px;
     color: #717171;
-    border: 1px solid darkgrey;
     max-width: 400px;
     margin: auto;
-    border-radius: 5%;
+    font-family: GothaLight;
 }
 
 .select-block{
-    width: 360px;
+    width: 380px;
     height: 130px;
     border: 1px solid #bbbbbb;
     text-align: center;
@@ -65,8 +106,21 @@
     cursor: pointer;
 }
 
-.select-block:hover{
-    background-color: lightgray;
+.first-step-text-wrapper{
+    margin: 30px;
+}
+
+.first-step-text-wrapper p{
+    font-size: 15px;
+}
+
+.first-step-text-wrapper h4{
+    font-size: 20px;
+    color: rgba(158, 147, 87, 0.87);
+}
+
+.selected-item{
+    background-color: rgba(201, 202, 74, 0.09);
 }
 
 .first-step-wrapper{
@@ -77,15 +131,11 @@
 }
 
 #registration-firstStep{
-    text-align: center;
-    font-size: 25px;
-    color: #717171;
-    border: 1px solid darkgrey;
-    max-width: 200px;
     margin: auto;
-    border-radius: 5%;
     margin-top: 50px;
-    background-color: aquamarine;
+    background-image: url(/content/dam/wedding/components/registration/next.png);
+    width: 141px;
+    height: 51px;
 }
 
 .form-item-wrapper{

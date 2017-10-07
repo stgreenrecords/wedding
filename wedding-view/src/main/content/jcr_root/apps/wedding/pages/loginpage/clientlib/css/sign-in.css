@@ -26,16 +26,6 @@
   font-weight: 600;
 }
 
-#submitRegistrationInput:active, #submitLoginInput:active {
-  background-color: #909090;
-}
-
-#submitRegistrationInput, #submitLoginInput {
-  background-color: #40403C;
-  color: white;
-  cursor: pointer;
-}
-
 .form-templates{
   display: none;
 }

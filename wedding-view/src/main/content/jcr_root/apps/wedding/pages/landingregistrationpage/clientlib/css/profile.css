@@ -1,0 +1,169 @@
+html, body{margin: 0px; width: 100%;}
+
+h3, h4{text-align: center; font-family: "GothaMed";font-size: 28px; font-weight: 300; margin: 0px;}
+p{color: #606060; font-family: "GothaReg";letter-spacing: 0.5px; font-size: 14px; font-weight: 300 !imporatant; margin: 0px;}
+a{text-decoration: none; color: #606060; font-family: "GothaReg";letter-spacing: 0.5px; font-size: 14px; font-weight: 300 !imporatant;}
+
+#profile h3{margin-top: 0px;}
+header{background-color: #fff; padding: 40px 30px 20px; margin: 0px !important;}
+header a{color: #000 !important;}
+.logo{text-align: center;}
+.exit{display: flex; justify-content: flex-end;}
+.gray-bg{background-color: #f4f4f4;}
+.white-bg{background-color: #fff; }
+.p-60-80{padding: 60px 45px 100px;}
+.profile-block{display: flex; flex-direction: row; justify-content: space-between; width: 100%;}
+.person-info{ width: 35%; height: 900px;}
+.person-name{padding: 0px 30px 20px;}
+.person-name p{margin: 10px 0px;}
+.right-block{width: 60%; display:  flex; flex-direction: column;}
+.person-main{display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 60px 0px;}
+
+.person-img{background-image: url(../images/with-us-3.jpg); background-size: cover; background-repeat: no-repeat; width: 100%; height: 350px; margin-bottom: 20px;}
+.person-name{text-align: center;}
+.person-contact{padding: 0px 50px 20px 50px;}
+.person-contact-block{display: flex; flex-direction: row; align-items: center; height: 45px;}
+.p-contact-icon{width: 60px; display: flex; justify-content: center; align-items: center;height: 40px;}
+.person-contact-block img{width: 30px; }
+
+.edit-link{text-align: center; margin-top:30px;}
+ button{ background: url(../images/profile/%D0%A0%D0%B5%D0%B4%D0%B0%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D1%83-240-40.png); width: 240px; height: 40px; background-size: cover; background-position: center; border: 0px; background-color: transparent;}
+ button:hover{cursor: pointer;}
+
+.about-myself{padding: 30px 60px 80px;}
+.about-myself h3{margin-bottom: 40px;}
+.about-myself p{line-height: 22px;}
+
+.portfolio{margin-top: 60px; padding: 30px 60px 70px;}
+.right-block hr{width: 50%; margin: 20px auto 30px; border: 0px; height: 1px; background: #606060;}
+.portfolio-block{display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between;}
+.portfolio-block div{width: 30%; height: 170px; margin-bottom: 25px;}
+.portfolio-block div img{width: 100%; height: 100%;}
+.link{ text-align: center;}
+.link-tablet{display: none;}
+#portfolio-carousel{display: none;}
+/*footer*/
+footer{padding: 50px !important;}
+.logo-bottom{text-align: center; margin-bottom: 25px;}
+.contact-info{display: flex; flex-direction: column; justify-content: center; align-items: center; color: #606060;}
+.contact-phone{display: flex; flex-direction: row; justify-content: center; align-items: center; margin-bottom: 15px;}
+.contact-info a{ margin: 0px; font-size: 15px; text-decoration: none; font-family: "GothaReg"; font-weight: 100 !important; letter-spacing: 1px; color: #606060;}
+.contact-info a:hover{text-decoration: none;}
+.contact-phone img{margin-right: 10px;}
+
+footer hr{width: 20% !important; margin: 30px auto;}
+.contact-social{width: 10%; display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin: 0 auto;}
+
+@media(max-width: 992px){	
+	footer hr{width: 40% !important;}
+	.contact-social{width: 16%;}
+}
+@media (max-width: 425px) {
+	footer hr{width: 70% !important;}
+	.contact-social{width: 40%;}
+}
+@media(max-width:1024px){
+/*	.p-60-80 { padding: 60px 50px 100px !important;}*/
+	.person-info {width: 38%;}	
+/*	.person-contact{padding: 0px 20px 20px 20px;}*/
+}
+@media(max-width:1100px){
+	.person-contact-block{width: 300px;}
+}
+
+
+@media (max-width:1024px) and (orientation:landscape){
+/*	.p-60-80 {padding: 60px 150px 100px;}*/
+	.portfolio {padding: 40px 60px 70px;}
+	.person-info { width: 100%;}
+	.profile-block {  flex-direction: column;}
+	.person-info { width: 100%; height: auto; margin-bottom: 60px;}
+	.person-r{display: flex; flex-direction: row; justify-content: space-between; padding: 0px 0px 20px;}
+	.edit-link{display: none;}
+	.link-tablet{display: block;}
+	.link-tablet button{width: 180px;}
+	.person-main { padding: 60px 0px 20px 60px;}
+	.person-contact { padding: 60px 50px 20px 30px;}
+	.person-name, .person-name h4 { text-align: left !important; }
+	.person-name{padding: 0px 15px;}
+	.person-img {width: 270px; height: 340px;}	
+	.right-block { width: 100%;}
+}
+/*
+@media(min-width:850px){
+	.p-60-80 {padding: 60px 100px 100px;}
+}
+*/
+@media(min-width:926px) and (max-width:1170px){
+	.person-main{padding: 60px 30px 0px;}
+	.person-contact{padding-left: 20px; padding-right: 20px;}
+	.p-60-80 {padding: 60px 100px 100px;}
+
+}
+@media(min-width:926px) and (max-width:1024px){
+	.p-60-80 {padding: 60px 150px 100px;}
+}
+@media(min-width:1024px){
+	.p-60-80 {padding: 60px 60px 100px;}
+}
+@media(max-width:926px){
+	
+	.person-info { width: 100%;}
+	.profile-block {  flex-direction: column;}
+	.person-info { width: 100%; height: auto; margin-bottom: 60px;}
+	.person-r{display: flex; flex-direction: row; justify-content: space-between; padding: 0px 0px 20px;}
+	.edit-link{display: none;}
+	.link-tablet{display: block;}
+	.link-tablet button{width: 180px;}
+	.person-main { padding: 60px 0px 20px 60px;}
+	.person-contact { padding: 60px 50px 20px 30px;}
+	.person-name, .person-name h4 { text-align: left !important; }
+	.person-name{padding: 0px 15px;}
+	.person-img {width: 270px; height: 340px; margin-bottom: 30px;}	
+	.right-block { width: 100%;}
+}
+@media (max-width:720px){
+	.logo img{width: 200px; margin-top: 10px;}
+	.person-r {flex-direction: column;}
+	.p-60-80 { padding: 60px 30px 100px !important;}
+	.person-main {padding: 60px 10px 20px;}
+	.person-img { width: 100%; height: 270px;}
+	.link-tablet { display: none;}
+	.person-contact { padding: 0px 5px 20px 5px;display: flex; flex-direction: column; justify-content: flex-start; align-items: baseline;}
+	.person-name h4, .person-name p  { text-align: left!important; }
+	.about-myself {padding: 30px 30px 80px;}
+	.edit-link{display: block;}
+	.portfolio-block{display: none}
+	#portfolio-carousel{display: block;}
+	.portfolio { padding: 30px 30px 70px;}
+	.portfolio .link{display: none;}
+}
+@media (max-width:720px){
+	.person-name h4, .person-name p  { text-align: center !important; }
+	.person-name{width: 100%; padding: 0px !important;}
+}
+@media(max-width:425px){
+	.person-contact { padding: 0px 15px 20px 15px;}
+	.person-main { padding: 60px 10px 0px;}
+/*	.person-name { padding: 0px 25px 20px;}*/
+	.person-img { height: 270px;}
+}
+
+@media(min-width:1500px){
+	.about-myself {padding: 50px 60px 80px;}
+	.portfolio { padding: 50px 60px 70px;}
+	header { padding: 90px 30px 20px;}
+	.p-60-80 {padding: 130px 200px 100px;}
+	.person-main { padding: 60px 90px 20px;}
+	.person-img { height: 470px;}
+	.person-name {padding: 0px 60px 30px;}
+	h3, h4{font-size: 40px; margin: 0px !important; }
+	a, p{font-size: 18px;}
+	.about-myself p {line-height: 28px;}
+	.portfolio-block div { width: 30%; height: 230px;  margin-bottom: 35px;}
+	.edit-link button { background: url(../images/profile/%D0%A0%D0%B5%D0%B4%D0%B0%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%20%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D1%83.png); width: 240px; height: 51px;}
+}
+@media(max-width:320px){
+	.p-60-80 { padding: 60px 10px 100px !important;}
+	.person-img { height: 240px;}
+}

@@ -5,7 +5,6 @@
 .best-product-block h3{
     padding-left: 255px;
     color: #00BCD4;
-    font-family: "oswald-bold";
 }
 .best-product-content{
     padding-left: 150px;
@@ -17,7 +16,6 @@
 
 .best-product-item{
     text-align: center;
-    font-family: 'oswald-regular';
     color: black;
     font-size: 18px;
     margin: 40px;

@@ -68,7 +68,6 @@
 
 .item-product-title a{
     text-decoration: none;
-    font-family: 'oswald-light';
     color: #ffffff;
     font-size: 18px;
 }
@@ -89,7 +88,6 @@
 }
 
 .itemDiscription span{
-    font-family: 'oswald-loght';
     font-size: 14px;
     color: #808080;
 }

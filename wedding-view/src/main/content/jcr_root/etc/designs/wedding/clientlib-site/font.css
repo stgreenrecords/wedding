@@ -1,62 +1,62 @@
 @font-face {
     font-family: 'GOTHAPROBLA';
-    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROBLA.otf");
+    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROBLA.OTF");
 }
 
 @font-face {
     font-family: 'GOTHAPROBLAITA';
-    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROBLAITA.otf");
+    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROBLAITA.OTF");
 }
 
 @font-face {
     font-family: 'GOTHAPROBOL';
-    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROBOL.otf");
+    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROBOL.OTF");
 }
 
 @font-face {
     font-family: 'GOTHAPROBOLITA';
-    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROBOLITA.otf");
+    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROBOLITA.OTF");
 }
 
 @font-face {
     font-family: 'GOTHAPROITA';
-    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROITA.otf");
+    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROITA.OTF");
 }
 @font-face {
-    font-family: 'GOTHAPROLIG';
-    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROLIG.otf");
+    font-family: 'GothaLight';
+    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROLIG.OTF");
 }
 @font-face {
     font-family: 'GOTHAPROLIGITA';
-    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROLIGITA.otf");
+    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROLIGITA.OTF");
 }
 @font-face {
-    font-family: 'GOTHAPROMED';
-    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROMED.otf");
+    font-family: 'GothaMed';
+    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROMED.OTF");
 }
 @font-face {
     font-family: 'GOTHAPROMEDITA';
-    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROMEDITA.otf");
+    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROMEDITA.OTF");
 }
 
 @font-face {
     font-family: 'GOTHAPRONARBOL';
-    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPRONARBOL.otf");
+    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPRONARBOL.OTF");
 }
 @font-face {
     font-family: 'GOTHAPRONARMED';
-    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPRONARMED.otf");
+    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPRONARMED.OTF");
 }
 @font-face {
-    font-family: 'GOTHAPROREG';
-    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROREG.otf");
+    font-family: 'GothaReg';
+    src: url("/etc/designs/wedding/clientlib-site/fonts/GOTHAPROREG.OTF");
 }
 @font-face {
     font-family: 'ROSA_MARENA';
     src: url("/etc/designs/wedding/clientlib-site/fonts/ROSA_MARENA.TTF");
 }
 @font-face {
-    font-family: 'THEANODIDOT-REGULAR';
+    font-family: 'TheanoDidot';
     src: url("/etc/designs/wedding/clientlib-site/fonts/THEANODIDOT-REGULAR.TTF");
 }
 
