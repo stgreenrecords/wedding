@@ -258,9 +258,7 @@ var PORTAL = (function (PORTAL, $) {
             dataType : "json",
             success: function (categories) {
                 var $select = $(".registration-select");
-
                 categories.categoryList.forEach(function(item){
-                    console.log(item);
                     $select.append("<option>"+item+"</option>")
                 });
 
