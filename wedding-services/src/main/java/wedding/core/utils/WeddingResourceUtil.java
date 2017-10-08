@@ -9,6 +9,7 @@ import wedding.core.model.UserData;
 
 import javax.jcr.query.Query;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.stream.Stream;
@@ -25,7 +26,7 @@ public final class WeddingResourceUtil {
     public static <T> Stream<T> findModel(ResourceResolver resourceResolver, String query, Class<T> modelClass,
                                           int type, boolean parallel) {
         return iteratorToStream(resourceResolver.findResources(query, Query.JCR_SQL2), type, parallel)
-                .map(modelClass::cast);
+                .map(resource -> resource.adaptTo(modelClass));
     }
 
     public static <T> Stream<T> findModel(ResourceResolver resourceResolver, String query, Class<T> modelClass) {
@@ -50,6 +51,7 @@ public final class WeddingResourceUtil {
     public static UserData getUserData(ResourceResolver resourceResolver, String id) {
         final String query = String.format(Constants.USER_QUERY, id);
         return findModel(resourceResolver, query, UserData.class)
+                .filter(Objects::nonNull)
                 .findFirst()
                 .orElseGet(UserData::new);
     }
