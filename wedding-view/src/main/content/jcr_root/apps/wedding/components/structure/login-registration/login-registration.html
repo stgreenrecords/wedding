@@ -1,164 +1,155 @@
-<sly data-sly-use.registrationModel="wedding.models.components.LoginRegistrationModel">
+<div class="login-registration-block">
+    <a id="login-registration-link" href="#login-popup">Вход | Регистрация</a>
+    <div class="userProfile" style="display: none">
 
-
-    <div class="login-registration-block">
-        <a id="login-registration-link" href="#login-popup">Вход | Регистрация</a>
-        <div class="userProfile" style="display: none">
-
-        </div>
-        <div id="login-popup" class="white-popup mfp-hide">
-            <div class="login-popup-wrapper">
-                <div class="registration">
-                    <h4>ВХОД</h4>
-                    <ul>
-                        <li class="vk-icon">
-                            <a href="#" id="vk-login-button">
-                                <img src="/content/dam/wedding/components/registration/vk.png" alt="">
-                            </a>
-                        </li>
-                        <li class="facebook-icon">
-                            <a href="#" id="facebook-login-button">
-                                <img src="/content/dam/wedding/components/registration/facebook.png" alt="">
-                            </a>
-                        </li>
-                        <li class="gmail-icon">
-                            <a href="#" id="gmail-login-button">
-                                <img src="/content/dam/wedding/components/registration/g+.png" alt="">
-                            </a>
-                        </li>
-                        <li class="odn-icon">
-                            <a href="#" id="odn-login-button">
-                                <img src="/content/dam/wedding/components/registration/ok.png" alt="">
-                            </a>
-                        </li>
-                    </ul>
-                    <a style="display: none" id="registration-newAcc" href="#registration-popup-first-step"></a>
-                </div>
-                <div class="login-vs-email">
-                    <div class="loginBlock">
-                        <h4>ИЛИ</h4>
-                        <div class="login-vs-email-wrapper">
-                            <input id="emailLoginInput" type="text" placeholder="e-mail"
-                                   class="registrationBlock_input">
-                            <input id="passLoginInput" type="password" placeholder="Пароль"
-                                   class="registrationBlock_input">
-                            <div class="recover-pass"><a href="#">Забыли пароль?</a></div>
-                            <div id="submitLoginInput" class="button-registration-submit" type="submit"
-                                 data-type="login">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    </div>
+    <div id="login-popup" class="white-popup mfp-hide">
+        <div class="login-popup-wrapper">
+            <div class="registration">
+                <h4>ВХОД</h4>
+                <ul>
+                    <li class="vk-icon">
+                        <a href="#" id="vk-login-button">
+                            <img src="/content/dam/wedding/components/registration/vk.png" alt="">
+                        </a>
+                    </li>
+                    <li class="facebook-icon">
+                        <a href="#" id="facebook-login-button">
+                            <img src="/content/dam/wedding/components/registration/facebook.png" alt="">
+                        </a>
+                    </li>
+                    <li class="gmail-icon">
+                        <a href="#" id="gmail-login-button">
+                            <img src="/content/dam/wedding/components/registration/g+.png" alt="">
+                        </a>
+                    </li>
+                    <li class="odn-icon">
+                        <a href="#" id="odn-login-button">
+                            <img src="/content/dam/wedding/components/registration/ok.png" alt="">
+                        </a>
+                    </li>
+                </ul>
+                <a style="display: none" id="registration-newAcc" href="#registration-popup-first-step"></a>
             </div>
-
-            <div id="registration-popup-first-step" class="white-popup mfp-hide">
-                <div class="first-step-wrapper">
-                    <div id="first-step-private" class="select-block">
-                        <div class="first-step-text-wrapper">
-                            <p>Невеста, жених, молодожёны</p>
-                            <h4>Личный аккант</h4>
-                        </div>
-                    </div>
-                    <div id="first-step-partner" class="select-block">
-                        <div class="first-step-text-wrapper">
-                            <p>Фотографы, видеографы и другие профессионалы, а также владельцы бизнеса</p>
-                            <h4>Партнёр</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="button-registration-submit">
-                    <a style="display: none" id="registration-firstStep" href="#"></a>
-                </div>
-            </div>
-            <div id="registration-popup-second-step-private" class="white-popup mfp-hide">
-                <div class="form-item-wrapper">
-                    <h4>ЗАВЕРШЕНИЕ РЕГИСТРАЦИИ</h4>
-                    <div class="form-item-wrapper-inner">
-                        <div class="form-item">
-                            <input type="text" id="registration-private-firstName" class="form-item-input"
-                                   placeholder="Имя">
-                        </div>
-                        <div class="form-item">
-                            <input type="text" id="registration-private-lastName" class="form-item-input"
-                                   placeholder="Фамилия">
-                        </div>
-                        <div class="form-item">
-                            <input type="text" id="registration-private-city" class="form-item-input"
-                                   placeholder="Город">
-                        </div>
-                        <div class="form-item">
-                            <input type="text" id="registration-private-email" class="form-item-input"
-                                   placeholder="Почта">
-                        </div>
-                        <div class="form-item">
-                            <label><input type="checkbox"><a class="licence-accept" href="">Я принимаю условия
-                                сотрудничества</a></label>
-                        </div>
-                        <div class="form-item button-registration-submit">
-                            <div class="registration-submit-private" id="registration-newPrivate">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="registration-popup-second-step-partner" class="white-popup mfp-hide">
-                <div class="form-item-wrapper">
-                    <h4>ЗАВЕРШЕНИЕ РЕГИСТРАЦИИ</h4>
-                    <div class="form-item-wrapper-inner">
-                        <div class="form-item">
-                            <select class="registrationBlock_input registration-select"
-                                    id="registration-partner-speciality">
-                                <option>Сфера деятельности</option>
-                                <sly data-sly-list.partnersList="${registrationModel.categoryList}">
-                                    <option>
-                                        ${partnersList.pageTitle}
-                                    </option>
-                                </sly>
-                            </select>
-                        </div>
-                        <div class="form-item">
-                            <input type="text" id="registration-partner-name" class="form-item-input"
-                                   placeholder="Название организации">
-                        </div>
-                        <div class="form-item-separator"><span>или</span></div>
-                        <div class="form-item">
-                            <input type="text" id="registration-partner-firstName" class="form-item-input"
-                                   placeholder="Имя">
-                        </div>
-                        <div class="form-item">
-                            <input type="text" id="registration-partner-lastName" class="form-item-input"
-                                   placeholder="Фамилия">
-                        </div>
-                        <div class="form-item">
-                            <input type="text" id="registration-partner-city" class="form-item-input"
-                                   placeholder="Город">
-                        </div>
-                        <div class="form-item">
-                            <input type="email" id="registration-partner-email" class="form-item-input"
-                                   placeholder="Почта">
-                        </div>
-                        <div class="form-item">
-                            <input type="text" id="registration-partner-phone" class="form-item-input"
-                                   placeholder="Телефон">
-                        </div>
-                        <div class="form-item">
-                            <label><input type="checkbox"><a class="licence-accept" href="">Я принимаю условия
-                                сотрудничества</a></label>
-                        </div>
-                        <div class="form-item button-registration-submit">
-                            <div class="registration-submit-partner" id="registration-newPartner">
-                            </div>
+            <div class="login-vs-email">
+                <div class="loginBlock">
+                    <h4>ИЛИ</h4>
+                    <div class="login-vs-email-wrapper">
+                        <input id="emailLoginInput" type="text" placeholder="e-mail"
+                               class="registrationBlock_input">
+                        <input id="passLoginInput" type="password" placeholder="Пароль"
+                               class="registrationBlock_input">
+                        <div class="recover-pass"><a href="#">Забыли пароль?</a></div>
+                        <div id="submitLoginInput" class="button-registration-submit" type="submit"
+                             data-type="login">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="user-menu-block" style="display: none">
-            <span class="user-name-title"></span>
-            <ul>
-                <li><a href="/content/wedding/user.html" x-cq-linkchecker="skip">Моя страница</a></li>
-                <li><a class="user-logout-link" href="#">Выйти</a></li>
-            </ul>
+
+        <div id="registration-popup-first-step" class="white-popup mfp-hide">
+            <div class="first-step-wrapper">
+                <div id="first-step-private" class="select-block">
+                    <div class="first-step-text-wrapper">
+                        <p>Невеста, жених, молодожёны</p>
+                        <h4>Личный аккант</h4>
+                    </div>
+                </div>
+                <div id="first-step-partner" class="select-block">
+                    <div class="first-step-text-wrapper">
+                        <p>Фотографы, видеографы и другие профессионалы, а также владельцы бизнеса</p>
+                        <h4>Партнёр</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="button-registration-submit">
+                <a style="display: none" id="registration-firstStep" href="#"></a>
+            </div>
+        </div>
+        <div id="registration-popup-second-step-private" class="white-popup mfp-hide">
+            <div class="form-item-wrapper">
+                <h4>ЗАВЕРШЕНИЕ РЕГИСТРАЦИИ</h4>
+                <div class="form-item-wrapper-inner">
+                    <div class="form-item">
+                        <input type="text" id="registration-private-firstName" class="form-item-input"
+                               placeholder="Имя">
+                    </div>
+                    <div class="form-item">
+                        <input type="text" id="registration-private-lastName" class="form-item-input"
+                               placeholder="Фамилия">
+                    </div>
+                    <div class="form-item">
+                        <input type="text" id="registration-private-city" class="form-item-input"
+                               placeholder="Город">
+                    </div>
+                    <div class="form-item">
+                        <input type="text" id="registration-private-email" class="form-item-input"
+                               placeholder="Почта">
+                    </div>
+                    <div class="form-item">
+                        <label><input type="checkbox"><a class="licence-accept" href="">Я принимаю условия
+                            сотрудничества</a></label>
+                    </div>
+                    <div class="form-item button-registration-submit">
+                        <div class="registration-submit-private" id="registration-newPrivate">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="registration-popup-second-step-partner" class="white-popup mfp-hide">
+            <div class="form-item-wrapper">
+                <h4>ЗАВЕРШЕНИЕ РЕГИСТРАЦИИ</h4>
+                <div class="form-item-wrapper-inner">
+                    <div class="form-item">
+                        <select class="registrationBlock_input registration-select"
+                                id="registration-partner-speciality">
+                            <option>Сфера деятельности</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <input type="text" id="registration-partner-name" class="form-item-input"
+                               placeholder="Название организации">
+                    </div>
+                    <div class="form-item-separator"><span>или</span></div>
+                    <div class="form-item">
+                        <input type="text" id="registration-partner-firstName" class="form-item-input"
+                               placeholder="Имя">
+                    </div>
+                    <div class="form-item">
+                        <input type="text" id="registration-partner-lastName" class="form-item-input"
+                               placeholder="Фамилия">
+                    </div>
+                    <div class="form-item">
+                        <input type="text" id="registration-partner-city" class="form-item-input"
+                               placeholder="Город">
+                    </div>
+                    <div class="form-item">
+                        <input type="email" id="registration-partner-email" class="form-item-input"
+                               placeholder="Почта">
+                    </div>
+                    <div class="form-item">
+                        <input type="text" id="registration-partner-phone" class="form-item-input"
+                               placeholder="Телефон">
+                    </div>
+                    <div class="form-item">
+                        <label><input type="checkbox"><a class="licence-accept" href="">Я принимаю условия
+                            сотрудничества</a></label>
+                    </div>
+                    <div class="form-item button-registration-submit">
+                        <div class="registration-submit-partner" id="registration-newPartner">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</sly>
+    <div class="user-menu-block" style="display: none">
+        <span class="user-name-title"></span>
+        <ul>
+            <li><a href="/content/wedding/user.html" x-cq-linkchecker="skip">Моя страница</a></li>
+            <li><a class="user-logout-link" href="#">Выйти</a></li>
+        </ul>
+    </div>
+</div>

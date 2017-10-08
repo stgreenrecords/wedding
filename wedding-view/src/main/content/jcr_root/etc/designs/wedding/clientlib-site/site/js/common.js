@@ -9,6 +9,20 @@ var PORTAL = function (PORTAL, $) {
         return false;
     };
 
+    PORTAL.utils.categories = [];
+
+    PORTAL.utils.setCategories = function () {
+        $.ajax({
+            type: "GET",
+            url: "/services/categories",
+            success: function (categories) {
+                PORTAL.utils.setCategories = categories;
+            }
+        });
+    };
+
+    PORTAL.utils.setCategories();
+
     PORTAL.utils.get_cookie = function (name) {
         cookie_name = name + "=";
         cookie_length = document.cookie.length;

@@ -6,7 +6,6 @@
 
 #registration-popup-first-step{
     margin: 0 auto;
-    height: 250px;
     padding-top: 100px;
 }
 
@@ -137,7 +136,8 @@
     display: flex;
     width: 600px;
     margin: auto;
-    padding-top: 200px;
+    margin-top: 100px;
+    padding-bottom: 100px;
 }
 
 #registration-firstStep{
@@ -220,6 +220,7 @@
 
 .licence-accept{
     font-size: 12px;
+    color: gray;
 }
 
 .form-item-wrapper-inner{

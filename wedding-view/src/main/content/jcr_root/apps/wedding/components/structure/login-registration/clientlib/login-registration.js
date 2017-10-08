@@ -252,13 +252,28 @@ var PORTAL = (function (PORTAL, $) {
             PORTAL.modules.LoginRegistration.AUTH.GMAIL.login();
         });
 
+        $.ajax({
+            type: "GET",
+            url: "/services/categories",
+            dataType : "json",
+            success: function (categories) {
+                var $select = $(".registration-select");
+
+                categories.categoryList.forEach(function(item){
+                    console.log(item);
+                    $select.append("<option>"+item+"</option>")
+                });
+
+            }
+        });
+
         $self.find(".registration-submit-partner").click(function () {
             var name = $("#registration-partner-name").val();
             var speciality = $("#registration-partner-speciality").find("option:selected").text();
             var city = $("#registration-partner-city").val();
             var email = $("#registration-partner-email").val();
             var phone = $("#registration-partner-phone").val();
-            if (name && speciality && city && email && phone && email.match("^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.([a-z][a-z][a-z]|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$")) {
+            if (name && speciality && speciality != "Сфера деятельности" && city && email && phone && email.match("^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.([a-z][a-z][a-z]|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$")) {
                 $.ajax({
                     url: "/services/registration",
                     type: "POST",
