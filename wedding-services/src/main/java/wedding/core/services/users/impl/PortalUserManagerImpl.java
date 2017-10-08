@@ -229,7 +229,7 @@ public class PortalUserManagerImpl implements PortalUserManager {
         User user = null;
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
-            String pathToNewUserFolder = "/home/users/wedding/users" + "/" + email.substring(0, 1) + "/" + dateFormat.format(new Date();
+            String pathToNewUserFolder = "/home/users/wedding/users" + "/" + email.substring(0, 1) + "/" + dateFormat.format(new Date());
             PrincipalManager principalManager = getJackrabbitSession().getPrincipalManager();
             Principal principal = principalManager.getPrincipal(email);
             if (principal == null) {
