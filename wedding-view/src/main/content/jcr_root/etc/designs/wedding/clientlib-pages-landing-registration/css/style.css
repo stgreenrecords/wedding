@@ -1,5 +1,8 @@
 html, body{width: 100%; margin: 0;}
 
+a{
+	text-decoration: none;
+}
 /*STYLES FOR TABLET WITH LANDSCAPE ORIENTATION*/
 @media screen and (max-width:1024px) and (orientation: landscape){
 	.logo img{width: 250px;}

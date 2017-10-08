@@ -1,8 +1,13 @@
 #login-popup, #registration-popup-first-step, #registration-popup-second-step-partner, #registration-popup-second-step-private{
     background-color: rgb(244, 244, 244);
     width: 70%;
-    height: 570px;
     margin: auto;
+}
+
+#registration-popup-first-step{
+    margin: 0 auto;
+    height: 250px;
+    padding-top: 100px;
 }
 
 .registration{
@@ -74,18 +79,18 @@
 }
 
 #submitLoginInput:hover {
-    background-color: #909090;
+
 }
 
 #submitLoginInput{
-    color: #505050;
-    cursor: pointer;
-    width: 120px;
+    background-image: url(/content/dam/wedding/components/registration/Enter-button.png);
+    width: 91px;
+    height: 51px;
+    padding: 0;
     margin: 0 auto;
-    margin-top: 20px;
-    display: block;
-    height: 40px;
-    font-size: 15px;
+    padding-top: 50px;
+    background-repeat: no-repeat;
+    margin-top: 10px;
 }
 
 #registration-newAcc{
@@ -106,8 +111,13 @@
     cursor: pointer;
 }
 
+.select-block:hover{
+
+}
+
 .first-step-text-wrapper{
-    margin: 30px;
+    width: 250px;
+    margin: 0 auto;
 }
 
 .first-step-text-wrapper p{
@@ -139,19 +149,28 @@
 }
 
 .form-item-wrapper{
-    padding-top: 100px;
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    margin: 0 auto;
 }
 
 .form-item{
-    width: 450px;
     margin: auto;
     font-size: 18px;
     color: #797979;
     padding-top: 20px;
+    width: 350px;
 }
 
 .form-item-input{
-    float: right;
+    width: 100%;
+    border: none;
+    height: 36px;
+    line-height: 10px;
+    font-family: 'GothaReg';
+    padding-left: 15px;
 }
 
 .login-registration-block{
@@ -184,3 +203,45 @@
 .user-menu-block ul li {
     border-bottom: 1px solid #d6cece;
 }
+
+#registration-newPrivate, #registration-newPartner{
+    background-image: url(/content/dam/wedding/components/registration/registration.png);
+    width: 250px;
+    height: 51px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.form-item-wrapper h4{
+    font-size: 28px;
+    color: gray;
+    font-family: 'GothaReg';
+}
+
+.licence-accept{
+    font-size: 12px;
+}
+
+.form-item-wrapper-inner{
+    padding-top: 30px;
+}
+
+.button-registration-submit{
+    padding-bottom: 50px;
+}
+
+.registration-select{
+    background-color: rgba(222, 138, 27, 0);
+}
+
+.registration-select option{
+    font-family: 'GothaLight';
+    padding: 2px;
+}
+
+.form-item-separator{
+    text-align: center;
+    margin-top: 20px;
+    vertical-align: middle;
+}
+

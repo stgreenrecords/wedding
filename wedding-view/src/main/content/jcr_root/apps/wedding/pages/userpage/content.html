@@ -1,23 +1,124 @@
-<div class="user-page-block">
-    <div class="main-info">
-        <div class="photo">
-            <input type="file" class="avatar-file" />
-            <button class="avatar-submit">Upload</button>
+<sly data-sly-use.clientLib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientLib.css @ categories='wedding.pages-profile'}"/>
+
+<header>
+    <div class="exit">
+        <a href="index.html" x-cq-linkchecker="skip">Выход</a>
+    </div>
+    <div class="logo">
+        <img src="/content/dam/wedding/components/profile/logo-black.png" alt="Твоя свадьба">
+    </div>
+</header>
+
+<section id="profile" class="gray-bg">
+    <div class="p-60-80">
+        <div class="profile-block">
+            <div class="person-info">
+                <div class=" white-bg person-r">
+                    <div class="person-main">
+                        <div class="person-img"></div>
+                        <div class="link-tablet">
+                            <button></button>
+                        </div>
+                    </div>
+                    <div class="person-contact">
+                        <div class="person-name">
+                            <h4>Алексей Тюшкевич</h4>
+                            <p>Видеооператор</p>
+                        </div>
+                        <div class="person-contact-block">
+                            <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/wallet.png"></div>
+                            <p>200-300 рублей</p>
+                        </div>
+                        <div class="person-contact-block">
+                            <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/phone.png"></div>
+                            <a href="tel:+375336531587" x-cq-linkchecker="skip">+375 33 653 1587</a>
+                        </div>
+                        <div class="person-contact-block">
+                            <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/envelope.png"></div>
+                            <p>tyushkevich@gmail.com</p>
+                        </div>
+                        <div class="person-contact-block">
+                            <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/link.png"></div>
+                            <p>www.tyushkevich.by</p>
+                        </div>
+                        <div class="person-contact-block">
+                            <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/vk.png"></div>
+                            <a href="vk.com/tyushkevich" x-cq-linkchecker="skip">vk.com/tyushkevich</a>
+                        </div>
+                        <div class="person-contact-block">
+                            <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/facebook.png" height="30px" style="width: 15px !important"></div>
+                            <a href="facebook.com/tyushkevich" x-cq-linkchecker="skip">facebook.com/tyushkevich</a>
+                        </div>
+                        <div class="person-contact-block">
+                            <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/instagram.png"></div>
+                            <a href="instagram.com/tyushkevich" x-cq-linkchecker="skip">instagram.com/tyushkevich</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="edit-link">
+                    <button></button>
+                </div>
+
+            </div>
+
+            <div class="right-block">
+                <div class="white-bg about-myself">
+                    <h3>О себе</h3>
+                    <hr>
+
+                    <p>Топовый ведущий праздников, телеведущий, сценарист. Самый красивый ведущий по версии его бабушки. За 6 лет в развлекательной индустрии сделал незабывае- мыми более 400 престижных свадеб. NOVAwedding —  это агентство нешаблонных праздников. Безупречная свадьба, душевное семейное торжество, веселый и нестандартный детский день рождения — здесь организуют любой из этих праздников. С ноля и под ключ — от написания индиви|</p>
+                </div>
+
+                <div class="portfolio white-bg">
+                    <h3>Портфолио</h3>
+                    <hr>
+
+                    <div class="portfolio-block">
+                        <div><img src="images/profile/img/1.jpg"></div>
+                    </div>
+
+                    <div id="portfolio-carousel" class="owl-carousel owl-theme">
+                        <div><img src="images/profile/img/1.jpg"></div>
+                    </div>
+
+                    <div class="link">
+                        <a href="" x-cq-linkchecker="skip">Показать еще</a>
+                    </div>
+
+                </div>
+            </div>
         </div>
-        <div class="name"></div>
-        <div class="job"></div>
-        <div class="price"></div>
-        <div class="phone"></div>
-        <div class="email"></div>
-        <div class="website"></div>
-        <div class="vk"></div>
-        <div class="facebook"></div>
-        <div class="insta"></div>
     </div>
-    <div class="about-block">
+</section>
 
+<footer class="white-bg">
+    <div class="logo-bottom">
+        <img src="/content/dam/wedding/components/navigation/Bottom_logo.png" alt="Твоя свадьба">
     </div>
-    <div class="portfolio">
 
+    <div class="contact-info">
+        <div class="contact-phone">
+            <img src="/content/dam/wedding/page/social_icons/mts.png" alt="mts">
+            <a href="tel:+375445560667" x-cq-linkchecker="skip">+375 44 5560 667</a>
+        </div>
+        <div class="contact-phone">
+            <img src="/content/dam/wedding/page/social_icons/velcom.png" alt="velcom">
+            <a href="tel:+375447560967" x-cq-linkchecker="skip">+375 44 7560 967</a>
+        </div>
+        <div>
+            <a href="mailto:info@tvoyasvadba.by" x-cq-linkchecker="skip">info@tvoyasvadba.by</a>
+        </div>
     </div>
-</div>
+
+    <hr>
+    <div class="contact-social">
+        <a href="https://vk.com"><img src="/content/dam/wedding/page/social_icons/vk.png" alt="vk.com"
+                                      x-cq-linkchecker="skip"></a>
+        <a href="https://facebook.com"><img src="/content/dam/wedding/page/social_icons/facebook.png" alt="facebook.com"
+                                            x-cq-linkchecker="skip"></a>
+        <a href="https://instagram.com"><img src="/content/dam/wedding/page/social_icons/insta.png" alt="instagram.com"
+                                             x-cq-linkchecker="skip"></a>
+    </div>
+
+</footer>
