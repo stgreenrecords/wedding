@@ -25,6 +25,10 @@ var PORTAL = (function (PORTAL, $) {
 
     PORTAL.modules.LoginRegistration.AUTH = PORTAL.modules.LoginRegistration.AUTH || {};
 
+    PORTAL.modules.LoginRegistration.AUTH.getCurrentUserData = function () {
+        return socialUser;
+    };
+
     PORTAL.modules.LoginRegistration.AUTH.VK = {
 
         "login": function () {
