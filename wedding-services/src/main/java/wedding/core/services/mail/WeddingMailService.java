@@ -5,8 +5,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.felix.scr.annotations.*;
+import org.apache.jackrabbit.api.JackrabbitSession;
 import org.apache.jackrabbit.util.Base64;
 import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.commons.osgi.PropertiesUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -20,6 +22,8 @@ import wedding.core.utils.ServerUtil;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import java.util.Optional;
 
 
 @Component(metatype = true, immediate = true)
@@ -51,8 +55,11 @@ public class WeddingMailService {
     }
 
     public boolean sendRegistrationMail(String userName) {
+        ResourceResolver resolver = weddingUtils.getResolver();
         try {
-            Node registrationNode = weddingUtils.getAdminSession().getNode(PropertiesUtil.toString(componentContext.getProperties().get(PATH_TO_REGISTRATION_MAIL), StringUtils.EMPTY) + "/jcr:content/par/text");
+            JackrabbitSession jackrabbitSession = Optional.of(resolver).
+                    map(resourceResolver -> (JackrabbitSession) resourceResolver.adaptTo(Session.class)).orElse(null);
+            Node registrationNode = jackrabbitSession.getNode(PropertiesUtil.toString(componentContext.getProperties().get(PATH_TO_REGISTRATION_MAIL), StringUtils.EMPTY) + "/jcr:content/par/text");
             if (registrationNode.hasProperty("text")) {
                 HtmlEmail email = new HtmlEmail();
                 email.setCharset("UTF-8");
@@ -76,10 +83,10 @@ public class WeddingMailService {
                 return true;
             }
 
-        } catch (RepositoryException e) {
+        } catch (RepositoryException | EmailException e) {
             LOG.error(e.getMessage());
-        } catch (EmailException e) {
-            LOG.error(e.getMessage());
+        } finally {
+            Optional.of(resolver).ifPresent(ResourceResolver::close);
         }
         return false;
     }

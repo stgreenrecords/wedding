@@ -31,5 +31,5 @@ public interface PortalUserManager {
 
     boolean addPortalUserViaSocial(String userID, String type, String email, String firstName, String lastName, String city, String authType);
 
-    boolean addPartner(String userID, String type, String email, String speciality, String name, String city, String phone, String authType);
+    boolean addPartner(String firstName, String lastName, String userID, String type, String email, String speciality, String name, String city, String phone, String authType);
 }

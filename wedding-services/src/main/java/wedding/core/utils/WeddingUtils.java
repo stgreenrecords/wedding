@@ -26,19 +26,9 @@ public class WeddingUtils {
     private static final Logger LOG = LoggerFactory.getLogger(WeddingUtils.class);
 
     @Reference
-    private Repository repository;
-
-    private ComponentContext componentContext;
-
-    @Reference
     private ResourceResolverFactory resolverFactory;
 
     private ResourceResolver resourceResolver;
-
-    @Activate
-    private void activate(ComponentContext context) throws LoginException {
-        resourceResolver = resolverFactory.getAdministrativeResourceResolver(null);
-    }
 
     public static byte[] gzip(String data) throws Exception{
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -49,8 +39,13 @@ public class WeddingUtils {
         return byteArrayOutputStream.toByteArray();
     }
 
-    public JackrabbitSession getAdminSession() {
-        return (JackrabbitSession) resourceResolver.adaptTo(Session.class);
+    public ResourceResolver getResolver() {
+        try {
+            resourceResolver = resolverFactory.getAdministrativeResourceResolver(null);
+        } catch (LoginException e) {
+            e.printStackTrace();
+        }
+        return resourceResolver;
     }
 
 }
