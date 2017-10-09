@@ -7,6 +7,7 @@ import org.apache.jackrabbit.api.security.user.Authorizable;
 import org.apache.jackrabbit.util.Base64;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
+import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +17,11 @@ import wedding.core.utils.WeddingUtils;
 import wedding.core.utils.ServerUtil;
 
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Optional;
 
 @SlingServlet(paths = {"/services/verifying"})
 public class VerifyingServlet extends SlingAllMethodsServlet {
@@ -46,7 +49,9 @@ public class VerifyingServlet extends SlingAllMethodsServlet {
         String sessionID = request.getParameter(Constants.AUTH_COOKIE_NAME);
         String email = request.getParameter(Constants.EMAIL_COOKIE_NAME);
         PrintWriter writer = null;
-        JackrabbitSession jackrabbitSession = weddingUtils.getAdminSession();
+        ResourceResolver resolver = weddingUtils.getResolver();
+        JackrabbitSession jackrabbitSession = Optional.of(resolver).
+                map(resourceResolver -> (JackrabbitSession) resourceResolver.adaptTo(Session.class)).orElse(null);
         if (jackrabbitSession != null) {
             try {
                 Authorizable authorizable = jackrabbitSession.getUserManager().getAuthorizable(email);
@@ -57,6 +62,9 @@ public class VerifyingServlet extends SlingAllMethodsServlet {
                 }
             } catch (RepositoryException e) {
                 LOG.error("FAIL TO GET USER FROM COOKIE. USER: " + email + ". Detail: " + e.getMessage());
+            }
+            finally {
+                Optional.of(resolver).ifPresent(ResourceResolver::close);
             }
         }
     }

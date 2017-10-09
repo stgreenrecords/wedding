@@ -271,6 +271,8 @@ var PORTAL = (function (PORTAL, $) {
 
         $self.find(".registration-submit-partner").click(function () {
             var name = $("#registration-partner-name").val();
+            var firstName = $("#registration-partner-firstName").val();
+            var lastName = $("#registration-partner-lastName").val();
             var speciality = $("#registration-partner-speciality").find("option:selected").text();
             var city = $("#registration-partner-city").val();
             var email = $("#registration-partner-email").val();
@@ -283,6 +285,8 @@ var PORTAL = (function (PORTAL, $) {
                         'type': 'partner',
                         'userID': socialUser.id,
                         'name': name,
+                        'firstName' : firstName,
+                        'lastName' : lastName,
                         'speciality': speciality,
                         'city': city,
                         'authType': authorizationType,

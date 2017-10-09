@@ -38,6 +38,8 @@ public class RegistrationServlet extends SlingAllMethodsServlet {
     }
 
     private boolean doPartnerRegistration(String type, SlingHttpServletRequest request) {
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
         String name = request.getParameter("name");
         String city = request.getParameter("city");
         String speciality = request.getParameter("speciality");
@@ -45,7 +47,7 @@ public class RegistrationServlet extends SlingAllMethodsServlet {
         String email = request.getParameter("email");
         String authType = request.getParameter("authType");
         String userID = request.getParameter("userID");
-        boolean statusRegistration = portalUserManager.addPartner(userID, type, email, speciality, name, city, phone, authType);
+        boolean statusRegistration = portalUserManager.addPartner(firstName, lastName, userID, type, email, speciality, name, city, phone, authType);
 /*        if (statusRegistration) {
             weddingMailService.sendRegistrationMail(email);
         }*/

@@ -192,7 +192,11 @@ public class PortalUserManagerImpl implements PortalUserManager {
             PrincipalManager principalManager = getJackrabbitSession().getPrincipalManager();
             Principal principal = principalManager.getPrincipal(email);
             if (principal == null) {
-                user = getJackrabbitSession().getUserManager().createUser(email, "user", () -> email, pathToNewUserFolder);
+                user = getJackrabbitSession().getUserManager().createUser(email, "user", new Principal() {
+                    public String getName() {
+                        return email;
+                    }
+                }, pathToNewUserFolder);
                 user.setProperty("./profile/userID", ValueFactoryImpl.getInstance().createValue(userID));
                 user.setProperty("./profile/email", ValueFactoryImpl.getInstance().createValue(email));
                 user.setProperty("./profile/authType", ValueFactoryImpl.getInstance().createValue(authType));
