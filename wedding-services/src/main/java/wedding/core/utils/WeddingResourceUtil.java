@@ -7,6 +7,7 @@ import org.apache.sling.api.resource.ModifiableValueMap;
 import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,6 +84,9 @@ public final class WeddingResourceUtil {
 
     public static void updateModel(Object model) {
         final Class<?> modelClass = model.getClass();
+        if (modelClass.getDeclaredAnnotation(Model.class) == null) {
+            return;
+        }
         final Field[] fields = modelClass.getDeclaredFields();
         Arrays.stream(fields)
                 .filter(field -> Resource.class.equals(field.getType()))
