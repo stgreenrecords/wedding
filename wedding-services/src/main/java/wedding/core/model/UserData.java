@@ -10,7 +10,6 @@ import javax.inject.Inject;
 @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class UserData {
 
-    @Inject
     @Self
     private Resource resource;
 
@@ -20,7 +19,10 @@ public class UserData {
     private String authType;
     @Inject
     private String type;
-
+    @Inject
+    private String firstName;
+    @Inject
+    private String lastName;
     @Inject
     private String city;
     @Inject
@@ -160,5 +162,21 @@ public class UserData {
 
     public Resource getResource() {
         return resource;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

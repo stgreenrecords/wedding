@@ -132,8 +132,9 @@
                         <Embed-Dependency>jsoup</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Sling-Model-Packages>wedding.core.model</Sling-Model-Packages>
                         <Export-Package>
-                            wedding.core.services.*;
+                            wedding.core.*;
                         </Export-Package>
                         <Import-Package>
                             *;resolution:=optional
