@@ -1,6 +1,7 @@
 package wedding.core.services.users.impl;
 
 import com.google.gson.JsonObject;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
@@ -10,6 +11,7 @@ import org.apache.jackrabbit.api.security.user.Authorizable;
 import org.apache.jackrabbit.api.security.user.Group;
 import org.apache.jackrabbit.api.security.user.User;
 import org.apache.jackrabbit.value.ValueFactoryImpl;
+import org.apache.sling.api.resource.ResourceResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import wedding.core.services.product.PortalProduct;
@@ -17,10 +19,7 @@ import wedding.core.services.users.PortalUserManager;
 import wedding.core.services.users.beans.PortalUser;
 import wedding.core.utils.WeddingUtils;
 
-import javax.jcr.Node;
-import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
-import javax.jcr.Value;
+import javax.jcr.*;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
 import java.security.Principal;
@@ -43,23 +42,26 @@ public class PortalUserManagerImpl implements PortalUserManager {
     public boolean addPortalUserViaEmail(final String email, String pass) {
         LOG.info("TRY ADD NEW USER WITH NAME : " + email);
         User user = null;
+        ResourceResolver resolver = weddingUtils.getResolver();
         try {
             String pathToNewUserFolder = "/home/users/wedding/users" + "/" + email.substring(0, 1);
-            PrincipalManager principalManager = getJackrabbitSession().getPrincipalManager();
+            JackrabbitSession jackrabbitSession = Optional.of(resolver).
+                    map(resourceResolver -> (JackrabbitSession) resourceResolver.adaptTo(Session.class)).orElse(null);
+            PrincipalManager principalManager = jackrabbitSession.getPrincipalManager();
             Principal principal = principalManager.getPrincipal(email);
             if (principal == null) {
-                user = getJackrabbitSession().getUserManager().createUser(email, pass, new Principal() {
+                user = jackrabbitSession.getUserManager().createUser(email, pass, new Principal() {
                     public String getName() {
                         return email;
                     }
                 }, pathToNewUserFolder);
                 user.setProperty("./profile/email", ValueFactoryImpl.getInstance().createValue(email));
                 user.setProperty("verifiedStatus", ValueFactoryImpl.getInstance().createValue(false));
-                Group portalUsers = (Group) getJackrabbitSession().getUserManager().getAuthorizable("wedding-users");
-                Authorizable authorizable = getJackrabbitSession().getUserManager().getAuthorizable(user.getPrincipal());
+                Group portalUsers = (Group) jackrabbitSession.getUserManager().getAuthorizable("wedding-users");
+                Authorizable authorizable = jackrabbitSession.getUserManager().getAuthorizable(user.getPrincipal());
                 portalUsers.addMember(authorizable);
-                getJackrabbitSession().move(user.getPath(), pathToNewUserFolder + "/" + email);
-                getJackrabbitSession().save();
+                jackrabbitSession.move(user.getPath(), pathToNewUserFolder + "/" + email);
+                jackrabbitSession.save();
                 LOG.info("USER SUCCESS CREATE");
                 return true;
             } else {
@@ -68,6 +70,8 @@ public class PortalUserManagerImpl implements PortalUserManager {
             }
         } catch (RepositoryException e) {
             LOG.error(e.getMessage());
+        }finally {
+            Optional.of(resolver).ifPresent(ResourceResolver::close);
         }
         LOG.info("FAILED ADD NEW USER");
         return false;
@@ -90,28 +94,36 @@ public class PortalUserManagerImpl implements PortalUserManager {
     }
 
     public void addVerifyStatus(String email) {
+        ResourceResolver resolver = weddingUtils.getResolver();
         try {
-            PrincipalManager principalManager = getJackrabbitSession().getPrincipalManager();
+            JackrabbitSession jackrabbitSession = Optional.of(resolver).
+                    map(resourceResolver -> (JackrabbitSession) resourceResolver.adaptTo(Session.class)).orElse(null);
+            PrincipalManager principalManager = jackrabbitSession.getPrincipalManager();
             Principal principal = principalManager.getPrincipal(email);
             if (principal != null) {
-                Authorizable authorizable = (User) getJackrabbitSession().getUserManager().getAuthorizable(principal);
+                Authorizable authorizable = (User) jackrabbitSession.getUserManager().getAuthorizable(principal);
                 authorizable.setProperty("verifiedStatus", ValueFactoryImpl.getInstance().createValue(true));
-                getJackrabbitSession().save();
+                jackrabbitSession.save();
                 LOG.info("USER SUCCESS VERIFY ON JCR LAYER");
             } else {
                 LOG.info("FAIL VERIFY USER. THAT NAME DOESN'T EXIST : " + email);
             }
         } catch (RepositoryException e) {
             LOG.error(e.getMessage());
+        }finally {
+            Optional.of(resolver).ifPresent(ResourceResolver::close);
         }
     }
 
     public boolean isVerify(String email) {
+        ResourceResolver resolver = weddingUtils.getResolver();
         try {
-            PrincipalManager principalManager = getJackrabbitSession().getPrincipalManager();
+            JackrabbitSession jackrabbitSession = Optional.of(resolver).
+                    map(resourceResolver -> (JackrabbitSession) resourceResolver.adaptTo(Session.class)).orElse(null);
+            PrincipalManager principalManager = jackrabbitSession.getPrincipalManager();
             Principal principal = principalManager.getPrincipal(email);
             if (principal != null) {
-                Authorizable authorizable = (User) getJackrabbitSession().getUserManager().getAuthorizable(principal);
+                Authorizable authorizable = (User) jackrabbitSession.getUserManager().getAuthorizable(principal);
                 Value[] verifiedStatus = authorizable.getProperty("verifiedStatus");
                 if (verifiedStatus.length > 0 && verifiedStatus[0].getBoolean()) {
                     return true;
@@ -121,6 +133,8 @@ public class PortalUserManagerImpl implements PortalUserManager {
             }
         } catch (RepositoryException e) {
             LOG.error(e.getMessage());
+        }finally {
+            Optional.of(resolver).ifPresent(ResourceResolver::close);
         }
         return false;
     }
@@ -128,9 +142,12 @@ public class PortalUserManagerImpl implements PortalUserManager {
     public PortalUser getPortalUser(String email) {
         PortalUser portalUser = new PortalUser();
         portalUser.setEmail(email);
+        ResourceResolver resolver = weddingUtils.getResolver();
         try {
-            Authorizable authorizable = weddingUtils.getAdminSession().getUserManager().getAuthorizable(email);
-            QueryResult result = weddingUtils.getAdminSession().getWorkspace().getQueryManager().
+            JackrabbitSession jackrabbitSession = Optional.of(resolver).
+                    map(resourceResolver -> (JackrabbitSession) resourceResolver.adaptTo(Session.class)).orElse(null);
+            Authorizable authorizable = jackrabbitSession.getUserManager().getAuthorizable(email);
+            QueryResult result = jackrabbitSession.getWorkspace().getQueryManager().
                     createQuery(String.format(QUERY_GET_USER, authorizable.getPath()), Query.XPATH).execute();
             NodeIterator nodeIterator = result.getNodes();
             while (nodeIterator.hasNext()) {
@@ -139,6 +156,8 @@ public class PortalUserManagerImpl implements PortalUserManager {
             }
         } catch (RepositoryException e) {
             LOG.error("FAIL TO BUILD USER. Details:" + e.getMessage());
+        }finally {
+            Optional.of(resolver).ifPresent(ResourceResolver::close);
         }
         return portalUser;
     }
@@ -146,8 +165,11 @@ public class PortalUserManagerImpl implements PortalUserManager {
     @Override
     public PortalUser getPortalUser(String id, String authType) {
         PortalUser portalUser = new PortalUser();
+        ResourceResolver resolver = weddingUtils.getResolver();
         try {
-            QueryResult queryResult = weddingUtils.getAdminSession().getWorkspace().getQueryManager().
+            JackrabbitSession jackrabbitSession = Optional.of(resolver).
+                    map(resourceResolver -> (JackrabbitSession) resourceResolver.adaptTo(Session.class)).orElse(null);
+            QueryResult queryResult = jackrabbitSession.getWorkspace().getQueryManager().
                     createQuery(String.format(QUERY_USER_EXIST, id, authType), Query.XPATH).execute();
             NodeIterator nodeIterator = queryResult.getNodes();
             if (nodeIterator.hasNext()) {
@@ -159,18 +181,25 @@ public class PortalUserManagerImpl implements PortalUserManager {
             }
         } catch (RepositoryException e) {
             LOG.error(e.getMessage());
+        }finally {
+            Optional.of(resolver).ifPresent(ResourceResolver::close);
         }
         return portalUser;
     }
 
     @Override
     public boolean isUserExist(String userID, String authType) {
+        ResourceResolver resolver = weddingUtils.getResolver();
         try {
-            QueryResult queryResult = weddingUtils.getAdminSession().getWorkspace().getQueryManager().
+            JackrabbitSession jackrabbitSession = Optional.of(resolver).
+                    map(resourceResolver -> (JackrabbitSession) resourceResolver.adaptTo(Session.class)).orElse(null);
+            QueryResult queryResult = jackrabbitSession.getWorkspace().getQueryManager().
                     createQuery(String.format(QUERY_USER_EXIST, userID, authType), Query.XPATH).execute();
             return queryResult.getNodes().hasNext();
         } catch (RepositoryException e) {
             LOG.error(e.getMessage());
+        } finally {
+            Optional.of(resolver).ifPresent(ResourceResolver::close);
         }
         return false;
     }
@@ -186,17 +215,17 @@ public class PortalUserManagerImpl implements PortalUserManager {
     public boolean addPortalUserViaSocial(String userID, String type, String email, String firstName, String lastName, String city, String authType) {
         LOG.info("TRY ADD NEW USER WITH NAME : " + email);
         User user = null;
+        ResourceResolver resolver = weddingUtils.getResolver();
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
             String pathToNewUserFolder = "/home/users/wedding/users" + "/" + email.substring(0, 1) + "/" + dateFormat.format(new Date());
-            PrincipalManager principalManager = getJackrabbitSession().getPrincipalManager();
+
+            JackrabbitSession jackrabbitSession = Optional.of(resolver).
+                    map(resourceResolver -> (JackrabbitSession) resourceResolver.adaptTo(Session.class)).orElse(null);
+            PrincipalManager principalManager = jackrabbitSession.getPrincipalManager();
             Principal principal = principalManager.getPrincipal(email);
             if (principal == null) {
-                user = getJackrabbitSession().getUserManager().createUser(email, "user", new Principal() {
-                    public String getName() {
-                        return email;
-                    }
-                }, pathToNewUserFolder);
+                user = jackrabbitSession.getUserManager().createUser(email, "user", () -> email, pathToNewUserFolder);
                 user.setProperty("./profile/userID", ValueFactoryImpl.getInstance().createValue(userID));
                 user.setProperty("./profile/email", ValueFactoryImpl.getInstance().createValue(email));
                 user.setProperty("./profile/authType", ValueFactoryImpl.getInstance().createValue(authType));
@@ -205,11 +234,11 @@ public class PortalUserManagerImpl implements PortalUserManager {
                 user.setProperty("./profile/lastName", ValueFactoryImpl.getInstance().createValue(lastName));
                 user.setProperty("./profile/city", ValueFactoryImpl.getInstance().createValue(city));
                 user.setProperty("verifiedStatus", ValueFactoryImpl.getInstance().createValue(true));
-                Group portalUsers = (Group) getJackrabbitSession().getUserManager().getAuthorizable("wedding-users");
-                Authorizable authorizable = getJackrabbitSession().getUserManager().getAuthorizable(user.getPrincipal());
+                Group portalUsers = (Group) jackrabbitSession.getUserManager().getAuthorizable("wedding-users");
+                Authorizable authorizable = jackrabbitSession.getUserManager().getAuthorizable(user.getPrincipal());
                 portalUsers.addMember(authorizable);
-                getJackrabbitSession().move(user.getPath(), pathToNewUserFolder + "/" + email);
-                getJackrabbitSession().save();
+                jackrabbitSession.move(user.getPath(), pathToNewUserFolder + "/" + email);
+                jackrabbitSession.save();
                 LOG.info("USER SUCCESS CREATE");
                 return true;
             } else {
@@ -218,40 +247,47 @@ public class PortalUserManagerImpl implements PortalUserManager {
             }
         } catch (RepositoryException e) {
             LOG.error(e.getMessage());
+        } finally {
+            Optional.of(resolver).ifPresent(ResourceResolver::close);
         }
         LOG.info("FAILED ADD NEW USER");
         return false;
     }
 
     @Override
-    public boolean addPartner(String userID, String type, String email, String speciality, String name, String city, String phone, String authType) {
+    public boolean addPartner(String firstName, String lastName, String userID, String type, String email, String speciality, String name, String city, String phone, String authType) {
         LOG.info("TRY ADD NEW USER WITH NAME : " + email);
         User user = null;
+        ResourceResolver resolver = weddingUtils.getResolver();
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
             String pathToNewUserFolder = "/home/users/wedding/users" + "/" + email.substring(0, 1) + "/" + dateFormat.format(new Date());
-            PrincipalManager principalManager = getJackrabbitSession().getPrincipalManager();
+            JackrabbitSession jackrabbitSession = Optional.of(resolver).
+                    map(resourceResolver -> (JackrabbitSession) resourceResolver.adaptTo(Session.class)).orElse(null);
+            PrincipalManager principalManager = jackrabbitSession.getPrincipalManager();
             Principal principal = principalManager.getPrincipal(email);
             if (principal == null) {
-                user = getJackrabbitSession().getUserManager().createUser(email, "user", new Principal() {
-                    public String getName() {
-                        return email;
-                    }
-                }, pathToNewUserFolder);
+                user = jackrabbitSession.getUserManager().createUser(email, "user", () -> email, pathToNewUserFolder);
+                if (StringUtils.isNotEmpty(firstName) && StringUtils.isNotEmpty(lastName)){
+                    user.setProperty("./profile/firstName", ValueFactoryImpl.getInstance().createValue(firstName));
+                    user.setProperty("./profile/lastName", ValueFactoryImpl.getInstance().createValue(lastName));
+                }
                 user.setProperty("./profile/type", ValueFactoryImpl.getInstance().createValue(type));
                 user.setProperty("./profile/userID", ValueFactoryImpl.getInstance().createValue(userID));
                 user.setProperty("./profile/authType", ValueFactoryImpl.getInstance().createValue(authType));
                 user.setProperty("./profile/email", ValueFactoryImpl.getInstance().createValue(email));
-                user.setProperty("./profile/name", ValueFactoryImpl.getInstance().createValue(name));
+                if (StringUtils.isNotEmpty(name)){
+                    user.setProperty("./profile/name", ValueFactoryImpl.getInstance().createValue(name));
+                }
                 user.setProperty("./profile/speciality", ValueFactoryImpl.getInstance().createValue(speciality));
                 user.setProperty("./profile/phone", ValueFactoryImpl.getInstance().createValue(phone));
                 user.setProperty("./profile/city", ValueFactoryImpl.getInstance().createValue(city));
                 user.setProperty("verifiedStatus", ValueFactoryImpl.getInstance().createValue(true));
-                Group portalUsers = (Group) getJackrabbitSession().getUserManager().getAuthorizable("wedding-users");
-                Authorizable authorizable = getJackrabbitSession().getUserManager().getAuthorizable(user.getPrincipal());
+                Group portalUsers = (Group) jackrabbitSession.getUserManager().getAuthorizable("wedding-users");
+                Authorizable authorizable = jackrabbitSession.getUserManager().getAuthorizable(user.getPrincipal());
                 portalUsers.addMember(authorizable);
-                getJackrabbitSession().move(user.getPath(), pathToNewUserFolder + "/" + email);
-                getJackrabbitSession().save();
+                jackrabbitSession.move(user.getPath(), pathToNewUserFolder + "/" + email);
+                jackrabbitSession.save();
                 LOG.info("USER SUCCESS CREATE");
                 return true;
             } else {
@@ -261,11 +297,10 @@ public class PortalUserManagerImpl implements PortalUserManager {
         } catch (RepositoryException e) {
             LOG.error(e.getMessage());
         }
+        finally {
+            Optional.of(resolver).ifPresent(ResourceResolver::close);
+        }
         LOG.info("FAILED ADD NEW USER");
         return false;
-    }
-
-    public JackrabbitSession getJackrabbitSession() {
-        return weddingUtils.getAdminSession();
     }
 }
