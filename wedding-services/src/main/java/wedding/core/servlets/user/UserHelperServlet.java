@@ -1,30 +1,38 @@
 package wedding.core.servlets.user;
 
+import org.apache.commons.lang3.CharEncoding;
+import org.apache.felix.scr.annotations.Reference;
+import org.apache.felix.scr.annotations.ReferenceCardinality;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import wedding.core.utils.WeddingResourceUtil;
+import org.apache.sling.servlets.post.JSONResponse;
+import wedding.core.services.users.UserJsonService;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.util.Optional;
 
 @SlingServlet(paths = {"/services/user/profile"})
 public class UserHelperServlet extends SlingAllMethodsServlet {
 
+    @Reference(cardinality = ReferenceCardinality.MANDATORY_UNARY)
+    private UserJsonService userJsonService;
+
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
         final ResourceResolver resolver = request.getResourceResolver();
-        Optional.ofNullable(WeddingResourceUtil.getUserData(resolver, "94314517"))
-                .map(WeddingResourceUtil::toJson)
-                .ifPresent(response.getWriter()::println);
+        response.setContentType(JSONResponse.RESPONSE_CONTENT_TYPE);
+        response.setCharacterEncoding(CharEncoding.UTF_8);
+        response.getWriter().println(userJsonService.getUserData(resolver, "94314517"));
     }
 
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
-        // TODO: 10/8/2017 update user data
+        final ResourceResolver resolver = request.getResourceResolver();
+        final String jsonData = request.getParameter("data");
+        userJsonService.setUserData(resolver, jsonData);
     }
 
 }

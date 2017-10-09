@@ -1,5 +1,6 @@
 package wedding.core.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
@@ -11,6 +12,7 @@ import javax.inject.Inject;
 public class UserData {
 
     @Self
+    @JsonIgnore
     private Resource resource;
 
     @Inject
@@ -160,10 +162,6 @@ public class UserData {
         this.instagramLink = instagramLink;
     }
 
-    public Resource getResource() {
-        return resource;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -178,5 +176,13 @@ public class UserData {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Resource getResource() {
+        return resource;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
     }
 }
