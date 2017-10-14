@@ -23,6 +23,22 @@ var PORTAL = (function (PORTAL, $) {
     var GoogleUser;
 
     var $loginRegistrationLink;
+    var listeners = [];
+
+    function notifyListeners() {
+        listeners.forEach(function (obj) {
+            var thisRef = obj.thisRef || this;
+            var callback = obj.callBackFunction || new Function();
+            callback.call(thisRef, socialUser);
+        })
+    }
+
+    PORTAL.modules.LoginRegistration.registerListener = function(callBackFunction, thisRef) {
+        listeners.push({
+            thisRef: thisRef,
+            callBackFunction: callBackFunction
+        });
+    };
 
     PORTAL.modules.LoginRegistration.AUTH = PORTAL.modules.LoginRegistration.AUTH || {};
 
@@ -390,6 +406,7 @@ var PORTAL = (function (PORTAL, $) {
                         userName = userName === "" ? user.lastName : userName + " " + user.lastName;
                     }
                     $userBlock.find(".user-name-title").text(userName);
+                    notifyListeners();
                 } else {
 
                 }

@@ -22,52 +22,48 @@
                     </div>
                     <div class="person-contact">
                         <div class="person-name">
-                            <h4>Алексей Тюшкевич</h4>
-                            <p>Видеооператор</p>
+                            <h4 class="data-value" data-key="name">Алексей Тюшкевич</h4>
+                            <p class="data-value" data-key="speciality">Видеооператор</p>
                         </div>
                         <div class="person-contact-block">
                             <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/wallet.png"></div>
                             <p class="data-value" data-key="price">200-300 рублей</p>
+                            <input class="hide-person-contact" data-type="price"/>
                         </div>
                         <div class="person-contact-block">
                             <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/phone.png"></div>
                             <a class="data-value" data-key="phone" href="tel:+375336531587" x-cq-linkchecker="skip">+375 33 653 1587</a>
+                            <input class="hide-person-contact" data-type="phone"/>
                         </div>
                         <div class="person-contact-block">
                             <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/envelope.png"></div>
                             <p class="data-value" data-key="email">tyushkevich@gmail.com</p>
+                            <input class="hide-person-contact" data-type="email"/>
                         </div>
                         <div class="person-contact-block">
                             <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/link.png"></div>
-                            <p cclass="data-value" data-key="siteLink">www.tyushkevich.by</p>
+                            <p class="data-value" data-key="siteLink">www.tyushkevich.by</p>
+                            <input class="hide-person-contact" data-type="siteLink"/>
                         </div>
                         <div class="person-contact-block">
                             <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/vk.png"></div>
                             <a class="data-value" data-key="vkLink" href="vk.com/tyushkevich" x-cq-linkchecker="skip">vk.com/tyushkevich</a>
+                            <input class="hide-person-contact" data-type="vkLink"/>
                         </div>
                         <div class="person-contact-block">
                             <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/facebook.png" height="30px" style="width: 15px !important"></div>
                             <a class="data-value" data-key="facebookLink" href="facebook.com/tyushkevich" x-cq-linkchecker="skip">facebook.com/tyushkevich</a>
+                            <input class="hide-person-contact" data-type="facebookLink"/>
                         </div>
                         <div class="person-contact-block">
                             <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/instagram.png"></div>
                             <a class="data-value" data-key="instagramLink" href="instagram.com/tyushkevich" x-cq-linkchecker="skip">instagram.com/tyushkevich</a>
+                            <input class="hide-person-contact" data-type="instagramLink"/>
                         </div>
                     </div>
                 </div>
-                <form action="" class="hide-person-contact">
-                    <input class="price"/>
-                    <input class="phone"/>
-                    <input class="email"/>
-                    <input class="siteLink"/>
-                    <input class="vkLink"/>
-                    <input class="facebookLink"/>
-                    <input class="instagramLink"/>
-                </form>
-
-                <form method="post" enctype="multipart/form-data" action="/services/uploadImg">
-                    <input type="file" name="avatar-image" multiple>
-                    <input type="submit" value="Upload">
+                <form id="user-profile-form" action="#" data-url="/services/user/profile" method="post" class="hide-person-contact">
+                    <input type="submit" value="Update Profile"/>
                 </form>
 
                 <div class="edit-link">
@@ -81,7 +77,7 @@
                     <h3>О себе</h3>
                     <hr>
 
-                    <p>Топовый ведущий праздников, телеведущий, сценарист. Самый красивый ведущий по версии его бабушки. За 6 лет в развлекательной индустрии сделал незабывае- мыми более 400 престижных свадеб. NOVAwedding —  это агентство нешаблонных праздников. Безупречная свадьба, душевное семейное торжество, веселый и нестандартный детский день рождения — здесь организуют любой из этих праздников. С ноля и под ключ — от написания индиви|</p>
+                    <p class="data-value" data-key="description">Топовый ведущий праздников, телеведущий, сценарист. Самый красивый ведущий по версии его бабушки. За 6 лет в развлекательной индустрии сделал незабывае- мыми более 400 престижных свадеб. NOVAwedding —  это агентство нешаблонных праздников. Безупречная свадьба, душевное семейное торжество, веселый и нестандартный детский день рождения — здесь организуют любой из этих праздников. С ноля и под ключ — от написания индиви|</p>
                 </div>
 
                 <div class="portfolio white-bg">
