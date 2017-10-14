@@ -5,8 +5,14 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
+import wedding.core.utils.WeddingResourceUtil;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class UserData {
@@ -33,6 +39,8 @@ public class UserData {
     private String phone;
     @Inject
     private String speciality;
+    @Inject
+    private String description;
 
     @Inject
     private String priceStart;
@@ -49,6 +57,22 @@ public class UserData {
     private String facebookLink;
     @Inject
     private String instagramLink;
+
+    private String avatarPath;
+    private List<String> portfolioPaths;
+
+    @PostConstruct
+    public void init() {
+        Optional.ofNullable(resource.getChild("avatar/file"))
+                .map(Resource::getPath)
+                .ifPresent(this::setAvatarPath);
+        portfolioPaths = Optional.ofNullable(resource.getChild("portfolio"))
+                .map(Resource::listChildren)
+                .map(WeddingResourceUtil::iteratorToOrderedStream)
+                .orElse(Stream.empty())
+                .map(Resource::getPath)
+                .collect(Collectors.toList());
+    }
 
     public String getUserID() {
         return userID;
@@ -178,11 +202,35 @@ public class UserData {
         this.lastName = lastName;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Resource getResource() {
         return resource;
     }
 
     public void setResource(Resource resource) {
         this.resource = resource;
+    }
+
+    public String getAvatarPath() {
+        return avatarPath;
+    }
+
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
+    }
+
+    public List<String> getPortfolioPaths() {
+        return portfolioPaths;
+    }
+
+    public void setPortfolioPaths(List<String> portfolioPaths) {
+        this.portfolioPaths = portfolioPaths;
     }
 }
