@@ -85,10 +85,15 @@ public final class SlingModelUtil {
     }
 
     private static Predicate<Field> isNotAnnotatedWith(Class<? extends Annotation> annotationClass) {
-        return field -> ArrayUtils.isEmpty(field.getDeclaredAnnotationsByType(annotationClass));
+        return checkAnnotations(annotationClass, ArrayUtils::isEmpty);
     }
 
     private static Predicate<Field> isAnnotatedWith(Class<? extends Annotation> annotationClass) {
-        return field -> ArrayUtils.isNotEmpty(field.getDeclaredAnnotationsByType(annotationClass));
+        return checkAnnotations(annotationClass, ArrayUtils::isNotEmpty);
+    }
+
+    private static Predicate<Field> checkAnnotations(Class<? extends Annotation> annotationClass,
+                                                     Predicate<Annotation[]> function) {
+        return field -> function.test(field.getDeclaredAnnotationsByType(annotationClass));
     }
 }
