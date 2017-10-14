@@ -9,6 +9,7 @@ import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.servlets.post.JSONResponse;
+import wedding.core.data.Constants;
 import wedding.core.services.users.UserJsonService;
 
 import javax.servlet.ServletException;
@@ -25,7 +26,7 @@ public class UserHelperServlet extends SlingAllMethodsServlet {
         final ResourceResolver resolver = request.getResourceResolver();
         response.setContentType(JSONResponse.RESPONSE_CONTENT_TYPE);
         response.setCharacterEncoding(CharEncoding.UTF_8);
-        response.getWriter().println(userJsonService.getUserData(resolver, "94314517"));
+        response.getWriter().println(userJsonService.getUserData(resolver, request.getParameter(Constants.USER_ID_PARAMETER)));
     }
 
     @Override

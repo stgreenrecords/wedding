@@ -5,7 +5,7 @@ var PORTAL = (function (PORTAL, $) {
     PORTAL.modules.LoginRegistration.selfSelector = ".login-registration-block";
 
     var socialUser = {
-        'id': '',
+        'userID': '',
         'firstName': '',
         'lastName': '',
         'email': '',
@@ -17,7 +17,8 @@ var PORTAL = (function (PORTAL, $) {
     var currentDate = new Date();
     var expires = new Date(currentDate.getTime() + 600000 * 60 * 60 * 3);
     var magnificPopup = $.magnificPopup.instance;
-    var authorizationType;
+    var authType;
+    var authStatusFromCookie;
     var GoogleAuth;
     var GoogleUser;
 
@@ -35,14 +36,14 @@ var PORTAL = (function (PORTAL, $) {
             VK.Auth.login(function (response) {
                 if (response.status === "connected") {
                     var responseUser = response.session.user;
-                    socialUser.id = responseUser.hasOwnProperty("id") ? responseUser.id : "";
+                    socialUser.userID = responseUser.hasOwnProperty("id") ? responseUser.id : "";
                     socialUser.firstName = responseUser.hasOwnProperty("first_name") ? responseUser.first_name : "";
                     socialUser.lastName = responseUser.hasOwnProperty("last_name") ? responseUser.last_name : "";
                     socialUser.nickname = responseUser.hasOwnProperty("nickname") ? responseUser.nickname : "";
                     socialUser.href = responseUser.hasOwnProperty("href") ? responseUser.href : "";
                     socialUser.authType = "VK";
-                    checkIfUserExist(socialUser, authorizationType);
-                    PORTAL.utils.set_cookie("authType", authorizationType, expires);
+                    checkIfUserExist(socialUser, authType);
+                    PORTAL.utils.set_cookie("authType", authType, expires);
                     PORTAL.utils.set_cookie("authStatus", "authorized", expires);
                 }
             }, VK.access.EMAIL);
@@ -50,7 +51,7 @@ var PORTAL = (function (PORTAL, $) {
 
         "logout": function () {
             VK.Auth.logout(function (response) {
-                PORTAL.utils.set_cookie("authType", authorizationType);
+                PORTAL.utils.set_cookie("authType", authType);
                 PORTAL.utils.set_cookie("authStatus", "authorized");
             });
         },
@@ -58,7 +59,7 @@ var PORTAL = (function (PORTAL, $) {
             VK.Auth.getLoginStatus(function (response) {
                 if (response.status === "connected") {
                     authStatus = true;
-                    socialUser.id = response.session.mid;
+                    socialUser.userID = response.session.mid;
                     socialUser.authType = "VK";
                     drawUser();
                 }
@@ -77,14 +78,14 @@ var PORTAL = (function (PORTAL, $) {
                         {fields: "id,first_name,link,last_name,name"},
                         function (response) {
                             var responseUser = response;
-                            socialUser.id = responseUser.hasOwnProperty("id") ? responseUser.id : "";
+                            socialUser.userID = responseUser.hasOwnProperty("id") ? responseUser.id : "";
                             socialUser.firstName = responseUser.hasOwnProperty("first_name") ? responseUser.first_name : "";
                             socialUser.lastName = responseUser.hasOwnProperty("last_name") ? responseUser.last_name : "";
                             socialUser.nickname = responseUser.hasOwnProperty("name") ? responseUser.name : "";
                             socialUser.href = responseUser.hasOwnProperty("link") ? responseUser.link : "";
                             socialUser.authType = "FACEBOOK";
-                            checkIfUserExist(socialUser, authorizationType);
-                            PORTAL.utils.set_cookie("authType", authorizationType, expires);
+                            checkIfUserExist(socialUser, authType);
+                            PORTAL.utils.set_cookie("authType", authType, expires);
                             PORTAL.utils.set_cookie("authStatus", "authorized", expires);
                         });
                 }
@@ -93,7 +94,7 @@ var PORTAL = (function (PORTAL, $) {
 
         "logout": function () {
             FB.logout(function (response) {
-                PORTAL.utils.set_cookie("authType", authorizationType);
+                PORTAL.utils.set_cookie("authType", authType);
                 PORTAL.utils.set_cookie("authStatus", "authorized");
             });
         },
@@ -110,7 +111,7 @@ var PORTAL = (function (PORTAL, $) {
 
         "logout": function () {
             GoogleAuth.signOut();
-            PORTAL.utils.set_cookie("authType", authorizationType);
+            PORTAL.utils.set_cookie("authType", authType);
             PORTAL.utils.set_cookie("authStatus", "authorized");
         },
         "status": function () {
@@ -124,21 +125,36 @@ var PORTAL = (function (PORTAL, $) {
             GoogleUser = GoogleAuth.currentUser.get();
             var gUser = GoogleUser.getBasicProfile();
             socialUser.authType = "GMAIL";
-            socialUser.id = gUser.getId();
+            socialUser.userID = gUser.getId();
             socialUser.firstName = gUser.getGivenName();
             socialUser.lastName = gUser.getFamilyName();
             socialUser.nickname = gUser.getName();
             socialUser.email = gUser.getEmail();
-            checkIfUserExist(socialUser, authorizationType);
-            PORTAL.utils.set_cookie("authType", authorizationType, expires);
+            checkIfUserExist(socialUser, authType);
+            PORTAL.utils.set_cookie("authType", authType, expires);
             PORTAL.utils.set_cookie("authStatus", "authorized", expires);
         }
     };
 
-    PORTAL.modules.LoginRegistration.init = function ($self) {
-        console.log('Component: "LoginRegistration"');
+    var initUserBlock = function(){
+        $(".user-logout-link").click(function () {
+            PORTAL.modules.LoginRegistration.AUTH[socialUser.authType].logout();
+            $loginRegistrationLink.css("display", "block");
+            $(".user-menu-block").css("display", "none");
+        });
 
-        var authStatus = false;
+        $(".user-name-title").click(function () {
+            var menu = $(".user-menu-block ul");
+            if (menu.css("display") === 'none') {
+                menu.css("display", "flex");
+            } else {
+                menu.css("display", "none");
+            }
+        });
+    };
+
+    PORTAL.modules.LoginRegistration.AUTH.init = function(){
+        console.log('AUTH: "init"');
 
         VK.init({
             apiId: 6153660
@@ -160,8 +176,7 @@ var PORTAL = (function (PORTAL, $) {
 
         FB.Event.subscribe('auth.statusChange', function (response) {
             if (response.status === "connected") {
-                authStatus = true;
-                socialUser.id = response.authResponse.userID;
+                socialUser.userID = response.authResponse.userID;
                 socialUser.authType = "FACEBOOK";
                 drawUser();
             }
@@ -180,12 +195,20 @@ var PORTAL = (function (PORTAL, $) {
             });
         }
 
-        var authStatusFromCookie = PORTAL.utils.get_cookie("authStatus");
-        var authType = PORTAL.utils.get_cookie("authType");
+        authStatusFromCookie = PORTAL.utils.get_cookie("authStatus");
+        authType = PORTAL.utils.get_cookie("authType");
 
         if (authStatusFromCookie === "authorized" && authType) {
             PORTAL.modules.LoginRegistration.AUTH[authType].status();
         }
+
+        initUserBlock();
+    };
+
+    PORTAL.modules.LoginRegistration.AUTH.init();
+
+    PORTAL.modules.LoginRegistration.init = function ($self) {
+        console.log('Component: "LoginRegistration"');
 
         var configForPopUp = {
             type: 'inline',
@@ -194,21 +217,6 @@ var PORTAL = (function (PORTAL, $) {
         };
 
         var $firstStepSubmit = $self.find("#registration-firstStep");
-
-        $(".user-logout-link").click(function () {
-            PORTAL.modules.LoginRegistration.AUTH[socialUser.authType].logout();
-            $loginRegistrationLink.css("display", "block");
-            $(".user-menu-block").css("display", "none");
-        });
-
-        $(".user-name-title").click(function () {
-            var menu = $(".user-menu-block ul");
-            if (menu.css("display") === 'none') {
-                menu.css("display", "flex");
-            } else {
-                menu.css("display", "none");
-            }
-        });
 
         $self.find("#first-step-private").click(function () {
             $(this).addClass("selected-item");
@@ -242,17 +250,17 @@ var PORTAL = (function (PORTAL, $) {
         var $loginPopUp = $self.find("#login-popup");
 
         $self.find("#vk-login-button").click(function () {
-            authorizationType = "VK";
+            authType = "VK";
             PORTAL.modules.LoginRegistration.AUTH.VK.login();
         });
 
         $self.find("#facebook-login-button").click(function () {
-            authorizationType = "FACEBOOK";
+            authType = "FACEBOOK";
             PORTAL.modules.LoginRegistration.AUTH.FACEBOOK.login();
         });
 
         $self.find("#gmail-login-button").click(function () {
-            authorizationType = "GMAIL";
+            authType = "GMAIL";
             PORTAL.modules.LoginRegistration.AUTH.GMAIL.login();
         });
 
@@ -283,13 +291,13 @@ var PORTAL = (function (PORTAL, $) {
                     type: "POST",
                     data: {
                         'type': 'partner',
-                        'userID': socialUser.id,
+                        'userID': socialUser.userID,
                         'name': name,
                         'firstName' : firstName,
                         'lastName' : lastName,
                         'speciality': speciality,
                         'city': city,
-                        'authType': authorizationType,
+                        'authType': authType,
                         'email': email,
                         'phone': phone
                     },
@@ -317,8 +325,8 @@ var PORTAL = (function (PORTAL, $) {
                     type: "POST",
                     data: {
                         'type': 'private',
-                        'authType': authorizationType,
-                        'userID': socialUser.id,
+                        'authType': authType,
+                        'userID': socialUser.userID,
                         'firstName': firstName,
                         'lastName': lastName,
                         'city': city,
@@ -344,7 +352,7 @@ var PORTAL = (function (PORTAL, $) {
             type: "GET",
             url: "/services/checkuser",
             data: {
-                "userID": user.id,
+                "userID": user.userID,
                 "authType": type
             },
             success: function (isUserExist) {
@@ -361,14 +369,17 @@ var PORTAL = (function (PORTAL, $) {
     var drawUser = function () {
         $.ajax({
             type: "GET",
-            url: "/services/getuser",
+            url: "/services/user/profile",
             data: {
-                "userID": socialUser.id,
+                "userID": socialUser.userID,
                 "authType": socialUser.authType
             },
             success: function (user) {
+                socialUser = user;
                 if (user) {
-                    $loginRegistrationLink.css("display", "none");
+                    if ($loginRegistrationLink){
+                        $loginRegistrationLink.css("display", "none");
+                    }
                     var $userBlock = $(".user-menu-block");
                     $userBlock.css("display", "flex");
                     var userName = "";
@@ -429,7 +440,7 @@ var PORTAL = (function (PORTAL, $) {
         loop: true,
         nav: false,
         dots: true,
-        autoplay: false,
+        autoplay: false
 //                smartSpeed:1000,
 //                autoplayTimeout:2000,
 

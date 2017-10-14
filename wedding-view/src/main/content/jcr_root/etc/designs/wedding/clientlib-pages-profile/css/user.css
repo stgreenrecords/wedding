@@ -5,6 +5,9 @@ h3, h4{text-align: center; font-family: "GothaMed";font-size: 28px; font-weight:
 p{color: #606060; font-family: "GothaReg";letter-spacing: 0.5px; font-size: 14px; font-weight: 300 !imporatant; margin: 0px;}
 a{text-decoration: none; color: #606060; font-family: "GothaReg";letter-spacing: 0.5px; font-size: 14px; font-weight: 300 !imporatant;}
 
+.signup{align-self: flex-end;}
+.signup a{color: #000; text-decoration: none; font-family: "GothaReg"; font-size: 14px;}
+
 #profile h3{margin-top: 0px;}
 header{background-color: #fff; padding: 40px 30px 20px; margin: 0px !important;}
 header a{color: #000 !important;}
