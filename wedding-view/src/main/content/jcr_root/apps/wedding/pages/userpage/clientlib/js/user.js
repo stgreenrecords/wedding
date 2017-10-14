@@ -23,9 +23,15 @@ var PORTAL = (function (PORTAL, $) {
                     alert(data);
                 }
             });
-        })
+        });
 
-
+        $('#profile .edit-link button').click(function() {
+            console.log('Invoke!!');
+            $('#profile .person-contact .person-contact-block .data-value').each(function(index, el) {
+                var key = $(el).data('key');
+                console.log(key);
+            });
+        });
     };
 
     return PORTAL;

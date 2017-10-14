@@ -27,34 +27,48 @@
                         </div>
                         <div class="person-contact-block">
                             <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/wallet.png"></div>
-                            <p>200-300 рублей</p>
+                            <p class="data-value" data-key="price">200-300 рублей</p>
                         </div>
                         <div class="person-contact-block">
                             <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/phone.png"></div>
-                            <a href="tel:+375336531587" x-cq-linkchecker="skip">+375 33 653 1587</a>
+                            <a class="data-value" data-key="phone" href="tel:+375336531587" x-cq-linkchecker="skip">+375 33 653 1587</a>
                         </div>
                         <div class="person-contact-block">
                             <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/envelope.png"></div>
-                            <p>tyushkevich@gmail.com</p>
+                            <p class="data-value" data-key="email">tyushkevich@gmail.com</p>
                         </div>
                         <div class="person-contact-block">
                             <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/link.png"></div>
-                            <p>www.tyushkevich.by</p>
+                            <p cclass="data-value" data-key="siteLink">www.tyushkevich.by</p>
                         </div>
                         <div class="person-contact-block">
                             <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/vk.png"></div>
-                            <a href="vk.com/tyushkevich" x-cq-linkchecker="skip">vk.com/tyushkevich</a>
+                            <a class="data-value" data-key="vkLink" href="vk.com/tyushkevich" x-cq-linkchecker="skip">vk.com/tyushkevich</a>
                         </div>
                         <div class="person-contact-block">
                             <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/facebook.png" height="30px" style="width: 15px !important"></div>
-                            <a href="facebook.com/tyushkevich" x-cq-linkchecker="skip">facebook.com/tyushkevich</a>
+                            <a class="data-value" data-key="facebookLink" href="facebook.com/tyushkevich" x-cq-linkchecker="skip">facebook.com/tyushkevich</a>
                         </div>
                         <div class="person-contact-block">
                             <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/instagram.png"></div>
-                            <a href="instagram.com/tyushkevich" x-cq-linkchecker="skip">instagram.com/tyushkevich</a>
+                            <a class="data-value" data-key="instagramLink" href="instagram.com/tyushkevich" x-cq-linkchecker="skip">instagram.com/tyushkevich</a>
                         </div>
                     </div>
                 </div>
+                <form action="" class="hide-person-contact">
+                    <input class="price"/>
+                    <input class="phone"/>
+                    <input class="email"/>
+                    <input class="siteLink"/>
+                    <input class="vkLink"/>
+                    <input class="facebookLink"/>
+                    <input class="instagramLink"/>
+                </form>
+
+                <form method="post" enctype="multipart/form-data" action="/services/uploadImg">
+                    <input type="file" name="avatar-image" multiple>
+                    <input type="submit" value="Upload">
+                </form>
 
                 <div class="edit-link">
                     <button></button>
