@@ -2,7 +2,7 @@ var PORTAL = (function (PORTAL, $) {
 
     PORTAL.modules.UserModel = {};
 
-    PORTAL.modules.UserModel.selfSelector = ".user-page-block";
+    PORTAL.modules.UserModel.selfSelector = "#profile";
 
     PORTAL.modules.UserModel.init = function ($self) {
         console.log('Component: "UserModel"');
