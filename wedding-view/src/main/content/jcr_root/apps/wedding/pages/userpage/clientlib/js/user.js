@@ -68,7 +68,7 @@ var PORTAL = (function (PORTAL, $) {
                 $infoElement = $self.find(`.data-value[data-key=${key}]`);
                 text = userInfo[key] || '';
             }
-            if ($infoElement && $infoElement.length) {
+            if (!$infoElement || !$infoElement.length) {
                 return;
             }
             getOrUpdateInfoField($infoElement, text);
