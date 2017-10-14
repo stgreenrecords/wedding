@@ -2,13 +2,6 @@ var PORTAL = function (PORTAL, $) {
 
     PORTAL.utils = PORTAL.utils || {};
 
-    PORTAL.utils.isAuthMode = function () {
-        if (CQ && CQ.WCM) {
-            return CQ.WCM.isEditMode(true) || CQ.WCM.isDesignMode(true);
-        }
-        return false;
-    };
-
     PORTAL.utils.categories = [];
 
     PORTAL.utils.setCategories = function () {
