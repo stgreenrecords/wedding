@@ -28,7 +28,7 @@ var PORTAL = (function (PORTAL, $) {
     function notifyListeners() {
         listeners.forEach(function (obj) {
             var thisRef = obj.thisRef || this;
-            var callback = obj.callBackFunction || new Function();
+            var callback = obj.callBackFunction || new Function;
             callback.call(thisRef, socialUser);
         })
     }

@@ -22,13 +22,16 @@
                     </div>
                     <div class="person-contact">
                         <div class="person-name">
-                            <h4 class="data-value" data-key="name">Алексей Тюшкевич</h4>
+                            <h4><span class="data-value" data-key="firstName">Алексей</span> <span class="data-value" data-key="lastName">Тюшкевич</span></h4>
                             <p class="data-value" data-key="speciality">Видеооператор</p>
                         </div>
                         <div class="person-contact-block">
                             <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/wallet.png"></div>
-                            <p class="data-value" data-key="price">200-300 рублей</p>
-                            <input class="hide-person-contact" data-type="price"/>
+                            <p class="data-container"><span class="data-value" data-key="priceStart">200</span>-<span class="data-value" data-key="priceEnd">300</span> рублей</p>
+                            <span class="data-container hide-person-contact">
+                                <input class="hide-person-contact" data-type="priceStart"/>-
+                                <input class="hide-person-contact" data-type="priceEnd"/> рублей
+                            </span>
                         </div>
                         <div class="person-contact-block">
                             <div  class="p-contact-icon"><img src="/content/dam/wedding/components/profile/phone.png"></div>
@@ -63,7 +66,8 @@
                     </div>
                 </div>
                 <form id="user-profile-form" action="#" data-url="/services/user/profile" method="post" class="hide-person-contact">
-                    <input type="submit" value="Update Profile"/>
+                    <input type="hidden" class="user-id hide-person-contact" data-type="userID"/>
+                    <button class="update-profile">Update Profile</button>
                 </form>
 
                 <div class="edit-link">
@@ -78,6 +82,7 @@
                     <hr>
 
                     <p class="data-value" data-key="description">Топовый ведущий праздников, телеведущий, сценарист. Самый красивый ведущий по версии его бабушки. За 6 лет в развлекательной индустрии сделал незабывае- мыми более 400 престижных свадеб. NOVAwedding —  это агентство нешаблонных праздников. Безупречная свадьба, душевное семейное торжество, веселый и нестандартный детский день рождения — здесь организуют любой из этих праздников. С ноля и под ключ — от написания индиви|</p>
+                    <textarea class="hide-person-contact" data-type="description"></textarea>
                 </div>
 
                 <div class="portfolio white-bg">

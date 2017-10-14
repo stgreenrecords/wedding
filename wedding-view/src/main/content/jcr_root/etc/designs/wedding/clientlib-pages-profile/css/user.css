@@ -31,7 +31,7 @@ header a{color: #000 !important;}
 .person-contact-block img{width: 30px; }
 
 .edit-link{text-align: center; margin-top:30px;}
-button{ background: url(/content/dam/wedding/components/profile/edit-page-240-40.png); width: 240px; height: 40px; background-size: cover; background-position: center; border: 0px; background-color: transparent;}
+.edit-link button{ background: url(/content/dam/wedding/components/profile/edit-page-240-40.png); width: 240px; height: 40px; background-size: cover; background-position: center; border: 0px; background-color: transparent;}
 button:hover{cursor: pointer;}
 
 .about-myself{padding: 30px 60px 80px;}

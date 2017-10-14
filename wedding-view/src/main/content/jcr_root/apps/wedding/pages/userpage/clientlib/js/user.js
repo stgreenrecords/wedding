@@ -36,21 +36,50 @@ var PORTAL = (function (PORTAL, $) {
         $self.find('.edit-link button').click(function() {
             var $form = $self.find('#user-profile-form');
             var hideClass = 'hide-person-contact';
-            if (!$form || !$form.length) {
-                return;
-            }
-            $self.find('.person-contact .person-contact-block .data-value').each(function(index, el) {
+            $self.find('.data-value').each(function(index, el) {
                 var $element = $(el);
                 var key = $element.data('key');
                 var value = getOrUpdateInfoField($element);
-                var $input = $element.siblings(`input[data-type=${key}]`);
-                $input.attr('value', value);
-                $element.toggleClass(hideClass);
-                $input.toggleClass(hideClass);
+                var $container = $element.parent('.data-container');
+                var $input = $container.length
+                    ? $container.siblings('.data-container').find(`[data-type=${key}]`)
+                    : $element.siblings(`[data-type=${key}]`);
+                $input.length && $input[0].tagName === 'INPUT'
+                    ? $input.attr('value', value)
+                    : $input.text(value);
+                $element.addClass(hideClass);
+                $element.parent('.data-container').addClass(hideClass);
+                $input.removeClass(hideClass);
+                $input.parent('.data-container').removeClass(hideClass);
             });
             $form.toggleClass(hideClass);
             $(this).toggleClass(hideClass);
         });
+
+        $self.find('#user-profile-form .update-profile').click(function (event) {
+            event.preventDefault();
+            var url = $self.find('#user-profile-form').data('url');
+            if (!url) {
+                return;
+            }
+            var formData = new FormData;
+            var data = {};
+            $self.find('[data-type]').each(function(index, field) {
+                var $field = $(field);
+                data[$field.data('type')] = getInputValue($field);
+            });
+            formData.append('data', JSON.stringify(data));
+            $.ajax({
+                url: url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        })
     }
 
     function registerListener($self) {
@@ -60,14 +89,12 @@ var PORTAL = (function (PORTAL, $) {
     function initUserProfileInfo(userInfo) {
         var $self = this;
         Object.keys(userInfo).forEach(function (key) {
-            var $infoElement, text;
-            if (key === 'firstName') {
-                $infoElement = $self.find('.data-value[data-key=name]');
-                text = userInfo['firstName'] && userInfo['lastName'] && `${userInfo['firstName']} ${userInfo['lastName']}` || '';
-            } else {
-                $infoElement = $self.find(`.data-value[data-key=${key}]`);
-                text = userInfo[key] || '';
+            if (key === 'userID') {
+                $self.find('.user-id[data-type=userID]').val(userInfo[key]);
+                return;
             }
+            var $infoElement = $self.find(`.data-value[data-key=${key}]`);
+            var text = userInfo[key] || '';
             if (!$infoElement || !$infoElement.length) {
                 return;
             }
@@ -76,7 +103,27 @@ var PORTAL = (function (PORTAL, $) {
     }
 
     function getOrUpdateInfoField($field, value) {
-        return $field.tagName === 'a' ? $field.attr('href', value) : $field.text(value);
+        if (value !== undefined) {
+            return $field.length && $field[0].tagName === 'A' ? setLinkValue($field, value) : $field.text(value);
+        }
+        return $field.length && $field[0].tagName === 'A' ? $field.text() : $field.text();
+    }
+
+    function getInputValue($field) {
+        return $field.length && $field[0].tagName === 'INPUT'
+            ? $field.val()
+            : $field.text();
+    }
+
+    function setLinkValue($field, value) {
+        var link = '#';
+        if ($field.data('key') === 'phone') {
+            link = `tel:${value.trim()}`;
+        } else if (value) {
+            link = value;
+        }
+        $field.attr('href', link);
+        $field.text(value);
     }
 
     return PORTAL;

@@ -33,7 +33,8 @@ public class UserHelperServlet extends SlingAllMethodsServlet {
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
         final ResourceResolver resolver = request.getResourceResolver();
         final String jsonData = request.getParameter("data");
-        userJsonService.setUserData(resolver, jsonData);
+        if (jsonData != null) {
+            userJsonService.setUserData(resolver, jsonData);
+        }
     }
-
 }
