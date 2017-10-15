@@ -1,15 +1,17 @@
 package wedding.core.services.binary.impl;
 
 public enum Type {
-    AVATAR("avatar", "avatar"),
-    PORTFOLIO("portfolio", "portfolio");
+    AVATAR("avatar", "avatar", true),
+    PORTFOLIO("portfolio", "portfolio", false);
 
     private final String name;
     private final String relPath;
+    private final boolean singleton;
 
-    Type(String name, String relPath) {
+    Type(String name, String relPath, boolean singleton) {
         this.name = name;
         this.relPath = relPath;
+        this.singleton = singleton;
     }
 
     public String getName() {
@@ -18,5 +20,9 @@ public enum Type {
 
     public String getRelPath() {
         return relPath;
+    }
+
+    public boolean isSingleton() {
+        return singleton;
     }
 }

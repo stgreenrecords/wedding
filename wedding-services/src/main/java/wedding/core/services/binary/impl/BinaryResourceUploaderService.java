@@ -26,6 +26,7 @@ import java.util.function.Consumer;
 public class BinaryResourceUploaderService implements BinaryUploaderService {
 
     private static final Logger LOG = LoggerFactory.getLogger(BinaryResourceUploaderService.class);
+    private static final String FILE_NAME = "file";
 
     @Override
     public void updateRepositoryBinariesAndClose(ResourceResolver resourceResolver, String userID, EnumMap<Type, List<BinaryFile>> files) {
@@ -53,17 +54,18 @@ public class BinaryResourceUploaderService implements BinaryUploaderService {
                         JcrConstants.NT_UNSTRUCTURED,
                         JcrConstants.NT_UNSTRUCTURED,
                         false);
-                entry.getValue().forEach(saveFile(fileResourceStore));
+                entry.getValue().forEach(saveFile(entry.getKey(), fileResourceStore));
             } catch (PersistenceException e) {
                 LOG.error(e.getMessage(), e);
             }
         };
     }
 
-    private Consumer<BinaryFile> saveFile(Resource fileResourceStore) {
+    private Consumer<BinaryFile> saveFile(Type type, Resource fileResourceStore) {
         return binaryFile -> {
-            try(BinaryFile binary = binaryFile) {
-                final String fileName = ResourceUtil.createUniqueChildName(fileResourceStore, "file");
+            try (BinaryFile binary = binaryFile) {
+                processSingletonValues(type, fileResourceStore);
+                final String fileName = ResourceUtil.createUniqueChildName(fileResourceStore, FILE_NAME);
                 final Node store = fileResourceStore.adaptTo(Node.class);
                 if (store == null) {
                     LOG.warn("Resource node to save is null {}", fileResourceStore);
@@ -74,5 +76,13 @@ public class BinaryResourceUploaderService implements BinaryUploaderService {
                 LOG.error(e.getMessage(), e);
             }
         };
+    }
+
+    private void processSingletonValues(Type type, Resource fileResourceStore) throws PersistenceException {
+        final ResourceResolver resourceResolver = fileResourceStore.getResourceResolver();
+        final Resource fileResource = fileResourceStore.getChild(FILE_NAME);
+        if (type.isSingleton() && fileResource != null) {
+            resourceResolver.delete(fileResource);
+        }
     }
 }
