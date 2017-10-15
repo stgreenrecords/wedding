@@ -73,6 +73,7 @@ var PORTAL = (function (PORTAL, $) {
                 data[$field.data('type')] = getInputValue($field);
             });
             formData.append('data', JSON.stringify(data));
+            formData.append('userID', data.userID);
             $.ajax({
                 url: url,
                 data: formData,
@@ -81,14 +82,16 @@ var PORTAL = (function (PORTAL, $) {
                 type: 'POST',
                 success: function (data) {
                     console.log(data);
+                    location.reload();
                 }
             });
         })
     }
 
     function putBinary(formData, $field) {
-        if ($field.data('type') === 'avatar') {
-            return formData.append('avatar',  $field.prop('files')[0]);
+        var file = $field.prop('files')[0];
+        if ($field.data('type') === 'avatar' && file) {
+            return formData.append('avatar',  file);
         }
         Array.from($field.prop('files')).forEach(function (element, index) {
             formData.append(`portfolio-${index}`, element);
@@ -111,8 +114,11 @@ var PORTAL = (function (PORTAL, $) {
             if (!$infoElement || !$infoElement.length) {
                 return;
             }
-            getOrUpdateInfoField($infoElement, text);
-        })
+            key === 'avatar' || key === 'portfolio'
+                ? updateImage($infoElement, userInfo, key === 'avatar')
+                : getOrUpdateInfoField($infoElement, text);
+        });
+        $self.removeClass('hide-person-contact');
     }
 
     function getOrUpdateInfoField($field, value) {
@@ -120,6 +126,18 @@ var PORTAL = (function (PORTAL, $) {
             return $field.length && $field[0].tagName === 'A' ? setLinkValue($field, value) : $field.text(value);
         }
         return $field.length && $field[0].tagName === 'A' ? $field.text() : $field.text();
+    }
+
+    function updateImage($infoElement, userInfo, avatar) {
+        if (avatar) {
+            $infoElement.css('background', `url(${userInfo.avatar})`);
+            return;
+        }
+        var html = '';
+        userInfo.portfolio.forEach(function (image) {
+            html += `<div class="portfolio-block"><div><img src="${image}"></div></div><div id="portfolio-carousel" class="owl-carousel owl-theme"><div><img src="${image}"></div></div>`;
+        });
+        $infoElement.replaceWith(html);
     }
 
     function getInputValue($field) {

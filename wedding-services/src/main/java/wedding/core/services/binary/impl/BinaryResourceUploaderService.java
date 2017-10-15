@@ -1,0 +1,78 @@
+package wedding.core.services.binary.impl;
+
+import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Service;
+import org.apache.jackrabbit.JcrConstants;
+import org.apache.jackrabbit.commons.JcrUtils;
+import org.apache.sling.api.resource.PersistenceException;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.ResourceUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import wedding.core.services.binary.BinaryUploaderService;
+import wedding.core.utils.WeddingResourceUtil;
+
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import java.io.IOException;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
+
+@Component
+@Service
+public class BinaryResourceUploaderService implements BinaryUploaderService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(BinaryResourceUploaderService.class);
+
+    @Override
+    public void updateRepositoryBinariesAndClose(ResourceResolver resourceResolver, String userID, EnumMap<Type, List<BinaryFile>> files) {
+        final Resource resource = WeddingResourceUtil.getUserResource(resourceResolver, userID)
+                .orElse(null);
+        if (resource == null) {
+            return;
+        }
+        files.entrySet().forEach(save(resource));
+        try {
+            resourceResolver.commit();
+        } catch (PersistenceException e) {
+            LOG.error(e.getMessage(), e);
+        }
+    }
+
+    private Consumer<Map.Entry<Type, List<BinaryFile>>> save(Resource resource) {
+        return entry -> {
+            final ResourceResolver resourceResolver = resource.getResourceResolver();
+            final String path = resource.getPath() + "/" + entry.getKey().getRelPath();
+            try {
+                final Resource fileResourceStore = ResourceUtil.getOrCreateResource(
+                        resourceResolver,
+                        path,
+                        JcrConstants.NT_UNSTRUCTURED,
+                        JcrConstants.NT_UNSTRUCTURED,
+                        false);
+                entry.getValue().forEach(saveFile(fileResourceStore));
+            } catch (PersistenceException e) {
+                LOG.error(e.getMessage(), e);
+            }
+        };
+    }
+
+    private Consumer<BinaryFile> saveFile(Resource fileResourceStore) {
+        return binaryFile -> {
+            try(BinaryFile binary = binaryFile) {
+                final String fileName = ResourceUtil.createUniqueChildName(fileResourceStore, "file");
+                final Node store = fileResourceStore.adaptTo(Node.class);
+                if (store == null) {
+                    LOG.warn("Resource node to save is null {}", fileResourceStore);
+                    return;
+                }
+                JcrUtils.putFile(store, fileName, "image/jpeg", binary.getIn());
+            } catch (RepositoryException | IOException e) {
+                LOG.error(e.getMessage(), e);
+            }
+        };
+    }
+}

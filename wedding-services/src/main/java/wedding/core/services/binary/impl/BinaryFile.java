@@ -1,4 +1,4 @@
-package wedding.core.factory;
+package wedding.core.services.binary.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,5 +16,9 @@ public class BinaryFile implements AutoCloseable {
         if (in != null) {
             in.close();
         }
+    }
+
+    public InputStream getIn() {
+        return in;
     }
 }

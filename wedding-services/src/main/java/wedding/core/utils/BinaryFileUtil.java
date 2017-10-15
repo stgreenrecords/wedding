@@ -1,16 +1,19 @@
 package wedding.core.utils;
 
+import com.google.common.collect.ImmutableList;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.request.RequestParameter;
-import wedding.core.factory.BinaryFile;
-import wedding.core.factory.BinaryFileFactory;
+import wedding.core.services.binary.impl.BinaryFile;
+import wedding.core.services.binary.impl.BinaryFileFactory;
+import wedding.core.services.binary.impl.Type;
 
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public final class BinaryFileUtil {
 
@@ -19,31 +22,34 @@ public final class BinaryFileUtil {
     private BinaryFileUtil() {
     }
 
-    public static List<BinaryFile> extractFromRequest(SlingHttpServletRequest request, Map<String, Boolean> keys) {
+    public static EnumMap<Type, List<BinaryFile>> extractFromRequest(SlingHttpServletRequest request, Map<Type, Boolean> keys) {
         return keys.entrySet()
                 .stream()
-                .flatMap(BinaryFileUtil.extractBinaryFiles(request))
-                .collect(Collectors.toList());
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        extractBinaryFiles(request),
+                        (oldValue, newValue) -> oldValue,
+                        () -> new EnumMap<>(Type.class)));
     }
 
-    private static Function<Map.Entry<String, Boolean>, Stream<BinaryFile>> extractBinaryFiles(SlingHttpServletRequest request) {
+    private static Function<Map.Entry<Type, Boolean>, List<BinaryFile>> extractBinaryFiles(SlingHttpServletRequest request) {
         return entry -> {
             if (BooleanUtils.isFalse(entry.getValue())) {
-                return Stream.of(BinaryFileFactory.fromRequestParameter(request.getRequestParameter(entry.getKey())));
+                return Collections.singletonList(BinaryFileFactory.fromRequestParameter(request.getRequestParameter(entry.getKey().getName())));
             }
-            Stream.Builder<BinaryFile> binaryFileBuilder = Stream.builder();
+            ImmutableList.Builder<BinaryFile> listBuilder = ImmutableList.builder();
             int index = 0;
             RequestParameter requestParameter;
             while ((requestParameter = getRequestParameter(request, entry, index)) != null) {
-                binaryFileBuilder.add(BinaryFileFactory.fromRequestParameter(requestParameter));
+                listBuilder.add(BinaryFileFactory.fromRequestParameter(requestParameter));
                 index++;
             }
-            return binaryFileBuilder.build();
+            return listBuilder.build();
         };
     }
 
-    private static RequestParameter getRequestParameter(SlingHttpServletRequest request, Map.Entry<String, Boolean> entry,
+    private static RequestParameter getRequestParameter(SlingHttpServletRequest request, Map.Entry<Type, Boolean> entry,
                                                         int index) {
-        return request.getRequestParameter(String.format(MULTIPLE_PARAMETERS_PATTERN, entry.getKey(), index));
+        return request.getRequestParameter(String.format(MULTIPLE_PARAMETERS_PATTERN, entry.getKey().getName(), index));
     }
 }

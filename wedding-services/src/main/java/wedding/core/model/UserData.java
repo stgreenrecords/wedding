@@ -5,10 +5,12 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
+import wedding.core.services.binary.impl.Type;
 import wedding.core.utils.WeddingResourceUtil;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -58,15 +60,18 @@ public class UserData {
     @Inject
     private String instagramLink;
 
-    private String avatarPath;
-    private List<String> portfolioPaths;
+    private String avatar;
+    private List<String> portfolio;
 
     @PostConstruct
     public void init() {
-        Optional.ofNullable(resource.getChild("avatar/file"))
+        Optional.ofNullable(resource.getChild(Type.AVATAR.getRelPath()))
+                .map(Resource::listChildren)
+                .filter(Iterator::hasNext)
+                .map(Iterator::next)
                 .map(Resource::getPath)
-                .ifPresent(this::setAvatarPath);
-        portfolioPaths = Optional.ofNullable(resource.getChild("portfolio"))
+                .ifPresent(this::setAvatar);
+        portfolio = Optional.ofNullable(resource.getChild(Type.PORTFOLIO.getRelPath()))
                 .map(Resource::listChildren)
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
@@ -218,19 +223,19 @@ public class UserData {
         this.resource = resource;
     }
 
-    public String getAvatarPath() {
-        return avatarPath;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setAvatarPath(String avatarPath) {
-        this.avatarPath = avatarPath;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
-    public List<String> getPortfolioPaths() {
-        return portfolioPaths;
+    public List<String> getPortfolio() {
+        return portfolio;
     }
 
-    public void setPortfolioPaths(List<String> portfolioPaths) {
-        this.portfolioPaths = portfolioPaths;
+    public void setPortfolio(List<String> portfolio) {
+        this.portfolio = portfolio;
     }
 }

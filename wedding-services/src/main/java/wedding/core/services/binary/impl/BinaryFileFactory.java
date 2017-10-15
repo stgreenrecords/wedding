@@ -1,4 +1,4 @@
-package wedding.core.factory;
+package wedding.core.services.binary.impl;
 
 import org.apache.sling.api.request.RequestParameter;
 import org.slf4j.Logger;
