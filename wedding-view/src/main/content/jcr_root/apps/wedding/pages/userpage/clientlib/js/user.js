@@ -49,9 +49,10 @@ var PORTAL = (function (PORTAL, $) {
                     : $input.text(value);
                 $element.addClass(hideClass);
                 $element.parent('.data-container').addClass(hideClass);
-                $input.removeClass(hideClass);
-                $input.parent('.data-container').removeClass(hideClass);
             });
+            var $inputs = $self.find('[data-type]');
+            $inputs.removeClass(hideClass);
+            $inputs.parent('.data-container').removeClass(hideClass);
             $form.toggleClass(hideClass);
             $(this).toggleClass(hideClass);
         });
@@ -66,6 +67,9 @@ var PORTAL = (function (PORTAL, $) {
             var data = {};
             $self.find('[data-type]').each(function(index, field) {
                 var $field = $(field);
+                if ($field.attr('type') === 'file') {
+                    putBinary(formData, $field);
+                }
                 data[$field.data('type')] = getInputValue($field);
             });
             formData.append('data', JSON.stringify(data));
@@ -80,6 +84,15 @@ var PORTAL = (function (PORTAL, $) {
                 }
             });
         })
+    }
+
+    function putBinary(formData, $field) {
+        if ($field.data('type') === 'avatar') {
+            return formData.append('avatar',  $field.prop('files')[0]);
+        }
+        Array.from($field.prop('files')).forEach(function (element, index) {
+            formData.append(`portfolio-${index}`, element);
+        });
     }
 
     function registerListener($self) {
