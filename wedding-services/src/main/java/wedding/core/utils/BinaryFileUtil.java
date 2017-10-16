@@ -34,12 +34,12 @@ public final class BinaryFileUtil {
 
     private static Function<Map.Entry<Type, Boolean>, List<BinaryFile>> extractBinaryFiles(SlingHttpServletRequest request) {
         return entry -> {
-            if (BooleanUtils.isFalse(entry.getValue())) {
-                return Collections.singletonList(BinaryFileFactory.fromRequestParameter(request.getRequestParameter(entry.getKey().getName())));
+            RequestParameter requestParameter = request.getRequestParameter(entry.getKey().getName());
+            if (requestParameter != null && BooleanUtils.isFalse(entry.getValue())) {
+                return Collections.singletonList(BinaryFileFactory.fromRequestParameter(requestParameter));
             }
             ImmutableList.Builder<BinaryFile> listBuilder = ImmutableList.builder();
             int index = 0;
-            RequestParameter requestParameter;
             while ((requestParameter = getRequestParameter(request, entry, index)) != null) {
                 listBuilder.add(BinaryFileFactory.fromRequestParameter(requestParameter));
                 index++;

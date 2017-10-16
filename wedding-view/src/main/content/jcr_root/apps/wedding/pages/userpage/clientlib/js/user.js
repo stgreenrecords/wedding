@@ -14,6 +14,8 @@ var PORTAL = (function (PORTAL, $) {
         });
     };
 
+    var hideClass = 'hide-person-contact';
+
     function initListeners ($self) {
         $self.find(".avatar-submit").click(function(){
             var $input = $(".avatar-file");
@@ -35,7 +37,6 @@ var PORTAL = (function (PORTAL, $) {
 
         $self.find('.edit-link button').click(function() {
             var $form = $self.find('#user-profile-form');
-            var hideClass = 'hide-person-contact';
             $self.find('.data-value').each(function(index, el) {
                 var $element = $(el);
                 var key = $element.data('key');
@@ -69,8 +70,9 @@ var PORTAL = (function (PORTAL, $) {
                 var $field = $(field);
                 if ($field.attr('type') === 'file') {
                     putBinary(formData, $field);
+                } else {
+                    data[$field.data('type')] = getInputValue($field);
                 }
-                data[$field.data('type')] = getInputValue($field);
             });
             formData.append('data', JSON.stringify(data));
             formData.append('userID', data.userID);
@@ -118,7 +120,7 @@ var PORTAL = (function (PORTAL, $) {
                 ? updateImage($infoElement, userInfo, key === 'avatar')
                 : getOrUpdateInfoField($infoElement, text);
         });
-        $self.removeClass('hide-person-contact');
+        $self.removeClass(hideClass);
     }
 
     function getOrUpdateInfoField($field, value) {
