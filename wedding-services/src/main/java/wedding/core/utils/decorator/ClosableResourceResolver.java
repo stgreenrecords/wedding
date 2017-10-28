@@ -86,6 +86,11 @@ public class ClosableResourceResolver implements AutoCloseable, ResourceResolver
     }
 
     @Override
+    public Resource getParent(Resource resource) {
+        return null;
+    }
+
+    @Override
     public Iterable<Resource> getChildren(Resource resource) {
         return resourceResolver.getChildren(resource);
     }
@@ -173,6 +178,16 @@ public class ClosableResourceResolver implements AutoCloseable, ResourceResolver
     @Override
     public void refresh() {
         resourceResolver.refresh();
+    }
+
+    @Override
+    public Resource copy(String s, String s1) throws PersistenceException {
+        return null;
+    }
+
+    @Override
+    public Resource move(String s, String s1) throws PersistenceException {
+        return null;
     }
 
     @Override

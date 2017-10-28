@@ -1,9 +1,5 @@
 package wedding.core.services.product;
 
-import com.adobe.cq.commerce.api.CommerceException;
-import com.adobe.cq.commerce.api.Product;
-import com.adobe.cq.commerce.api.VariantFilter;
-import com.day.cq.commons.ImageResource;
 import org.apache.sling.api.resource.Resource;
 
 import java.util.Iterator;
@@ -12,7 +8,7 @@ import java.util.List;
 /**
  * Created by Студия on 04.10.2016.
  */
-public class PortalProduct implements Product {
+public class PortalProduct {
 
     public String getPath() {
         return null;
@@ -62,14 +58,6 @@ public class PortalProduct implements Product {
         return null;
     }
 
-    public ImageResource getImage() {
-        return null;
-    }
-
-    public List<ImageResource> getImages() {
-        return null;
-    }
-
     public <T> T getProperty(String s, Class<T> aClass) {
         return null;
     }
@@ -86,31 +74,11 @@ public class PortalProduct implements Product {
         return false;
     }
 
-    public Iterator<Product> getVariants() throws CommerceException {
-        return null;
-    }
-
-    public Iterator<Product> getVariants(VariantFilter variantFilter) throws CommerceException {
-        return null;
-    }
-
-    public Product getBaseProduct() throws CommerceException {
-        return null;
-    }
-
-    public Product getPIMProduct() throws CommerceException {
-        return null;
-    }
-
     public String getImageUrl() {
         return null;
     }
 
     public String getImagePath() {
-        return null;
-    }
-
-    public ImageResource getThumbnail() {
         return null;
     }
 

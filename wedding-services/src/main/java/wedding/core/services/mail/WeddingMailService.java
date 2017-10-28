@@ -1,6 +1,5 @@
 package wedding.core.services.mail;
 
-import com.day.cq.mailer.MailService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
@@ -44,9 +43,6 @@ public class WeddingMailService {
     private WeddingUtils weddingUtils;
 
     @Reference
-    private MailService mailService;
-
-    @Reference
     private ServerUtil serverUtil;
 
     @Activate
@@ -78,7 +74,7 @@ public class WeddingMailService {
                 email.setHtmlMsg(document.outerHtml());
                 email.setFrom(PropertiesUtil.toString(componentContext.getProperties().get(ADDRESS_FROM), StringUtils.EMPTY));
                 email.addTo(userName);
-                mailService.send(email);
+            //    mailService.send(email);
                 LOG.info("REGISTRATION LETTER SUCCESS SEND");
                 return true;
             }

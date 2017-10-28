@@ -1,10 +1,5 @@
 package wedding.core.servlets;
 
-import com.day.cq.mailer.MailService;
-import com.day.cq.mailer.MailingStatus;
-import com.day.cq.mcm.api.newsletter.NewsLetter;
-import com.day.cq.mcm.api.newsletter.NewsletterService;
-import com.day.cq.mcm.core.NewsletterHelper;
 import org.apache.felix.scr.annotations.*;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
@@ -28,11 +23,6 @@ public class MailServlet extends SlingAllMethodsServlet {
 
     private static final Logger LOG = LoggerFactory.getLogger(MailServlet.class);
 
-    @Reference
-    private MailService mailservice;
-
-    @Reference
-    NewsletterService newsletterService;
 
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws IOException {
@@ -52,7 +42,7 @@ public class MailServlet extends SlingAllMethodsServlet {
 
     private boolean sendRegistrationMail(SlingHttpServletRequest request) {
         try {
-            NewsLetter newsLetter = NewsletterHelper.fromRequest(request, newsletterService);
+/*            NewsLetter newsLetter = NewsletterHelper.fromRequest(request, newsletterService);
             newsLetter.setFromAddress(new InternetAddress("administration@wedding-gomel.com"));
             Iterator<com.day.cq.security.Authorizable> recipients = newsLetter.getMailingList().members();
             while (recipients.hasNext()) {
@@ -60,7 +50,7 @@ public class MailServlet extends SlingAllMethodsServlet {
             }
             MailingStatus mailingStatus = newsletterService.sendNewsletter(newsLetter);
             mailingStatus.getStatusCode();
-            LOG.info("REGISTRATION MAIL CODE : " + mailingStatus.getStatusCode());
+            LOG.info("REGISTRATION MAIL CODE : " + mailingStatus.getStatusCode());*/
 
 /*
             Node registrationNode = request.getResourceResolver().adaptTo(Session.class).getNode("/content/campaigns/wedding/notifications/userValidation/jcr:content/text");
@@ -79,9 +69,7 @@ public class MailServlet extends SlingAllMethodsServlet {
             }
 */
 
-        } catch (RepositoryException e) {
-            LOG.error(e.getMessage());
-        } catch (AddressException e) {
+        } catch (Exception e) {
             LOG.error(e.getMessage());
         }
         return false;
