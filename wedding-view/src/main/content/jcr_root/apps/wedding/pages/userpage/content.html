@@ -90,7 +90,23 @@
                     <h3>Портфолио</h3>
                     <hr>
 
-                    <span class="data-value" data-key="portfolio"></span>
+                    <div class="portfolio-block">
+                        <span class="data-value" data-key="portfolio"></span>
+                    </div>
+                    <div id="portfolio-carousel" class="owl-carousel owl-theme owl-loaded owl-drag">
+                        <div class="owl-stage-outer">
+                            <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: 0s;">
+                                <span data-portfolio-carousel></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="owl-nav disabled">
+                        <div class="owl-prev">prev</div>
+                        <div class="owl-next">next</div>
+                    </div>
+                    <div class="owl-dots">
+                        <span data-owl-dots></span>
+                    </div>
 
                     <div class="link">
                         <a href="" x-cq-linkchecker="skip">Показать еще</a>

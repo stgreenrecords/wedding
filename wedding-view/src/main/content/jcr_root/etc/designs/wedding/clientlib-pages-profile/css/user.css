@@ -1,6 +1,10 @@
 .hide-person-contact {
     display: none;
 }
+.portfolio-block img.remove-portfolio-img {
+    opacity: 0.5;
+    outline: 5px dashed red;
+}
 h3, h4{text-align: center; font-family: "GothaMed";font-size: 28px; font-weight: 300; margin: 0px;}
 p{color: #606060; font-family: "GothaReg";letter-spacing: 0.5px; font-size: 14px; font-weight: 300 !imporatant; margin: 0px;}
 a{text-decoration: none; color: #606060; font-family: "GothaReg";letter-spacing: 0.5px; font-size: 14px; font-weight: 300 !imporatant;}

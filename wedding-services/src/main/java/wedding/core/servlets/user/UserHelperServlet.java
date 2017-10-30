@@ -19,8 +19,8 @@ import wedding.core.services.binary.impl.Type;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 @SlingServlet(paths = {"/services/user/profile"})
 public class UserHelperServlet extends SlingAllMethodsServlet {
@@ -42,7 +42,7 @@ public class UserHelperServlet extends SlingAllMethodsServlet {
         final ResourceResolver resolver = request.getResourceResolver();
         final String jsonData = request.getParameter("data");
         final String userID = request.getParameter(Constants.USER_ID_PARAMETER);
-        EnumMap<Type, List<BinaryFile>> binaries = BinaryFileUtil.extractFromRequest(request, ImmutableMap.of(
+        Map<Type, List<BinaryFile>> binaries = BinaryFileUtil.extractFromRequest(request, ImmutableMap.of(
                 Type.AVATAR, false,
                 Type.PORTFOLIO, true
         ));

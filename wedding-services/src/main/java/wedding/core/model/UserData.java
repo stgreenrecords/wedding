@@ -23,6 +23,8 @@ public class UserData {
     @JsonIgnore
     private Resource resource;
 
+    private String profile;
+
     @Inject
     private String userID;
     @Inject
@@ -65,6 +67,7 @@ public class UserData {
 
     @PostConstruct
     public void init() {
+        profile = resource.getPath();
         Optional.ofNullable(resource.getChild(Type.AVATAR.getRelPath()))
                 .map(Resource::listChildren)
                 .filter(Iterator::hasNext)
@@ -221,6 +224,7 @@ public class UserData {
 
     public void setResource(Resource resource) {
         this.resource = resource;
+        this.profile = resource.getPath();
     }
 
     public String getAvatar() {
@@ -237,5 +241,9 @@ public class UserData {
 
     public void setPortfolio(List<String> portfolio) {
         this.portfolio = portfolio;
+    }
+
+    public String getProfile() {
+        return profile;
     }
 }

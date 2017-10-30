@@ -60,34 +60,81 @@ var PORTAL = (function (PORTAL, $) {
 
         $self.find('#user-profile-form .update-profile').click(function (event) {
             event.preventDefault();
-            var url = $self.find('#user-profile-form').data('url');
-            if (!url) {
-                return;
+            removePortfolioImages($self, updateProfile);
+        });
+    }
+
+    function removePortfolioImages($self, callback) {
+        var $removed = $self.find('.portfolio-block img.remove-portfolio-img');
+        var url = PORTAL.modules.LoginRegistration.AUTH.getCurrentUserData().profile;
+        if (!$removed.length || !url) {
+            if (callback) {
+                callback($self);
             }
-            var formData = new FormData;
-            var data = {};
-            $self.find('[data-type]').each(function(index, field) {
-                var $field = $(field);
-                if ($field.attr('type') === 'file') {
-                    putBinary(formData, $field);
-                } else {
-                    data[$field.data('type')] = getInputValue($field);
+            return;
+        }
+        var data = {
+            ":operation" : "delete",
+            ":applyTo" : getFilesToRemove($removed)
+        };
+        $.ajax({
+            url: url + "/portfolio",
+            data: data,
+            type: 'POST',
+            success: function (data) {
+                if (callback) {
+                    callback($self, data);
                 }
-            });
-            formData.append('data', JSON.stringify(data));
-            formData.append('userID', data.userID);
-            $.ajax({
-                url: url,
-                data: formData,
-                processData: false,
-                contentType: false,
-                type: 'POST',
-                success: function (data) {
-                    console.log(data);
-                    location.reload();
+            }
+        });
+    }
+
+    function updateProfile($self, callback) {
+        var url = $self.find('#user-profile-form').data('url');
+        if (!url) {
+            return;
+        }
+        var formData = new FormData;
+        var data = {};
+        $self.find('[data-type]').each(function(index, field) {
+            var $field = $(field);
+            if ($field.attr('type') === 'file') {
+                putBinary(formData, $field);
+            } else {
+                data[$field.data('type')] = getInputValue($field);
+            }
+        });
+        formData.append('data', JSON.stringify(data));
+        formData.append('userID', data.userID);
+        $.ajax({
+            url: url,
+            data: formData,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (data) {
+                if (callback) {
+                    callback($self, data);
                 }
-            });
-        })
+                location.reload();
+            }
+        });
+    }
+
+    function getFilesToRemove($removed) {
+        return $removed.map(function (index, element) {
+            var path = $(element).attr('src');
+            var nameIndex = path && (path.lastIndexOf('/') + 1) || -1;
+            return nameIndex > 0 ? path.substring(nameIndex) : null;
+        }).filter(function (index, element) {
+            return !!element;
+        }).toArray();
+    }
+
+    function initDynamicElementListeners($self) {
+        $self.find('.portfolio-block img').click(function () {
+            $(this).toggleClass('remove-portfolio-img');
+        });
     }
 
     function putBinary(formData, $field) {
@@ -121,6 +168,7 @@ var PORTAL = (function (PORTAL, $) {
                 : getOrUpdateInfoField($infoElement, text);
         });
         $self.removeClass(hideClass);
+        initDynamicElementListeners($self);
     }
 
     function getOrUpdateInfoField($field, value) {
@@ -136,10 +184,18 @@ var PORTAL = (function (PORTAL, $) {
             return;
         }
         var html = '';
-        userInfo.portfolio.forEach(function (image) {
-            html += `<div class="portfolio-block"><div><img src="${image}"></div></div><div id="portfolio-carousel" class="owl-carousel owl-theme"><div><img src="${image}"></div></div>`;
+        var carouselHtml = '';
+        var carouselDotsHtml = '';
+        userInfo.portfolio.forEach(function (image, index) {
+            html += `<div><img src="${image}"/></div>`;
+            carouselHtml += `<div class="owl-item"><div><img src="${image}"/></div></div>`;
+            carouselDotsHtml += `<div class="owl-dot ${index === 0 ? 'active' : ''}"><span></span></div>`;
         });
+        var $carousel = $('#portfolio-carousel [data-portfolio-carousel]');
+        var $carouselDots = $('.portfolio .owl-dots [data-owl-dots]');
         $infoElement.replaceWith(html);
+        $carousel.replaceWith(carouselHtml);
+        $carouselDots.replaceWith(carouselDotsHtml);
     }
 
     function getInputValue($field) {

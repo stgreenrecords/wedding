@@ -16,7 +16,6 @@ import wedding.core.utils.WeddingResourceUtil;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import java.io.IOException;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -29,7 +28,7 @@ public class BinaryResourceUploaderService implements BinaryUploaderService {
     private static final String FILE_NAME = "file";
 
     @Override
-    public void updateRepositoryBinariesAndClose(ResourceResolver resourceResolver, String userID, EnumMap<Type, List<BinaryFile>> files) {
+    public void updateRepositoryBinariesAndClose(ResourceResolver resourceResolver, String userID, Map<Type, List<BinaryFile>> files) {
         final Resource resource = WeddingResourceUtil.getUserResource(resourceResolver, userID)
                 .orElse(null);
         if (resource == null) {
