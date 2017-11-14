@@ -23,6 +23,8 @@
 
         <cq.host>localhost</cq.host>
         <cq.port>4502</cq.port>
+        <sling.host>localhost</sling.host>
+        <sling.port>80</sling.port>
 
         <cq.author.host>localhost</cq.author.host>
         <cq.author.port>80</cq.author.port>
@@ -108,6 +110,12 @@
                 <groupId>javax.jcr</groupId>
                 <artifactId>jcr</artifactId>
                 <version>2.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <artifactId>jackrabbit-jcr-commons</artifactId>
+                <version>2.14.0</version>
+                <groupId>org.apache.jackrabbit</groupId>
                 <scope>provided</scope>
             </dependency>
             <dependency>
@@ -353,8 +361,9 @@
                         </execution>
                     </executions>
                     <configuration>
-                        <slingUrl>http://${cq.host}:${cq.port}/crx/repository/crx.default</slingUrl>
-                        <usePut>true</usePut>
+                        <!--<slingUrl>http://${cq.host}:${cq.port}/crx/repository/crx.default</slingUrl>-->
+                        <slingUrl>http://${sling.host}:${sling.port}/system/console</slingUrl>
+                        <!--<usePut>true</usePut>-->
                         <failOnError>true</failOnError>
                     </configuration>
                 </plugin>
@@ -463,5 +472,27 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <profile>
+            <id>install-bundle</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.sling</groupId>
+                        <artifactId>maven-sling-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>install-bundle</id>
+                                <goals>
+                                    <goal>install</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
