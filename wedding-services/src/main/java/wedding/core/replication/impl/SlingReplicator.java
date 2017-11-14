@@ -22,8 +22,8 @@ public class SlingReplicator implements Replicator {
             "</temp>";
 
     @Reference(
-            bind = "bindConfig",
-            unbind = "unbindConfig",
+            bind = "bindServersInfo",
+            unbind = "unbindServersInfo",
             referenceInterface = ReplicatorConfig.class,
             cardinality = ReferenceCardinality.MANDATORY_MULTIPLE,
             policy = ReferencePolicy.DYNAMIC
@@ -45,11 +45,11 @@ public class SlingReplicator implements Replicator {
     }
 
 
-    public void bindConfig(final ReplicatorConfig config) {
+    public void bindServersInfo(final ReplicatorConfig config) {
         serverInfoSet.add(config.getServerInfo());
     }
 
-    public void unbindConfig(final ReplicatorConfig config) {
+    public void unbindServersInfo(final ReplicatorConfig config) {
         serverInfoSet.remove(config.getServerInfo());
     }
 
