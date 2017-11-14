@@ -16,13 +16,13 @@ import java.util.Map;
 @Service
 public class SlingReplicatorConfig implements ReplicatorConfig {
 
-    @Property
+    @Property(label = "Server URL")
     private static final String SERVER_URL = "replicator.sling.server.url";
 
-    @Property(value = "admin")
+    @Property(label = "User Name", value = "admin")
     private static final String USER_NAME = "replicator.sling.server.credential.name";
 
-    @Property(passwordValue = "")
+    @Property(label = "User Password", passwordValue = "")
     private static final String USER_PASSWORD = "replicator.sling.server.credential.password";
 
     private ServerInfo serverInfo;
@@ -40,5 +40,10 @@ public class SlingReplicatorConfig implements ReplicatorConfig {
                 (String) properties.get(USER_NAME),
                 (String) properties.get(USER_PASSWORD)
         );
+    }
+
+    @Deactivate
+    private void deactivate() {
+        serverInfo = null;
     }
 }
