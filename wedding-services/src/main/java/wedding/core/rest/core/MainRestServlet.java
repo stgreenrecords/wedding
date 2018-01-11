@@ -40,7 +40,7 @@ public class MainRestServlet extends SlingSafeMethodsServlet {
         String json = Optional.ofNullable(request.getQueryString())
                 .map(query -> processWithQuery(query, pathInfo, request))
                 .orElseGet(() -> processWithOutQuery(pathInfo, request));
-        response.setContentType("application/json; charset=UTF-8");
+        response.setContentType(Constants.RESPONSE_JSON_SETTING);
         response.getWriter().write(json);
     }
     private String processWithOutQuery(RequestPathInfo pathInfo, SlingHttpServletRequest slingHttpServletRequest) {
@@ -48,7 +48,7 @@ public class MainRestServlet extends SlingSafeMethodsServlet {
                 .filter(ArrayUtils::isNotEmpty)
                 .map(MainRestServlet::getFirstSelectorFromArray)
                 .map(name -> ((RestFieldCore) bundleContext.getService(getServesReferenceFromContext(name))))
-                .map(restFieldCore -> restFieldCore.apply(slingHttpServletRequest))
+                .map(restFieldCore -> restFieldCore.apply(slingHttpServletRequest, null))
                 .map(WeddingResourceUtil::toJson)
                 .orElse(StringUtils.EMPTY);
     }

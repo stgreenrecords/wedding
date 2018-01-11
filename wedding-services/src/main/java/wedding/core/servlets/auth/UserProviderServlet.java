@@ -26,7 +26,7 @@ public class UserProviderServlet extends SlingAllMethodsServlet {
         String userID = request.getParameter(Constants.USER_ID_PARAMETER);
         String authType = request.getParameter(Constants.AUTH_TYPE_PARAMETER);
         if (portalUserManager.isUserExist(userID, authType)){
-            response.setContentType("application/json; charset=UTF-8");
+            response.setContentType(Constants.RESPONSE_JSON_SETTING);
             response.getWriter().write(portalUserManager.getPortalUser(userID, authType).toString());
         }
     }
