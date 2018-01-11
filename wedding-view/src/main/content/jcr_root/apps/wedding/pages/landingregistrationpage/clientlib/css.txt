@@ -1,5 +1,0 @@
-#base=css
-font-awesome.min.css
-owl.carousel.css
-owl.carousel.min.css
-owl.theme.default.min.css

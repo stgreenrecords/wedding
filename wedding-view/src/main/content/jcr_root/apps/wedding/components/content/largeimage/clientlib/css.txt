@@ -1,1 +1,0 @@
-largeimage.css
