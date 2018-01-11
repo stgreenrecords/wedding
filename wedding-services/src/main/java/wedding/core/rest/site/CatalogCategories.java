@@ -23,8 +23,8 @@ public class CatalogCategories implements RestFieldCore {
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
                 .collect(toMap(
-                        r -> WeddingResourceUtil.getStringPropertyFromResource(r, RestFieldCore.PROPERTY_CATALOG_TITLE),
-                        Resource::getPath));
+                        Resource::getPath,
+                        r -> WeddingResourceUtil.getStringPropertyFromResource(r, RestFieldCore.PROPERTY_CATALOG_TITLE)));
     }
 
 
