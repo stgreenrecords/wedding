@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
-    <filter root="/apps/wedding"/>
-    <filter root="/apps/sling"/>
-    <filter root="/apps/cq"/>
-    <filter root="/home" mode="update"/>
-    <filter root="/etc/designs/wedding"/>
+    <filter root="/content/wedding"/>
+    <filter root="/home/groups/w" mode="update"/>
+    <filter root="/home/users/wedding" mode="update"/>
 </workspaceFilter>
