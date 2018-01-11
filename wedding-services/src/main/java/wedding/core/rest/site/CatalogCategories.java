@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toMap;
 public class CatalogCategories implements RestFieldCore {
 
     @Override
-    public Object apply(SlingHttpServletRequest request) {
+    public Map<String, String> apply(SlingHttpServletRequest request) {
         return Optional.ofNullable(request.getResourceResolver().getResource(Constants.CATALOG_ROOT_PAGE_PATH))
                 .map(Resource::listChildren)
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
