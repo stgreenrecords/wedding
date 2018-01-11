@@ -30,7 +30,7 @@ public final class SlingModelUtil {
 
     public static void updateModel(Object model) {
         final Class<?> modelClass = model.getClass();
-        if (modelClass.getDeclaredAnnotation(Model.class) == null) {
+        if (!modelClass.isAnnotationPresent(Model.class)) {
             return;
         }
         final Field[] fields = modelClass.getDeclaredFields();

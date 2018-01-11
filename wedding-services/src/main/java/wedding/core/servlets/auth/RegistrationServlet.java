@@ -7,7 +7,6 @@ import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import wedding.core.data.Constants;
-import wedding.core.services.mail.WeddingMailService;
 import wedding.core.services.users.PortalUserManager;
 
 import javax.servlet.ServletException;
@@ -25,8 +24,8 @@ public class RegistrationServlet extends SlingAllMethodsServlet {
     @Reference
     private PortalUserManager portalUserManager;
 
-    @Reference
-    private WeddingMailService weddingMailService;
+/*    @Reference
+    private WeddingMailService weddingMailService;*/
 
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
@@ -63,7 +62,7 @@ public class RegistrationServlet extends SlingAllMethodsServlet {
         String userID = request.getParameter("userID");
         boolean statusRegistration = portalUserManager.addPortalUserViaSocial(userID, type, email, firstName, lastName, city, authType);
         if (statusRegistration) {
-            weddingMailService.sendRegistrationMail(email);
+          //  weddingMailService.sendRegistrationMail(email);
         }
         return statusRegistration;
     }

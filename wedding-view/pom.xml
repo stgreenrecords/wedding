@@ -107,11 +107,6 @@
                     <embeddeds>
                         <embedded>
                             <groupId>com.wedding</groupId>
-                            <artifactId>wedding-models</artifactId>
-                            <target>/apps/wedding/install</target>
-                        </embedded>
-                        <embedded>
-                            <groupId>com.wedding</groupId>
                             <artifactId>wedding-services</artifactId>
                             <target>/apps/wedding/install</target>
                         </embedded>
@@ -182,11 +177,6 @@
     </profiles>
 
     <dependencies>
-        <dependency>
-            <groupId>com.wedding</groupId>
-            <artifactId>wedding-models</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <dependency>
             <groupId>com.wedding</groupId>
             <artifactId>wedding-services</artifactId>

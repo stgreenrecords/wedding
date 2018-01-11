@@ -2,6 +2,7 @@ package wedding.core.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.slf4j.Logger;
@@ -71,4 +72,12 @@ public final class WeddingResourceUtil {
         return iteratorToOrderedStream(resourceResolver.findResources(query, Query.JCR_SQL2))
                 .findFirst();
     }
+
+    public static String getStringPropertyFromResource(Resource resource, String propertyName){
+        return Optional.of(resource)
+                .map(Resource::getValueMap)
+                .map(properties -> properties.get(propertyName, String.class))
+                .orElse(StringUtils.EMPTY);
+    }
+
 }

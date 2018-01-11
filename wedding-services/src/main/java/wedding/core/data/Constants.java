@@ -8,6 +8,7 @@ public class Constants {
     }
 
     public static final String COMMA = ",";
+    public static final String DOT = ".";
 
     public static final String CHARSET_UTF_8 = "UTF-8";
 

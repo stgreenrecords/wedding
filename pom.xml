@@ -32,8 +32,8 @@
         <cq.author2.port>4502</cq.author2.port>
         <cq.author3.host>localhost</cq.author3.host>
         <cq.author3.port>4502</cq.author3.port>
-        <cq.prodaction.publish.host>192.168.100.39</cq.prodaction.publish.host>
-        <cq.prodaction.publish.port>4503</cq.prodaction.publish.port>
+        <cq.prodaction.publish.host>localhost</cq.prodaction.publish.host>
+        <cq.prodaction.publish.port>80</cq.prodaction.publish.port>
         <cq.publish2.host>localhost</cq.publish2.host>
         <cq.publish2.port>80</cq.publish2.port>
         <cq.publish3.host>localhost</cq.publish3.host>
@@ -46,7 +46,6 @@
     <modules>
         <module>wedding-view</module>
         <module>wedding-services</module>
-        <module>wedding-models</module>
     </modules>
 
     <dependencyManagement>
