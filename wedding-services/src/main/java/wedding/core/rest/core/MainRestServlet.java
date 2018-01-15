@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import wedding.core.data.Constants;
 import wedding.core.rest.site.RestFieldCore;
+import wedding.core.rest.util.ServletMapping;
 import wedding.core.utils.WeddingResourceUtil;
 
 import javax.servlet.ServletException;
@@ -47,7 +48,8 @@ public class MainRestServlet extends SlingSafeMethodsServlet {
         return Optional.of(pathInfo.getSelectors())
                 .filter(ArrayUtils::isNotEmpty)
                 .map(MainRestServlet::getFirstSelectorFromArray)
-                .map(name -> ((RestFieldCore) bundleContext.getService(getServesReferenceFromContext(name))))
+                .map(ServletMapping::getClassBySelector)
+                .map(cl -> ((RestFieldCore) bundleContext.getService(getServesReferenceFromContext(cl.getName()))))
                 .map(restFieldCore -> restFieldCore.apply(slingHttpServletRequest, null))
                 .map(WeddingResourceUtil::toJson)
                 .orElse(StringUtils.EMPTY);
@@ -66,7 +68,7 @@ public class MainRestServlet extends SlingSafeMethodsServlet {
     }
 
     private ServiceReference getServesReferenceFromContext(String name) {
-        return bundleContext.getServiceReference(RestFieldCore.class.getPackage().getName() + Constants.DOT + name);
+        return bundleContext.getServiceReference(name);
     }
 
 }
