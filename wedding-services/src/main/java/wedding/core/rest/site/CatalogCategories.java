@@ -18,7 +18,8 @@ public class CatalogCategories implements RestFieldCore {
 
     @Override
     public Map<String, String> apply(SlingHttpServletRequest request, Map<String, String> query) {
-        return Optional.ofNullable(request.getResourceResolver().getResource(Constants.CATALOG_ROOT_PAGE_PATH))
+        return Optional.of(request.getResourceResolver())
+                .map(resolver -> resolver.getResource(Constants.CATALOG_ROOT_PAGE_PATH))
                 .map(Resource::listChildren)
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())

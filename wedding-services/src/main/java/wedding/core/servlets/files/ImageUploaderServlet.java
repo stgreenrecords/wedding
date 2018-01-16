@@ -21,7 +21,7 @@ public class ImageUploaderServlet extends SlingAllMethodsServlet {
         InputStream inputStream = request.getRequestParameter("avatar-image").getInputStream();
         try {
             Session session = request.getResourceResolver().adaptTo(Session.class);
-            Node node = session.getNode("/content/test");
+            Node node = null;/*session.getNode("/content/test");*/
             JcrUtils.putFile(node, "testImage", "image/png", inputStream);
             session.save();
         } catch (RepositoryException e) {

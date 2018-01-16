@@ -8,7 +8,7 @@
     <parent>
         <groupId>com.wedding</groupId>
         <artifactId>wedding</artifactId>
-        <version>${project.version}</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>wedding-services</artifactId>
@@ -26,48 +26,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.semantics3</groupId>
-            <artifactId>Sem3Java</artifactId>
-            <version>1.2.4</version>
-        </dependency>
-        <dependency>
-            <artifactId>org.apache.sling.api</artifactId>
-            <version>2.16.2</version>
             <groupId>org.apache.sling</groupId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <artifactId>jackrabbit-api</artifactId>
-            <version>2.14.0</version>
-            <groupId>org.apache.jackrabbit</groupId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <artifactId>jackrabbit-jcr-commons</artifactId>
-            <version>2.14.0</version>
-            <groupId>org.apache.jackrabbit</groupId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <artifactId>org.apache.sling.commons.osgi</artifactId>
-            <version>2.4.0</version>
-            <groupId>org.apache.sling</groupId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <artifactId>org.apache.sling.servlets.post</artifactId>
-            <version>2.3.20</version>
-            <groupId>org.apache.sling</groupId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.models.api</artifactId>
+            <artifactId>org.apache.sling.jcr.jackrabbit.usermanager</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.sling</groupId>
@@ -77,75 +37,73 @@
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.scr</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.apache.felix.scr.annotations</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.compendium</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-        </dependency>
         <!-- JCR -->
         <dependency>
-            <groupId>javax.jcr</groupId>
-            <artifactId>jcr</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
         <dependency>
             <artifactId>jackrabbit-jcr-commons</artifactId>
             <groupId>org.apache.jackrabbit</groupId>
         </dependency>
         <dependency>
-            <groupId>org.apache.jackrabbit</groupId>
-            <artifactId>jackrabbit-jcr2dav</artifactId>
+            <artifactId>org.apache.sling.models.api</artifactId>
+            <groupId>org.apache.sling</groupId>
+        </dependency>
+        <dependency>
+            <artifactId>composum-sling-core-commons</artifactId>
+            <groupId>com.composum.sling.core</groupId>
+        </dependency>
+        <dependency>
+            <artifactId>org.apache.sling.servlets.post</artifactId>
+            <groupId>org.apache.sling</groupId>
+        </dependency>
+        <dependency>
+            <artifactId>org.apache.sling.commons.osgi</artifactId>
+            <groupId>org.apache.sling</groupId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.compendium</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.jcr</groupId>
+            <artifactId>jcr</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.scr.annotations</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
         </dependency>
         <dependency>
-            <groupId>junit-addons</groupId>
-            <artifactId>junit-addons</artifactId>
+            <groupId>com.semantics3</groupId>
+            <artifactId>Sem3Java</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
+            <artifactId>jackrabbit-api</artifactId>
+            <groupId>org.apache.jackrabbit</groupId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-email</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-        </dependency>
+
     </dependencies>
 
     <build>

@@ -25,7 +25,7 @@ public final class WeddingResourceUtil {
 
     public static <T> Stream<T> findModels(ResourceResolver resourceResolver, String query, Class<T> modelClass,
                                            int type, boolean parallel) {
-        return iteratorToStream(resourceResolver.findResources(query, Query.JCR_SQL2), type, parallel)
+        return iteratorToStream(resourceResolver.findResources(query, Query.SQL), type, parallel)
                 .map(resource -> resource.adaptTo(modelClass));
     }
 
@@ -69,7 +69,7 @@ public final class WeddingResourceUtil {
 
     public static Optional<Resource> getUserResource(ResourceResolver resourceResolver, String id) {
         final String query = String.format(Constants.USER_QUERY, id);
-        return iteratorToOrderedStream(resourceResolver.findResources(query, Query.JCR_SQL2))
+        return iteratorToOrderedStream(resourceResolver.findResources(query, Query.SQL))
                 .findFirst();
     }
 
