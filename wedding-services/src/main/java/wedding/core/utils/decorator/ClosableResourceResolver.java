@@ -10,7 +10,7 @@ public class ClosableResourceResolver implements AutoCloseable, ResourceResolver
 
     private final ResourceResolver resourceResolver;
 
-    public ClosableResourceResolver(ResourceResolver resourceResolver) {
+    private ClosableResourceResolver(ResourceResolver resourceResolver) {
         this.resourceResolver = resourceResolver;
     }
 
