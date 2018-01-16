@@ -17,14 +17,14 @@ import static java.util.stream.Collectors.toMap;
 public class CatalogCategories implements RestFieldCore {
 
     @Override
-    public Map<String, String> apply(SlingHttpServletRequest request, Map<String, String> query) {
+    public Map<String, String> apply(SlingHttpServletRequest request) {
         return Optional.of(request.getResourceResolver())
                 .map(resolver -> resolver.getResource(Constants.CATALOG_ROOT_PAGE_PATH))
                 .map(Resource::listChildren)
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
                 .collect(toMap(
-                        Resource::getPath,
+                        Resource::getName,
                         r -> WeddingResourceUtil.getStringPropertyFromResource(r, RestFieldCore.PROPERTY_CATALOG_TITLE)));
     }
 

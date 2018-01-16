@@ -1,56 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
-    jcr:primaryType="nt:unstructured">
+          jcr:primaryType="nt:unstructured">
     <catalog
-        jcr:primaryType="nt:unstructured"
-        jcr:title="Эксклюзив">
+            jcr:primaryType="nt:unstructured"
+            jcr:title="Эксклюзив">
         <photographers
-            jcr:primaryType="nt:unstructured"
-            jcr:title="Фотографы"/>
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Фотографы"/>
         <videographers
-            jcr:primaryType="nt:unstructured"
-            jcr:title="Видеографы"/>
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Видеографы"/>
         <flowers
-            jcr:primaryType="nt:unstructured"
-            jcr:title="Цветы"/>
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Цветы"/>
         <rest
-            jcr:primaryType="nt:unstructured"
-            jcr:title="Отдых"/>
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Отдых"/>
         <cars
-            jcr:primaryType="nt:unstructured"
-            jcr:title="Автомобили"/>
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Автомобили"/>
         <restaurants
-            jcr:primaryType="nt:unstructured"
-            jcr:title="Рестораны"/>
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Рестораны"/>
         <dresses
-            jcr:primaryType="nt:unstructured"
-            jcr:title="Платья"/>
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Платья"/>
         <beauty
-            jcr:primaryType="nt:unstructured"
-            jcr:title="Салоны красоты"/>
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Салоны красоты"/>
         <show-program
-            jcr:primaryType="nt:unstructured"
-            jcr:title="Шоу-программа"/>
-        <decor jcr:primaryType="nt:unstructured"/>
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Шоу-программа"/>
+        <decor
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Декор"/>
         <cakes
-            jcr:primaryType="nt:unstructured"
-            jcr:title="Торты"/>
-        <organizers jcr:primaryType="nt:unstructured"/>
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Торты"/>
+        <organizers
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Организаторы"/>
         <leading
-            jcr:primaryType="nt:unstructured"
-            jcr:title="Ведущие"/>
-        <dance jcr:primaryType="nt:unstructured"/>
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Ведущие"/>
+        <dance
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Танцы"/>
         <music
-            jcr:primaryType="nt:unstructured"
-            jcr:title="Музыка"/>
-        <hotels jcr:primaryType="nt:unstructured"/>
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Музыка"/>
+        <hotels
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Отели"/>
         <rings
-            jcr:primaryType="nt:unstructured"
-            jcr:title="Кольца"/>
-        <accessories jcr:primaryType="nt:unstructured"/>
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Кольца"/>
+        <accessories
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Акксесуары"/>
         <costumes
-            jcr:primaryType="nt:unstructured"
-            jcr:title="Костюмы"/>
-        <exclusive jcr:primaryType="nt:unstructured"/>
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Костюмы"/>
+        <exclusive
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Эксклюзив"/>
     </catalog>
 </jcr:root>

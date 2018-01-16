@@ -9,7 +9,6 @@ import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.request.RequestPathInfo;
 import org.apache.sling.api.servlets.SlingSafeMethodsServlet;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceReference;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,27 +37,22 @@ public class MainRestServlet extends SlingSafeMethodsServlet {
     @Override
     protected void doGet(final SlingHttpServletRequest request, final SlingHttpServletResponse response) throws ServletException, IOException {
         RequestPathInfo pathInfo = request.getRequestPathInfo();
-        String json = Optional.ofNullable(request.getQueryString())
-                .map(query -> processWithQuery(query, pathInfo, request))
-                .orElseGet(() -> processWithOutQuery(pathInfo, request));
+        String json = Optional.of(pathInfo)
+                .map(query -> processRequest(pathInfo, request))
+                .orElse(StringUtils.EMPTY);
         response.setContentType(Constants.RESPONSE_JSON_SETTING);
         response.getWriter().write(json);
     }
-    private String processWithOutQuery(RequestPathInfo pathInfo, SlingHttpServletRequest slingHttpServletRequest) {
+    private String processRequest(RequestPathInfo pathInfo, SlingHttpServletRequest slingHttpServletRequest) {
         return Optional.of(pathInfo.getSelectors())
                 .filter(ArrayUtils::isNotEmpty)
                 .map(MainRestServlet::getFirstSelectorFromArray)
                 .map(ServletMapping::getClassBySelector)
-                .map(cl -> ((RestFieldCore) bundleContext.getService(getServesReferenceFromContext(cl.getName()))))
-                .map(restFieldCore -> restFieldCore.apply(slingHttpServletRequest, null))
+                .map(Class::getName)
+                .map(this::getServesFromContextByClassName)
+                .map(restFieldCore -> restFieldCore.apply(slingHttpServletRequest))
                 .map(WeddingResourceUtil::toJson)
                 .orElse(StringUtils.EMPTY);
-    }
-
-
-    private String processWithQuery(String query, RequestPathInfo pathInfo, SlingHttpServletRequest slingHttpServletRequest) {
-        // TODO: implementation
-        return null;
     }
 
     private static String getFirstSelectorFromArray(String[] selectors){
@@ -67,8 +61,10 @@ public class MainRestServlet extends SlingSafeMethodsServlet {
                 .orElse(StringUtils.EMPTY);
     }
 
-    private ServiceReference getServesReferenceFromContext(String name) {
-        return bundleContext.getServiceReference(name);
+    private RestFieldCore getServesFromContextByClassName(String className) {
+        return (RestFieldCore) Optional.ofNullable(className)
+                .map(bundleContext::getServiceReference)
+                .map(bundleContext::getService).orElse(null);
     }
 
 }

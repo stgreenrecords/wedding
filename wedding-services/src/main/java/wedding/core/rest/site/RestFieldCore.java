@@ -8,6 +8,9 @@ public interface RestFieldCore {
 
     String PROPERTY_CATALOG_TITLE = "jcr:title";
 
-    Object apply(SlingHttpServletRequest request, Map<String, String> query);
+    String REQUEST_PARAMETER_CATEGORY_PATH = "categoryPath";
+    String REQUEST_PARAMETER_CITY = "city";
+
+    Object apply(SlingHttpServletRequest request);
 
 }
