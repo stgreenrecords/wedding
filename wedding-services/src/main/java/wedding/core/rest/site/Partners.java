@@ -44,13 +44,13 @@ public class Partners implements RestFieldCore {
 
         FILTER_BY_PRICE_START(((userData, request) -> {
             return Optional.ofNullable(request.getParameter(REQUEST_PARAMETER_PRICE_START))
-                    .map(parameterValue -> Integer.parseInt(userData.getPriceStart()) < Integer.parseInt(parameterValue))
+                    .map(parameterValue -> Integer.parseInt(userData.getPriceStart()) <= Integer.parseInt(parameterValue))
                     .orElse(true);
         })),
 
         FILTER_BY_PRICE_END(((userData, request) -> {
             return Optional.ofNullable(request.getParameter(REQUEST_PARAMETER_PRICE_END))
-                    .map(parameterValue -> Integer.parseInt(userData.getPriceEnd()) < Integer.parseInt(parameterValue))
+                    .map(parameterValue -> Integer.parseInt(userData.getPriceEnd()) <= Integer.parseInt(parameterValue))
                     .orElse(true);
         }));
 
