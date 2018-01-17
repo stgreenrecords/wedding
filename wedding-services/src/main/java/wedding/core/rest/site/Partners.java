@@ -37,7 +37,7 @@ public class Partners implements RestFieldCore {
 
     private Predicate<UserData> applyFilters(final SlingHttpServletRequest request) {
         return userData -> Arrays.stream(Filters.values()).
-                anyMatch(filter -> filter.applyFilter(userData, request));
+                anyMatch(filter -> !filter.applyFilter(userData, request));
     }
 
     private enum Filters{
