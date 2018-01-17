@@ -54,11 +54,9 @@ public class Partners implements RestFieldCore {
                     .orElse(true);
         }));
 
-        private String requestParameter;
         private BiFunction<UserData, SlingHttpServletRequest, Boolean> function;
 
         Filters(final BiFunction<UserData, SlingHttpServletRequest, Boolean> function) {
-            this.requestParameter = requestParameter;
             this.function = function;
         }
 
