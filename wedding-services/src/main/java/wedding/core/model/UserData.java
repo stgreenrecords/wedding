@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.ChildResource;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 import wedding.core.services.binary.impl.Type;
 import wedding.core.utils.WeddingResourceUtil;
@@ -61,9 +62,14 @@ public class UserData {
     private String facebookLink;
     @Inject
     private String instagramLink;
+    @Inject
+    private Boolean vipStatus;
 
     private String avatar;
     private List<String> portfolio;
+
+    @ChildResource(name = "bookedDates")
+    private Resource bookedDates;
 
     @PostConstruct
     public void init() {
@@ -245,5 +251,9 @@ public class UserData {
 
     public String getProfile() {
         return profile;
+    }
+
+    public Boolean isVip() {
+        return vipStatus;
     }
 }

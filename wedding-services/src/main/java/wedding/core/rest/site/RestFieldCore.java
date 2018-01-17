@@ -10,7 +10,8 @@ public interface RestFieldCore {
 
     String REQUEST_PARAMETER_CATEGORY_PATH = "categoryPath";
     String REQUEST_PARAMETER_SORTED_BY = "sortBy";
-    String REQUEST_PARAMETER_PRICE_DOWN = "priceDown";
+    String REQUEST_PARAMETER_SORT_PRICE_DOWN = "priceDown";
+    String REQUEST_PARAMETER_SORT_VIP_STATUS = "priceDown";
     String REQUEST_PARAMETER_PRICE_START = "priceStart";
     String REQUEST_PARAMETER_PRICE_END = "priceEnd";
     String REQUEST_PARAMETER_DATE = "date";
