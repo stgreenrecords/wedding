@@ -20,19 +20,6 @@ import java.util.stream.Stream;
 @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class TenderData {
 
-    /*                “tenderId”:”sometenderId”,
-”photoUrl”:”/content/photo.jpg”,
-”firstName”:”Vasya”,
-”secondName”:”Xryshkin”,
-”datePublication”:”27-12-1999”,
-“deadline”:”28-12-2012”,
-“shortText”:”Description”,
-” required”:[”Видеографы”, “Фотографы”],
-”offers”:”12”,
-“city”:”Minsk”,
-“moneyLimit”:”100”},
-            {…next tender…}]}*/
-
     @Self
     @JsonIgnore
     private Resource resource;

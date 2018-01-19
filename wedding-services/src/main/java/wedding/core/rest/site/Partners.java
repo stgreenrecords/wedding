@@ -8,6 +8,7 @@ import org.apache.sling.api.resource.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import wedding.core.model.UserData;
+import wedding.core.rest.util.PathHelper;
 import wedding.core.utils.WeddingResourceUtil;
 
 import java.util.Arrays;
@@ -26,9 +27,9 @@ public class Partners implements RestFieldCore {
     public Object apply(SlingHttpServletRequest request) {
         String[] selectors = request.getRequestPathInfo().getSelectors();
         if (selectors.length < 3) return StringUtils.EMPTY;
-        String speciality = selectors[1];
-        String city = selectors[2];
-        long limit = getLimit(selectors);
+        String speciality = PathHelper.getSpecialityFromSelectors(selectors);
+        String city = PathHelper.getCityFromSelectors(selectors);
+        long limit = PathHelper.getLimitSelectors(selectors);
         return Optional.ofNullable(request.getResourceResolver().getResource(PARTNER_USERS_ROOT_PATH))
                 .map(partnerRoot -> partnerRoot.getChild(speciality))
                 .map(specialityResource -> specialityResource.getChild(city))
@@ -78,12 +79,6 @@ public class Partners implements RestFieldCore {
         public Comparator<UserData> getComparator() {
             return comparator;
         }
-    }
-
-    private long getLimit(String[] selectors) {
-        if (selectors.length == 4){
-            return Long.parseLong(selectors[3]);
-        } else return Integer.MAX_VALUE;
     }
 
 }

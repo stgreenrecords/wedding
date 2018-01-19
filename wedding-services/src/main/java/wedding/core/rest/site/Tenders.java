@@ -4,13 +4,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.resource.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import wedding.core.model.TenderData;
-import wedding.core.model.UserData;
+import wedding.core.rest.util.PathHelper;
 import wedding.core.utils.WeddingResourceUtil;
 
+import javax.jcr.query.Query;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Optional;
@@ -27,11 +27,10 @@ public class Tenders implements RestFieldCore {
     public Object apply(SlingHttpServletRequest request) {
         String[] selectors = request.getRequestPathInfo().getSelectors();
         if (selectors.length < 2) return StringUtils.EMPTY;
-        String city = selectors[1];
-        long limit = getLimit(selectors);
-        return Optional.ofNullable(request.getResourceResolver().getResource(USERS_ROOT_PATH))
-                .map(specialityResource -> specialityResource.getChild(city))
-                .map(Resource::listChildren)
+        String city = PathHelper.getCityFromSelectors(selectors);
+        long limit = PathHelper.getLimitSelectors(selectors);
+        return Optional.of(request.getResourceResolver())
+                .map(resourceResolver -> resourceResolver.findResources(String.format(TENDER_QUERY, city), Query.SQL))
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
                 .map(resource -> resource.adaptTo(TenderData.class))
@@ -46,7 +45,7 @@ public class Tenders implements RestFieldCore {
                 .orElse(Comparators.COMPARATOR_BY_DATE_PUBLISHING.getComparator());
     }
 
-    private enum Comparators{
+    private enum Comparators {
 
         COMPARATOR_BY_DATE_PUBLISHING(REQUEST_PARAMETER_SORT_DATE_PUBLISHING,
                 Comparator.comparing(TenderData::getDatePublication).reversed());
@@ -54,12 +53,12 @@ public class Tenders implements RestFieldCore {
         private Comparator<TenderData> comparator;
         private String comparatorName;
 
-        Comparators(String comparatorName, Comparator<TenderData> comparator){
+        Comparators(String comparatorName, Comparator<TenderData> comparator) {
             this.comparator = comparator;
             this.comparatorName = comparatorName;
         }
 
-        public static Comparator<TenderData> getComparatorByName(String comparatorName){
+        public static Comparator<TenderData> getComparatorByName(String comparatorName) {
             return Arrays.stream(Comparators.values())
                     .filter(comparator -> comparator.getComparatorName().equals(comparatorName))
                     .map(Comparators::getComparator)
@@ -73,12 +72,6 @@ public class Tenders implements RestFieldCore {
         public Comparator<TenderData> getComparator() {
             return comparator;
         }
-    }
-
-    private long getLimit(String[] selectors) {
-        if (selectors.length == 4){
-            return Long.parseLong(selectors[3]);
-        } else return Integer.MAX_VALUE;
     }
 
 }

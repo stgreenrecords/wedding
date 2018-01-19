@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import wedding.core.data.Constants;
 import wedding.core.rest.site.RestFieldCore;
+import wedding.core.rest.util.PathHelper;
 import wedding.core.rest.util.ServletMapping;
 import wedding.core.utils.WeddingResourceUtil;
 
@@ -46,7 +47,7 @@ public class MainRestServlet extends SlingSafeMethodsServlet {
     private String processRequest(RequestPathInfo pathInfo, SlingHttpServletRequest slingHttpServletRequest) {
         return Optional.of(pathInfo.getSelectors())
                 .filter(ArrayUtils::isNotEmpty)
-                .map(MainRestServlet::getFirstSelectorFromArray)
+                .map(PathHelper::getClassNameFromSelectors)
                 .map(ServletMapping::getClassBySelector)
                 .map(Class::getName)
                 .map(this::getServesFromContextByClassName)

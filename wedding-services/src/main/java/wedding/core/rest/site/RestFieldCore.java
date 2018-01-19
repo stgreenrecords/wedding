@@ -20,6 +20,9 @@ public interface RestFieldCore {
     String PARTNER_USERS_ROOT_PATH = "/home/users/wedding/partners";
     String USERS_ROOT_PATH = "/home/users/wedding/users";
 
+    String TENDER_QUERY = "SELECT * FROM [nt:unstructured] AS tender WHERE ISDESCENDANTNODE([/home/users/wedding/users/%s]) AND NAME() = 'tender'";
+
+
     Object apply(SlingHttpServletRequest request);
 
 }
