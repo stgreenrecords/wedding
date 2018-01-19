@@ -68,8 +68,8 @@ public class UserData {
     private String avatar;
     private List<String> portfolio;
 
-    @ChildResource(name = "bookedDates")
-    private Resource bookedDates;
+    @Inject
+    private String[] bookedDates;
 
     @PostConstruct
     public void init() {

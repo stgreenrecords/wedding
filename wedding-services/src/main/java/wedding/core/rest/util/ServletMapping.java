@@ -2,13 +2,15 @@ package wedding.core.rest.util;
 
 import wedding.core.rest.site.CatalogCategories;
 import wedding.core.rest.site.Partners;
+import wedding.core.rest.site.Tenders;
 
 import java.util.Arrays;
 
 public enum ServletMapping {
 
     CATALOG_CATEGORIES("catalog-categories", CatalogCategories.class),
-    PARTNERS("partners",Partners.class);
+    PARTNERS("partners",Partners.class),
+    TENDERS("tenders",Tenders.class);
 
     private String selector;
     private Class servletClass;

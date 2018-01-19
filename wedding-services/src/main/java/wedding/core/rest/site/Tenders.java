@@ -7,6 +7,7 @@ import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import wedding.core.model.TenderData;
 import wedding.core.model.UserData;
 import wedding.core.utils.WeddingResourceUtil;
 
@@ -17,54 +18,48 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component(immediate = true)
-@Service(Partners.class)
-public class Partners implements RestFieldCore {
+@Service(Tenders.class)
+public class Tenders implements RestFieldCore {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Partners.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Tenders.class);
 
     @Override
     public Object apply(SlingHttpServletRequest request) {
         String[] selectors = request.getRequestPathInfo().getSelectors();
-        if (selectors.length < 3) return StringUtils.EMPTY;
-        String speciality = selectors[1];
-        String city = selectors[2];
+        if (selectors.length < 2) return StringUtils.EMPTY;
+        String city = selectors[1];
         long limit = getLimit(selectors);
-        return Optional.ofNullable(request.getResourceResolver().getResource(PARTNER_USERS_ROOT_PATH))
-                .map(partnerRoot -> partnerRoot.getChild(speciality))
+        return Optional.ofNullable(request.getResourceResolver().getResource(USERS_ROOT_PATH))
                 .map(specialityResource -> specialityResource.getChild(city))
                 .map(Resource::listChildren)
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
-                .map(resource -> resource.adaptTo(UserData.class))
+                .map(resource -> resource.adaptTo(TenderData.class))
                 .sorted(applySorting(request))
                 .limit(limit)
                 .collect(Collectors.toList());
     }
 
-    private Comparator<UserData> applySorting(final SlingHttpServletRequest request) {
+    private Comparator<TenderData> applySorting(final SlingHttpServletRequest request) {
         return Optional.ofNullable(request.getParameter(REQUEST_PARAMETER_SORTED_BY))
                 .map(Comparators::getComparatorByName)
-                .orElse(Comparators.COMPARATOR_BY_VIP_STATUS.getComparator());
+                .orElse(Comparators.COMPARATOR_BY_DATE_PUBLISHING.getComparator());
     }
 
     private enum Comparators{
 
-        COMPARATOR_BY_PRICE_DOWN(REQUEST_PARAMETER_SORT_PRICE_DOWN,
-                (firstUser, secondUser) -> Integer.valueOf(firstUser.getPriceStart()).
-                        compareTo(Integer.parseInt(secondUser.getPriceStart()))),
+        COMPARATOR_BY_DATE_PUBLISHING(REQUEST_PARAMETER_SORT_DATE_PUBLISHING,
+                Comparator.comparing(TenderData::getDatePublication).reversed());
 
-        COMPARATOR_BY_VIP_STATUS(REQUEST_PARAMETER_SORT_VIP_STATUS,
-                Comparator.comparing(UserData::isVip).reversed());
-
-        private Comparator<UserData> comparator;
+        private Comparator<TenderData> comparator;
         private String comparatorName;
 
-        Comparators(String comparatorName, Comparator<UserData> comparator){
+        Comparators(String comparatorName, Comparator<TenderData> comparator){
             this.comparator = comparator;
             this.comparatorName = comparatorName;
         }
 
-        public static Comparator<UserData> getComparatorByName(String comparatorName){
+        public static Comparator<TenderData> getComparatorByName(String comparatorName){
             return Arrays.stream(Comparators.values())
                     .filter(comparator -> comparator.getComparatorName().equals(comparatorName))
                     .map(Comparators::getComparator)
@@ -75,7 +70,7 @@ public class Partners implements RestFieldCore {
             return comparatorName;
         }
 
-        public Comparator<UserData> getComparator() {
+        public Comparator<TenderData> getComparator() {
             return comparator;
         }
     }
