@@ -31,8 +31,8 @@ public class ServerInfo {
         final ServerInfo that = (ServerInfo) o;
 
         if (url != null ? !url.equals(that.url) : that.url != null) return false;
-        if (userName != null ? !userName.equals(that.userName) : that.userName != null) return false;
-        return userPassword != null ? userPassword.equals(that.userPassword) : that.userPassword == null;
+        return (userName != null ? userName.equals(that.userName) : that.userName == null)
+                && (userPassword != null ? userPassword.equals(that.userPassword) : that.userPassword == null);
     }
 
     @Override

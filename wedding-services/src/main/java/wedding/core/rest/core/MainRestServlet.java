@@ -10,8 +10,6 @@ import org.apache.sling.api.request.RequestPathInfo;
 import org.apache.sling.api.servlets.SlingSafeMethodsServlet;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.component.ComponentContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import wedding.core.data.Constants;
 import wedding.core.rest.site.RestFieldCore;
 import wedding.core.rest.util.PathHelper;
@@ -20,15 +18,12 @@ import wedding.core.utils.WeddingResourceUtil;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Optional;
 
 @SlingServlet(paths = {"/services/rest"})
 public class MainRestServlet extends SlingSafeMethodsServlet {
 
-    private static final Logger LOG = LoggerFactory.getLogger(WeddingResourceUtil.class);
-
-    private BundleContext bundleContext;
+    private transient BundleContext bundleContext;
 
     @Activate
     public void activate(ComponentContext componentContext) {
@@ -53,12 +48,6 @@ public class MainRestServlet extends SlingSafeMethodsServlet {
                 .map(this::getServesFromContextByClassName)
                 .map(restFieldCore -> restFieldCore.apply(slingHttpServletRequest))
                 .map(WeddingResourceUtil::toJson)
-                .orElse(StringUtils.EMPTY);
-    }
-
-    private static String getFirstSelectorFromArray(String[] selectors){
-        return Arrays.stream(selectors)
-                .findFirst()
                 .orElse(StringUtils.EMPTY);
     }
 

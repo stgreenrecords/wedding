@@ -16,7 +16,7 @@ import java.io.IOException;
 public class ReplicatorServlet extends SlingAllMethodsServlet {
 
     @Reference
-    private Replicator replicator;
+    private transient Replicator replicator;
 
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws IOException, ServletException {

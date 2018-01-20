@@ -5,17 +5,9 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
-import wedding.core.services.binary.impl.Type;
-import wedding.core.utils.WeddingResourceUtil;
 
-import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.util.Calendar;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class TenderData {
@@ -38,10 +30,6 @@ public class TenderData {
     private String offers;
     @Inject
     private String moneyLimit;
-
-    @PostConstruct
-    public void init() {
-    }
 
     public Resource getResource() {
         return resource;

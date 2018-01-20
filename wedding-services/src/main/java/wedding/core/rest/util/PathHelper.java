@@ -1,7 +1,6 @@
 package wedding.core.rest.util;
 
 import org.apache.commons.lang3.StringUtils;
-import wedding.core.rest.site.RestFieldCore;
 
 public class PathHelper {
 

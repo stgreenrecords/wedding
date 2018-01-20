@@ -4,8 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import wedding.core.model.TenderData;
 import wedding.core.rest.util.PathHelper;
 import wedding.core.utils.WeddingResourceUtil;
@@ -20,8 +18,6 @@ import java.util.stream.Stream;
 @Component(immediate = true)
 @Service(Tenders.class)
 public class Tenders implements RestFieldCore {
-
-    private static final Logger LOG = LoggerFactory.getLogger(Tenders.class);
 
     @Override
     public Object apply(SlingHttpServletRequest request) {

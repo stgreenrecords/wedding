@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
-import org.apache.sling.models.annotations.injectorspecific.ChildResource;
 import org.apache.sling.models.annotations.injectorspecific.Self;
-import wedding.core.rest.site.Tenders;
 import wedding.core.services.binary.impl.Type;
 import wedding.core.utils.WeddingResourceUtil;
 
@@ -68,7 +66,6 @@ public class UserData {
 
     private String avatar;
     private List<String> portfolio;
-    private List<Tenders> tenders;
 
     @Inject
     private String[] bookedDates;
@@ -239,7 +236,7 @@ public class UserData {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    private void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 
