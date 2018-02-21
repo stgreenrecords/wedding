@@ -42,7 +42,7 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                     }
                     return null;
                 }).orElse(null);
-        IntStream.range(0, 1000)
+        IntStream.range(0, 15000)
                 .forEach(i -> {
                     String name = UUID.randomUUID().toString();
                     try {
@@ -50,7 +50,7 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                         User user;
                         String city = CITIES.getCity().name();
                         if (isPartner) {
-                            user = Objects.requireNonNull(userManager).createUser(name, "123", () -> name, "/home/users/wedding/partners/photographers/" + city);
+                            user = Objects.requireNonNull(userManager).createUser(name, "123", () -> name, "/home/users/wedding/partners/" + CATEGORIES.getCategory() + "/" + city);
                         } else {
                             user = Objects.requireNonNull(userManager).createUser(name, "123", () -> name, "/home/users/wedding/users/" + city);
                         }
@@ -101,12 +101,12 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                             }
                         }
 
-
                     } catch (RepositoryException e) {
                         e.printStackTrace();
                     }
                 });
         try {
+
             Objects.requireNonNull(session).save();
         } catch (RepositoryException e) {
             e.printStackTrace();
@@ -143,7 +143,15 @@ enum CITIES {
     gomel, vitebsk, grodno, minsk;
 
     static CITIES getCity() {
-        return CITIES.values()[(int) (Math.random() * 1)];
+        return CITIES.values()[(int) (Math.random() * 4)];
+    }
+}
+
+enum CATEGORIES {
+    photographers, videographers, flowers, rest, cars, restaurants, dresses, beauty, show_program, decor, cakes, organizers, leading, dance, music, hotels, rings, accessories, costumes, exclusive;
+
+    static CATEGORIES getCategory() {
+        return CATEGORIES.values()[(int) (Math.random() * 20)];
     }
 }
 

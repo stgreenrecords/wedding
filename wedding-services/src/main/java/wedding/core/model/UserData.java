@@ -5,11 +5,11 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
+import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import wedding.core.services.binary.impl.Type;
 import wedding.core.utils.WeddingResourceUtil;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -25,49 +25,49 @@ public class UserData {
 
     private String profile;
 
-    @Inject
-    private String userID;
-    @Inject
+    @ValueMapValue
+    private String userId;
+    @ValueMapValue
     private String authType;
-    @Inject
+    @ValueMapValue
     private String type;
-    @Inject
+    @ValueMapValue
     private String firstName;
-    @Inject
+    @ValueMapValue
     private String lastName;
-    @Inject
+
     private String city;
-    @Inject
+    @ValueMapValue
     private String name;
-    @Inject
+    @ValueMapValue
     private String phone;
-    @Inject
+
     private String speciality;
-    @Inject
+    @ValueMapValue
     private String description;
 
-    @Inject
+    @ValueMapValue
     private String priceStart;
-    @Inject
+    @ValueMapValue
     private String priceEnd;
 
-    @Inject
+    @ValueMapValue
     private String email;
-    @Inject
+    @ValueMapValue
     private String siteLink;
-    @Inject
+    @ValueMapValue
     private String vkLink;
-    @Inject
+    @ValueMapValue
     private String facebookLink;
-    @Inject
+    @ValueMapValue
     private String instagramLink;
-    @Inject
+    @ValueMapValue
     private Boolean vipStatus;
 
     private String avatar;
     private List<String> portfolio;
 
-    @Inject
+    @ValueMapValue
     private String[] bookedDates;
 
     @PostConstruct
@@ -87,12 +87,12 @@ public class UserData {
                 .collect(Collectors.toList());
     }
 
-    public String getUserID() {
-        return userID;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getAuthType() {
