@@ -35,14 +35,10 @@ public class UserData {
     private String firstName;
     @ValueMapValue
     private String lastName;
-
-    private String city;
     @ValueMapValue
     private String name;
     @ValueMapValue
     private String phone;
-
-    private String speciality;
     @ValueMapValue
     private String description;
 
@@ -63,7 +59,10 @@ public class UserData {
     private String instagramLink;
     @ValueMapValue
     private Boolean vipStatus;
-
+    @ValueMapValue
+    private String speciality;
+    @ValueMapValue
+    private String city;
     private String avatar;
     private List<String> portfolio;
 

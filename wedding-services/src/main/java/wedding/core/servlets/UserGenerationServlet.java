@@ -48,9 +48,13 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                     try {
                         boolean isPartner = Math.random() < 0.5;
                         User user;
-                        String city = CITIES.getCity().name();
+                        CITIES citeEnum = CITIES.getCity();
+                        String city = citeEnum.name();
+                        String cityName = citeEnum.getCityName();
+                        CATEGORIES category = CATEGORIES.getCategory();
+                        String pathToTheCity = "/home/users/wedding/partners/" + category.name();
                         if (isPartner) {
-                            user = Objects.requireNonNull(userManager).createUser(name, "123", () -> name, "/home/users/wedding/partners/" + CATEGORIES.getCategory() + "/" + city);
+                            user = Objects.requireNonNull(userManager).createUser(name, "123", () -> name, pathToTheCity + "/" + city);
                         } else {
                             user = Objects.requireNonNull(userManager).createUser(name, "123", () -> name, "/home/users/wedding/users/" + city);
                         }
@@ -63,7 +67,8 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                         addPropertyToUser(user, "vkLink", "http://vk.com/" + getGeneratedUUID());
                         addPropertyToUser(user, "facebookLink", "http://facebook.com/" + getGeneratedUUID());
                         addPropertyToUser(user, "instagramLink", "http://instagram.com/" + getGeneratedUUID());
-
+                        addPropertyToUser(user, "city", citeEnum.getCityName());
+                        addPropertyToUser(user, "speciality", category.getCategoryName());
                         if (isPartner) {
                             user.setProperty("type", ValueFactoryImpl.getInstance().createValue("partner"));
                             int priceStart = random.nextInt(1000);
@@ -140,15 +145,42 @@ enum AUTH_TYPES {
 }
 
 enum CITIES {
-    gomel, vitebsk, grodno, minsk;
+    gomel("Гомель"), vitebsk("Витебск"), grodno("Гродно"), mogilev("Могилёв"), brest("Брест"), minsk("Минск");
+
+    private String cityName;
+
+
+    CITIES(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
 
     static CITIES getCity() {
-        return CITIES.values()[(int) (Math.random() * 4)];
+        return CITIES.values()[(int) (Math.random() * 6)];
     }
 }
 
 enum CATEGORIES {
-    photographers, videographers, flowers, rest, cars, restaurants, dresses, beauty, show_program, decor, cakes, organizers, leading, dance, music, hotels, rings, accessories, costumes, exclusive;
+    photographers("Фотографы"), videographers("Видеографы"), flowers("Цветы"), rest("Отдых"), cars("Автомобили"),
+    restaurants("Рестораны"), dresses("Платья"),
+    beauty("Салоны красоты"), show_program("Шоу-программа"), decor("Декор"), cakes("Торты"),
+    organizers("Организаторы"), leading("Ведущие"), dance("Танцы"), music("Музыка"),
+    hotels("Отели"), rings("Кольца"), accessories("Акксесуары"), costumes("Костюмы"), exclusive("Эксклюзив");
+
+    private String categoryName;
+
+
+    CATEGORIES(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
 
     static CATEGORIES getCategory() {
         return CATEGORIES.values()[(int) (Math.random() * 20)];

@@ -167,7 +167,12 @@
                 <version>1.9.12</version>
                 <scope>provided</scope>
             </dependency>
-
+            <dependency>
+                <artifactId>org.apache.jackrabbit.vault</artifactId>
+                <version>3.1.42</version>
+                <groupId>org.apache.jackrabbit.vault</groupId>
+                <scope>provided</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
