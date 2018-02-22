@@ -1,6 +1,5 @@
 package wedding.core.rest.core;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
@@ -12,7 +11,6 @@ import org.osgi.framework.BundleContext;
 import org.osgi.service.component.ComponentContext;
 import wedding.core.data.Constants;
 import wedding.core.rest.site.RestFieldCore;
-import wedding.core.rest.util.PathHelper;
 import wedding.core.rest.util.ServletMapping;
 import wedding.core.utils.WeddingResourceUtil;
 
@@ -40,9 +38,7 @@ public class MainRestServlet extends SlingSafeMethodsServlet {
         response.getWriter().write(json);
     }
     private String processRequest(RequestPathInfo pathInfo, SlingHttpServletRequest slingHttpServletRequest) {
-        return Optional.of(pathInfo.getSelectors())
-                .filter(ArrayUtils::isNotEmpty)
-                .map(PathHelper::getClassNameFromSelectors)
+        return Optional.ofNullable(pathInfo.getExtension())
                 .map(ServletMapping::getClassBySelector)
                 .map(Class::getName)
                 .map(this::getServesFromContextByClassName)

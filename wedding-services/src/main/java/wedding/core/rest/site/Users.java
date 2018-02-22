@@ -18,16 +18,15 @@ public class Users implements RestFieldCore {
 
     @Override
     public Object apply(SlingHttpServletRequest request) {
-        String[] selectors = request.getRequestPathInfo().getSelectors();
-        if (selectors.length < 2) return StringUtils.EMPTY;
         String userId = Optional.ofNullable(request.getParameter(REQUEST_PARAMETER_USER_ID))
                 .map(user -> String.format(PART_USER_QUERY, user))
                 .orElse(StringUtils.EMPTY);
         return Optional.of(request.getResourceResolver())
-                .map(resolver -> resolver.findResources(String.format(USER_QUERY, getCity(selectors), userId), Query.SQL))
+                .map(resolver -> resolver.findResources(String.format(USER_QUERY, getSuffixPathFromRequest(request), userId), Query.SQL))
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
                 .map(resource -> resource.adaptTo(UserData.class))
                 .collect(Collectors.toList());
     }
+
 }
