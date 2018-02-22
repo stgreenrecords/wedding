@@ -9,12 +9,12 @@ public class PathHelper {
         return selectors.length >= SELECTORS.CLASS_NAME.number + 1 ? selectors[SELECTORS.CLASS_NAME.getNumber()] : StringUtils.EMPTY;
     }
 
-    public static String getSpecialityFromSelectors(String[] selectors){
-        return selectors.length >= SELECTORS.SPECIALITY.number + 1 ? selectors[SELECTORS.SPECIALITY.getNumber()] : StringUtils.EMPTY;
+    public static String getCityFromSelectors(String[] selectors) {
+        return selectors.length >= SELECTORS.CITY.number + 1 ? selectors[SELECTORS.CITY.getNumber()] : StringUtils.EMPTY;
     }
 
-    public static String getCityFromSelectors(String[] selectors){
-        return selectors.length >= SELECTORS.CITY.number + 1 ? selectors[SELECTORS.CITY.getNumber()] : StringUtils.EMPTY;
+    public static String getSpecialityFromSelectors(String[] selectors){
+        return selectors.length >= SELECTORS.SPECIALITY.number + 1 ? selectors[SELECTORS.SPECIALITY.getNumber()] : StringUtils.EMPTY;
     }
 
     public static long getLimitSelectors(String[] selectors){
@@ -23,7 +23,7 @@ public class PathHelper {
 
     enum SELECTORS{
 
-        CLASS_NAME(0), SPECIALITY(1), CITY(2), LIMIT(3);
+        CLASS_NAME(0), CITY(1), SPECIALITY(2), LIMIT(3);
 
         private int number;
 

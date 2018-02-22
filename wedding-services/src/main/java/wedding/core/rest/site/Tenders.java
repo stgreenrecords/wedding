@@ -5,7 +5,6 @@ import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
 import wedding.core.model.TenderData;
-import wedding.core.rest.util.PathHelper;
 import wedding.core.utils.WeddingResourceUtil;
 
 import javax.jcr.query.Query;
@@ -23,15 +22,13 @@ public class Tenders implements RestFieldCore {
     public Object apply(SlingHttpServletRequest request) {
         String[] selectors = request.getRequestPathInfo().getSelectors();
         if (selectors.length < 2) return StringUtils.EMPTY;
-        String city = PathHelper.getCityFromSelectors(selectors);
-        long limit = PathHelper.getLimitSelectors(selectors);
         return Optional.of(request.getResourceResolver())
-                .map(resourceResolver -> resourceResolver.findResources(String.format(TENDER_QUERY, city), Query.SQL))
+                .map(resourceResolver -> resourceResolver.findResources(String.format(TENDER_QUERY, getCity(selectors)), Query.SQL))
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
                 .map(resource -> resource.adaptTo(TenderData.class))
                 .sorted(applySorting(request))
-                .limit(limit)
+                .limit(getLimit(selectors))
                 .collect(Collectors.toList());
     }
 

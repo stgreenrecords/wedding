@@ -42,7 +42,7 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                     }
                     return null;
                 }).orElse(null);
-        IntStream.range(0, 15000)
+        IntStream.range(0, 35000)
                 .forEach(i -> {
                     String name = UUID.randomUUID().toString();
                     try {
@@ -54,9 +54,9 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                         CATEGORIES category = CATEGORIES.getCategory();
                         String pathToTheCity = "/home/users/wedding/partners/" + category.name();
                         if (isPartner) {
-                            user = Objects.requireNonNull(userManager).createUser(name, "123", () -> name, pathToTheCity + "/" + city);
+                            user = Objects.requireNonNull(userManager).createUser(name, "123", () -> name, pathToTheCity + "/" + city + "/" + name.substring(0, 1));
                         } else {
-                            user = Objects.requireNonNull(userManager).createUser(name, "123", () -> name, "/home/users/wedding/users/" + city);
+                            user = Objects.requireNonNull(userManager).createUser(name, "123", () -> name, "/home/users/wedding/users/" + city + "/" + name.substring(0, 2));
                         }
                         addPropertyToUser(user, "authType", AUTH_TYPES.getAuthType().name());
                         addPropertyToUser(user, "userId", name);
@@ -105,17 +105,11 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
 
                             }
                         }
-
+                        Objects.requireNonNull(session).save();
                     } catch (RepositoryException e) {
                         e.printStackTrace();
                     }
                 });
-        try {
-
-            Objects.requireNonNull(session).save();
-        } catch (RepositoryException e) {
-            e.printStackTrace();
-        }
     }
 
     private void addPropertyToUser(User user, String propertyName, String propertyValue) {

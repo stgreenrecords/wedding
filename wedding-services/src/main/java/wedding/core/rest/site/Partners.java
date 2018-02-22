@@ -4,11 +4,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.resource.Resource;
 import wedding.core.model.UserData;
-import wedding.core.rest.util.PathHelper;
 import wedding.core.utils.WeddingResourceUtil;
 
+import javax.jcr.query.Query;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Optional;
@@ -23,18 +22,13 @@ public class Partners implements RestFieldCore {
     public Object apply(SlingHttpServletRequest request) {
         String[] selectors = request.getRequestPathInfo().getSelectors();
         if (selectors.length < 3) return StringUtils.EMPTY;
-        String speciality = PathHelper.getSpecialityFromSelectors(selectors);
-        String city = PathHelper.getCityFromSelectors(selectors);
-        long limit = PathHelper.getLimitSelectors(selectors);
-        return Optional.ofNullable(request.getResourceResolver().getResource(PARTNER_USERS_ROOT_PATH))
-                .map(partnerRoot -> partnerRoot.getChild(speciality))
-                .map(specialityResource -> specialityResource.getChild(city))
-                .map(Resource::listChildren)
+        return Optional.of(request.getResourceResolver())
+                .map(resolver -> resolver.findResources(String.format(PARTNER_QUERY, getSpeciality(selectors), getCity(selectors)), Query.SQL))
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
                 .map(resource -> resource.adaptTo(UserData.class))
                 .sorted(applySorting(request))
-                .limit(limit)
+                .limit(getLimit(selectors))
                 .collect(Collectors.toList());
     }
 

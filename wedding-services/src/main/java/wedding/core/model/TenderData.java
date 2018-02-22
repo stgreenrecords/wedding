@@ -5,8 +5,8 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
+import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
-import javax.inject.Inject;
 import java.util.Calendar;
 
 @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
@@ -16,19 +16,19 @@ public class TenderData {
     @JsonIgnore
     private Resource resource;
 
-    @Inject
+    @ValueMapValue
     private String tenderId;
-    @Inject
+    @ValueMapValue
     private Calendar datePublication;
-    @Inject
+    @ValueMapValue
     private Calendar deadline;
-    @Inject
+    @ValueMapValue
     private String shortText;
-    @Inject
+    @ValueMapValue
     private String[] required;
-    @Inject
+    @ValueMapValue
     private String offers;
-    @Inject
+    @ValueMapValue
     private String moneyLimit;
 
     public Resource getResource() {
