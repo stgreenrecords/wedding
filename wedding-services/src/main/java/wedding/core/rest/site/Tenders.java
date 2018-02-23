@@ -15,10 +15,10 @@ import java.util.stream.Stream;
 
 @Component(immediate = true)
 @Service(Tenders.class)
-public class Tenders implements RestFieldCore {
+public class Tenders extends AbstractResFieldCore {
 
     @Override
-    public Object apply(SlingHttpServletRequest request) {
+    public Object getObject(SlingHttpServletRequest request) {
         return Optional.of(request.getResourceResolver())
                 .map(resourceResolver -> resourceResolver.findResources(String.format(TENDER_QUERY, getSuffixPathFromRequest(request)), Query.SQL))
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
@@ -27,6 +27,21 @@ public class Tenders implements RestFieldCore {
                 .sorted(applySorting(request))
                 .limit(getLimit(request))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Object updateObject(SlingHttpServletRequest request) {
+        return null;
+    }
+
+    @Override
+    public Object createObject(SlingHttpServletRequest request) {
+        return null;
+    }
+
+    @Override
+    public Object deleteObject(SlingHttpServletRequest request) {
+        return null;
     }
 
     private Comparator<TenderData> applySorting(final SlingHttpServletRequest request) {

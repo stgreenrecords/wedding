@@ -14,10 +14,10 @@ import java.util.stream.Stream;
 
 @Component(immediate = true)
 @Service(Users.class)
-public class Users implements RestFieldCore {
+public class Users extends AbstractResFieldCore {
 
     @Override
-    public Object apply(SlingHttpServletRequest request) {
+    public Object getObject(SlingHttpServletRequest request) {
         String userId = Optional.ofNullable(request.getParameter(REQUEST_PARAMETER_USER_ID))
                 .map(user -> String.format(PART_USER_QUERY, user))
                 .orElse(StringUtils.EMPTY);
@@ -27,6 +27,21 @@ public class Users implements RestFieldCore {
                 .orElse(Stream.empty())
                 .map(resource -> resource.adaptTo(UserData.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Object updateObject(SlingHttpServletRequest request) {
+        return null;
+    }
+
+    @Override
+    public Object createObject(SlingHttpServletRequest request) {
+        return null;
+    }
+
+    @Override
+    public Object deleteObject(SlingHttpServletRequest request) {
+        return null;
     }
 
 }

@@ -14,10 +14,10 @@ import static java.util.stream.Collectors.toMap;
 
 @Component(immediate = true)
 @Service(CatalogCategories.class)
-public class CatalogCategories implements RestFieldCore {
+public class CatalogCategories extends AbstractResFieldCore {
 
     @Override
-    public Map<String, String> apply(SlingHttpServletRequest request) {
+    public Map<String, String> getObject(SlingHttpServletRequest request) {
         return Optional.of(request.getResourceResolver())
                 .map(resolver -> resolver.getResource(getSuffixPathFromRequest(request)))
                 .map(Resource::listChildren)
@@ -25,7 +25,22 @@ public class CatalogCategories implements RestFieldCore {
                 .orElse(Stream.empty())
                 .collect(toMap(
                         Resource::getName,
-                        r -> WeddingResourceUtil.getStringPropertyFromResource(r, RestFieldCore.PROPERTY_CATALOG_TITLE)));
+                        r -> WeddingResourceUtil.getStringPropertyFromResource(r, PROPERTY_CATALOG_TITLE)));
+    }
+
+    @Override
+    public Object updateObject(SlingHttpServletRequest request) {
+        return null;
+    }
+
+    @Override
+    public Object createObject(SlingHttpServletRequest request) {
+        return null;
+    }
+
+    @Override
+    public Object deleteObject(SlingHttpServletRequest request) {
+        return null;
     }
 
 
