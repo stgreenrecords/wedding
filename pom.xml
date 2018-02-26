@@ -26,7 +26,7 @@
         <sling.host>localhost</sling.host>
         <sling.port>80</sling.port>
 
-        <cq.author.host>localhost</cq.author.host>
+        <cq.author.host>wedding-services.mycloud.by</cq.author.host>
         <cq.author.port>80</cq.author.port>
         <cq.author2.host>localhost</cq.author2.host>
         <cq.author2.port>4502</cq.author2.port>

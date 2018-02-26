@@ -1,68 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
-          jcr:primaryType="nt:unstructured">
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          jcr:primaryType="nt:unstructured"
+          sling:resourceType="wedding/components/pages/landing">
     <catalog
             jcr:primaryType="nt:unstructured"
-            jcr:title="Эксклюзив">
-        <photographers
+            sling:resourceType="wedding/components/pages/categories">
+        <category
                 jcr:primaryType="nt:unstructured"
-                jcr:title="Фотографы"/>
-        <videographers
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Видеографы"/>
-        <flowers
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Цветы"/>
-        <rest
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Отдых"/>
-        <cars
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Автомобили"/>
-        <restaurants
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Рестораны"/>
-        <dresses
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Платья"/>
-        <beauty
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Салоны красоты"/>
-        <show-program
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Шоу-программа"/>
-        <decor
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Декор"/>
-        <cakes
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Торты"/>
-        <organizers
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Организаторы"/>
-        <leading
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Ведущие"/>
-        <dance
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Танцы"/>
-        <music
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Музыка"/>
-        <hotels
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Отели"/>
-        <rings
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Кольца"/>
-        <accessories
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Акксесуары"/>
-        <costumes
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Костюмы"/>
-        <exclusive
-                jcr:primaryType="nt:unstructured"
-                jcr:title="Эксклюзив"/>
+                sling:resourceType="wedding/components/pages/category">
+            <partner
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="wedding/components/pages/partner"/>
+        </category>
     </catalog>
+    <tenders
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wedding/components/pages/tenders">
+        <tender
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="wedding/components/pages/tender"/>
+    </tenders>
+    <sales
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wedding/components/pages/sales">
+        <sale
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="wedding/components/pages/sale"/>
+    </sales>
+    <settings
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wedding/components/pages/settings"/>
+    <real-weddings
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wedding/components/pages/weddings">
+        <real-wedding
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="wedding/components/pages/wedding"/>
+    </real-weddings>
+    <user
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wedding/components/pages/user"/>
 </jcr:root>
