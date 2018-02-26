@@ -17,6 +17,7 @@ import wedding.core.utils.WeddingResourceUtil;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.function.Function;
 
 @SlingServlet(paths = {"/services/rest"})
 public class MainRestServlet extends SlingAllMethodsServlet {
@@ -30,34 +31,30 @@ public class MainRestServlet extends SlingAllMethodsServlet {
 
     @Override
     protected void doGet(final SlingHttpServletRequest request, final SlingHttpServletResponse response) throws ServletException, IOException {
-        writeResponse(
-                processRequest(request.getRequestPathInfo()).
-                        map(restFieldCore -> restFieldCore.getObject(request)).
-                        orElse(StringUtils.EMPTY), response);
+        processMethod(request, response, restFieldCore -> restFieldCore.getObject(request));
     }
 
     @Override
     protected void doPost(final SlingHttpServletRequest request, final SlingHttpServletResponse response) throws ServletException, IOException {
-        writeResponse(
-                processRequest(request.getRequestPathInfo()).
-                        map(restFieldCore -> restFieldCore.createObject(request)).
-                        orElse(StringUtils.EMPTY), response);
+        processMethod(request, response, restFieldCore -> restFieldCore.createObject(request));
     }
 
     @Override
     protected void doPut(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
-        writeResponse(
-                processRequest(request.getRequestPathInfo()).
-                        map(restFieldCore -> restFieldCore.updateObject(request)).
-                        orElse(StringUtils.EMPTY), response);
+        processMethod(request, response, restFieldCore -> restFieldCore.updateObject(request));
     }
 
     @Override
     protected void doDelete(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
+        processMethod(request, response, restFieldCore -> restFieldCore.deleteObject(request));
+    }
+
+    private void processMethod(SlingHttpServletRequest request, SlingHttpServletResponse response,
+                               Function<RestFieldCore, Object> method) throws IOException {
         writeResponse(
-                processRequest(request.getRequestPathInfo()).
-                        map(restFieldCore -> restFieldCore.deleteObject(request)).
-                        orElse(StringUtils.EMPTY), response);
+                processRequest(request.getRequestPathInfo())
+                        .map(method)
+                        .orElse(StringUtils.EMPTY), response);
     }
 
     private void writeResponse(Object responseObject, final SlingHttpServletResponse response) throws IOException {
@@ -69,14 +66,14 @@ public class MainRestServlet extends SlingAllMethodsServlet {
     private Optional<RestFieldCore> processRequest(RequestPathInfo pathInfo) {
         return Optional.ofNullable(pathInfo.getExtension())
                 .map(ServletMapping::getClassBySelector)
-                .map(Class::getName)
                 .map(this::getServesFromContextByClassName);
     }
 
-    private RestFieldCore getServesFromContextByClassName(String className) {
-        return (RestFieldCore) Optional.ofNullable(className)
-                .map(bundleContext::getServiceReference)
-                .map(bundleContext::getService).orElse(null);
+    private RestFieldCore getServesFromContextByClassName(Class<RestFieldCore> serviceClass) {
+        return Optional.ofNullable(bundleContext.getServiceReference(serviceClass.getName()))
+                .map(bundleContext::getService)
+                .map(serviceClass::cast)
+                .orElse(null);
     }
 
 }
