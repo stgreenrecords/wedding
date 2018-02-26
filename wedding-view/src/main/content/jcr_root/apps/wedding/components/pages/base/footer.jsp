@@ -2,4 +2,3 @@
 <%@ taglib prefix="cpn" uri="http://sling.composum.com/cpnl/1.0" %>
 <cpn:clientlib type="js" path="/etc/clientlibs/wedding/external" />
 <cpn:clientlib type="js" path="/etc/clientlibs/wedding/pages" />
-<h1>FOOTER</h1>
