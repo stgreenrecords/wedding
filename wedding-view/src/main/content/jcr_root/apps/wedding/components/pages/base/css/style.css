@@ -1,1 +1,91 @@
+body{
+  font-family: 'PT Sans', sans-serif;
+  font-weight: lighter;
+  font-size: 20px;
+  line-height: 1.5;
+ 
+}
+
+img, body, header, footer, nav, aside, article, section, figure, ul, ol, li, h1, h2, h3,h4,h5,h6 {
+  padding:0;  margin:0;
+}
+
+header{  
+  height: 175px;
+  display: flex;
+  justify-content:  center;
+
+
+}
+
+a {  text-decoration: none; color: #000; white-space: nowrap; }
+
+.central-head{
+  align-self: center;
+  padding: 0 7%;
+}
+
+.right-head{
+ padding: 20px 0 0 5%;
+}
+
+.central-head--title{
+  font-family: 'Marck Script', cursive;
+  font-size: 48px;
+  text-align: center;
+}
+
+
+
+.empty{
+	width:170px;
+	padding: 0 5% 0 0;
+
+}
+
+
+
+/* ==== nav ==== */
+.main-menu{
+   
+  box-sizing: border-box;
+  text-transform: uppercase; 
+  height: 75px;
+
+}
+
+.main-menu ul{
+  display: flex;	
+  flex-direction: row;
+}
+ 
+
+.main-menu li {   
+  list-style-type: none;
+  box-sizing: border-box;
+  font-size: 22px;
+  white-space: nowrap;
+   
+ /* vertical-align: top;   
+  text-align: center;  */
+  padding: 20px;
+}
+
+.main-menu a{
+  box-sizing: border-box; 
+  padding: 20px 0;
+   
+  /*width: 100%;*/
+  text-align: center;  
+  
+}
+
+/*.main-menu li:hover a {
+  color: #0088cc;
+}*/
+ 
+
+#promo-btn .promo-btn-procent{	 
+	color: red;
+}
 
