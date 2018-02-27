@@ -12,7 +12,7 @@
 				Vrangel1
 			</div>
 
-			<div id="search-vip1" class="container-search-vip">
+			<div id="search-vip2" class="container-search-vip">
 				Vrangel2
 			</div>
 
