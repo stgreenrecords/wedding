@@ -71,18 +71,83 @@ a {  text-decoration: none; color: #000; white-space: nowrap; }
 .main-menu a{
   box-sizing: border-box; 
   padding: 20px 0;
-   
-  /*width: 100%;*/
+    
   text-align: center;  
   
 }
-
-/*.main-menu li:hover a {
-  color: #0088cc;
-}*/
+ 
  
 
 #promo-btn .promo-btn-procent{	 
 	color: red;
+}
+
+
+/*=====  main start ======*/
+main{
+	min-height: 800px;
+  width: 70%;
+  margin: 0 auto;
+
+}
+
+.top-bar{
+	min-height: 150px;
+	background-color: #57f;
+  text-align: center;
+}
+
+.container-search-vip{
+  text-align: center;
+  min-height: 200px;
+  background-color: #dbf;  
+  margin-top: 20px;
+}
+
+.container-search-usually{
+  text-align: center;
+  min-height: 600px;
+  background-color: #89f;  
+  margin-top: 20px;
+}
+
+.btn-up{
+  display: none;
+  position: fixed; 
+  right: 7%;
+  bottom: 15%;
+}
+.btn-up a{ padding: 20px;}
+
+
+/*======== Footer =======*/
+
+footer{
+  padding-top: 100px;
+  min-height: 250px;
+  text-align: center;
+}
+
+
+.foot--title{
+  font-family: 'Marck Script', cursive;
+  font-size: 40px;
+  text-align: center;
+  flex-direction: column;
+}
+
+.phone-div a{
+  color: #8af; 
+}
+
+.mail-div a{
+  color: #79d;
+}
+.line-div{
+  color: #abf;
+}
+
+.social-btn-block{
+  color: #bbf;
 }
 
