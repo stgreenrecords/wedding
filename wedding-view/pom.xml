@@ -155,7 +155,7 @@
             </build>
         </profile>
         <profile>
-            <id>publish-prodaction</id>
+            <id>publish-production</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -171,7 +171,7 @@
                                 <failOnError>true</failOnError>
                                 <targetURL>http://${cq.author.host}:${cq.author.port}/bin/cpm/package.service.html</targetURL>
                                 <userId>admin</userId>
-                                <password>admin</password>
+                                <password>you_can't_match_this_password</password>
                                 <useProxy>false</useProxy>
                                 <failOnMissingEmbed>true</failOnMissingEmbed>
                             </configuration>
