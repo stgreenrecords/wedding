@@ -3,7 +3,7 @@
 <cpn:clientlib type="js" path="/etc/clientlibs/wedding/external" />
 <cpn:clientlib type="js" path="/etc/clientlibs/wedding/pages" />
 
-<footer class="foot-block">
+ 
 
 			<h2 class="foot--title"> <a href=""> Твоя Свадьба </a> </h2>
 
@@ -15,4 +15,4 @@
 
 
 			
-		</footer>
+	 
