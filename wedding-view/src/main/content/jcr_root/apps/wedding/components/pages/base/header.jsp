@@ -1,5 +1,5 @@
 <%@page session="false" pageEncoding="utf-8"%>
-<header class="head-block">
+ 
 
 			<div class="left-head empty">
         
@@ -27,4 +27,4 @@
 
 			</div>
 
-		</header>
+		 
