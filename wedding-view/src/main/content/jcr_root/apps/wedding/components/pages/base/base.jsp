@@ -9,13 +9,13 @@
 </head>
 <body>
 
-    <header>
+    <header class="head-block">
         <sling:include resourceType="/apps/wedding/components/pages/base/header.jsp" />
     </header>
 
     <sling:include resourceType="/apps/${properties['sling:resourceType']}/content.jsp" />
     
-    <footer>
+    <footer class="foot-block">
         <sling:include resourceType="/apps/wedding/components/pages/base/footer.jsp" />
     </footer>
     
