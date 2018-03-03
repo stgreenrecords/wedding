@@ -167,6 +167,14 @@
                             <artifactId>content-package-maven-plugin</artifactId>
                             <version>0.0.24</version>
                             <extensions>true</extensions>
+                            <executions>
+                                <execution>
+                                    <id>install-package</id>
+                                    <goals>
+                                        <goal>install</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
                             <configuration>
                                 <failOnError>true</failOnError>
                                 <targetURL>http://${cq.author.host}:${cq.author.port}/bin/cpm/package.service.html</targetURL>
