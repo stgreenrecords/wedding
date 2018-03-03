@@ -7,11 +7,11 @@
   
 			<div class="central-head">
         
-				<h1 class="central-head--title"> <a href=""> Твоя Свадьба </a> </h1>
+				<h1 class="central-head--title"> <a href="http://wedding-services.mycloud.by/content/wedding.html"> Твоя Свадьба </a> </h1>
         
 				<nav class="main-menu">
 					<ul>
-						<li > <a href=""> Каталог </a> </li>
+						<li > <a href="http://wedding-services.mycloud.by/content/wedding/catalog.html"> Каталог </a> </li>
 						<li > <a href=""> Тендеры </a> </li>
 						<li id="promo-btn"> 	<a href="">%  Акции </a> </li>
 						<li > <a href=""> Свадьбы </a> </li>						 
@@ -27,4 +27,3 @@
 
 			</div>
 
-		 
