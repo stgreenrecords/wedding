@@ -50,13 +50,82 @@ a {  text-decoration: none; color: #000; white-space: nowrap; }
   text-align: center;
 }
 
-
-
 .empty{
 	width:170px;
 	padding: 0 5% 0 0;
 
 }
+
+/*  =========   форма входа */
+#entrance-form {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  background-color: rgba(204, 204, 204, 0.6);
+  visibility: hidden;
+}
+
+.mwindow {
+  text-align: center;
+  background-color: #f4f4f4;
+
+
+  border: 1px solid #000;
+  position: absolute;
+  z-index: 10;
+  margin: 0;
+  visibility: hidden;
+
+}
+
+.window-entrance{
+  min-width: 60%;
+  min-height: 50%;
+
+}
+
+.container-window-entrance{
+  padding: 5% 0;
+  width: 360px;
+  /**/
+  font-size: 15pt;
+  margin: 0 auto;
+}
+
+.social-inter{
+  display: flex;
+  justify-content: space-between;
+}
+
+#remember-ident{
+  vertical-align: middle;
+}
+
+.title-inter{
+  font-size: 29pt;
+}
+
+.inp-user-email, .inp-user-password {
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+
+}
+
+.remember-forget{
+
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-enter{
+  border: none;
+}
+
+/*  =========  end  форма входа */
 
 
 
@@ -133,6 +202,8 @@ main{
   bottom: 15%;
 }
 .btn-up a{ padding: 20px;}
+
+
 
 
 /*======== Footer =======*/

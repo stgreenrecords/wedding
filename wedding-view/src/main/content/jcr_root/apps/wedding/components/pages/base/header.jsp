@@ -23,7 +23,42 @@
 
 			<div class="right-head cabinet-input">
 
-					<div> <a href=""> Вход </a> | <a href=""> Регистрация </a>	</div>
+				<div> <span id="entrance-cabinet"> Вход </span>	<span class="vert-line">&#124;</span> <span id="registration"> Регистрация </span>	</div>
 
+			</div>
+
+
+
+
+
+			<div id="entrance-form">
+				<div class="mwindow window-entrance">
+
+					<div class="container-window-entrance">
+
+						<h2 class="title-inter" >ВХОД</h2>
+						<div class="social-inter"><img src="img/social_media_icons _buttons/vk.png" alt="VK">
+							<img src="img/social_media_icons _buttons/facebook.png" alt="F">
+							<img src="img/social_media_icons _buttons/g+.png" alt="G+">
+							<img src="img/social_media_icons _buttons/ok.png" alt="OK"> </div>
+						<p> или </p>
+						<p><input class="inp-user-email" type="email" name="user-email" placeholder="Введите email">  </p>
+						<p><input class="inp-user-password" type="password" name="user-email" placeholder="Введите пароль">  </p>
+
+						<div class="remember-forget">
+
+										<span><label for="remember-ident">Запомнить</label>
+										<input type="checkbox" id="remember-ident" name="remember-ident" value="remember-ident-user">  </span>
+
+							<a class="forget-password" href="#">Забыли пароль?</a>
+
+						</div>
+
+						<div>
+							<button class="btn-enter" type="submit"> <img src="img/social_media_icons _buttons/enter_button.png" alt="ВХОД">  </button>
+						</div>
+
+					</div>
+				</div>
 			</div>
 
