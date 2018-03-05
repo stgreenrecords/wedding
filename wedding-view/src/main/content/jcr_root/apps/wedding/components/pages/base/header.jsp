@@ -12,9 +12,9 @@
 				<nav class="main-menu">
 					<ul>
 						<li > <a href="http://wedding-services.mycloud.by/content/wedding/catalog.html"> Каталог </a> </li>
-						<li > <a href=""> Тендеры </a> </li>
-						<li id="promo-btn"> 	<a href="">%  Акции </a> </li>
-						<li > <a href=""> Свадьбы </a> </li>						 
+						<li > <a href="http://wedding-services.mycloud.by/content/wedding/tenders.html "> Тендеры </a> </li>
+						<li id="promo-btn"> <a href="http://wedding-services.mycloud.by/content/wedding/sales.html">%  Акции </a> </li>
+						<li > <a href="http://wedding-services.mycloud.by/content/wedding/real-weddings.html"> Свадьбы </a> </li>
 
 					</ul>
 				</nav>
@@ -37,11 +37,11 @@
 					<div class="container-window-entrance">
 
 						<h2 class="title-inter" >ВХОД</h2>
-						<div class="social-inter"><img src="img/social_media_icons _buttons/vk.png" alt="VK">
-							<img src="img/social_media_icons _buttons/facebook.png" alt="F">
-							<img src="img/social_media_icons _buttons/g+.png" alt="G+">
-							<img src="img/social_media_icons _buttons/ok.png" alt="OK"> </div>
-						<p> или </p>
+						<div class="social-inter"><img src="<%--img/social_media_icons _buttons/vk.png--%>" alt="VK">
+						<img src="<%--img/social_media_icons _buttons/facebook.png--%>" alt="F">
+						<img src="<%--img/social_media_icons _buttons/g+.png--%>" alt="G+">
+						<img src="<%--img/social_media_icons _buttons/ok.png--%>" alt="OK"> </div>
+					<p> или </p>
 						<p><input class="inp-user-email" type="email" name="user-email" placeholder="Введите email">  </p>
 						<p><input class="inp-user-password" type="password" name="user-email" placeholder="Введите пароль">  </p>
 
@@ -55,7 +55,7 @@
 						</div>
 
 						<div>
-							<button class="btn-enter" type="submit"> <img src="img/social_media_icons _buttons/enter_button.png" alt="ВХОД">  </button>
+							<button class="btn-enter" type="submit"> <img src="<%--img/social_media_icons _buttons/enter_button.png--%>" alt="ВХОД">  </button>
 						</div>
 
 					</div>

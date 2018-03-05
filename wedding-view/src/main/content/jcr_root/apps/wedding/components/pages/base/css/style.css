@@ -1,4 +1,4 @@
-@font-face {
+/*@font-face {
   font-family: "Theano Didot";
   src: url("../fonts/THEANODIDOT-REGULAR.TTF");
   font-weight: normal;
@@ -9,12 +9,12 @@
   src: url("../fonts/ROSA_MARENA.TTF");
   font-weight: normal;
   font-style: normal;
-}
+}*/
 
 
 
 body{
-  font-family: 'Theano Didot',  serif;
+  /*font-family: 'Theano Didot',  serif;*/
   font-weight: lighter;
   font-size: 20px;
   line-height: 1.5;
@@ -45,7 +45,7 @@ a {  text-decoration: none; color: #000; white-space: nowrap; }
 }
 
 .central-head--title{
-  font-family: 'Rosa Marena', cursive;
+/*  font-family: 'Rosa Marena', cursive;*/
   font-size: 48px;
   text-align: center;
 }
@@ -216,7 +216,7 @@ footer{
 
 
 .foot--title{
-  font-family: 'Rosa Marena', cursive;
+ /* font-family: 'Rosa Marena', cursive;*/
   font-size: 40px;
   text-align: center;
   flex-direction: column;
