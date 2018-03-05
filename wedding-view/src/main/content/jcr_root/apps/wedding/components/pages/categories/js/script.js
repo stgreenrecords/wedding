@@ -63,6 +63,31 @@ var PORTAL = (function (PORTAL, $) {
 
         */
 
+        (function(){ // ============   Запрос
+
+
+            var photo_first =  $.ajax({
+                url: "http://wedding-services.mycloud.by/services/rest.partners/photographers/minsk.5.json",
+                type: "GET",
+                dataType: "json",
+                // crossDomain: "true",
+                success: function (data) {
+
+                    console.log("success");
+                    console.dir(data);
+
+                  //  var example_object = JSON.parse(photo_first);
+                   // console.dir(example_object);
+
+                        //example_object[1]['id'] = "lalala";
+                    // console.dir(data);
+                }
+            });
+
+
+        }()); // end -  --- Запрос
+
+
 
         console.log('Component: "Categories"');
 

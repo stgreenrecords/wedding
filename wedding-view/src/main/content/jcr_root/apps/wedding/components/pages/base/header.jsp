@@ -57,7 +57,7 @@
 							</div>
 
 							<div>
-								<button class="btn-enter" type="submit"> <img src="img/social_media_icons _buttons/enter_button.png" alt="ВХОД">  </button>
+								<button class="btn-enter" type="submit"> <img src="<%--img/social_media_icons _buttons/enter_button.png--%>" alt="ВХОД">  </button>
 							</div>
 						</form>
 
