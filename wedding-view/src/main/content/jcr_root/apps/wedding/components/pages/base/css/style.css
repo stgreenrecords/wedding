@@ -14,19 +14,19 @@
 
 
 body{
-  /*font-family: 'Theano Didot',  serif;*/
+ /* font-family: 'Theano Didot',  serif;*/
   font-weight: lighter;
   font-size: 20px;
   line-height: 1.5;
  
 }
 
-img, body, header, footer, nav, aside, article, section, figure, ul, ol, li, h1, h2, h3,h4,h5,h6 {
+img, body, header, footer, nav, aside, article, section, figure, ul, ol, li, h1, h2, h3,h4,h5,h6, input  {
   padding:0;  margin:0;
 }
 
 header{  
-  height: 175px;
+  height: 225px;
   display: flex;
   justify-content:  center;
 
@@ -45,9 +45,18 @@ a {  text-decoration: none; color: #000; white-space: nowrap; }
 }
 
 .central-head--title{
-/*  font-family: 'Rosa Marena', cursive;*/
+  font-family: 'Rosa Marena', cursive;
   font-size: 48px;
   text-align: center;
+}
+
+#entrance-cabinet-btn, #registration-btn {
+  cursor: pointer;
+
+}
+
+.vert-line{
+  font-size: 24px;
 }
 
 .empty{
@@ -55,6 +64,8 @@ a {  text-decoration: none; color: #000; white-space: nowrap; }
 	padding: 0 5% 0 0;
 
 }
+
+
 
 /*  =========   форма входа */
 #entrance-form {
@@ -216,7 +227,7 @@ footer{
 
 
 .foot--title{
- /* font-family: 'Rosa Marena', cursive;*/
+  /*font-family: 'Rosa Marena', cursive;*/
   font-size: 40px;
   text-align: center;
   flex-direction: column;

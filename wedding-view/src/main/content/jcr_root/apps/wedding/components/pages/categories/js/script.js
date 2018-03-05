@@ -6,15 +6,17 @@ var PORTAL = (function (PORTAL, $) {
 
     PORTAL.modules.Categories.init = function ($self) {
 
+/*
 
         addEventListener("DOMContentLoaded",function() {
-
+*/
             (function(){ // Работа с окнами входа и регистрации
 
 
 
-                var entrance = document.getElementById("entrance-cabinet");
-                var registration = document.getElementById("registration");
+
+                var entrance = document.getElementById("entrance-cabinet-btn");
+                var registration = document.getElementById("registration-btn");
 
                 entrance.addEventListener("click", function(evt) {
                     console.log(evt.type);
@@ -60,10 +62,12 @@ var PORTAL = (function (PORTAL, $) {
 
 
 
+
             }()); // end -  --- с окнами входа и регистрации
+        /*
+                });   //  ---   DOMContentLoaded finish
 
-        });   //  ---   DOMContentLoaded finish
-
+        */
 
 
         console.log('Component: "Categories"');
