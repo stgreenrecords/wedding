@@ -12,9 +12,6 @@ var PORTAL = (function (PORTAL, $) {
 */
             (function(){ // Работа с окнами входа и регистрации
 
-
-
-
                 var entrance = document.getElementById("entrance-cabinet-btn");
                 var registration = document.getElementById("registration-btn");
 
@@ -33,7 +30,7 @@ var PORTAL = (function (PORTAL, $) {
                     mwindow.style.visibility = "visible";
                     mwindow.style.left = (document.documentElement.clientWidth - mwindow.getBoundingClientRect().width)/2 + "px";
                     mwindow.style.top = (document.documentElement.clientHeight - mwindow.getBoundingClientRect().height)/3 + "px";
-                }
+                };
 
 
                 entrance.addEventListener("click", showEntranceForm);
@@ -43,9 +40,6 @@ var PORTAL = (function (PORTAL, $) {
                         showEntranceForm();
                 });
 
-
-
-
                 modal.addEventListener("click", function(evt) {
                     // evt.stopPropagation();
                     if (evt.target == document.querySelector("#entrance-form")) {
@@ -53,7 +47,7 @@ var PORTAL = (function (PORTAL, $) {
                         Array.from(this.children).forEach(function(elem) {
                             elem.style.visibility = "hidden";
                         });
-                    }
+                    };
                 });
 
 

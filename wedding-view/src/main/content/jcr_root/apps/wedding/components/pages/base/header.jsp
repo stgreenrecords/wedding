@@ -41,22 +41,25 @@
 						<img src="<%--img/social_media_icons _buttons/facebook.png--%>" alt="F">
 						<img src="<%--img/social_media_icons _buttons/g+.png--%>" alt="G+">
 						<img src="<%--img/social_media_icons _buttons/ok.png--%>" alt="OK"> </div>
-					<p> или </p>
-						<p><input class="inp-user-email" type="email" name="user-email" placeholder="Введите email">  </p>
-						<p><input class="inp-user-password" type="password" name="user-email" placeholder="Введите пароль">  </p>
+						<p> или </p>
 
-						<div class="remember-forget">
+						<form action="" method="post">
+							<p><input class="inp-user-email" type="email" name="user-email" placeholder="Введите email">  </p>
+							<p><input class="inp-user-password" type="password" name="user-email" placeholder="Введите пароль">  </p>
 
-										<span><label for="remember-ident">Запомнить</label>
-										<input type="checkbox" id="remember-ident" name="remember-ident" value="remember-ident-user">  </span>
+							<div class="remember-forget">
 
-							<a class="forget-password" href="#">Забыли пароль?</a>
+						 		<span><label for="remember-ident">Запомнить</label>
+						 		<input type="checkbox" id="remember-ident" name="remember-ident" value="remember-ident-user">  </span>
 
-						</div>
+								<a class="forget-password" href="#">Забыли пароль?</a>
 
-						<div>
-							<button class="btn-enter" type="submit"> <img src="<%--img/social_media_icons _buttons/enter_button.png--%>" alt="ВХОД">  </button>
-						</div>
+							</div>
+
+							<div>
+								<button class="btn-enter" type="submit"> <img src="img/social_media_icons _buttons/enter_button.png" alt="ВХОД">  </button>
+							</div>
+						</form>
 
 					</div>
 				</div>
