@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
     <filter root="/content/wedding"/>
+    <filter root="/content/images"/>
     <filter root="/apps/wedding"/>
     <filter root="/etc/clientlibs/wedding"/>
 <!--    <filter root="/home/groups/w" mode="update"/>
