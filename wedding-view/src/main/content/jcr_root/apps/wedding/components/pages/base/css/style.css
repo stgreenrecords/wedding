@@ -1,20 +1,18 @@
-/*@font-face {
+@font-face {
   font-family: "Theano Didot";
-  src: url("../fonts/THEANODIDOT-REGULAR.TTF");
+  src: url("/etc/clientlibs/wedding/pages/fonts/THEANODIDOT-REGULAR.TTF");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "Rosa Marena";
-  src: url("../fonts/ROSA_MARENA.TTF");
+  src: url("/etc/clientlibs/wedding/pages/fonts/ROSA_MARENA.TTF");
   font-weight: normal;
   font-style: normal;
-}*/
-
-
+}
 
 body{
- /* font-family: 'Theano Didot',  serif;*/
+  font-family: 'Theano Didot',  serif;
   font-weight: lighter;
   font-size: 20px;
   line-height: 1.5;
@@ -29,8 +27,6 @@ header{
   height: 225px;
   display: flex;
   justify-content:  center;
-
-
 }
 
 a {  text-decoration: none; color: #000; white-space: nowrap; }
@@ -50,7 +46,7 @@ a {  text-decoration: none; color: #000; white-space: nowrap; }
   text-align: center;
 }
 
-#entrance-cabinet-btn, #registration-btn {
+#entrance-cabinet-btn, #registration-btn {  /*кнопки рег и входа*/
   cursor: pointer;
 
 }
@@ -66,77 +62,6 @@ a {  text-decoration: none; color: #000; white-space: nowrap; }
 }
 
 
-
-/*  =========   форма входа */
-#entrance-form {
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  background-color: rgba(204, 204, 204, 0.6);
-  visibility: hidden;
-}
-
-.mwindow {
-  text-align: center;
-  background-color: #f4f4f4;
-
-
-  border: 1px solid #000;
-  position: absolute;
-  z-index: 10;
-  margin: 0;
-  visibility: hidden;
-
-}
-
-.window-entrance{
-  min-width: 60%;
-  min-height: 50%;
-
-}
-
-.container-window-entrance{
-  padding: 5% 0;
-  width: 360px;
-  /**/
-  font-size: 15pt;
-  margin: 0 auto;
-}
-
-.social-inter{
-  display: flex;
-  justify-content: space-between;
-}
-
-#remember-ident{
-  vertical-align: middle;
-}
-
-.title-inter{
-  font-size: 29pt;
-}
-
-.inp-user-email, .inp-user-password {
-  box-sizing: border-box;
-  width: 100%;
-  height: 30px;
-
-}
-
-.remember-forget{
-
-  display: flex;
-  justify-content: space-around;
-}
-
-.btn-enter{
-  border: none;
-}
-
-/*  =========  end  форма входа */
 
 
 
@@ -166,29 +91,26 @@ a {  text-decoration: none; color: #000; white-space: nowrap; }
 .main-menu a{
   box-sizing: border-box; 
   padding: 20px 0;
-    
-  text-align: center;  
-  
+  text-align: center;
 }
  
  
 
 #promo-btn .promo-btn-procent{	 
-	color: red;
+  color: red;
 }
 
 
 /*=====  main start ======*/
 main{
-	min-height: 800px;
+  min-height: 800px;
   width: 70%;
   margin: 0 auto;
-
 }
 
 .top-bar{
-	min-height: 150px;
-	background-color: #57f;
+  min-height: 150px;
+  background-color: #57f;
   text-align: center;
 }
 
@@ -227,7 +149,7 @@ footer{
 
 
 .foot--title{
-  /*font-family: 'Rosa Marena', cursive;*/
+  font-family: 'Rosa Marena', cursive;
   font-size: 40px;
   text-align: center;
   flex-direction: column;
@@ -248,3 +170,76 @@ footer{
   color: #bbf;
 }
 
+
+
+
+
+
+
+
+
+/*  =========   форма входа */
+#entrance-form {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  background-color: rgba(204, 204, 204, 0.6);
+  visibility: hidden;
+}
+
+.mwindow {
+  text-align: center;
+  background-color: #f4f4f4;
+  border: 1px solid #000;
+  position: absolute;
+  z-index: 10;
+  margin: 0;
+  visibility: hidden;
+
+}
+
+.window-entrance{
+  min-width: 60%;
+  min-height: 50%;
+}
+
+.container-window-entrance{
+  padding: 5% 0;
+  width: 360px;
+  font-size: 15pt;
+  margin: 0 auto;
+}
+
+.social-inter{
+  display: flex;
+  justify-content: space-between;
+}
+
+#remember-ident{
+  vertical-align: middle;
+}
+
+.title-inter{
+  font-size: 29pt;
+}
+
+.inp-user-email, .inp-user-password {
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+
+}
+
+.remember-forget{
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-enter{
+  border: none;
+}
+
+/*  =========  end  форма входа */
