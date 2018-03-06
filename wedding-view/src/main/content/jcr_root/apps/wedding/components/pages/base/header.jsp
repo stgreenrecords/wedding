@@ -31,7 +31,7 @@
 
 
 
-			<div id="entrance-form">
+			<section id="entrance-form">
 				<div class="mwindow window-entrance">
 
 					<div class="container-window-entrance">
@@ -63,5 +63,5 @@
 
 					</div>
 				</div>
-			</div>
+			</section>
 

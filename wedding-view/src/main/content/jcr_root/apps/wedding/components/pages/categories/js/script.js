@@ -67,7 +67,7 @@ var PORTAL = (function (PORTAL, $) {
 
 
             var photo_first =  $.ajax({
-                url: "http://wedding-services.mycloud.by/services/rest.partners/photographers/minsk.5.json",
+                url: "http://wedding-services.mycloud.by/services/rest.partners/photographers/minsk.15.json",
                 type: "GET",
                 dataType: "json",
                 // crossDomain: "true",
@@ -76,6 +76,11 @@ var PORTAL = (function (PORTAL, $) {
                     console.log("success");
                     console.dir(data);
 
+                    console.dir(data[1]);
+                    var e_ob = data;
+                    e_ob[1]["phone"] = "change phone";
+                    console.dir(e_ob);
+
                   //  var example_object = JSON.parse(photo_first);
                    // console.dir(example_object);
 
@@ -83,6 +88,23 @@ var PORTAL = (function (PORTAL, $) {
                     // console.dir(data);
                 }
             });
+
+            $.ajax({
+                url: "http://wedding-services.mycloud.by/services/rest.catalog-categories/home/users/wedding/partners.json",
+                type: "GET",
+                dataType: "json",
+                // crossDomain: "true",
+                success: function (data) {
+
+                    console.log("success");
+                    console.dir(data);
+
+
+
+                }
+            });
+
+
 
 
         }()); // end -  --- Запрос
