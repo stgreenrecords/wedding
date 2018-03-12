@@ -19,7 +19,7 @@ body{
  
 }
 
-img, body, header, footer, nav, aside, article, section, figure, ul, ol, li, h1, h2, h3,h4,h5,h6, input  {
+img, body, header, footer, nav, aside, article, section, figure, p, ul, ol, li, h1, h2, h3,h4,h5,h6, input  {
   padding:0;  margin:0;
 }
 
@@ -103,38 +103,118 @@ a {  text-decoration: none; color: #000; white-space: nowrap; }
 
 /*=====  main start ======*/
 main{
-  min-height: 800px;
+
   width: 70%;
   margin: 0 auto;
 }
 
 .top-bar{
   min-height: 150px;
-  background-color: #57f;
+  background-color: #f4f4f4;
   text-align: center;
+  margin: 2%;
 }
 
-.container-search-vip{
-  text-align: center;
+.container-search-pro{
+
   min-height: 200px;
-  background-color: #dbf;  
-  margin-top: 20px;
+  color: #fff;
+  margin: 20px 2% 0;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
 }
+
+.search-pro_content{
+  padding: 20px 0 25px 3%;
+}
+
 
 .container-search-usually{
   text-align: center;
-  min-height: 600px;
-  background-color: #89f;  
-  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
+.search-usually{
+  width: 29.3333333%;
+  min-height: 350px;
+  margin: 2%;
+  /*  background-color: #cdfbf8;  */
+  cursor: pointer;
+}
+
+.search-usually_img{
+  width: 100%;
+  height: 75%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+
+.search-usually:nth-child(1) .search-usually_img{
+  background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_4.jpg');
+
+}
+
+
+.search-usually:nth-child(2) .search-usually_img{
+  background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_1.jpg');
+}
+
+.search-usually:nth-child(3) .search-usually_img{
+  background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_2.jpg');
+}
+.search-usually_content_name{
+  line-height: 1;
+  padding-top: 7px;
+  font-weight: bold;
+}
+
+.search-usually_content_hline{
+  line-height: 1;
+  font-size: 15px;
+
+}
+
+.search-usually_content_speciality{
+  font-size: 12pt;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .btn-up{
-  display: none;
+ /* display: none;*/
   position: fixed; 
   right: 7%;
   bottom: 15%;
 }
 .btn-up a{ padding: 20px;}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

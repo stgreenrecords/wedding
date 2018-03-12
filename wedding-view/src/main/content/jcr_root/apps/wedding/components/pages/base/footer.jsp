@@ -18,10 +18,13 @@
 		<div class="container-window-entrance">
 
 			<h2 class="title-inter" >ВХОД</h2>
-			<div class="social-inter"><img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/vk.png" alt="VK">
+			<div class="social-inter">
+				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/vk.png" alt="VK">	<%--check it--%>
 				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/facebook.png" alt="F">
 				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/g+.png" alt="G+">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/ok.png" alt="OK"> </div>
+				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/ok.png" alt="OK">
+			</div>
+
 			<p> или </p>
 
 			<form action="" method="post">
@@ -30,8 +33,8 @@
 
 				<div class="remember-forget">
 
-						 		<span><label for="remember-ident">Запомнить</label>
-						 		<input type="checkbox" id="remember-ident" name="remember-ident" value="remember-ident-user">  </span>
+					<span><label for="remember-ident">Запомнить</label>
+						<input type="checkbox" id="remember-ident" name="remember-ident" value="remember-ident-user">  </span>
 
 					<a class="forget-password" href="#">Забыли пароль?</a>
 

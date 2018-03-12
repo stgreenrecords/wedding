@@ -3,7 +3,7 @@
 <div id="categories-page-content">
 
     <main class="main-block">
-        <div class="top-bar">
+        <section class="top-bar">
             <div class="top-bar-menu">
                 top-bar-menu
 
@@ -18,9 +18,10 @@
                 </select>
 
                 <select name="City">
+                    <option value="minsk" selected disabled>Город</option>
                     <option value="minsk">Минск</option>
-                    <option value="minsk" selected>Минск</option>
-                    <option value="minsk">Минск</option>
+                    <option value="minsk">Гомель</option>
+                    <option value="minsk">Гродно</option>
                 </select>
 
                 <input id="date" type="date" value="2018-06-01">
@@ -42,26 +43,9 @@
             </div>
 
 
-        </div>
+        </section>
 
 
-        <div id="search-vip1" class="container-search-vip">
-            Vrangel1
-        </div>
-
-        <div id="search-vip2" class="container-search-vip">
-            Vrangel2
-        </div>
-
-        <div id="search-usually" class="container-search-usually">
-            <div class="search-usually1">1</div>
-            <div class="search-usually2">2</div>
-            <div class="search-usually3">3</div>
-            <div class="search-usually4">4</div>
-            <div class="search-usually5">5</div>
-            <div class="search-usually6">6</div>
-
-        </div>
 
 
 

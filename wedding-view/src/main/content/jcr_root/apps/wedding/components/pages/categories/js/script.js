@@ -63,7 +63,7 @@ var PORTAL = (function (PORTAL, $) {
 
         */
 
-        (function(){ // ============   Запрос
+        (function(){ // ============   Запросы
 
 
             var photo_first =  $.ajax({
@@ -90,24 +90,55 @@ var PORTAL = (function (PORTAL, $) {
             });
 
             $.ajax({
-                url: "http://wedding-services.mycloud.by/services/rest.catalog-categories/home/users/wedding/partners.json",
                 type: "GET",
-                dataType: "json",
-                // crossDomain: "true",
-                success: function (data) {
-
-                    console.log("success");
+                url: "http://wedding-services.mycloud.by/services/rest.catalog-categories/home/users/wedding/partners.json",
+                dataType: 'json',
+                success: function (data){
+                    console.log("success партнёров ");
                     console.dir(data);
+                }
+            });
 
 
+            $.ajax({
+                type: "GET",
+                url: "http://wedding-services.mycloud.by/services/rest.tenders/gomel.json",
+                dataType: 'json',
+                success: function (data){
+                    console.log("success  тендеры города ");
+                    console.dir(data);
+                }
+            });
 
+            $.ajax({
+                type: "GET",
+                url: "http://wedding-services.mycloud.by/services/rest.users/minsk.json",
+                dataType: 'json',
+                success: function (data){
+                    console.log("success все юзеры ");
+                    console.dir(data);
+                }
+            });
+
+
+            $.ajax({
+                type: "GET",
+                url: "http://wedding-services.mycloud.by/services/rest.users/minsk.json?userId=2f97de50-d5f3-48b8-9fc5-e4b7f0e00918",
+                dataType: 'json',
+                success: function (data){
+                    console.log("success  Юзер конкретный ");
+                    console.dir(data);
                 }
             });
 
 
 
 
-        }()); // end -  --- Запрос
+
+
+
+
+        }()); // end -  --- Запросы
 
 
 
