@@ -14,7 +14,6 @@
 
 <section id="entrance-form">
 	<div class="mwindow window-entrance">
-
 		<div class="container-window-entrance">
 
 			<h2 class="title-inter" >ВХОД</h2>
@@ -28,21 +27,21 @@
 			<p> или </p>
 
 			<form action="" method="post">
+
 				<p><input class="inp-user-email" type="email" name="user-email" placeholder="Введите email">  </p>
 				<p><input class="inp-user-password" type="password" name="user-email" placeholder="Введите пароль">  </p>
 
 				<div class="remember-forget">
-
 					<span><label for="remember-ident">Запомнить</label>
-						<input type="checkbox" id="remember-ident" name="remember-ident" value="remember-ident-user">  </span>
-
+						<input type="checkbox" id="remember-ident" name="remember-ident" value="remember-ident-user">
+					</span>
 					<a class="forget-password" href="#">Забыли пароль?</a>
-
 				</div>
 
 				<div>
 					<button class="btn-enter" type="submit"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/enter_button.png" alt="ВХОД">  </button>
 				</div>
+
 			</form>
 
 		</div>
