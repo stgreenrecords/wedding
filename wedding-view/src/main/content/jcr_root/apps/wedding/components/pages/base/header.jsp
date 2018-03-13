@@ -1,5 +1,4 @@
 <%@page session="false" pageEncoding="utf-8"%>
- 
 
 	<div class="left-head empty">
 
@@ -16,16 +15,13 @@
 				<li > <a href="/content/wedding/tenders.html "> Тендеры </a> </li>
 				<li id="promo-btn"> <a href="/content/wedding/sales.html">%  Акции </a> </li>
 				<li > <a href="/content/wedding/real-weddings.html"> Свадьбы </a> </li>
-
 			</ul>
 		</nav>
 
 	</div>
 
 	<div class="right-head cabinet-input">
-
 		<div> <span id="entrance-cabinet-btn"> Вход </span>	<span class="vert-line">&#124;</span> <span id="registration-btn"> Регистрация </span>	</div>
-
 	</div>
 
 
