@@ -63,11 +63,11 @@ var PORTAL = (function (PORTAL, $) {
 
         */
 
-        (function(){ // ============   Запрос
+        (function(){ // ============   Запросы
 
 
             var photo_first =  $.ajax({
-                url: "http://wedding-services.mycloud.by/services/rest.partners/photographers/minsk.5.json",
+                url: "http://wedding-services.mycloud.by/services/rest.partners/photographers/minsk.15.json",
                 type: "GET",
                 dataType: "json",
                 // crossDomain: "true",
@@ -75,6 +75,11 @@ var PORTAL = (function (PORTAL, $) {
 
                     console.log("success");
                     console.dir(data);
+
+                    console.dir(data[1]);
+                    var e_ob = data;
+                    e_ob[1]["phone"] = "change phone";
+                    console.dir(e_ob);
 
                   //  var example_object = JSON.parse(photo_first);
                    // console.dir(example_object);
@@ -84,8 +89,56 @@ var PORTAL = (function (PORTAL, $) {
                 }
             });
 
+            $.ajax({
+                type: "GET",
+                url: "http://wedding-services.mycloud.by/services/rest.catalog-categories/home/users/wedding/partners.json",
+                dataType: 'json',
+                success: function (data){
+                    console.log("success партнёров ");
+                    console.dir(data);
+                }
+            });
 
-        }()); // end -  --- Запрос
+
+            $.ajax({
+                type: "GET",
+                url: "http://wedding-services.mycloud.by/services/rest.tenders/gomel.json",
+                dataType: 'json',
+                success: function (data){
+                    console.log("success  тендеры города ");
+                    console.dir(data);
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "http://wedding-services.mycloud.by/services/rest.users/minsk.json",
+                dataType: 'json',
+                success: function (data){
+                    console.log("success все юзеры ");
+                    console.dir(data);
+                }
+            });
+
+
+            $.ajax({
+                type: "GET",
+                url: "http://wedding-services.mycloud.by/services/rest.users/minsk.json?userId=2f97de50-d5f3-48b8-9fc5-e4b7f0e00918",
+                dataType: 'json',
+                success: function (data){
+                    console.log("success  Юзер конкретный ");
+                    console.dir(data);
+                }
+            });
+
+
+
+
+
+
+
+
+        }()); // end -  --- Запросы
 
 
 

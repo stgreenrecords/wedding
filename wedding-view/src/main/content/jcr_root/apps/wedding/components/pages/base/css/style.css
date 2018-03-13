@@ -1,27 +1,25 @@
-/*@font-face {
+@font-face {
   font-family: "Theano Didot";
-  src: url("../fonts/THEANODIDOT-REGULAR.TTF");
+  src: url("/etc/clientlibs/wedding/pages/fonts/THEANODIDOT-REGULAR.TTF");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "Rosa Marena";
-  src: url("../fonts/ROSA_MARENA.TTF");
+  src: url("/etc/clientlibs/wedding/pages/fonts/ROSA_MARENA.TTF");
   font-weight: normal;
   font-style: normal;
-}*/
-
-
+}
 
 body{
- /* font-family: 'Theano Didot',  serif;*/
+  font-family: 'Theano Didot',  serif;
   font-weight: lighter;
   font-size: 20px;
   line-height: 1.5;
  
 }
 
-img, body, header, footer, nav, aside, article, section, figure, ul, ol, li, h1, h2, h3,h4,h5,h6, input  {
+img, body, header, footer, nav, aside, article, section, figure, p, ul, ol, li, h1, h2, h3,h4,h5,h6, input  {
   padding:0;  margin:0;
 }
 
@@ -29,8 +27,6 @@ header{
   height: 225px;
   display: flex;
   justify-content:  center;
-
-
 }
 
 a {  text-decoration: none; color: #000; white-space: nowrap; }
@@ -50,7 +46,7 @@ a {  text-decoration: none; color: #000; white-space: nowrap; }
   text-align: center;
 }
 
-#entrance-cabinet-btn, #registration-btn {
+#entrance-cabinet-btn, #registration-btn {  /*кнопки рег и входа*/
   cursor: pointer;
 
 }
@@ -66,77 +62,6 @@ a {  text-decoration: none; color: #000; white-space: nowrap; }
 }
 
 
-
-/*  =========   форма входа */
-#entrance-form {
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  background-color: rgba(204, 204, 204, 0.6);
-  visibility: hidden;
-}
-
-.mwindow {
-  text-align: center;
-  background-color: #f4f4f4;
-
-
-  border: 1px solid #000;
-  position: absolute;
-  z-index: 10;
-  margin: 0;
-  visibility: hidden;
-
-}
-
-.window-entrance{
-  min-width: 60%;
-  min-height: 50%;
-
-}
-
-.container-window-entrance{
-  padding: 5% 0;
-  width: 360px;
-  /**/
-  font-size: 15pt;
-  margin: 0 auto;
-}
-
-.social-inter{
-  display: flex;
-  justify-content: space-between;
-}
-
-#remember-ident{
-  vertical-align: middle;
-}
-
-.title-inter{
-  font-size: 29pt;
-}
-
-.inp-user-email, .inp-user-password {
-  box-sizing: border-box;
-  width: 100%;
-  height: 30px;
-
-}
-
-.remember-forget{
-
-  display: flex;
-  justify-content: space-around;
-}
-
-.btn-enter{
-  border: none;
-}
-
-/*  =========  end  форма входа */
 
 
 
@@ -166,53 +91,130 @@ a {  text-decoration: none; color: #000; white-space: nowrap; }
 .main-menu a{
   box-sizing: border-box; 
   padding: 20px 0;
-    
-  text-align: center;  
-  
+  text-align: center;
 }
  
  
 
 #promo-btn .promo-btn-procent{	 
-	color: red;
+  color: red;
 }
 
 
 /*=====  main start ======*/
 main{
-	min-height: 800px;
+
   width: 70%;
   margin: 0 auto;
-
 }
 
 .top-bar{
-	min-height: 150px;
-	background-color: #57f;
+  min-height: 150px;
+  background-color: #f4f4f4;
   text-align: center;
+  margin: 2%;
 }
 
-.container-search-vip{
-  text-align: center;
+.container-search-pro{
+
   min-height: 200px;
-  background-color: #dbf;  
-  margin-top: 20px;
+  color: #fff;
+  margin: 20px 2% 0;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
 }
+
+.search-pro_content{
+  padding: 20px 0 25px 3%;
+}
+
 
 .container-search-usually{
   text-align: center;
-  min-height: 600px;
-  background-color: #89f;  
-  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
+.search-usually{
+  width: 29.3333333%;
+  min-height: 350px;
+  margin: 2%;
+  /*  background-color: #cdfbf8;  */
+  cursor: pointer;
+}
+
+.search-usually_img{
+  width: 100%;
+  height: 75%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+
+.search-usually:nth-child(1) .search-usually_img{
+  background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_4.jpg');
+
+}
+
+
+.search-usually:nth-child(2) .search-usually_img{
+  background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_1.jpg');
+}
+
+.search-usually:nth-child(3) .search-usually_img{
+  background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_2.jpg');
+}
+.search-usually_content_name{
+  line-height: 1;
+  padding-top: 7px;
+  font-weight: bold;
+}
+
+.search-usually_content_hline{
+  line-height: 1;
+  font-size: 15px;
+
+}
+
+.search-usually_content_speciality{
+  font-size: 12pt;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .btn-up{
-  display: none;
+ /* display: none;*/
   position: fixed; 
   right: 7%;
   bottom: 15%;
 }
 .btn-up a{ padding: 20px;}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -227,7 +229,7 @@ footer{
 
 
 .foot--title{
-  /*font-family: 'Rosa Marena', cursive;*/
+  font-family: 'Rosa Marena', cursive;
   font-size: 40px;
   text-align: center;
   flex-direction: column;
@@ -248,3 +250,76 @@ footer{
   color: #bbf;
 }
 
+
+
+
+
+
+
+
+
+/*  =========   форма входа */
+#entrance-form {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  background-color: rgba(204, 204, 204, 0.6);
+  visibility: hidden;
+}
+
+.mwindow {
+  text-align: center;
+  background-color: #f4f4f4;
+  border: 1px solid #000;
+  position: absolute;
+  z-index: 10;
+  margin: 0;
+  visibility: hidden;
+
+}
+
+.window-entrance{
+  min-width: 60%;
+  min-height: 50%;
+}
+
+.container-window-entrance{
+  padding: 5% 0;
+  width: 360px;
+  font-size: 15pt;
+  margin: 0 auto;
+}
+
+.social-inter{
+  display: flex;
+  justify-content: space-between;
+}
+
+#remember-ident{
+  vertical-align: middle;
+}
+
+.title-inter{
+  font-size: 29pt;
+}
+
+.inp-user-email, .inp-user-password {
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+
+}
+
+.remember-forget{
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-enter{
+  border: none;
+}
+
+/*  =========  end  форма входа */
