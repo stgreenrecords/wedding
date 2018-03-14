@@ -1,16 +1,109 @@
 @font-face {
+    font-family: "Rosa Marena";
+    src: url("/etc/clientlibs/wedding/pages/fonts/ROSA_MARENA.TTF");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GothamPro-Black";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROBLA.OTF");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GothamPro-BlackItalic";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROBLAITA.OTF");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "GothamPro-Bold";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROBOL.OTF");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GothamPro-BoldItalic";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROBOLITA.OTF");
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "GothamPro-Italic";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROITA.OTF");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "GothamPro-Light";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROLIG.OTF");
+    font-weight: 100; /* Проверить */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GothamPro-LightItalic";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROLIGITA.OTF");
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "GothamPro-Medium";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROMED.OTF");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GothamPro-MediumItalic";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROMEDITA.OTF");
+    font-weight: normal;
+    font-style: italic;
+}
+
+
+@font-face {
+    font-family: "GothamProNarrow-Bold";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPRONARBOL.OTF");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GothamProNarrow-Medium";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPRONARMED.OTF");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Theano Didot";
+    src: url("/etc/clientlibs/wedding/pages/fonts/THEANODIDOT-REGULAR.TTF");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GothamPro";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROREG.OTF");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
   font-family: "Theano Didot";
   src: url("/etc/clientlibs/wedding/pages/fonts/THEANODIDOT-REGULAR.TTF");
   font-weight: normal;
   font-style: normal;
 }
 
-@font-face {
-  font-family: "Rosa Marena";
-  src: url("/etc/clientlibs/wedding/pages/fonts/ROSA_MARENA.TTF");
-  font-weight: normal;
-  font-style: normal;
-}
 
 body{
   font-family: 'Theano Didot',  serif;

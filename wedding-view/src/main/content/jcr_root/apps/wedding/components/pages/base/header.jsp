@@ -6,7 +6,7 @@
 
 	<div class="central-head">
 
-		<h1 class="central-head--title"> <a href="http://wedding-services.mycloud.by/content/wedding.html"> Твоя Свадьба </a> </h1>
+		<h1 class="central-head--title"> <a href="/content/wedding-partners.html"> Твоя Свадьба </a> </h1>
 
 		<nav class="main-menu">
 			<ul>

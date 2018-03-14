@@ -1,1 +1,74 @@
+.lend-partners-header{
+    position: relative;
+    left: 0;
+    top: -225px;
+    text-align: center;
+    width: 100%;
+    min-height: 1142px;
+    color: #fff;
+    z-index: 100;
+    background-color: #ffe;
+    background:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/cover_photo.jpg") center no-repeat;
+    background-size: cover;
+}
+
+.lend-partners-header-title{
+    font-family: 'Rosa Marena', cursive;
+    font-size: 62pt;
+    font-weight: normal;
+    padding-top: 90px;
+}
+
+.lend-partners-header-title a{	color: #fff;}
+
+.lend-partners-header-title2{
+    font-family: 'Theano Didot',  serif;
+    font-weight: normal;
+    font-size: 56pt;
+    padding-top: 320px;
+}
+
+.lend-partners-header-slogan{
+    font-family: 'GothamPro',  sans-serif;
+    font-weight: 100;
+    font-size: 22pt;
+}
+
+.top-section-lend-partners-header{
+
+}
+
+.landing-cabinet-input{
+    position: absolute;
+    right: 5%;
+    top: 40px;
+    font-family: 'GothamPro',  sans-serif;
+    font-size: 18pt;
+    color: #000;
+}
+
+
+.btn-become-partner{
+    margin-top: 60px;
+    width: 300px;
+    height: 80px;
+    background:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/become_partner/Partner_Button_1.png") center no-repeat;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-become-partner:hover{
+    background-image:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/become_partner/Partner_Button_2.png");
+
+}
+
+.btn-become-partner:focus {
+    border: none;
+    background-image:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/become_partner/Partner_Button_2.png");
+}
+
+
+
+
 
