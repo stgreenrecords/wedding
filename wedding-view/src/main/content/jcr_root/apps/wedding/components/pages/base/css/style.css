@@ -110,9 +110,10 @@ body{
   font-weight: lighter;
   font-size: 20px;
   line-height: 1.5;
+  background-color: #f4f4f4;
 }
 
-img, body, header, footer, nav, aside, article, section, figure, p, ul, ol, li, h1, h2, h3,h4,h5,h6, input  {
+img, body, header, footer, nav, aside, article, section, figure, button, p, ul, ol, li, h1, h2, h3,h4,h5,h6, input  {
   padding:0;  margin:0;
 }
 
@@ -120,6 +121,7 @@ header{
   height: 225px;
   display: flex;
   justify-content:  center;
+  background-color: #fff;
 }
 
 a {  text-decoration: none; color: #000; white-space: nowrap; }
@@ -129,8 +131,11 @@ a {  text-decoration: none; color: #000; white-space: nowrap; }
   padding: 0 7%;
 }
 
-.right-head{
- padding: 20px 0 0 5%;
+.cabinet-input{
+    position: absolute;
+    right: 5%;
+    top: 40px;
+    font-family: 'GothamPro',  sans-serif;
 }
 
 .central-head--title{

@@ -68,6 +68,114 @@
     background-image:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/become_partner/Partner_Button_2.png");
 }
 
+/*  ======   --- -----  */
+
+.lend-partners-main{
+    background-color: #f4f4f4;
+    text-align: center;
+    margin-top: -150px;
+}
+
+.benifits-title, .with-us-title, .about-us-title {
+    font-family: 'Theano Didot',  serif;
+    font-weight: normal;
+    font-size: 48pt;
+}
+
+.benifits-container, .with-us-container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.benifits-container{
+    padding-bottom: 50px;
+}
+
+.benifits{
+    min-height: 350px;
+    width: 46%;
+    background-color: #fff;
+    margin: 2%;
+}
+.benifits img{
+    margin: 40px 0 20px;
+}
+
+.benifits-text{
+    font-family: 'GothamPro',  sans-serif;
+    font-size: 20pt;
+    font-weight: normal;
+    margin: 0 10px;
+}
+
+
+.with-us-container{
+    background-color: #fff;
+
+}
+
+.with-us-div{
+    min-height: 440px;
+    width: 29.3333333333%;
+    margin: 2%;
+    background-color: #f4f4f4;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: #fff;
+}
+
+.with-us-container{
+    margin: 2%;
+    padding: 0 4% 4% 4%;
+}
+
+.with-us-title{
+    background-color: #fff;
+    padding: 30px 0 0 0;
+    margin: 2% 2% -2% 2%;
+}
+
+.with-us-content{
+
+}
+
+.about-us-container{
+    min-height: 700px;
+    background:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/about_us_background.png") center no-repeat / cover;
+    margin: 90px 2% 2% 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+.about-us-frame{
+    margin-top: 140px;
+    background-color: #fff;
+    padding: 0 0 50px 0;
+}
+
+
+.btn-become-partner2{
+    margin-top: 60px;
+    width: 300px;
+    height: 80px;
+    background:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/become_partner/Partner_Button_2.png") center no-repeat / cover;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-become-partner2:hover{
+    background-image:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/become_partner/Partner_Button_1.png");
+}
+
+.btn-become-partner2:focus{
+    border: none;
+    background-image:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/become_partner/Partner_Button_1.png");
+}
 
 
 
