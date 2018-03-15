@@ -34,10 +34,6 @@
     font-size: 22pt;
 }
 
-.top-section-lend-partners-header{
-
-}
-
 .landing-cabinet-input{
     position: absolute;
     right: 5%;
@@ -46,7 +42,6 @@
     font-size: 18pt;
     color: #000;
 }
-
 
 .btn-become-partner{
     margin-top: 60px;
@@ -109,10 +104,8 @@
     margin: 0 10px;
 }
 
-
 .with-us-container{
     background-color: #fff;
-
 }
 
 .with-us-div{
@@ -127,6 +120,7 @@
     flex-direction: column;
     justify-content: flex-end;
     color: #fff;
+    cursor: pointer;
 }
 
 .with-us-container{
@@ -140,10 +134,6 @@
     margin: 2% 2% -2% 2%;
 }
 
-.with-us-content{
-
-}
-
 .about-us-container{
     min-height: 700px;
     background:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/about_us_background.png") center no-repeat / cover;
@@ -153,11 +143,44 @@
 }
 
 .about-us-frame{
-    margin-top: 140px;
+    margin: 140px auto 0;
     background-color: #fff;
     padding: 0 0 50px 0;
+    width: 70%;
 }
 
+.about-us-title{
+    padding-top: 20px;
+    margin-bottom: -20px;
+}
+
+.about-us-line{
+    padding-bottom: 15px;
+}
+
+.about-us-help-title{
+    font-family: 'GothamPro',  sans-serif;
+    font-weight: normal;
+    font-size: 22pt;
+    padding: 20px 0 10px 0;
+}
+
+.about-us-help-text-container{
+    width: 70%;
+    margin: 0 auto;
+    padding-left: 7%;
+}
+
+.about-us-help-text, .about-us-text{
+    font-family: 'GothamPro-light',  sans-serif;
+    font-weight: normal;
+    font-size: 14pt;
+    padding: 0 10%;
+}
+
+.about-us-help-text{
+    text-align: left;
+}
 
 .btn-become-partner2{
     margin-top: 60px;

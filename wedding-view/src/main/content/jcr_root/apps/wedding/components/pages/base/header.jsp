@@ -21,7 +21,11 @@
 	</div>
 
 	<div class="right-head cabinet-input">
-		<div> <span id="entrance-cabinet-btn"> Вход </span>	<span class="vert-line">&#124;</span> <span id="registration-btn"> Регистрация </span>	</div>
+		<div>
+			<span id="entrance-cabinet-btn"> Вход </span>
+			<span class="vert-line">&#124;</span>
+			<span id="registration-btn"> Регистрация </span>
+		</div>
 	</div>
 
 
