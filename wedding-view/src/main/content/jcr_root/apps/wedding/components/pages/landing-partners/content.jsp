@@ -144,7 +144,31 @@
 
         <section class="timer-container">
 
+            <h3 class="timer-title"> ДО ОТКРЫТИЯ САЙТА  </h3>
 
+            <div class="timer-board">
+
+                <figure>
+                    <span id="timer_day">17</span>
+                    <figcaption> Дней </figcaption>
+                </figure>
+
+                <figure>
+                    <span id="timer_hour">11</span>
+                    <figcaption> Часов </figcaption>
+                </figure>
+
+                <figure>
+                    <span id="timer_minute">25</span>
+                    <figcaption> Минут </figcaption>
+                </figure>
+
+                <figure>
+                    <span id="timer_second">55</span>
+                    <figcaption> Секунд </figcaption>
+                </figure>
+
+            </div>
 
         </section>
 

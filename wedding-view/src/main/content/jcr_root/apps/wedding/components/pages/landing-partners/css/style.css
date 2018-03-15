@@ -55,7 +55,6 @@
 
 .btn-become-partner:hover{
     background-image:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/become_partner/Partner_Button_2.png");
-
 }
 
 .btn-become-partner:focus {
@@ -106,6 +105,8 @@
 
 .with-us-container{
     background-color: #fff;
+    margin: 2%;
+    padding: 0 4% 4% 4%;
 }
 
 .with-us-div{
@@ -115,7 +116,7 @@
     background-color: #f4f4f4;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
+    /*background-size: cover;*/
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -123,9 +124,9 @@
     cursor: pointer;
 }
 
-.with-us-container{
-    margin: 2%;
-    padding: 0 4% 4% 4%;
+.with-us-content{
+    padding: 25px 0 15px;
+    background: linear-gradient(to bottom, transparent,  rgba(22, 22, 22, 0.9));
 }
 
 .with-us-title{
@@ -135,9 +136,9 @@
 }
 
 .about-us-container{
-    min-height: 700px;
+    min-height: 780px;
     background:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/about_us_background.png") center no-repeat / cover;
-    margin: 90px 2% 2% 2%;
+    margin: 90px 2% 70px 2%;
     display: flex;
     flex-direction: column;
 }
@@ -184,7 +185,7 @@
 
 .btn-become-partner2{
     margin-top: 60px;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
     width: 300px;
     height: 80px;
     background:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/become_partner/Partner_Button_2.png") center no-repeat / cover;
@@ -201,6 +202,34 @@
     background-image:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/become_partner/Partner_Button_1.png");
 }
 
+.timer-title{
+    font-family: 'GothamPro',  sans-serif;
+    font-weight: normal;
+    font-size: 27pt;
+    padding: 30px 0;
+}
 
+.timer-board{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 50px;
+    text-transform: uppercase;
+}
+
+.timer-board figure span{
+    font-family: 'Theano Didot',  serif;
+    font-weight: normal;
+    font-size: 76pt;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, #c3b89e);
+    /*background: #c3b89e;*/
+    color: #fff;
+    padding: 20px 10px 5px;
+}
+
+.timer-board figure{
+    padding: 15px;
+}
 
 
