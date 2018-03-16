@@ -22,9 +22,9 @@
 
         <div class="right-head landing-cabinet-input">
             <div>
-                <span id="entrance-cabinet-btn"> Вход </span>
+                <span id="entrance-cabinet-btn-land"> Вход </span>
                 <span class="vert-line">&#124;</span>
-                <span id="registration-btn"> Регистрация </span>
+                <span id="registration-btn-land"> Регистрация </span>
             </div>
         </div>
 
@@ -149,22 +149,22 @@
             <div class="timer-board">
 
                 <figure>
-                    <span id="timer_day">17</span>
+                    <span id="timer_day"> dd </span>
                     <figcaption> Дней </figcaption>
                 </figure>
 
                 <figure>
-                    <span id="timer_hour">11</span>
+                    <span id="timer_hour"> hh </span>
                     <figcaption> Часов </figcaption>
                 </figure>
 
                 <figure>
-                    <span id="timer_minute">25</span>
+                    <span id="timer_minute"> mm </span>
                     <figcaption> Минут </figcaption>
                 </figure>
 
                 <figure>
-                    <span id="timer_second">55</span>
+                    <span id="timer_second"> ss </span>
                     <figcaption> Секунд </figcaption>
                 </figure>
 

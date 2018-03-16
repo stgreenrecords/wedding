@@ -10,39 +10,79 @@
 <div class="social-btn-block"> <a href=" "> <img src="/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/Main_Page_Social_Media_Icons_operators/vk.png" alt="Вконтакте"> </a> <a href=" "> <img src="/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/Main_Page_Social_Media_Icons_operators/facebook.png" alt="ВФейсбуке"> </a> <a href=" "> <img src="/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/Main_Page_Social_Media_Icons_operators/insta.png" alt="ВИнстаграме"> </a> </div>
 
 <section id="entrance-form">
+
 	<div class="mwindow window-entrance">
+
 		<div class="container-window-entrance">
 
 			<h2 class="title-inter" >ВХОД</h2>
 			<div class="social-inter">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/vk.png" alt="VK">	<%--check it--%>
+				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/vk.png" alt="VK">
 				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/facebook.png" alt="F">
 				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/g+.png" alt="G+">
 				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/ok.png" alt="OK">
 			</div>
 
-			<p> или </p>
+			<p class="mwindow-or"> или </p>
 
 			<form action="" method="post">
-
 				<p><input class="inp-user-email" type="email" name="user-email" placeholder="Введите email">  </p>
 				<p><input class="inp-user-password" type="password" name="user-email" placeholder="Введите пароль">  </p>
 
 				<div class="remember-forget">
-					<span><label for="remember-ident">Запомнить</label>
-						<input type="checkbox" id="remember-ident" name="remember-ident" value="remember-ident-user">
-					</span>
+
+					 		<span><label for="remember-ident">Запомнить</label>
+					 		<input type="checkbox" id="remember-ident" name="remember-ident" value="remember-ident-user">  </span>
+
 					<a class="forget-password" href="#">Забыли пароль?</a>
+
 				</div>
 
 				<div>
 					<button class="btn-enter" type="submit"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/enter_button.png" alt="ВХОД">  </button>
 				</div>
-
 			</form>
 
 		</div>
+
 	</div>
+
+	<div class="mwindow window-registation">
+
+		<div class="container-window-registation">
+
+			<h2 class="title-inter">РЕГИСТРАЦИЯ</h2>
+			<div class="social-inter">
+				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/vk.png" alt="VK">
+				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/facebook.png" alt="F">
+				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/g+.png" alt="G+">
+				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/ok.png" alt="OK">
+			</div>
+
+			<p class="mwindow-or"> или </p>
+
+			<form action="" method="post">
+
+				<p><input class="inp-user-name" type="text" name="user-name" placeholder="Имя, Фамилия / Название компании">  </p>
+				<p><input class="inp-user-email" type="email" name="user-email" placeholder="Введите email">  </p>
+				<p><input class="inp-user-password" type="password" name="user-password" placeholder="Введите пароль">  </p>
+				<p><input class="inp-user-password-repeat" type="password" name="user-password-repeat" placeholder="Подтвердите пароль">  </p>
+
+				<div class="have-account">
+
+					<span> У Вас уже есть аккаунт? </span> <span>   </span> <span class="have-account-entrance"> Войти </span>
+
+				</div>
+
+				<div>
+					<button class="btn-enter" type="submit"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/further.png" alt="ДАЛЕЕ">  </button>
+				</div>
+			</form>
+
+		</div>
+
+	</div>
+
 </section>
 
 

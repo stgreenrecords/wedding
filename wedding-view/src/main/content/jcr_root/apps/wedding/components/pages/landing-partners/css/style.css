@@ -6,7 +6,7 @@
     width: 100%;
     min-height: 1142px;
     color: #fff;
-    z-index: 100;
+    z-index: 5;
     background-color: #ffe;
     background:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/cover_photo.jpg") center no-repeat;
     background-size: cover;
@@ -62,6 +62,10 @@
     background-image:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/become_partner/Partner_Button_2.png");
 }
 
+#entrance-cabinet-btn-land, #registration-btn-land {
+    cursor: pointer;
+}
+
 /*  ======   --- -----  */
 
 .lend-partners-main{
@@ -92,6 +96,7 @@
     background-color: #fff;
     margin: 2%;
 }
+
 .benifits img{
     margin: 40px 0 20px;
 }
