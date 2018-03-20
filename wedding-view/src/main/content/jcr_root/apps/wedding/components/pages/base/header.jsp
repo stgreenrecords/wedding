@@ -20,7 +20,7 @@
 
 	</div>
 
-	<div class="right-head cabinet-input">
+	<div id="cabinet-input-block" class="right-head cabinet-input">
 		<div>
 			<span id="entrance-cabinet-btn"> Вход </span>
 			<span class="vert-line">&#124;</span>
