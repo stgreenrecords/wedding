@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <sly data-sly-include="${@ path='/apps/wedding/components/pages/base/head.jsp'}"></sly>
+</head>
+<body>
+
+    <header class="head-block">
+        <sly data-sly-include="header.html"></sly>
+    </header>
+
+    <sly data-sly-include="content.html"></sly>
+
+    <footer class="foot-block">
+        <sly data-sly-include="${@ path='/apps/wedding/components/pages/base/footer.jsp'}" ></sly>
+    </footer>
+    
+</body>
+</html>
