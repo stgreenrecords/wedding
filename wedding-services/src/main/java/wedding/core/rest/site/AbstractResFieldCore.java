@@ -1,5 +1,7 @@
 package wedding.core.rest.site;
 
+import org.apache.sling.api.SlingHttpServletRequest;
+
 abstract class AbstractResFieldCore implements RestFieldCore {
 
     static final String PROPERTY_CATALOG_TITLE = "jcr:title";
@@ -15,4 +17,23 @@ abstract class AbstractResFieldCore implements RestFieldCore {
     static final String USER_QUERY = "SELECT * FROM [rep:User] AS user WHERE ISDESCENDANTNODE([/home/users/wedding/users%s]) %s";
     static final String PART_USER_QUERY = "AND user.[userId] = '%s'";
 
+    @Override
+    public Object getObject(SlingHttpServletRequest request) {
+        return null;
+    }
+
+    @Override
+    public Object updateObject(SlingHttpServletRequest request) {
+        return null;
+    }
+
+    @Override
+    public Object createObject(SlingHttpServletRequest request) {
+        return null;
+    }
+
+    @Override
+    public Object deleteObject(SlingHttpServletRequest request) {
+        return null;
+    }
 }

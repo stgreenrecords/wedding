@@ -6,10 +6,10 @@ import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
+import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -47,7 +47,7 @@ public final class SlingModelUtil {
         return resource -> {
             Map<String, Object> modelValues = Arrays.stream(fields)
                     .filter(isNotAnnotatedWith(Self.class))
-                    .filter(isAnnotatedWith(Inject.class))
+                    .filter(isAnnotatedWith(ValueMapValue.class))
                     .filter(field -> getFiledValue(model).apply(field) != null)
                     .collect(Collectors.toMap(SlingModelUtil::getName, getFiledValue(model), (v1, v2) -> v1));
             if (modelValues.isEmpty()) {

@@ -29,21 +29,6 @@ public class Partners extends AbstractResFieldCore {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public Object updateObject(SlingHttpServletRequest request) {
-        return null;
-    }
-
-    @Override
-    public Object createObject(SlingHttpServletRequest request) {
-        return null;
-    }
-
-    @Override
-    public Object deleteObject(SlingHttpServletRequest request) {
-        return null;
-    }
-
     private Comparator<UserData> applySorting(final SlingHttpServletRequest request) {
         return Optional.ofNullable(request.getParameter(REQUEST_PARAMETER_SORTED_BY))
                 .map(Comparators::getComparatorByName)

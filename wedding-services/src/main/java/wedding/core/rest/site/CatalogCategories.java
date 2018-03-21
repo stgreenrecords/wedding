@@ -28,20 +28,4 @@ public class CatalogCategories extends AbstractResFieldCore {
                         r -> WeddingResourceUtil.getStringPropertyFromResource(r, PROPERTY_CATALOG_TITLE)));
     }
 
-    @Override
-    public Object updateObject(SlingHttpServletRequest request) {
-        return null;
-    }
-
-    @Override
-    public Object createObject(SlingHttpServletRequest request) {
-        return null;
-    }
-
-    @Override
-    public Object deleteObject(SlingHttpServletRequest request) {
-        return null;
-    }
-
-
 }

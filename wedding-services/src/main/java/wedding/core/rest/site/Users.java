@@ -29,19 +29,4 @@ public class Users extends AbstractResFieldCore {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public Object updateObject(SlingHttpServletRequest request) {
-        return null;
-    }
-
-    @Override
-    public Object createObject(SlingHttpServletRequest request) {
-        return null;
-    }
-
-    @Override
-    public Object deleteObject(SlingHttpServletRequest request) {
-        return null;
-    }
-
 }

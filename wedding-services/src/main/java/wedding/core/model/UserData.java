@@ -23,8 +23,6 @@ public class UserData {
     @JsonIgnore
     private Resource resource;
 
-    private String profile;
-
     @ValueMapValue
     private String userId;
     @ValueMapValue
@@ -41,12 +39,10 @@ public class UserData {
     private String phone;
     @ValueMapValue
     private String description;
-
     @ValueMapValue
     private String priceStart;
     @ValueMapValue
     private String priceEnd;
-
     @ValueMapValue
     private String email;
     @ValueMapValue
@@ -63,15 +59,14 @@ public class UserData {
     private String speciality;
     @ValueMapValue
     private String city;
-    private String avatar;
-    private List<String> portfolio;
-
     @ValueMapValue
     private String[] bookedDates;
 
+    private String avatar;
+    private List<String> portfolio;
+
     @PostConstruct
     public void init() {
-        profile = resource.getPath();
         Optional.ofNullable(resource.getChild(Type.AVATAR.getRelPath()))
                 .map(Resource::listChildren)
                 .filter(Iterator::hasNext)
@@ -228,7 +223,6 @@ public class UserData {
 
     public void setResource(Resource resource) {
         this.resource = resource;
-        this.profile = resource.getPath();
     }
 
     public String getAvatar() {
@@ -245,10 +239,6 @@ public class UserData {
 
     public void setPortfolio(List<String> portfolio) {
         this.portfolio = portfolio;
-    }
-
-    public String getProfile() {
-        return profile;
     }
 
     public Boolean isVip() {
