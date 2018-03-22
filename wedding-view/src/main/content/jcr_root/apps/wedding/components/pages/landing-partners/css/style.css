@@ -1,7 +1,6 @@
 .lend-partners-header{
     position: relative;
     left: 0;
-    top: -225px;
     text-align: center;
     width: 100%;
     min-height: 1142px;
@@ -62,7 +61,7 @@
 .lend-partners-main{
     background-color: #f4f4f4;
     text-align: center;
-    margin-top: -150px;
+    margin-top: 35px;
 }
 
 .benifits-title, .with-us-title, .about-us-title {

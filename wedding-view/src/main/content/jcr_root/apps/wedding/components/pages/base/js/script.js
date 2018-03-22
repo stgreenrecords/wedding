@@ -16,6 +16,7 @@ var PORTAL = (function (PORTAL, $) {
                 }
                 if ($self.length) {
                     PORTAL.modules[mod].init($self);
+                    console.dir(PORTAL);
                 }
             } catch (e) {
                 if (PORTAL.utils.isAuthMode()) {
