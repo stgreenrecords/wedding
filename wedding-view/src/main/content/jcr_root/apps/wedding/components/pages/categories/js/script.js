@@ -6,7 +6,9 @@ var PORTAL = (function (PORTAL, $) {
 
     PORTAL.modules.Categories.init = function ($self) {
 
-        (function () { // Работа с окнами входа и регистрации
+        console.log('Component: "Categories"');
+
+       /* (function () { // Работа с окнами входа и регистрации
 
             var entrance = document.getElementById("entrance-cabinet-btn-land");
 
@@ -35,7 +37,7 @@ var PORTAL = (function (PORTAL, $) {
             var modal = document.querySelector("#entrance-form");
 
             function showForm(){
-                /* Можно написать появление формы - а может и не писать */
+                /!* Можно написать появление формы - а может и не писать *!/
                 // На вход передается class
             }
 
@@ -55,9 +57,9 @@ var PORTAL = (function (PORTAL, $) {
                 mwindow.style.top = (document.documentElement.clientHeight - mwindow.getBoundingClientRect().height)/3 + "px";
             };
 
-            /* function hiddenModalWindow(){
+            /!* function hiddenModalWindow(){
                  let mwindow = document.querySelector(".window-registation");
-             };*/
+             };*!/
 
             var data_registration = {};
 
@@ -117,7 +119,7 @@ var PORTAL = (function (PORTAL, $) {
                 };
             });
 
-        }()); // end -  --- с окнами входа и регистрации
+        }());*/ // end -  --- с окнами входа и регистрации
 
 
         (function () { // ============   Запросы
@@ -178,7 +180,7 @@ var PORTAL = (function (PORTAL, $) {
 
         }()); // end -  --- Запросы
 
-        console.log('Component: "Categories"');
+
 
     };
 

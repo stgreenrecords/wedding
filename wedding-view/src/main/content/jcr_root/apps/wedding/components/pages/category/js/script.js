@@ -6,8 +6,9 @@ var PORTAL = (function (PORTAL, $) {
 
     PORTAL.modules.Category.init = function ($self) {
 
+        console.log('Component: "Category"');
 
-        (function () { // Работа с окнами входа и регистрации
+        /*(function () { // Работа с окнами входа и регистрации
 
             var entrance = document.getElementById("entrance-cabinet-btn");
             var registration = document.getElementById("registration-btn");
@@ -48,7 +49,7 @@ var PORTAL = (function (PORTAL, $) {
                 ;
             });
 
-        }()); // end -  --- с окнами входа и регистрации
+        }());*/ // end -  --- с окнами входа и регистрации
 
         (function () { // ============   Запросы
 
@@ -133,7 +134,7 @@ var PORTAL = (function (PORTAL, $) {
 
         }()); // end -  --- Запросы
 
-        console.log('Component: "Category"');
+
 
     };
 
