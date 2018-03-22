@@ -117,8 +117,8 @@ img, body, header, footer, nav, aside, article, section, figure, button, p, ul, 
   padding:0;  margin:0;
 }
 
-header{  
-  height: 225px;
+.head-block{
+    height: 225px;
   display: flex;
   justify-content:  center;
   background-color: #fff;
@@ -136,16 +136,14 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
     right: 5%;
     top: 40px;
     font-family: 'GothamPro',  sans-serif;
+    font-size: 18pt;
+    color: #222;
 }
 
 .central-head--title{
   font-family: 'Rosa Marena', cursive;
   font-size: 48px;
   text-align: center;
-}
-
-#entrance-cabinet-btn, #registration-btn {  /*кнопки рег и входа*/
-  cursor: pointer;
 }
 
 .vert-line{
@@ -156,6 +154,39 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
 	width:170px;
 	padding: 0 5% 0 0;
 }
+
+#entrance-cabinet-btn, #registration-btn, #cabinet_success {
+    cursor: pointer;
+}
+
+/* entrance success */
+
+#cabinet_success{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#cabinet_success{
+    display: none;
+}
+
+#cabinet_success .mail-count{
+    font-size: 12pt;
+    padding: 15px 0;
+}
+
+.for-mail-icon{
+    border-radius: 30px;
+    border: 1px solid black;
+    width: 60px;
+    height: 60px;
+    background:  url("/etc/clientlibs/wedding/pages/images/any_img/d2_6.jpg") center no-repeat;
+    background-size: 150%;
+    margin: 0 15px;
+}
+
 
 
 /* ==== nav ==== */
@@ -309,6 +340,7 @@ footer div a, footer div{
 }
 
 /*  =========   форма входа and reg */
+
 #entrance-form {
     position: fixed;
     height: 100%;
@@ -320,7 +352,7 @@ footer div a, footer div{
     visibility: hidden;
 }
 
-.window-entrance, .window-registation {
+.window-entrance, .window-registation, .window-registation-step2, .window-registation-step3-partner, .window-registation-step3-user {
     text-align: center;
     background-color: #f4f4f4;
     border: 1px solid #000;
@@ -330,12 +362,12 @@ footer div a, footer div{
     visibility: hidden;
 }
 
-.window-entrance{
+.window-entrance, .window-registation-step2{
     min-width: 60%;
     min-height: 50%;
 }
 
-.window-registation{
+.window-registation, .window-registation-step3-partner, .window-registation-step3-user {
     min-width: 60%;
     min-height: 70%;
 }
@@ -347,9 +379,9 @@ footer div a, footer div{
     margin: 0 auto;
 }
 
-.container-window-registation{
+.container-window-registation, .container-window-registation-step2, .container-window-registation-step3-user, .container-window-registation-step3-partner{
     padding: 5% 0;
-    width: 360px;
+    width: 420px;
     font-size: 15pt;
     margin: 0 auto;
 }
@@ -359,7 +391,7 @@ footer div a, footer div{
     justify-content: space-between;
 }
 
-.social-inter img, .btn-enter, .have-account-entrance{
+.social-inter img, .btn-enter, .have-account-entrance, .consent-working{
     cursor: pointer;
 }
 
@@ -372,12 +404,13 @@ footer div a, footer div{
     margin-bottom: 15px;
 }
 
-.mwindow-or{
-    margin: 15px 0 10px;
+.title-inter2 {
+    font-size: 20pt;
+    margin-bottom: 10px;
 }
 
-#remember-ident{
-    width: 20%;
+.mwindow-or{
+    margin: 15px 0 10px;
 }
 
 .mwindow input{
@@ -389,7 +422,17 @@ footer div a, footer div{
     font-size: 15pt;
 }
 
-.mwindow input::placeholder{
+.mwindow select{
+    box-sizing: border-box;
+    height: 50px;
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    font-size: 15pt;
+}
+
+.mwindow input::placeholder, .mwindow select::placeholder{
     color: #a0a0a0;
 }
 
@@ -401,7 +444,7 @@ footer div a, footer div{
     margin: 15px 0;
 }
 
-.have-account-entrance{
+.have-account-entrance, .consent-working{
     text-decoration: underline;
     color: #c3b89e;
 }
@@ -409,10 +452,36 @@ footer div a, footer div{
 .remember-forget{
     display: flex;
     justify-content: space-around;
+    margin: 15px -17px 30px;
 }
 
-.btn-enter{
+.btn-enter, .btn-enter-2{
     border: none;
+}
+
+.btn-enter-2{
+    margin: 15px 0;
+}
+
+.dop-info2{
+    font-size: 12pt;
+}
+
+.consent-user-div{
+    margin: 20px 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.consent-user-div span{
+    padding: 0 7px;
+}
+
+.mwindow .consent-check{
+    height: 18px;
+    width: 18px;
+    margin: 5px;
 }
 
 /*  =========  end  форма входа and reg */

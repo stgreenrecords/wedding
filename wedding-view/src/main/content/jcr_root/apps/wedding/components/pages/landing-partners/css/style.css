@@ -34,15 +34,6 @@
     font-size: 22pt;
 }
 
-.landing-cabinet-input{
-    position: absolute;
-    right: 5%;
-    top: 40px;
-    font-family: 'GothamPro',  sans-serif;
-    font-size: 18pt;
-    color: #000;
-}
-
 .btn-become-partner{
     margin-top: 60px;
     width: 300px;
@@ -62,9 +53,9 @@
     background-image:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/become_partner/Partner_Button_2.png");
 }
 
-#entrance-cabinet-btn-land, #registration-btn-land {
+/*#entrance-cabinet-btn-land, #registration-btn-land {
     cursor: pointer;
-}
+}*/
 
 /*  ======   --- -----  */
 
