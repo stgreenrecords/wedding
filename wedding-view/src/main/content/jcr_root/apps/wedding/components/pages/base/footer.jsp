@@ -9,6 +9,8 @@
 <div class="footer-line-div">	_____________________________	</div>
 <div class="social-btn-block"> <a href=" "> <img src="/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/Main_Page_Social_Media_Icons_operators/vk.png" alt="Вконтакте"> </a> <a href=" "> <img src="/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/Main_Page_Social_Media_Icons_operators/facebook.png" alt="ВФейсбуке"> </a> <a href=" "> <img src="/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/Main_Page_Social_Media_Icons_operators/insta.png" alt="ВИнстаграме"> </a> </div>
 
+<div class="btn-up"> <a href="#"> <img src="/etc/clientlibs/wedding/pages/images/on_all_pages/btn_up.png"> </a> </div>
+
 <section id="entrance-form">
 
 	<div class="mwindow window-entrance">
@@ -40,7 +42,6 @@
 
 				</div>
 
-
 			</form>
 
 			<div>
@@ -50,8 +51,6 @@
 		</div>
 
 	</div>
-
-
 
 	<div class="mwindow window-registation">
 
@@ -84,7 +83,7 @@
 			</form>
 
 			<div>
-				<button id="registration-futher" class="btn-enter"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/further.png" alt="ДАЛЕЕ">  </button>
+				<button id="btn-registration-futher" class="btn-enter"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/further.png" alt="ДАЛЕЕ">  </button>
 			</div>
 
 		</div>
@@ -98,12 +97,12 @@
 			<h2 class="title-inter2">В качестве кого вы хотите зарегистрироваться ?</h2>
 
 			<span> Клиента </span>
-			<input id="cheked_user" class="inp" name="selected-role" type="radio" >
+			<input id="cheked_user" class="inp" name="selected-role" type="radio" value="cheked_us" checked>
 			<p class="mwindow-or"> или </p>
-			<input id="cheked_partner" class="inp" name="selected-role" type="radio" >
+			<input id="cheked_partner" class="inp" name="selected-role" type="radio" value="cheked_part" >
 			<span> Партнера </span>
 
-			<div><button  id="registration-futher2" class="btn-enter-2"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/further.png" alt="ДАЛЕЕ">  </button> </div>
+			<div><button  id="btn-registration-futher2" class="btn-enter-2"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/further.png" alt="ДАЛЕЕ">  </button> </div>
 
 		</div>
 
@@ -113,7 +112,7 @@
 
 		<div class="container-window-registation-step3-user">
 
-			<h2 class="title-inter2">ЗАВЕРШЕНИЕ РЕГИСТРАЦИИ - (НЕТ В ДИЗАЙНЕ!!!)</h2>
+			<h2 class="title-inter2">ЗАВЕРШЕНИЕ РЕГИСТРАЦИИ - (НА ЮЗЕРА НЕТ В ДИЗАЙНЕ!!!)</h2>
 
 			<form action="" method="post">
 
@@ -139,12 +138,13 @@
 
 				</div>
 
-				<div>
-
-					<button  id="registration-finish-user" class="btn-enter" type="submit"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/registration.png" alt="ЗАРЕГИСТРИРОВАТЬСЯ">  </button>
-
-				</div>
 			</form>
+
+			<div class="registation3_errore_message"></div>
+
+			<div>
+				<button  id="btn-registration-finish-user" class="btn-enter" type="submit"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/registration.png" alt="ЗАРЕГИСТРИРОВАТЬСЯ"></button>
+			</div>
 
 		</div>
 
@@ -165,8 +165,6 @@
 					<option value="style">Стилист</option>
 				</select>
 
-
-
 				<p><input class="inp-user-name" type="text" name="user-name" placeholder="Город, Страна? (может разбить?)">  </p>
 				<p><input class="inp-user-surname" type="text" name="user-surname" placeholder="Номер телефона">  </p>
 				<p><input class="inp-user-email" type="email" name="user-email" placeholder="email">  </p>
@@ -182,7 +180,6 @@
 				<p><input class="inp-user-password" type="text" name="user-password" placeholder="Гугл+ ?(его нет в дизайне) ">  </p>
 				<p><input class="inp-user-password-repeat" type="text" name="user-password-repeat" placeholder="Сайт">  </p>
 
-
 				<div class="consent-user-div">
 
 					<input type="checkbox" id="consent-user-check" class="consent-check" name="consent" value="consent-user">
@@ -191,11 +188,12 @@
 
 				</div>
 
-
 			</form>
 
+			<div class="registation3_errore_message"></div>
+
 			<div>
-				<button id="registration-finish-partner" class="btn-enter" type="submit"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/registration.png" alt="ЗАРЕГИСТРИРОВАТЬСЯ">  </button>
+				<button id="btn-registration-finish-partner" class="btn-enter" type="submit"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/registration.png" alt="ЗАРЕГИСТРИРОВАТЬСЯ">  </button>
 			</div>
 
 		</div>

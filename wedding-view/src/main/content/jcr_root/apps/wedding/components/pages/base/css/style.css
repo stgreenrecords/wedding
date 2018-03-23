@@ -289,9 +289,9 @@ main{
 
 .btn-up{
  /* display: none;*/
-  position: fixed; 
-  right: 7%;
-  bottom: 15%;
+  position: fixed;
+  right: 3%;
+  bottom: 7%;
 }
 
 .btn-up a{ padding: 20px;}
@@ -398,6 +398,20 @@ footer div a, footer div{
     margin-bottom: 15px;
 }
 
+.registation3_errore_message{
+    min-height: 25px;
+    background-color: yellow;
+    color: red;
+    z-index: 12;
+    position: absolute;
+    display: none;
+    bottom:  17%;
+}
+
+.registation3_errore_message::before{
+    content:"Вам необходимо принять условия сотрудничества";
+}
+
 .title-inter2 {
     font-size: 20pt;
     margin-bottom: 10px;
@@ -479,3 +493,4 @@ footer div a, footer div{
 }
 
 /*  =========  end  форма входа and reg */
+/*Del this yesterday*/

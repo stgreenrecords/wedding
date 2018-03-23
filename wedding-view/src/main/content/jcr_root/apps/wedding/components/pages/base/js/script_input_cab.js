@@ -9,38 +9,24 @@ var PORTAL = (function (PORTAL, $) {
 
         console.log('Component: "#cabinet-input-block"');
 
-        (function () { // Работа с окнами входа и регистрации  для лендинга
+        (function(){ // Работа с окнами входа и регистрации
 
             var entrance = document.getElementById("entrance-cabinet-btn");
-
             var registration = document.getElementById("registration-btn");
-           // var registration2 = document.querySelector(".btn-become-partner2");
-           // var registration3 = document.querySelector(".btn-become-partner");
             var entrance2 = document.querySelector(".have-account-entrance");
-            var reg_futher = document.querySelector('#registration-futher');
-            var reg_futher2 = document.querySelector('#registration-futher2');
-            var reg_fin_user = document.querySelector('#registration-finish-user');
-            var reg_fin_part = document.querySelector('#registration-finish-partner');
-
+            var reg_futher = document.querySelector('#btn-registration-futher');
+            var reg_futher2 = document.querySelector('#btn-registration-futher2');
             var enter = document.getElementById("btn-entrance-form");
 
             entrance.addEventListener("click", function(evt) {
-                console.log(evt.type);
-                console.log(evt.clientX);
                 this.style.color = "#555";
             });
 
             registration.addEventListener("click", function(evt) {
                 this.style.color = "#555";
-                console.log(evt.type);
             });
 
             var modal = document.querySelector("#entrance-form");
-
-            function showForm(){
-                /* Можно написать появление формы - а может и не писать */
-                // На вход передается class
-            }
 
             function showEntranceForm() {
                 modal.style.visibility = "visible";
@@ -58,17 +44,11 @@ var PORTAL = (function (PORTAL, $) {
                 mwindow.style.top = (document.documentElement.clientHeight - mwindow.getBoundingClientRect().height)/3 + "px";
             };
 
-            /* function hiddenModalWindow(){
-                 let mwindow = document.querySelector(".window-registation");
-             };*/
-
             var data_registration = {};
 
             entrance.addEventListener("click", showEntranceForm);
             entrance2.addEventListener("click", showEntranceForm);
             registration.addEventListener("click", showRegistrationForm);
-           // registration3.addEventListener("click", showRegistrationForm);
-           // registration2.addEventListener("click", showRegistrationForm);
             entrance2.addEventListener("click", function(){
                 document.querySelector(".window-registation").style.visibility = "hidden";
             });
@@ -82,7 +62,6 @@ var PORTAL = (function (PORTAL, $) {
 
             reg_futher.addEventListener("click", function(){
                 document.querySelector(".window-registation").style.visibility = "hidden";
-                /*	document.querySelector(".window-registation-step2").style.visibility = "visible";*/
                 let mwindow = document.querySelector(".window-registation-step2");
                 mwindow.style.visibility = "visible";
                 mwindow.style.left = (document.documentElement.clientWidth - mwindow.getBoundingClientRect().width)/2 + "px";
@@ -90,30 +69,55 @@ var PORTAL = (function (PORTAL, $) {
             });
 
             reg_futher2.addEventListener("click", function(){
-                document.querySelector(".window-registation-step2").style.visibility = "hidden";
-                /*if (radio_value == "user")
-                    let mwindow = document.querySelector(".window-registation-step3-user");
-                else */
-                let mwindow = document.querySelector(".window-registation-step3-partner");
 
-                mwindow.style.visibility = "visible";
-                mwindow.style.left = (document.documentElement.clientWidth - mwindow.getBoundingClientRect().width)/2 + "px";
-                mwindow.style.top = (document.documentElement.clientHeight - mwindow.getBoundingClientRect().height)/3 + "px";
-            });
+                let hide = document.querySelector(".window-registation-step2");
 
-            var btn_finish =  document.querySelector("#registration-finish-partner");
+                var mwindow3 = document.querySelector(".window-registation-step3-user");
 
-            btn_finish.addEventListener("click", function(){
-                document.querySelector(".window-registation-step3-partner").style.visibility = "hidden";
-                cabinet_login.style.display = "none";
-                cabinet_success.style.display = "flex";
-                modal.style.visibility = "hidden";
-            });
+                if ($("input[name='selected-role']:checked").val() == 'cheked_part'){
 
-            window.addEventListener("resize", function(){
-                if (modal.style.visibility == "visible"){
-                    showEntranceForm();
+                    mwindow3 = document.querySelector(".window-registation-step3-partner");
+                    hide.style.visibility = "hidden";
+
+                    $("#btn-registration-finish-partner").on("click", function(){
+                        console.log($("input[name='consent']:checked").val());
+                        if ($("input[name='consent']:checked").val() == 'consent-user'){
+                            mwindow3.style.visibility = "hidden";
+                            modal.style.visibility = "hidden";
+                            cabinet_login.style.display = "none";
+                            cabinet_success.style.display = "flex";
+                        } else if ($("input[name='consent']:checked").val() == undefined){
+                            $('.registation3_errore_message').css('display','block')
+                        } else {
+                            console.log("Error");
+                        }
+                    });
+
+                }else if ($("input[name='selected-role']:checked").val() == 'cheked_us')	{
+
+                    mwindow3 = document.querySelector(".window-registation-step3-user");
+                    hide.style.visibility = "hidden";
+
+                    $("#btn-registration-finish-user").on("click", function(){
+                        console.log($("input[name='consent']:checked").val());
+                        if ($("input[name='consent']:checked").val() == 'consent-user'){
+                            mwindow3.style.visibility = "hidden";
+                            modal.style.visibility = "hidden";
+                            cabinet_login.style.display = "none";
+                            cabinet_success.style.display = "flex";
+                        } else if ($("input[name='consent']:checked").val() == undefined){
+                            $('.registation3_errore_message').css('display','block')
+                        } else {
+                            console.log("Error");
+                        }
+                    });
+
                 }
+
+                mwindow3.style.visibility = "visible";
+                mwindow3.style.left = (document.documentElement.clientWidth - mwindow3.getBoundingClientRect().width)/2 + "px";
+                mwindow3.style.top = (document.documentElement.clientHeight - mwindow3.getBoundingClientRect().height)/3 + "px";
+
             });
 
             modal.addEventListener("click", function(evt) {
@@ -125,7 +129,7 @@ var PORTAL = (function (PORTAL, $) {
                 };
             });
 
-        }()); // end -  ---   окнами входа и регистрации  для лендинга
+        }()); // end -  --- с окнами входа и регистрации
 
     };
 
