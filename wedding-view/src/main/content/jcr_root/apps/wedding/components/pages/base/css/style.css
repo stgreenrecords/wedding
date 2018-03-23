@@ -96,14 +96,6 @@
     font-style: normal;
 }
 
-@font-face {
-  font-family: "Theano Didot";
-  src: url("/etc/clientlibs/wedding/pages/fonts/THEANODIDOT-REGULAR.TTF");
-  font-weight: normal;
-  font-style: normal;
-}
-
-
 body{
   font-family: 'Theano Didot',  serif;
   font-weight: lighter;
@@ -113,12 +105,12 @@ body{
   color: #222;
 }
 
-img, body, header, footer, nav, aside, article, section, figure, button, p, ul, ol, li, h1, h2, h3,h4,h5,h6, input  {
+img, body, header, footer, nav, aside, article, section, figure, button, p, ul, ol, li, h1, h2, h3,h4,h5,h6, input, *{
   padding:0;  margin:0;
 }
 
 .head-block{
-    height: 225px;
+  min-height: 225px;
   display: flex;
   justify-content:  center;
   background-color: #fff;
@@ -174,10 +166,10 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
 
 #cabinet_success .mail-count{
     font-size: 12pt;
-    padding: 15px 0;
+    padding: 15px 0 15px 10px;
 }
 
-.for-mail-icon{
+.mini-avatar{
     border-radius: 30px;
     border: 1px solid black;
     width: 60px;
@@ -187,9 +179,8 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
     margin: 0 15px;
 }
 
-
-
 /* ==== nav ==== */
+
 .main-menu{
   box-sizing: border-box;
   text-transform: uppercase; 
@@ -220,9 +211,11 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
 }
 
 /*=====  main start ======*/
+
 main{
   width: 70%;
   margin: 0 auto;
+  background-color: #fff;
 }
 
 .top-bar{
@@ -237,7 +230,7 @@ main{
   color: #fff;
   margin: 20px 2% 0;
   background-size: cover;
-  background-position: center center;
+  background-position: center;
   background-repeat: no-repeat;
 }
 
@@ -263,7 +256,7 @@ main{
   width: 100%;
   height: 75%;
   background-size: cover;
-  background-position: center center;
+  background-position: center;
   background-repeat: no-repeat;
 }
 
@@ -278,6 +271,7 @@ main{
 .search-usually:nth-child(3) .search-usually_img{
   background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_2.jpg');
 }
+
 .search-usually_content_name{
   line-height: 1;
   padding-top: 7px;
@@ -299,10 +293,10 @@ main{
   right: 7%;
   bottom: 15%;
 }
+
 .btn-up a{ padding: 20px;}
 
-
-
+/*=====  main finish ======*/
 /*======== Footer =======*/
 
 footer{
