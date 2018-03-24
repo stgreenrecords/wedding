@@ -147,7 +147,7 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
 	padding: 0 5% 0 0;
 }
 
-#entrance-cabinet-btn, #registration-btn, #cabinet_success {
+#entrance-cabinet-btn, #registration-btn, #cabinet_success, #btn-registration-futher2, .inp  {
     cursor: pointer;
 }
 
@@ -406,10 +406,11 @@ footer div a, footer div{
     position: absolute;
     display: none;
     bottom:  17%;
+    left: 3%;
 }
 
 .registation3_errore_message::before{
-    content:"Вам необходимо принять условия сотрудничества";
+    content:"Вам необходимо принять условия сотрудничества и заполнить все обязательные поля";
 }
 
 .title-inter2 {
