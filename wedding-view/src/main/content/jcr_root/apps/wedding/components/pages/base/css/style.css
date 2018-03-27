@@ -179,6 +179,32 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
     margin: 0 15px;
 }
 
+.mini-menu-drop{
+    position: absolute;
+    right: -0.5%;
+    top:  60px;
+    width: 120%;
+    box-shadow:  5px 5px 20px 5px #a0a0a0;
+    background-color: #fff;
+    padding: 20px 30px 20px 0;
+}
+
+.hidden_cl{
+    visibility: hidden;
+}
+
+.mini-menu-drop li{
+    list-style-type: none;
+    text-align: left;
+    width: 100%;
+    padding: 5px 0 5px 30px;
+}
+
+.mini-menu-drop li:hover {
+    background-color: #afa58e;
+    color: #fff;
+}
+
 /* ==== nav ==== */
 
 .main-menu{

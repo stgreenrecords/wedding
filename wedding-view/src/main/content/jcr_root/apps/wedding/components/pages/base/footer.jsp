@@ -28,8 +28,8 @@
 			<p class="mwindow-or"> или </p>
 
 			<form action="" method="post">
-				<p><input   type="email" name="user-email" placeholder="Введите email">  </p>
-				<p><input   type="password" name="user-email" placeholder="Введите пароль">  </p>
+				<p><input id="user_email"  type="email" name="user-email" placeholder="Введите email">  </p>
+				<p><input   type="password" name="user-password" placeholder="Введите пароль">  </p>
 
 				<div class="remember-forget">
 
@@ -69,7 +69,7 @@
 			<form action="" method="post">
 
 				<p><input id="registration-firstName" class="inp-user-name" type="text" name="user-name" placeholder="Имя / Название компании" value="Funny">  </p>
-				<p><input id="registration-lastName" class="inp-user-surname" type="text" name="user-surname" placeholder="Фамилия" value="Piople">  </p>
+				<p><input id="registration-lastName" class="inp-user-surname" type="text" name="user-surname" placeholder="Фамилия" value="People">  </p>
 				<p><input id="registration-email" class="inp-user-email" type="email" name="user-email" placeholder="Введите email" value="funny@gmail.com">  </p>
 				<p><input id="registration-password" class="inp-user-password" type="password" name="user-password" placeholder="Введите пароль" value="123654">  </p>
 				<p><input id="registration-password-repeat" class="inp-user-password-repeat" type="password" name="user-password-repeat" placeholder="Подтвердите пароль" value="123654">  </p>
@@ -112,11 +112,21 @@
 
 		<div class="container-window-registation-step3-user">
 
-			<h2 class="title-inter2">ЗАВЕРШЕНИЕ РЕГИСТРАЦИИ - (НА ЮЗЕРА НЕТ В ДИЗАЙНЕ!!!)</h2>  <!-- ЮЗЕРА -->
+			<h2 class="title-inter2">ЗАВЕРШЕНИЕ РЕГИСТРАЦИИ</h2>  <!-- ЮЗЕРА -->
 
 			<form action="" method="post">
 
-				<p><input id="city_finish-user" type="text" name="city" placeholder="Город, Страна? (может разбить?)"  value="Менск">  </p>
+				<!-- 	<p><input id="city_finish-user" type="text" name="city" placeholder="Город"  value="Менск">  </p> -->
+
+				<select id="city_finish-user" name="city_finish-user">
+					<option value="Minsk" selected>Минск</option>
+					<option value="Brest">Брест</option>
+					<option value="Vitebsk">Витебск</option>
+					<option value="Gomel">Гомель</option>
+					<option value="Grodno">Гродно</option>
+					<option value="Mogilev">Могилев</option>
+				</select>
+
 				<p><input id="tel_finish-user" type="tel" name="tel" placeholder="Номер телефона" value="+375(29)3222232">  </p>
 				<p><input id="email_finish-user" type="email" name="user-email" placeholder="email" disabled>  </p>
 
@@ -128,7 +138,7 @@
 				<p><input id="vk_finish-user" type="text" name="user-name" placeholder="ВКонтакте" value="vk">  </p>
 				<p><input id="fb_finish-user" type="text" name="user-surname" placeholder="Фейсбук" value="fb">  </p>
 				<p><input id="ok_finish-user" type="text" name="user-email" placeholder="Одноклассники" value="ok">  </p>
-				<p><input id="googl_finish-user" type="text" name="user-password" placeholder="Гугл+ ?(его нет в дизайне)" value="g+">  </p>
+				<!-- 	<p><input id="googl_finish-user" type="text" name="user-password" placeholder="Гугл+ ?(его нет в дизайне)" value="g+">  </p> -->
 
 				<div class="consent-user-div">
 
@@ -165,7 +175,15 @@
 					<option value="style" selected>Стилист</option>
 				</select>
 
-				<p><input id="city_finish-partner"  type="text" name="user-name" placeholder="Город, Страна? (может разбить?)" value="Менск">  </p>
+				<!-- <p><input id="city_finish-partner"  type="text" name="user-name" placeholder="Город, Страна? (может разбить?)" value="Менск">  </p> -->
+				<select id="city_finish-partner" name="city_finish-user">
+					<option value="Minsk" selected>Минск</option>
+					<option value="Brest">Брест</option>
+					<option value="Vitebsk">Витебск</option>
+					<option value="Gomel">Гомель</option>
+					<option value="Grodno">Гродно</option>
+					<option value="Mogilev">Могилев</option>
+				</select>
 				<p><input id="tel_finish-partner" type="tel" name="user-surname" placeholder="Номер телефона" value="+375(29)3222232">  </p>
 				<p><input id="email_finish-patner"  type="email" name="user-email" placeholder="email" disabled>  </p>
 
@@ -177,7 +195,7 @@
 				<p><input id="vk_finish-partner" type="text" name="user-name" placeholder="ВКонтакте">  </p>
 				<p><input id="fb_finish-partner" type="text" name="user-surname" placeholder="Фейсбук">  </p>
 				<p><input id="ok_finish-partner" type="text" name="user-email" placeholder="Одноклассники">  </p>
-				<p><input id="googl_finish-partner" type="text" name="user-password" placeholder="Гугл+ ?(его нет в дизайне) ">  </p>
+				<!-- 	<p><input id="googl_finish-partner" type="text" name="user-password" placeholder="Гугл+ ?(его нет в дизайне) ">  </p> -->
 				<p><input id="site_finish-partner" type="text" name="user-password-repeat" placeholder="Сайт">  </p>
 
 				<div class="consent-user-div">

@@ -39,7 +39,7 @@ var PORTAL = (function (PORTAL, $) {
 
         var dayTimer = function () {
 
-            var date_finish = new Date(2018, 2, 30, 17, 0, 0, 0);
+            var date_finish = new Date(2018, 3, 10, 17, 0, 0, 0);
 
             var Date_remained = function (date_finish, current_date) {
                 this.remained_all = date_finish - current_date;

@@ -64,6 +64,12 @@
     margin-top: 35px;
 }
 
+.video-block iframe{
+    width: 96%;
+    min-height: 650px;
+    margin: 50px 0 70px;
+}
+
 .benifits-title, .with-us-title, .about-us-title {
     font-family: 'Theano Didot',  serif;
     font-weight: normal;
