@@ -19,10 +19,10 @@
 
 			<h2 class="title-inter" >ВХОД</h2>
 			<div class="social-inter">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/vk.png" alt="VK">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/facebook.png" alt="F">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/g+.png" alt="G+">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/ok.png" alt="OK">
+				<img id="vk-login-btn" src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/vk.png" alt="VK">
+				<img id="fb-login-btn" src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/facebook.png" alt="F">
+				<img id="gmail-login-btn" src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/g+.png" alt="G+">
+				<img id="ok-login-btn" src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/ok.png" alt="OK">
 			</div>
 
 			<p class="mwindow-or"> или </p>
@@ -58,21 +58,21 @@
 
 			<h2 class="title-inter">РЕГИСТРАЦИЯ</h2>
 			<div class="social-inter">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/vk.png" alt="VK">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/facebook.png" alt="F">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/g+.png" alt="G+">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/ok.png" alt="OK">
+				<img id="vk-reg-btn" src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/vk.png" alt="VK">
+				<img id="fb-reg-btn" src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/facebook.png" alt="F">
+				<img id="gmail-reg-btn" src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/g+.png" alt="G+">
+				<img id="ok-reg-btn" src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/ok.png" alt="OK">
 			</div>
 
 			<p class="mwindow-or"> или </p>
 
-			<form action="" method="post">
+			<form id="form-reg-step1" action="" method="post">
 
 				<p><input id="registration-firstName" class="inp-user-name" type="text" name="user-name" placeholder="Имя / Название компании" value="Funny">  </p>
 				<p><input id="registration-lastName" class="inp-user-surname" type="text" name="user-surname" placeholder="Фамилия" value="People">  </p>
 				<p><input id="registration-email" class="inp-user-email" type="email" name="user-email" placeholder="Введите email" value="funny@gmail.com">  </p>
-				<p><input id="registration-password" class="inp-user-password" type="password" name="user-password" placeholder="Введите пароль" value="123654">  </p>
-				<p><input id="registration-password-repeat" class="inp-user-password-repeat" type="password" name="user-password-repeat" placeholder="Подтвердите пароль" value="123654">  </p>
+				<p><input id="registration-password" class="inp-user-password" type="password" name="user-password" placeholder="Введите пароль" value="Ss123asdf" title="Пароль должен содержать более 8 символов строчных и заглавных букв и min 1 цифру ">  </p>
+				<p><input id="registration-password-repeat" class="inp-user-password-repeat" type="password" name="user-password-repeat" placeholder="Подтвердите пароль" value="Ss123asdf">  </p>
 
 				<div class="have-account">
 
@@ -96,11 +96,11 @@
 
 			<h2 class="title-inter2">В качестве кого вы хотите зарегистрироваться ?</h2>
 
-			<span> Клиента </span>
-			<input id="cheked_user" class="inp" name="selected-role" type="radio" value="cheked_us" checked >
+			<span title="У вас скоро свадьба. Вам нужны профессионалы"> Клиента </span>
+			<input id="cheked_user" class="inp" name="selected-role" type="radio" value="cheked_us" title="У вас скоро свадьба. Вам нужны профессионалы" >
 			<p class="mwindow-or"> или </p>
-			<input id="cheked_partner" class="inp" name="selected-role" type="radio" value="cheked_part"  >
-			<span> Партнера </span>
+			<input id="cheked_partner" class="inp" name="selected-role" type="radio" title="Вы работаете или хотите начать работу в свадебном бизнесе" value="cheked_part" checked >
+			<span title="Вы работаете или хотите начать работу в свадебном бизнесе"> Партнера </span>
 
 			<div><button  id="btn-registration-futher2" class="btn-enter-2"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/further.png" alt="ДАЛЕЕ">  </button> </div>
 
@@ -114,7 +114,7 @@
 
 			<h2 class="title-inter2">ЗАВЕРШЕНИЕ РЕГИСТРАЦИИ</h2>  <!-- ЮЗЕРА -->
 
-			<form action="" method="post">
+			<form id="form-reg-step3-user" action="" method="post">
 
 				<!-- 	<p><input id="city_finish-user" type="text" name="city" placeholder="Город"  value="Менск">  </p> -->
 
@@ -166,13 +166,13 @@
 
 			<h2 class="title-inter2">ЗАВЕРШЕНИЕ РЕГИСТРАЦИИ</h2>  <!-- ПАРТНЕРА -->
 
-			<form action="" method="post">
+			<form id="form-reg-step3-partner" action="" method="post">
 
 				<select id="work-sphere" name="work-sphere">
 					<option value="title" selected disabled>Сфера деятельности</option>
-					<option value="photo">Фотограф</option>
-					<option value="aminer">Ведущий</option>
-					<option value="style" selected>Стилист</option>
+					<!-- <option value="photo">Фотограф</option>
+                    <option value="aminer">Ведущий</option>
+                    <option value="style" selected>Стилист</option> -->
 				</select>
 
 				<!-- <p><input id="city_finish-partner"  type="text" name="user-name" placeholder="Город, Страна? (может разбить?)" value="Менск">  </p> -->

@@ -451,9 +451,9 @@ footer div a, footer div{
 .mwindow input{
     height: 30px;
     margin: 10px 0;
-    padding: 10px;
+    padding: 10px 0 10px 3%;
     border: none;
-    width: 100%;
+    width: 97%;
     font-size: 15pt;
 }
 
@@ -519,5 +519,9 @@ footer div a, footer div{
     margin: 5px;
 }
 
+.inp_red_border{
+    background-color: #f99;
+}
+
 /*  =========  end  форма входа and reg */
-/*Del this yesterday*/
+

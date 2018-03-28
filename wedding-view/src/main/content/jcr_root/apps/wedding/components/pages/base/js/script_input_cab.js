@@ -17,12 +17,14 @@ var PORTAL = (function (PORTAL, $) {
             var reg_futher = document.querySelector('#btn-registration-futher');
             var reg_futher2 = document.querySelector('#btn-registration-futher2');
             var enter = document.getElementById("btn-entrance-form");
-            var modal = document.querySelector("#entrance-form"); // (+)
+            var modal = document.querySelector("#entrance-form");
 
             var dataRegistration = {};
+            var userLogin = {};
             var authStatusFromCookie;
             var authTypeFromCookie;
             var userEmailFromCookie;
+            var authType = 'EMAIL';
 
             authStatusFromCookie = Cookies.get('authStatus');
             authTypeFromCookie = Cookies.get('authType');
@@ -62,7 +64,7 @@ var PORTAL = (function (PORTAL, $) {
                 mwindow.style.top = (document.documentElement.clientHeight - mwindow.getBoundingClientRect().height)/3 + "px";
             }
 
-            function inputFill(){
+            function inputEmailFill(){
                 $('#email_finish-user').val(dataRegistration.email);
                 $('#email_finish-patner').val(dataRegistration.email);
             }
@@ -76,12 +78,77 @@ var PORTAL = (function (PORTAL, $) {
                 cabinet_success.style.display = "none";
                 cabinet_login.style.display = "block";
                 Cookies.set('authStatus', 'NotAuth');
+                Cookies.set('authType', '');
             }
 
             function setCookiesAuth(authStatusValue, authTypeValue){
                 Cookies.set('authStatus', authStatusValue);
                 Cookies.set('authType', authTypeValue);
             }
+
+            function enterOfForm(){
+                document.querySelector(".window-entrance").style.visibility = "hidden";
+                modal.style.visibility = "hidden";
+                showCabinetSuccess();
+            }
+
+            function sendRegInfo(url_link){
+
+                $.ajax({
+                    url: url_link,
+                    type: "POST",
+                    dataType: "json",
+                    data: dataRegistration,
+                    beforeSend: function () {
+                        console.log("как сча отправлю !");
+                    },
+                    success: function (data) {
+                        // if (data) {
+                        console.log(data);
+                        showCabinet();
+                        // }
+                    },
+                    complete: function () {
+                        console.log('Наверное еще не настроили приемку на сервере |');
+                    },
+                    error: function (e) {
+                        console.log('Что-то пошло не так (');
+                        console.log(e);
+                    }
+                });
+
+            }
+
+
+            function sendLoginRequest(url_link){
+                $.ajax({
+                    url: url_link,
+                    type: "POST",
+                    dataType: "json",
+                    // data: userId,
+
+                    success: function (data) {
+                        // if (data) {
+                        console.log(data);
+
+                        // }
+                    }
+                });
+
+            }
+
+            function showCabinet(){
+                console.log(' ============ showCabinet - in the studia ) ============ ');
+            }
+
+            function inputFirstStepRegFill(){
+
+                $("#registration-firstName").val(dataRegistration.firstName) ;
+                $("#registration-lastName").val(dataRegistration.lastName) ;
+                $("#registration-email").val(dataRegistration.email) ;
+
+            }
+
 
             entrance.addEventListener("click", showEntranceForm);
             entrance2.addEventListener("click", showEntranceForm);
@@ -90,17 +157,223 @@ var PORTAL = (function (PORTAL, $) {
                 document.querySelector(".window-registation").style.visibility = "hidden";
             });
 
+
+
+            /*	    function Social (type){ // 			подумать через конструктор !?
+
+
+
+                            "login": function() {
+                                console.log('login function ready');
+                            },
+
+                            "logout": function () {
+                                console.log('logout function ready');
+                            },
+
+                            "status": function () {
+                                 console.log('status function ready');
+
+                            }
+
+
+
+                    }
+
+                       var  FB = new Social(FB);*/
+
+
+
+            var VK = {
+
+                "login": function() {
+
+                    console.log('login  function ready');
+                    dataRegistration.vkID = '321654987';
+                    dataRegistration.firstName =  'ANY_Name';
+                    dataRegistration.lastName =  'ANY_Name';
+                    dataRegistration.email =  'ANY_email@email.com';
+                    inputFirstStepRegFill();
+
+                },
+
+                "logout": function () {
+                    console.log('logout function ready');
+                },
+
+                "status": function () {
+
+                    // VK.Auth.getLoginStatus(function (response) {
+                    //              if (response.status === "connected") {
+                    //                  userLogin.authStatus = true;
+                    //                  userLogin.userID = response.session.mid;
+                    //                  userLogin.authType = "VK";
+                    //              }
+                    //          });
+                    // sendLoginRequest('/services/rest.login.json?wedding-session-id=1593572684');
+
+                    if (true){
+                        setCookiesAuth('authorized', authType);
+                        enterOfForm();
+                        console.log('status function ready');
+
+                    }
+
+                }
+            };
+
+
+
+            var FB = {
+
+                "login": function() {
+
+                    dataRegistration.fbID = '456852';
+                    dataRegistration.firstName =  'ANY_Name';
+                    dataRegistration.lastName =  'ANY_Name';
+                    dataRegistration.email =  'ANY_email@email.com';
+                    inputFirstStepRegFill();
+
+                    console.log('login function ready');
+
+                },
+
+                "logout": function () {
+                    console.log('logout function ready');
+                },
+
+                "status": function () {
+
+                    // sendLoginRequest('/services/rest.login.json?wedding-session-id=1593572684');
+
+                    if (true){
+                        setCookiesAuth('authorized', authType);
+                        enterOfForm();
+                        console.log('status function ready');
+
+                    }
+
+                }
+
+            };
+
+            var GOOGLE = {
+
+                "login": function() {
+
+                    console.log('login  function ready');
+                    dataRegistration.googleID = '357951';
+                    dataRegistration.firstName =  'ANY_Name';
+                    dataRegistration.lastName =  'ANY_Name';
+                    dataRegistration.email =  'ANY_email@email.com';
+                    inputFirstStepRegFill();
+                    console.log('login function ready');
+                },
+
+                "logout": function () {
+                    console.log('logout function ready');
+                },
+
+                "status": function (responce) {
+
+                    // sendLoginRequest('/services/rest.login.json?wedding-session-id=1593572684');
+
+                    if (true){
+                        setCookiesAuth('authorized', authType);
+                        enterOfForm();
+                        console.log('status function ready');
+
+                    }
+
+                }
+
+            };
+
+            var OK = {
+
+                "login": function() {
+
+                    console.log('login  function ready');
+                    dataRegistration.okID = '856123';
+                    dataRegistration.firstName =  'ANY_Name';
+                    dataRegistration.lastName =  'ANY_Name';
+                    dataRegistration.email =  'ANY_email@email.com';
+                    inputFirstStepRegFill();
+                    console.log('login function ready');
+                },
+
+                "logout": function () {
+                    console.log('logout function ready');
+                },
+
+                "status": function () {
+
+                    // sendLoginRequest('/services/rest.login.json?wedding-session-id=1593572684');
+
+                    if (true){
+                        setCookiesAuth('authorized', authType);
+                        enterOfForm();
+                        console.log('status function ready');
+
+                    }
+
+                }
+
+            };
+
+            $("#vk-login-btn").click(function () {
+                authType = "VK";
+                VK.status();
+            });
+
+            $("#fb-login-btn").click(function () {
+                authType = "FACEBOOK";
+                FB.status();
+            });
+
+            $("#gmail-login-btn").click(function () {
+                authType = "GOOGLE";
+                GOOGLE.status();
+            });
+
+            $("#ok-login-btn").click(function () {
+                authType = "OK";
+                OK.status();
+            });
+
+
+            $("#vk-reg-btn").click(function () {
+                authType = "VK";
+                VK.login();
+            });
+
+            $("#fb-reg-btn").click(function () {
+                authType = "FACEBOOK";
+                FB.login();
+            });
+
+            $("#gmail-reg-btn").click(function () {
+                authType = "GOOGLE";
+                GOOGLE.login();
+            });
+
+            $("#ok-reg-btn").click(function () {
+                authType = "OK";
+                OK.login();
+            });
+
+
             enter.addEventListener("click", function(){
-                document.querySelector(".window-entrance").style.visibility = "hidden";
-                showCabinetSuccess();
-                modal.style.visibility = "hidden";
+
+                enterOfForm();
                 setCookiesAuth('authorized', 'EMAIL');
                 if ($('#remember-ident').val() === 'remember-ident-user'){
                     Cookies.set('userEmail', $('#user_email').val());
                 }
+
             });
 
-            function firstStepWindow(){
+            function secondStepRegWindow(){
                 document.querySelector(".window-registation").style.visibility = "hidden";
                 var mwindow = document.querySelector(".window-registation-step2");
                 mwindow.style.visibility = "visible";
@@ -109,18 +382,28 @@ var PORTAL = (function (PORTAL, $) {
             }
 
             (function firstStepReg() {
+
+                $('#registration-password-repeat').on('blur', function(){
+                    if ($("#registration-password").val() !== $("#registration-password-repeat").val())
+                        $('#registration-password-repeat').addClass('inp_red_border');
+                });
+                $('#registration-password-repeat').on('focus', function(){
+                    $('#registration-password-repeat').removeClass('inp_red_border');
+                });
+
                 $("#btn-registration-futher").click(function () {
 
                     var firstName = $("#registration-firstName").val();
                     var lastName = $("#registration-lastName").val();
                     var email = $("#registration-email").val();
                     var password = $("#registration-password").val();
+                    var password_rep = $("#registration-password-repeat").val();
 
-                    var regul_passw = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.([a-z][a-z][a-z]|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/ig;
-                    var regul_email = 	/^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.([a-z][a-z][a-z]|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/;
+                    var regul_passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}$/;
+                    var regul_email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-                    if (firstName && lastName && password   && email.match(regul_email)   ) {
-                        firstStepWindow();
+                    if (firstName && lastName && password.match(regul_passw) && email.match(regul_email) && password === password_rep) {
+                        secondStepRegWindow();
                         dataRegistration.firstName =  firstName;
                         dataRegistration.lastName =  lastName;
                         dataRegistration.email =  email;
@@ -134,7 +417,7 @@ var PORTAL = (function (PORTAL, $) {
             })();
 
             function compileInput(){
-                return coppl_inp_obj;
+                return compl_inp_obj;
             }
 
             function lastStepRegPartner(){
@@ -146,6 +429,26 @@ var PORTAL = (function (PORTAL, $) {
                 mwindow3.style.visibility = "visible";
                 mwindow3.style.left = (document.documentElement.clientWidth - mwindow3.getBoundingClientRect().width)/2 + "px";
                 mwindow3.style.top = (document.documentElement.clientHeight - mwindow3.getBoundingClientRect().height)/3 + "px";
+
+                $.ajax({ // Запрос на добавление всех категорий в селект
+                    url: "http://wedding-services.mycloud.by/services/rest.catalog-categories/home/users/wedding/partners.json",
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        var allCategories = data;
+
+                        console.dir(allCategories);
+                        for (var prop in allCategories){
+                            $('#work-sphere').append('<option value="'+prop+ '">' + prop + '</option>');
+
+                        }
+                    },
+                    error: function () { // На случай если запрос не прошел - сферу пишет вручную
+                        $('#work-sphere').detach();
+                        $('#form-reg-step3-partner').prepend('<p><input id="work-sphere" type="text" placeholder="Сфера деятельности"></p>');
+                        console.log("success allCategories");
+                    }
+                });
 
                 $("#btn-registration-finish-partner").on("click", function(){
 
@@ -171,7 +474,7 @@ var PORTAL = (function (PORTAL, $) {
                         modal.style.visibility = "hidden";
                         showCabinetSuccess();
                         console.dir(dataRegistration);
-
+                        setCookiesAuth('authorized', authType);
                         sendRegInfo("http://wedding-services.mycloud.by/services/rest.partner.create");
 
                     } else /*if ($("input[name='consent']:checked").val() === undefined)*/{
@@ -214,7 +517,7 @@ var PORTAL = (function (PORTAL, $) {
                         modal.style.visibility = "hidden";
                         showCabinetSuccess();
                         console.dir(dataRegistration);
-
+                        setCookiesAuth('authorized', authType);
                         sendRegInfo("http://wedding-services.mycloud.by/services/rest.users.create");
 
 
@@ -230,40 +533,9 @@ var PORTAL = (function (PORTAL, $) {
 
             }
 
-            function sendRegInfo(url_link){
-
-                $.ajax({
-                    url: url_link,
-                    type: "POST",
-                    dataType: "json",
-                    data: dataRegistration,
-                    beforeSend: function () {
-                        console.log("как сча отправлю !");
-                    },
-                    success: function (data) {
-                        // if (data) {
-                        console.log(data);
-                        showCabinet();
-                        // }
-                    },
-                    complete: function () {
-                        console.log('Наверное еще не настроили приемку на сервере |');
-                    },
-                    error: function (e) {
-                        console.log('Что-то пошло не так (');
-                        console.log(e);
-                    }
-                });
-
-            }
-
-            function showCabinet(){
-                console.log(' ============ showCabinet - in the studia ) ============ ');
-            }
-
             reg_futher2.addEventListener("click", function(){
 
-                inputFill();
+                inputEmailFill();
 
                 if ($("input[name='selected-role']:checked").val() === 'cheked_part'){
 
