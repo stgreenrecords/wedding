@@ -96,14 +96,6 @@
     font-style: normal;
 }
 
-@font-face {
-  font-family: "Theano Didot";
-  src: url("/etc/clientlibs/wedding/pages/fonts/THEANODIDOT-REGULAR.TTF");
-  font-weight: normal;
-  font-style: normal;
-}
-
-
 body{
   font-family: 'Theano Didot',  serif;
   font-weight: lighter;
@@ -113,12 +105,12 @@ body{
   color: #222;
 }
 
-img, body, header, footer, nav, aside, article, section, figure, button, p, ul, ol, li, h1, h2, h3,h4,h5,h6, input  {
+img, body, header, footer, nav, aside, article, section, figure, button, p, ul, ol, li, h1, h2, h3,h4,h5,h6, input, *{
   padding:0;  margin:0;
 }
 
 .head-block{
-    height: 225px;
+  min-height: 225px;
   display: flex;
   justify-content:  center;
   background-color: #fff;
@@ -138,6 +130,7 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
     font-family: 'GothamPro',  sans-serif;
     font-size: 18pt;
     color: #222;
+    z-index: 9;
 }
 
 .central-head--title{
@@ -155,7 +148,7 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
 	padding: 0 5% 0 0;
 }
 
-#entrance-cabinet-btn, #registration-btn, #cabinet_success {
+#entrance-cabinet-btn, #registration-btn, #cabinet_success, #btn-registration-futher2, .inp  {
     cursor: pointer;
 }
 
@@ -174,10 +167,10 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
 
 #cabinet_success .mail-count{
     font-size: 12pt;
-    padding: 15px 0;
+    padding: 15px 0 15px 10px;
 }
 
-.for-mail-icon{
+.mini-avatar{
     border-radius: 30px;
     border: 1px solid black;
     width: 60px;
@@ -187,9 +180,34 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
     margin: 0 15px;
 }
 
+.mini-menu-drop{
+    position: absolute;
+    right: -0.5%;
+    top:  60px;
+    width: 120%;
+    box-shadow:  5px 5px 20px 5px #a0a0a0;
+    background-color: #fff;
+    padding: 20px 30px 20px 0;
+}
 
+.hidden_cl{
+    visibility: hidden;
+}
+
+.mini-menu-drop li{
+    list-style-type: none;
+    text-align: left;
+    width: 100%;
+    padding: 5px 0 5px 30px;
+}
+
+.mini-menu-drop li:hover {
+    background-color: #afa58e;
+    color: #fff;
+}
 
 /* ==== nav ==== */
+
 .main-menu{
   box-sizing: border-box;
   text-transform: uppercase; 
@@ -220,9 +238,11 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
 }
 
 /*=====  main start ======*/
+
 main{
   width: 70%;
   margin: 0 auto;
+  background-color: #fff;
 }
 
 .top-bar{
@@ -237,7 +257,7 @@ main{
   color: #fff;
   margin: 20px 2% 0;
   background-size: cover;
-  background-position: center center;
+  background-position: center;
   background-repeat: no-repeat;
 }
 
@@ -263,7 +283,7 @@ main{
   width: 100%;
   height: 75%;
   background-size: cover;
-  background-position: center center;
+  background-position: center;
   background-repeat: no-repeat;
 }
 
@@ -278,6 +298,7 @@ main{
 .search-usually:nth-child(3) .search-usually_img{
   background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_2.jpg');
 }
+
 .search-usually_content_name{
   line-height: 1;
   padding-top: 7px;
@@ -295,14 +316,14 @@ main{
 
 .btn-up{
  /* display: none;*/
-  position: fixed; 
-  right: 7%;
-  bottom: 15%;
+  position: fixed;
+  right: 3%;
+  bottom: 7%;
 }
+
 .btn-up a{ padding: 20px;}
 
-
-
+/*=====  main finish ======*/
 /*======== Footer =======*/
 
 footer{
@@ -320,7 +341,7 @@ footer{
     padding-bottom: 15px;
 }
 
-footer div a, footer div{
+footer > div a, footer > div{
     color: #5f5f5f;
     font-family: 'GothamPro',  sans-serif;
     font-weight: normal;
@@ -404,6 +425,21 @@ footer div a, footer div{
     margin-bottom: 15px;
 }
 
+.registation3_errore_message{
+    min-height: 25px;
+    background-color: yellow;
+    color: red;
+    z-index: 12;
+    position: absolute;
+    display: none;
+    bottom:  17%;
+    left: 3%;
+}
+
+.registation3_errore_message::before{
+    content:"Вам необходимо принять условия сотрудничества и заполнить все обязательные поля";
+}
+
 .title-inter2 {
     font-size: 20pt;
     margin-bottom: 10px;
@@ -416,9 +452,9 @@ footer div a, footer div{
 .mwindow input{
     height: 30px;
     margin: 10px 0;
-    padding: 10px;
+    padding: 10px 0 10px 3%;
     border: none;
-    width: 100%;
+    width: 97%;
     font-size: 15pt;
 }
 
@@ -484,4 +520,9 @@ footer div a, footer div{
     margin: 5px;
 }
 
+.inp_red_border{
+    background-color: #f99;
+}
+
 /*  =========  end  форма входа and reg */
+

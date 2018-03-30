@@ -9,202 +9,248 @@
 <div class="footer-line-div">	_____________________________	</div>
 <div class="social-btn-block"> <a href=" "> <img src="/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/Main_Page_Social_Media_Icons_operators/vk.png" alt="Вконтакте"> </a> <a href=" "> <img src="/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/Main_Page_Social_Media_Icons_operators/facebook.png" alt="ВФейсбуке"> </a> <a href=" "> <img src="/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/Main_Page_Social_Media_Icons_operators/insta.png" alt="ВИнстаграме"> </a> </div>
 
-<section id="entrance-form">
+<div class="btn-up"> <a href="#"> <img src="/etc/clientlibs/wedding/pages/images/on_all_pages/btn_up.png"> </a> </div>
 
-	<div class="mwindow window-entrance">
+<section id="cabinet-input-block" >
 
-		<div class="container-window-entrance">
+    <div class="cabinet-input">
 
-			<h2 class="title-inter" >ВХОД</h2>
-			<div class="social-inter">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/vk.png" alt="VK">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/facebook.png" alt="F">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/g+.png" alt="G+">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/ok.png" alt="OK">
-			</div>
+        <div id="cabinet_login">
+            <span id="entrance-cabinet-btn"> Вход </span>
+            <span class="vert-line">&#124;</span>
+            <span id="registration-btn"> Регистрация </span>
+        </div>
 
-			<p class="mwindow-or"> или </p>
+        <div id="cabinet_success">
 
-			<form action="" method="post">
-				<p><input class="inp-user-email" type="email" name="user-email" placeholder="Введите email">  </p>
-				<p><input class="inp-user-password" type="password" name="user-email" placeholder="Введите пароль">  </p>
+            <div class="for-mail-icon">
+                <img src="/etc/clientlibs/wedding/pages/images/on_all_pages/header/messages_icon.png" alt="mail_icon">
+            </div>
+            <div class="mail-count"> Сообщения (12) </div>
+            <div class="mini-avatar"> </div>
+            <div class="mini-menu">
+                <img src="/etc/clientlibs/wedding/pages/images/on_all_pages/header/drop_arrow_menu.png" alt="drop-down">
+                <ul class="mini-menu-drop hidden_cl">
+                    <li id="mini-menu_my-page">Моя страница</li>
+                    <li id="mini-menu_options">Настройки</li>
+                    <li id="mini-menu_exit">Выход</li>
+                </ul>
+            </div>
 
-				<div class="remember-forget">
+        </div>
 
-					 		<span>
-					 			<span>Запомнить</span>
-					 			<input type="checkbox" id="remember-ident" class="consent-check" name="remember-ident" value="remember-ident-user">
-					 		</span>
+    </div>
 
-					<a class="forget-password" href="#">Забыли пароль?</a> <!-- Тут куда? -->
+    <div id="entrance-form">
 
-				</div>
+        <div class="mwindow window-entrance">
 
+            <div class="container-window-entrance">
 
-			</form>
+                <h2 class="title-inter" >ВХОД</h2>
+                <div class="social-inter">
+                    <img id="vk-login-btn" src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/vk.png" alt="VK">
+                    <img id="fb-login-btn" src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/facebook.png" alt="F">
+                    <img id="gmail-login-btn" src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/g+.png" alt="G+">
+                    <img id="ok-login-btn" src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/ok.png" alt="OK">
+                </div>
 
-			<div>
-				<button id="btn-entrance-form" class="btn-enter" > <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/enter_button.png" alt="ВХОД">  </button>
-			</div>
+                <p class="mwindow-or"> или </p>
 
-		</div>
+                <form action="" method="post">
+                    <p><input id="user_email"  type="email" name="user-email" placeholder="Введите email">  </p>
+                    <p><input   type="password" name="user-password" placeholder="Введите пароль">  </p>
 
-	</div>
+                    <div class="remember-forget">
 
+                                <span>
+                                    <span>Запомнить</span>
+                                    <input type="checkbox" id="remember-ident" class="consent-check" name="remember-ident" value="remember-ident-user">
+                                </span>
 
+                        <a class="forget-password" href="#">Забыли пароль?</a> <!-- Тут куда? -->
 
-	<div class="mwindow window-registation">
+                    </div>
 
-		<div class="container-window-registation">
+                </form>
 
-			<h2 class="title-inter">РЕГИСТРАЦИЯ</h2>
-			<div class="social-inter">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/vk.png" alt="VK">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/facebook.png" alt="F">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/g+.png" alt="G+">
-				<img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/ok.png" alt="OK">
-			</div>
+                <div>
+                    <button id="btn-entrance-form" class="btn-enter" > <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/enter_button.png" alt="ВХОД">  </button>
+                </div>
 
-			<p class="mwindow-or"> или </p>
+            </div>
 
-			<form action="" method="post">
+        </div>
 
-				<p><input class="inp-user-name" type="text" name="user-name" placeholder="Имя / Название компании">  </p>
-				<p><input class="inp-user-surname" type="text" name="user-surname" placeholder="Фамилия">  </p>
-				<p><input class="inp-user-email" type="email" name="user-email" placeholder="Введите email">  </p>
-				<p><input class="inp-user-password" type="password" name="user-password" placeholder="Введите пароль">  </p>
-				<p><input class="inp-user-password-repeat" type="password" name="user-password-repeat" placeholder="Подтвердите пароль">  </p>
+        <div class="mwindow window-registation">
 
-				<div class="have-account">
+            <div class="container-window-registation">
 
-					<span> У Вас уже есть аккаунт? </span> <span>   </span> <span class="have-account-entrance"> Войти </span>
+                <h2 class="title-inter">РЕГИСТРАЦИЯ</h2>
+                <div class="social-inter">
+                    <img id="vk-reg-btn" src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/vk.png" alt="VK">
+                    <img id="fb-reg-btn" src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/facebook.png" alt="F">
+                    <img id="gmail-reg-btn" src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/g+.png" alt="G+">
+                    <img id="ok-reg-btn" src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/ok.png" alt="OK">
+                </div>
 
-				</div>
+                <p class="mwindow-or"> или </p>
 
-			</form>
+                <form id="form-reg-step1" action="" method="post">
 
-			<div>
-				<button id="registration-futher" class="btn-enter"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/further.png" alt="ДАЛЕЕ">  </button>
-			</div>
+                    <p><input id="registration-firstName" class="inp-user-name" type="text" name="user-name" placeholder="Имя / Название компании" value="Funny">  </p>
+                    <p><input id="registration-lastName" class="inp-user-surname" type="text" name="user-surname" placeholder="Фамилия" value="People">  </p>
+                    <p><input id="registration-email" class="inp-user-email" type="email" name="user-email" placeholder="Введите email" value="funny@gmail.com">  </p>
+                    <p><input id="registration-password" class="inp-user-password" type="password" name="user-password" placeholder="Введите пароль" value="Ss123asdf" title="Пароль должен содержать более 8 символов строчных и заглавных букв и min 1 цифру ">  </p>
+                    <p><input id="registration-password-repeat" class="inp-user-password-repeat" type="password" name="user-password-repeat" placeholder="Подтвердите пароль" value="Ss123asdf">  </p>
 
-		</div>
+                    <div class="have-account">
 
-	</div>
+                        <span> У Вас уже есть аккаунт? </span> <span>   </span> <span class="have-account-entrance"> Войти </span>
 
-	<div class="mwindow window-registation-step2">
+                    </div>
 
-		<div class="container-window-registation-step2">
+                </form>
 
-			<h2 class="title-inter2">В качестве кого вы хотите зарегистрироваться ?</h2>
+                <div>
+                    <button id="btn-registration-futher" class="btn-enter"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/further.png" alt="ДАЛЕЕ">  </button>
+                </div>
 
-			<span> Клиента </span>
-			<input id="cheked_user" class="inp" name="selected-role" type="radio" >
-			<p class="mwindow-or"> или </p>
-			<input id="cheked_partner" class="inp" name="selected-role" type="radio" >
-			<span> Партнера </span>
+            </div>
 
-			<div><button  id="registration-futher2" class="btn-enter-2"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/further.png" alt="ДАЛЕЕ">  </button> </div>
+        </div>
 
-		</div>
+        <div class="mwindow window-registation-step2">
 
-	</div>
+            <div class="container-window-registation-step2">
 
-	<div class="mwindow window-registation-step3-user">
+                <h2 class="title-inter2">В качестве кого вы хотите зарегистрироваться ?</h2>
 
-		<div class="container-window-registation-step3-user">
+                <span title="У вас скоро свадьба. Вам нужны профессионалы"> Клиента </span>
+                <input id="cheked_user" class="inp" name="selected-role" type="radio" value="cheked_us" title="У вас скоро свадьба. Вам нужны профессионалы" >
+                <p class="mwindow-or"> или </p>
+                <input id="cheked_partner" class="inp" name="selected-role" type="radio" title="Вы работаете или хотите начать работу в свадебном бизнесе" value="cheked_part" checked >
+                <span title="Вы работаете или хотите начать работу в свадебном бизнесе"> Партнера </span>
 
-			<h2 class="title-inter2">ЗАВЕРШЕНИЕ РЕГИСТРАЦИИ - (НЕТ В ДИЗАЙНЕ!!!)</h2>
+                <div><button  id="btn-registration-futher2" class="btn-enter-2"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/further.png" alt="ДАЛЕЕ">  </button> </div>
 
-			<form action="" method="post">
+            </div>
 
-				<p><input class="inp-user-name" type="text" name="user-name" placeholder="Город, Страна? (может разбить?)">  </p>
-				<p><input class="inp-user-surname" type="text" name="user-surname" placeholder="Номер телефона">  </p>
-				<p><input class="inp-user-email" type="email" name="user-email" placeholder="email">  </p>
+        </div>
 
-				<p class="mwindow-or">
-				<p> Дополнительная информация </p>
-				<p class="dop-info2" > (можете заполнить сейчас или позднее) </p>
-				</p>
+        <div class="mwindow window-registation-step3-user">
 
-				<p><input class="inp-user-name" type="text" name="user-name" placeholder="ВКонтакте">  </p>
-				<p><input class="inp-user-surname" type="text" name="user-surname" placeholder="Фейсбук">  </p>
-				<p><input class="inp-user-email" type="text" name="user-email" placeholder="Одноклассники">  </p>
-				<p><input class="inp-user-password" type="text" name="user-password" placeholder="Гугл+ ?(его нет в дизайне) ">  </p>
+            <div class="container-window-registation-step3-user">
 
-				<div class="consent-user-div">
+                <h2 class="title-inter2">ЗАВЕРШЕНИЕ РЕГИСТРАЦИИ</h2>  <!-- ЮЗЕРА -->
 
-					<input type="checkbox" id="consent-partner-check" class="consent-check" name="consent" value="consent-user">
-					<span>  Я принимаю </span>
-					<span class="consent-working"> Условия сотрудничества </span>
+                <form id="form-reg-step3-user" action="" method="post">
 
-				</div>
+                    <!-- 	<p><input id="city_finish-user" type="text" name="city" placeholder="Город"  value="Менск">  </p> -->
 
-				<div>
+                    <select id="city_finish-user" name="city_finish-user">
+                        <option value="Minsk" selected>Минск</option>
+                        <option value="Brest">Брест</option>
+                        <option value="Vitebsk">Витебск</option>
+                        <option value="Gomel">Гомель</option>
+                        <option value="Grodno">Гродно</option>
+                        <option value="Mogilev">Могилев</option>
+                    </select>
 
-					<button  id="registration-finish-user" class="btn-enter" type="submit"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/registration.png" alt="ЗАРЕГИСТРИРОВАТЬСЯ">  </button>
+                    <p><input id="tel_finish-user" type="tel" name="tel" placeholder="Номер телефона" value="+375(29)3222232">  </p>
+                    <p><input id="email_finish-user" type="email" name="user-email" placeholder="email" disabled>  </p>
 
-				</div>
-			</form>
+                    <p class="mwindow-or">
+                    <p> Дополнительная информация </p>
+                    <p class="dop-info2" > (можете заполнить сейчас или позднее) </p>
+                    </p>
 
-		</div>
+                    <p><input id="vk_finish-user" type="text" name="user-name" placeholder="ВКонтакте" value="vk">  </p>
+                    <p><input id="fb_finish-user" type="text" name="user-surname" placeholder="Фейсбук" value="fb">  </p>
+                    <p><input id="ok_finish-user" type="text" name="user-email" placeholder="Одноклассники" value="ok">  </p>
+                    <!-- 	<p><input id="googl_finish-user" type="text" name="user-password" placeholder="Гугл+ ?(его нет в дизайне)" value="g+">  </p> -->
 
-	</div>
+                    <div class="consent-user-div">
 
-	<div class="mwindow window-registation-step3-partner">
+                        <input type="checkbox" id="consent-partner-check" class="consent-check" name="consent" value="consent-user">
+                        <span>  Я принимаю </span>
+                        <span class="consent-working"> Условия сотрудничества </span>
 
-		<div class="container-window-registation-step3-partner">
+                    </div>
 
-			<h2 class="title-inter2">ЗАВЕРШЕНИЕ РЕГИСТРАЦИИ</h2>
+                </form>
 
-			<form action="" method="post">
+                <div class="registation3_errore_message"></div>
 
-				<select name="City">
-					<option value="work-sphere" selected disabled>Сфера деятельности</option>
-					<option value="photo">Фотограф</option>
-					<option value="aminer">Ведущий</option>
-					<option value="style">Стилист</option>
-				</select>
+                <div>
+                    <button  id="btn-registration-finish-user" class="btn-enter" type="submit"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/registration.png" alt="ЗАРЕГИСТРИРОВАТЬСЯ"></button>
+                </div>
 
+            </div>
 
+        </div>
 
-				<p><input class="inp-user-name" type="text" name="user-name" placeholder="Город, Страна? (может разбить?)">  </p>
-				<p><input class="inp-user-surname" type="text" name="user-surname" placeholder="Номер телефона">  </p>
-				<p><input class="inp-user-email" type="email" name="user-email" placeholder="email">  </p>
+        <div class="mwindow window-registation-step3-partner">
 
-				<p class="mwindow-or">
-				<p> Дополнительная информация </p>
-				<p class="dop-info2" > (можете заполнить сейчас или позднее) </p>
-				</p>
+            <div class="container-window-registation-step3-partner">
 
-				<p><input class="inp-user-name" type="text" name="user-name" placeholder="ВКонтакте">  </p>
-				<p><input class="inp-user-surname" type="text" name="user-surname" placeholder="Фейсбук">  </p>
-				<p><input class="inp-user-email" type="text" name="user-email" placeholder="Одноклассники">  </p>
-				<p><input class="inp-user-password" type="text" name="user-password" placeholder="Гугл+ ?(его нет в дизайне) ">  </p>
-				<p><input class="inp-user-password-repeat" type="text" name="user-password-repeat" placeholder="Сайт">  </p>
+                <h2 class="title-inter2">ЗАВЕРШЕНИЕ РЕГИСТРАЦИИ</h2>  <!-- ПАРТНЕРА -->
 
+                <form id="form-reg-step3-partner" action="" method="post">
 
-				<div class="consent-user-div">
+                    <select id="work-sphere" name="work-sphere">
+                        <option value="title" selected disabled>Сфера деятельности</option>
+                        <!-- <option value="photo">Фотограф</option>
+                        <option value="aminer">Ведущий</option>
+                        <option value="style" selected>Стилист</option> -->
+                    </select>
 
-					<input type="checkbox" id="consent-user-check" class="consent-check" name="consent" value="consent-user">
-					<span>  Я принимаю </span>
-					<span class="consent-working"> Условия сотрудничества </span>
+                    <!-- <p><input id="city_finish-partner"  type="text" name="user-name" placeholder="Город, Страна? (может разбить?)" value="Менск">  </p> -->
+                    <select id="city_finish-partner" name="city_finish-user">
+                        <option value="Minsk" selected>Минск</option>
+                        <option value="Brest">Брест</option>
+                        <option value="Vitebsk">Витебск</option>
+                        <option value="Gomel">Гомель</option>
+                        <option value="Grodno">Гродно</option>
+                        <option value="Mogilev">Могилев</option>
+                    </select>
+                    <p><input id="tel_finish-partner" type="tel" name="user-surname" placeholder="Номер телефона" value="+375(29)3222232">  </p>
+                    <p><input id="email_finish-patner"  type="email" name="user-email" placeholder="email" disabled>  </p>
 
-				</div>
+                    <p class="mwindow-or">
+                    <p> Дополнительная информация </p>
+                    <p class="dop-info2" > (можете заполнить сейчас или позднее) </p>
+                    </p>
 
+                    <p><input id="vk_finish-partner" type="text" name="user-name" placeholder="ВКонтакте">  </p>
+                    <p><input id="fb_finish-partner" type="text" name="user-surname" placeholder="Фейсбук">  </p>
+                    <p><input id="ok_finish-partner" type="text" name="user-email" placeholder="Одноклассники">  </p>
+                    <!-- 	<p><input id="googl_finish-partner" type="text" name="user-password" placeholder="Гугл+ ?(его нет в дизайне) ">  </p> -->
+                    <p><input id="site_finish-partner" type="text" name="user-password-repeat" placeholder="Сайт">  </p>
 
-			</form>
+                    <div class="consent-user-div">
 
-			<div>
-				<button id="registration-finish-partner" class="btn-enter" type="submit"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/registration.png" alt="ЗАРЕГИСТРИРОВАТЬСЯ">  </button>
-			</div>
+                        <input type="checkbox" id="consent-user-check" class="consent-check" name="consent" value="consent-user">
+                        <span>  Я принимаю </span>
+                        <span class="consent-working"> Условия сотрудничества </span>
 
-		</div>
+                    </div>
 
-	</div>
+                </form>
+
+                <div class="registation3_errore_message"></div>
+
+                <div>
+                    <button id="btn-registration-finish-partner" class="btn-enter" type="submit"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/registration.png" alt="ЗАРЕГИСТРИРОВАТЬСЯ">  </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
-
-
 
 
 

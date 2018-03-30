@@ -7,7 +7,7 @@ var PORTAL = (function (PORTAL, $) {
 
     PORTAL.initMods = function () {
         for (var mod in PORTAL.modules) {
-            try {
+        // *del    try {
                 var $self = $(PORTAL.modules[mod].selfSelector);
                 // Run required modules with default selector
                 if (typeof PORTAL.modules === 'undefined') {
@@ -16,12 +16,13 @@ var PORTAL = (function (PORTAL, $) {
                 }
                 if ($self.length) {
                     PORTAL.modules[mod].init($self);
+                    console.dir(PORTAL);
                 }
-            } catch (e) {
+           /* } catch (e) {
                 if (PORTAL.utils.isAuthMode()) {
                     console.log(e);
                 }
-            }
+           }*/
         }
     };
 
