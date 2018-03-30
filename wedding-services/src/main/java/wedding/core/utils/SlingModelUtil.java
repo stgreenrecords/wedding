@@ -58,7 +58,7 @@ public final class SlingModelUtil {
             try {
                 resource.getResourceResolver().commit();
             } catch (PersistenceException e) {
-                LOG.error("Error occurred while saving data [{}], for [{}]", new Object[] {modelValues, resource, e});
+                LOG.error("Error occurred while saving data [{}], for [{}]", modelValues, resource, e);
             }
         };
     }

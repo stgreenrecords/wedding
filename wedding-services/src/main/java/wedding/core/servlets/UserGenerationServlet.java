@@ -4,6 +4,7 @@ import jdk.nashorn.internal.ir.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.jackrabbit.api.security.user.User;
 import org.apache.jackrabbit.api.security.user.UserManager;
+import org.apache.jackrabbit.commons.JcrUtils;
 import org.apache.jackrabbit.rmi.value.SerialValueFactory;
 import org.apache.jackrabbit.value.ValueFactoryImpl;
 import org.apache.sling.api.SlingHttpServletRequest;
@@ -13,11 +14,13 @@ import org.apache.sling.api.servlets.SlingSafeMethodsServlet;
 import org.apache.sling.jackrabbit.usermanager.CreateUser;
 import org.apache.sling.jcr.base.util.AccessControlUtil;
 
+import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -42,7 +45,7 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                     }
                     return null;
                 }).orElse(null);
-        IntStream.range(0, 35000)
+        IntStream.range(0, 10000)
                 .forEach(i -> {
                     String name = UUID.randomUUID().toString();
                     try {
@@ -58,6 +61,18 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                         } else {
                             user = Objects.requireNonNull(userManager).createUser(name, "123", () -> name, "/home/users/wedding/users/" + city + "/" + name.substring(0, 2));
                         }
+                        Node portfolio = resourceResolver.getResource(user.getPath()).adaptTo(Node.class).addNode("portfolio");
+                        resourceResolver.getResource("/etc/clientlibs/wedding/pages/images/assets")
+                                .listChildren()
+                                .forEachRemaining(resource -> {
+                                    try {
+                                        JcrUtils.putFile(portfolio, resource.getName(), "image/jpeg", resource.adaptTo(InputStream.class));
+                                    } catch (RepositoryException e) {
+                                        e.printStackTrace();
+                                    }
+                                });
+                        Node avatar = resourceResolver.getResource(user.getPath()).adaptTo(Node.class).addNode("avatar");
+                        JcrUtils.putFile(avatar, "26.jpg", "image/jpeg", resourceResolver.getResource("/etc/clientlibs/wedding/pages/images/assets/26.jpg").adaptTo(InputStream.class));
                         addPropertyToUser(user, "authType", AUTH_TYPES.getAuthType().name());
                         addPropertyToUser(user, "userId", name);
                         addPropertyToUser(user, "firstName", NAMES.getName().name());
