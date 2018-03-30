@@ -20,7 +20,7 @@ var PORTAL = (function (PORTAL, $) {
             var modal = document.querySelector("#entrance-form");
 
             var dataRegistration = {};
-            var userLogin = {};
+            var userLoginInfo = {};
             var authStatusFromCookie;
             var authTypeFromCookie;
             var userEmailFromCookie;
@@ -105,7 +105,7 @@ var PORTAL = (function (PORTAL, $) {
                     success: function (data) {
                         // if (data) {
                         console.log(data);
-                        showCabinet();
+                        showCabinetPage(data);
                         // }
                     },
                     complete: function () {
@@ -119,26 +119,29 @@ var PORTAL = (function (PORTAL, $) {
 
             }
 
-
             function sendLoginRequest(url_link){
+
                 $.ajax({
                     url: url_link,
-                    type: "POST",
+                    type: "GET",
                     dataType: "json",
-                    // data: userId,
 
                     success: function (data) {
-                        // if (data) {
-                        console.log(data);
-
-                        // }
+                        console.log("Аякс с юзером прошел");
+                        showCabinetPage(data);
+                    },
+                    error: function (e) {
+                        console.log('Что-то пошло не так (');
+                        console.log(e);
                     }
+
                 });
 
             }
 
-            function showCabinet(){
+            function showCabinetPage(data){
                 console.log(' ============ showCabinet - in the studia ) ============ ');
+                console.dir(data);
             }
 
             function inputFirstStepRegFill(){
@@ -149,7 +152,6 @@ var PORTAL = (function (PORTAL, $) {
 
             }
 
-
             entrance.addEventListener("click", showEntranceForm);
             entrance2.addEventListener("click", showEntranceForm);
             registration.addEventListener("click", showRegistrationForm);
@@ -157,82 +159,181 @@ var PORTAL = (function (PORTAL, $) {
                 document.querySelector(".window-registation").style.visibility = "hidden";
             });
 
-
-
-            /*	    function Social (type){ // 			подумать через конструктор !?
-
-
-
-                            "login": function() {
-                                console.log('login function ready');
-                            },
-
-                            "logout": function () {
-                                console.log('logout function ready');
-                            },
-
-                            "status": function () {
-                                 console.log('status function ready');
-
-                            }
-
-
-
+            function Social(type){
+                this.login = function() {
+                    console.log(type + ' login function ready');
+                },
+                    this.logout = function () {
+                        console.log(type + ' logout function ready');
+                    },
+                    this.status = function () {
+                        console.log(type + ' status function ready');
+                        console.log(this );
                     }
+            }
 
-                       var  FB = new Social(FB);*/
+            var  FBook = new Social('FBook');
 
+            FBook.login = function() {
 
+            }
 
-            var VK = {
+            function dataRegistrationFill(){
+                dataRegistration.ID = userLoginInfo.userID;
+                dataRegistration.firstName =  userLoginInfo.firstName;
+                dataRegistration.lastName =  userLoginInfo.lastName;
+                dataRegistration.email =  userLoginInfo.email;
+                dataRegistration.authType = userLoginInfo.authType;
+            }
+
+            function initSocial(){
+
+                VK.init({
+                    apiId: 6428473
+                });
+
+                window.fbAsyncInit = function () {
+
+                    FB.init({
+                        appId: '119308788738222',
+                        autoLogAppEvents: true,
+                        cookie: true,
+                        status: true,
+                        xfbml: true,
+                        version: 'v2.12'
+                    });
+
+                    FB.AppEvents.logPageView();
+                };
+
+            }
+
+            initSocial();
+
+            var V_K = {
 
                 "login": function() {
 
-                    console.log('login  function ready');
-                    dataRegistration.vkID = '321654987';
-                    dataRegistration.firstName =  'ANY_Name';
-                    dataRegistration.lastName =  'ANY_Name';
-                    dataRegistration.email =  'ANY_email@email.com';
-                    inputFirstStepRegFill();
+                    VK.Auth.login(function (response) {
+
+                        if (response.status === "connected") {
+
+                            var responseUser = response.session.user;
+                            console.log('success VK responce');
+                            console.dir(response);
+
+                            userLoginInfo.userID = responseUser.hasOwnProperty("id") ? responseUser.id : "";
+                            userLoginInfo.firstName = responseUser.hasOwnProperty("first_name") ? responseUser.first_name : "";
+                            userLoginInfo.lastName = responseUser.hasOwnProperty("last_name") ? responseUser.last_name : "";
+                            userLoginInfo.nickname = responseUser.hasOwnProperty("nickname") ? responseUser.nickname : "";
+                            userLoginInfo.email = responseUser.hasOwnProperty("email") ? responseUser.email : "";
+                            userLoginInfo.href = responseUser.hasOwnProperty("href") ? responseUser.href : "";
+                            userLoginInfo.authType = "VK";
+
+                            /* vk_sid = response.session.sid;
+                             console.dir(vk_sid);
+                             var vk_req_token = 'https://oauth.vk.com/access_token?client_id=6428473&client_secret=cdphE3qkUL40XOSLiUPO&redirect_uri=http://youwedding&code=';
+                             vk_req_token += vk_sid;
+
+                             $.ajax({
+                                 url: 'https://oauth.vk.com/access_token',
+                                 method: 'POST',
+                                 data: vk_req_token,
+                                 success: function(response){
+                                     console.log(response);
+                                 }
+                             });
+
+                             console.log(vk_req_token);*/
+
+                            dataRegistrationFill();
+                            inputFirstStepRegFill();
+
+                        }
+
+                    });
+
+                    // VK.Auth.login(function(res){
+                    //        if (res.status === 'connected') {
+
+                    //            var data = {};
+                    //            data = res.session;
+
+                    //            var user = {};
+                    //            user = res.session.user;
+
+                    //            VK.Api.call('users.get', { fields: 'sex,photo_50' }, function(res) {
+                    //                if(res.response){
+                    //                    user.photo = res.response[0].photo_50;
+                    //                    user.gender = res.response[0].sex;
+                    //                    data.user = user;
+
+                    //                    $.ajax({
+                    //                        url: '/auth/vk',
+                    //                        method: 'POST',
+                    //                        data: data,
+                    //                        dataType: 'JSON',
+                    //                        success: function(res){
+                    //                            console.log(res);
+                    //                        }
+                    //                    });
+
+                    //                }
+                    //            });
+                    //        }
+                    //    }, 4194304 );
 
                 },
 
                 "logout": function () {
-                    console.log('logout function ready');
+                    console.log('logout VK function ready');
                 },
 
                 "status": function () {
 
-                    // VK.Auth.getLoginStatus(function (response) {
-                    //              if (response.status === "connected") {
-                    //                  userLogin.authStatus = true;
-                    //                  userLogin.userID = response.session.mid;
-                    //                  userLogin.authType = "VK";
-                    //              }
-                    //          });
-                    // sendLoginRequest('/services/rest.login.json?wedding-session-id=1593572684');
+                    VK.Auth.getLoginStatus(function (response) {
 
-                    if (true){
-                        setCookiesAuth('authorized', authType);
-                        enterOfForm();
-                        console.log('status function ready');
+                        var reqLinkGetUser = 'http://wedding-services.mycloud.by/services/rest.users/minsk.json?userId=';
 
-                    }
+                        if (response.status === "connected") {
+                            userLoginInfo.authStatus = true;
+                            userLoginInfo.userID = response.session.mid;
+                            userLoginInfo.authType = "VK";
+                            // reqLinkGetUser += userLoginInfo.userID;
+                            reqLinkGetUser +='a931a267-ff17-4d89-ab80-e478c0a6de0a';
+                            var reqData = sendLoginRequest(reqLinkGetUser);
+                            setCookiesAuth('authorized', userLoginInfo.authType);
+                            enterOfForm();
+                            console.log('status function finish');
+                            // console.dir(userLoginInfo);
+                            // console.dir(reqData);
+                        }
+
+                    });
 
                 }
             };
 
-
-
             var FB = {
 
                 "login": function() {
-
-                    dataRegistration.fbID = '456852';
-                    dataRegistration.firstName =  'ANY_Name';
-                    dataRegistration.lastName =  'ANY_Name';
-                    dataRegistration.email =  'ANY_email@email.com';
-                    inputFirstStepRegFill();
+                    FB.login(function (response) {
+                        if (response.status === "connected") {
+                            FB.api('/me',
+                                {fields: "id,first_name,link,last_name,name"},
+                                function (response) {
+                                    var responseUser = response;
+                                    userLoginInfo.userID = responseUser.hasOwnProperty("id") ? responseUser.id : "";
+                                    userLoginInfo.firstName = responseUser.hasOwnProperty("first_name") ? responseUser.first_name : "";
+                                    userLoginInfo.lastName = responseUser.hasOwnProperty("last_name") ? responseUser.last_name : "";
+                                    userLoginInfo.nickname = responseUser.hasOwnProperty("name") ? responseUser.name : "";
+                                    userLoginInfo.href = responseUser.hasOwnProperty("link") ? responseUser.link : "";
+                                    userLoginInfo.authType = "FACEBOOK";
+                                    dataRegistrationFill();
+                                    inputFirstStepRegFill();
+                                });
+                        }
+                    });
 
                     console.log('login function ready');
 
@@ -321,35 +422,14 @@ var PORTAL = (function (PORTAL, $) {
 
             };
 
-            $("#vk-login-btn").click(function () {
-                authType = "VK";
-                VK.status();
-            });
-
-            $("#fb-login-btn").click(function () {
-                authType = "FACEBOOK";
-                FB.status();
-            });
-
-            $("#gmail-login-btn").click(function () {
-                authType = "GOOGLE";
-                GOOGLE.status();
-            });
-
-            $("#ok-login-btn").click(function () {
-                authType = "OK";
-                OK.status();
-            });
-
-
             $("#vk-reg-btn").click(function () {
                 authType = "VK";
-                VK.login();
+                V_K.login();
             });
 
             $("#fb-reg-btn").click(function () {
                 authType = "FACEBOOK";
-                FB.login();
+                FBook.login();
             });
 
             $("#gmail-reg-btn").click(function () {
@@ -360,6 +440,28 @@ var PORTAL = (function (PORTAL, $) {
             $("#ok-reg-btn").click(function () {
                 authType = "OK";
                 OK.login();
+            });
+
+
+
+            $("#vk-login-btn").click(function () {
+                authType = "VK";
+                V_K.status();
+            });
+
+            $("#fb-login-btn").click(function () {
+                authType = "FACEBOOK";
+                FBook.status();
+            });
+
+            $("#gmail-login-btn").click(function () {
+                authType = "GOOGLE";
+                GOOGLE.status();
+            });
+
+            $("#ok-login-btn").click(function () {
+                authType = "OK";
+                OK.status();
             });
 
 
@@ -469,7 +571,7 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.okLink =  ok;
                     dataRegistration.siteLink =  site;
 
-                    if (($("input[name='consent']:checked").val() === 'consent-user') && city && tel && work_sphere /*!= 'null'*/) {
+                    if (($("input[name='consent-part']:checked").val() === 'consent-partner') && city && tel && work_sphere /*!= 'null'*/) {
                         mwindow3.style.visibility = "hidden";
                         modal.style.visibility = "hidden";
                         showCabinetSuccess();
@@ -504,7 +606,6 @@ var PORTAL = (function (PORTAL, $) {
                     var vk = $("#vk_finish-user").val();
                     var fb = $("#fb_finish-user").val();
                     var ok = $("#ok_finish-user").val();
-                    // var googl = $("#googl_finish-user").val();
 
                     dataRegistration.city =  city;
                     dataRegistration.tel =  tel;
@@ -512,7 +613,7 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.fbLink =  fb;
                     dataRegistration.okLink =  ok;
 
-                    if (($("input[name='consent']:checked").val() === 'consent-user')   && city && tel){
+                    if (($("#consent-user-check:checked").val() === 'consent-user')   && city && tel){
                         mwindow3.style.visibility = "hidden";
                         modal.style.visibility = "hidden";
                         showCabinetSuccess();
@@ -521,13 +622,11 @@ var PORTAL = (function (PORTAL, $) {
                         sendRegInfo("http://wedding-services.mycloud.by/services/rest.users.create");
 
 
-                    } else if ($("input[name='consent']:checked").val() === undefined){
+                    } else /*if ($("input[name='consent']:checked").val() === undefined)*/{
                         $('.registation3_errore_message').css('display','flex');
                         $(".window-registation-step3-user input").one('focus', function(){
                             $('.registation3_errore_message').css('display','none');
                         });
-                    } else {
-                        console.log("Error");
                     }
                 });
 
