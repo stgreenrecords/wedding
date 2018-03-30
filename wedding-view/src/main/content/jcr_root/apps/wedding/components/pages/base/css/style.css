@@ -130,6 +130,7 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
     font-family: 'GothamPro',  sans-serif;
     font-size: 18pt;
     color: #222;
+    z-index: 9;
 }
 
 .central-head--title{
