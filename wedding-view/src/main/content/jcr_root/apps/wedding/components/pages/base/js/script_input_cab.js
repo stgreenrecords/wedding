@@ -186,7 +186,7 @@ var PORTAL = (function (PORTAL, $) {
                 dataRegistration.authType = userLoginInfo.authType;
             }
 
-            function initSocial(){
+        //    setTimeout(function initSocial(){
 
                 VK.init({
                     apiId: 6428473
@@ -206,9 +206,7 @@ var PORTAL = (function (PORTAL, $) {
                     FB.AppEvents.logPageView();
                 };
 
-            }
-
-            initSocial();
+       //     }, 1000); // Это сделано потому, что external подгружается позже основных скриптов.
 
             var V_K = {
 

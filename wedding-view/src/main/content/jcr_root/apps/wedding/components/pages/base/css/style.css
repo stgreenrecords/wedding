@@ -194,6 +194,10 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
     visibility: hidden;
 }
 
+.hidden_full{
+    display: none;
+}
+
 .mini-menu-drop li{
     list-style-type: none;
     text-align: left;
@@ -250,6 +254,19 @@ main{
   background-color: #f4f4f4;
   text-align: center;
   margin: 2%;
+}
+
+.top-bar input, .top-bar select{
+    height: 30px;
+    margin: 10px 0;
+    padding: 1px 1% 1px 3%;
+    box-sizing: border-box;
+    border: none;
+    font-size: 15pt;
+}
+
+.pro_vk a{
+    color: #fff;
 }
 
 .container-search-pro{
@@ -468,7 +485,8 @@ footer > div a, footer > div{
     font-size: 15pt;
 }
 
-.mwindow input::placeholder, .mwindow select::placeholder{
+.mwindow input::placeholder, .mwindow select::placeholder,
+.top-bar input::placeholder, .top-bar select::placeholder {
     color: #a0a0a0;
 }
 
