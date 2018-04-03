@@ -30,11 +30,11 @@ var PORTAL = (function (PORTAL, $) {
             authTypeFromCookie = Cookies.get('authType');
             userEmailFromCookie = Cookies.get('userEmail');
 
-            $('.mini-menu').on('click', function(){
-                $('.mini-menu-drop').toggleClass('hidden_cl');
+            $self.find('.mini-menu').on('click', function(){
+                $self.find('.mini-menu-drop').toggleClass('hidden_cl');
             });
 
-            $('#mini-menu_exit').on('click', hideCabinetSuccess);
+            $self.find('#mini-menu_exit').on('click', hideCabinetSuccess);
 
             if (authStatusFromCookie === "authorized" && authTypeFromCookie) {
                 //PORTAL.modules.LoginRegistration.AUTH[authType].status();
@@ -52,7 +52,7 @@ var PORTAL = (function (PORTAL, $) {
                 mwindow.style.left = (document.documentElement.clientWidth - mwindow.getBoundingClientRect().width)/2 + "px";
                 mwindow.style.top = (document.documentElement.clientHeight - mwindow.getBoundingClientRect().height)/3 + "px";
                 if (userEmailFromCookie != 'undefined') {
-                    $('#user_email').val(userEmailFromCookie);
+                    $self.find('#user_email').val(userEmailFromCookie);
                 }
             }
 
@@ -65,8 +65,8 @@ var PORTAL = (function (PORTAL, $) {
             }
 
             function inputEmailFill(){
-                $('#email_finish-user').val(dataRegistration.email);
-                $('#email_finish-patner').val(dataRegistration.email);
+                $self.find('#email_finish-user').val(dataRegistration.email);
+                $self.find('#email_finish-patner').val(dataRegistration.email);
             }
 
             function showCabinetSuccess(){
@@ -146,9 +146,9 @@ var PORTAL = (function (PORTAL, $) {
 
             function inputFirstStepRegFill(){
 
-                $("#registration-firstName").val(dataRegistration.firstName) ;
-                $("#registration-lastName").val(dataRegistration.lastName) ;
-                $("#registration-email").val(dataRegistration.email) ;
+                $self.find("#registration-firstName").val(dataRegistration.firstName) ;
+                $self.find("#registration-lastName").val(dataRegistration.lastName) ;
+                $self.find("#registration-email").val(dataRegistration.email) ;
 
             }
 
@@ -186,11 +186,20 @@ var PORTAL = (function (PORTAL, $) {
                 dataRegistration.authType = userLoginInfo.authType;
             }
 
-        //    setTimeout(function initSocial(){
+            function initSocial(){
 
-                VK.init({
+                /*VK.init({
                     apiId: 6428473
-                });
+                });*/
+
+           /*     VK.init(function() {
+                    apiId: 6428473
+                    // API initialization succeeded
+                    // Your code here
+                }, function() {
+                    // API initialization failed
+                    // Can reload page here
+                }, '5.73');*/
 
                 window.fbAsyncInit = function () {
 
@@ -206,7 +215,9 @@ var PORTAL = (function (PORTAL, $) {
                     FB.AppEvents.logPageView();
                 };
 
-       //     }, 1000); // Это сделано потому, что external подгружается позже основных скриптов.
+            }
+
+            initSocial();
 
             var V_K = {
 
@@ -420,44 +431,44 @@ var PORTAL = (function (PORTAL, $) {
 
             };
 
-            $("#vk-reg-btn").click(function () {
+            $self.find("#vk-reg-btn").click(function () {
                 authType = "VK";
                 V_K.login();
             });
 
-            $("#fb-reg-btn").click(function () {
+            $self.find("#fb-reg-btn").click(function () {
                 authType = "FACEBOOK";
                 FBook.login();
             });
 
-            $("#gmail-reg-btn").click(function () {
+            $self.find("#gmail-reg-btn").click(function () {
                 authType = "GOOGLE";
                 GOOGLE.login();
             });
 
-            $("#ok-reg-btn").click(function () {
+            $self.find("#ok-reg-btn").click(function () {
                 authType = "OK";
                 OK.login();
             });
 
 
 
-            $("#vk-login-btn").click(function () {
+            $self.find("#vk-login-btn").click(function () {
                 authType = "VK";
                 V_K.status();
             });
 
-            $("#fb-login-btn").click(function () {
+            $self.find("#fb-login-btn").click(function () {
                 authType = "FACEBOOK";
                 FBook.status();
             });
 
-            $("#gmail-login-btn").click(function () {
+            $self.find("#gmail-login-btn").click(function () {
                 authType = "GOOGLE";
                 GOOGLE.status();
             });
 
-            $("#ok-login-btn").click(function () {
+            $self.find("#ok-login-btn").click(function () {
                 authType = "OK";
                 OK.status();
             });
@@ -467,8 +478,8 @@ var PORTAL = (function (PORTAL, $) {
 
                 enterOfForm();
                 setCookiesAuth('authorized', 'EMAIL');
-                if ($('#remember-ident').val() === 'remember-ident-user'){
-                    Cookies.set('userEmail', $('#user_email').val());
+                if ($self.find('#remember-ident').val() === 'remember-ident-user'){
+                    Cookies.set('userEmail', $self.find('#user_email').val());
                 }
 
             });
@@ -482,22 +493,22 @@ var PORTAL = (function (PORTAL, $) {
             }
 
             (function firstStepReg() {
-
-                $('#registration-password-repeat').on('blur', function(){
-                    if ($("#registration-password").val() !== $("#registration-password-repeat").val())
-                        $('#registration-password-repeat').addClass('inp_red_border');
+                var $regPassRepeat = $self.find('#registration-password-repeat');
+                $regPassRepeat.on('blur', function(){
+                    if ($self.find("#registration-password").val() !== $self.find("#registration-password-repeat").val())
+                        $regPassRepeat.addClass('inp_red_border');
                 });
-                $('#registration-password-repeat').on('focus', function(){
-                    $('#registration-password-repeat').removeClass('inp_red_border');
+                $regPassRepeat.on('focus', function(){
+                    $regPassRepeat.removeClass('inp_red_border');
                 });
 
-                $("#btn-registration-futher").click(function () {
+                $self.find("#btn-registration-futher").click(function () {
 
-                    var firstName = $("#registration-firstName").val();
-                    var lastName = $("#registration-lastName").val();
-                    var email = $("#registration-email").val();
-                    var password = $("#registration-password").val();
-                    var password_rep = $("#registration-password-repeat").val();
+                    var firstName = $self.find("#registration-firstName").val();
+                    var lastName = $self.find("#registration-lastName").val();
+                    var email = $self.find("#registration-email").val();
+                    var password = $self.find("#registration-password").val();
+                    var password_rep = $self.find("#registration-password-repeat").val();
 
                     var regul_passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,16}$/;
                     var regul_email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -524,7 +535,7 @@ var PORTAL = (function (PORTAL, $) {
 
                 console.log("lastStepRegPartner ON success " );
 
-                $(".window-registation-step2").css('visibility', "hidden");
+                $self.find(".window-registation-step2").css('visibility', "hidden");
                 var mwindow3 = document.querySelector(".window-registation-step3-partner"); // TODO заменить на function
                 mwindow3.style.visibility = "visible";
                 mwindow3.style.left = (document.documentElement.clientWidth - mwindow3.getBoundingClientRect().width)/2 + "px";
@@ -539,27 +550,26 @@ var PORTAL = (function (PORTAL, $) {
 
                         console.dir(allCategories);
                         for (var prop in allCategories){
-                            $('#work-sphere').append('<option value="'+prop+ '">' + prop + '</option>');
-
+                            $self.find('#work-sphere').append('<option value="'+prop+ '">' + prop + '</option>');
                         }
                     },
                     error: function () { // На случай если запрос не прошел - сферу пишет вручную
-                        $('#work-sphere').detach();
-                        $('#form-reg-step3-partner').prepend('<p><input id="work-sphere" type="text" placeholder="Сфера деятельности"></p>');
+                        $self.find('#work-sphere').detach();
+                        $self.find('#form-reg-step3-partner').prepend('<p><input id="work-sphere" type="text" placeholder="Сфера деятельности"></p>');
                         console.log("success allCategories");
                     }
                 });
 
-                $("#btn-registration-finish-partner").on("click", function(){
+                $self.find("#btn-registration-finish-partner").on("click", function(){
 
-                    var work_sphere = $("#work-sphere").val();
-                    var city = $("#city_finish-partner").val();
-                    var tel = $("#tel_finish-partner").val();
-                    var vk = $("#vk_finish-partner").val();
-                    var fb = $("#fb_finish-partner").val();
-                    var ok = $("#ok_finish-partner").val();
+                    var work_sphere = $self.find("#work-sphere").val();
+                    var city = $self.find("#city_finish-partner").val();
+                    var tel = $self.find("#tel_finish-partner").val();
+                    var vk = $self.find("#vk_finish-partner").val();
+                    var fb = $self.find("#fb_finish-partner").val();
+                    var ok = $self.find("#ok_finish-partner").val();
                     /*  var googl = $("#googl_finish-partner").val();*/
-                    var site = $("#site_finish-partner").val();
+                    var site = $self.find("#site_finish-partner").val();
 
                     dataRegistration.workSphere =  work_sphere;
                     dataRegistration.city =  city;
@@ -569,7 +579,7 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.okLink =  ok;
                     dataRegistration.siteLink =  site;
 
-                    if (($("input[name='consent-part']:checked").val() === 'consent-partner') && city && tel && work_sphere /*!= 'null'*/) {
+                    if (($self.find("input[name='consent-part']:checked").val() === 'consent-partner') && city && tel && work_sphere /*!= 'null'*/) {
                         mwindow3.style.visibility = "hidden";
                         modal.style.visibility = "hidden";
                         showCabinetSuccess();
@@ -578,9 +588,9 @@ var PORTAL = (function (PORTAL, $) {
                         sendRegInfo("http://wedding-services.mycloud.by/services/rest.partner.create");
 
                     } else /*if ($("input[name='consent']:checked").val() === undefined)*/{
-                        $('.registation3_errore_message').css('display','flex');
-                        $(".window-registation-step3-partner input").one('focus', function(){
-                            $('.registation3_errore_message').css('display','none');
+                        $self.find('.registation3_errore_message').css('display','flex');
+                        $self.find(".window-registation-step3-partner input").one('focus', function(){
+                            $self.find('.registation3_errore_message').css('display','none');
                         });
                     }
 
@@ -591,19 +601,19 @@ var PORTAL = (function (PORTAL, $) {
             function lastStepRegUser(){
 
                 console.log("lastStepRegUSSEERRR ON success ");
-                $(".window-registation-step2").css('visibility', "hidden");
+                $self.find(".window-registation-step2").css('visibility', "hidden");
                 var mwindow3 = document.querySelector(".window-registation-step3-user"); // TODO заменить на function
                 mwindow3.style.visibility = "visible";
                 mwindow3.style.left = (document.documentElement.clientWidth - mwindow3.getBoundingClientRect().width)/2 + "px";
                 mwindow3.style.top = (document.documentElement.clientHeight - mwindow3.getBoundingClientRect().height)/3 + "px";
 
-                $("#btn-registration-finish-user").on("click", function(){
+                $self.find("#btn-registration-finish-user").on("click", function(){
 
-                    var city = $("#city_finish-user").val();
-                    var tel = $("#tel_finish-user").val();
-                    var vk = $("#vk_finish-user").val();
-                    var fb = $("#fb_finish-user").val();
-                    var ok = $("#ok_finish-user").val();
+                    var city = $self.find("#city_finish-user").val();
+                    var tel = $self.find("#tel_finish-user").val();
+                    var vk = $self.find("#vk_finish-user").val();
+                    var fb = $self.find("#fb_finish-user").val();
+                    var ok = $self.find("#ok_finish-user").val();
 
                     dataRegistration.city =  city;
                     dataRegistration.tel =  tel;
@@ -611,7 +621,7 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.fbLink =  fb;
                     dataRegistration.okLink =  ok;
 
-                    if (($("#consent-user-check:checked").val() === 'consent-user')   && city && tel){
+                    if (($self.find("#consent-user-check:checked").val() === 'consent-user')   && city && tel){
                         mwindow3.style.visibility = "hidden";
                         modal.style.visibility = "hidden";
                         showCabinetSuccess();
@@ -621,9 +631,9 @@ var PORTAL = (function (PORTAL, $) {
 
 
                     } else /*if ($("input[name='consent']:checked").val() === undefined)*/{
-                        $('.registation3_errore_message').css('display','flex');
-                        $(".window-registation-step3-user input").one('focus', function(){
-                            $('.registation3_errore_message').css('display','none');
+                        $self.find('.registation3_errore_message').css('display','flex');
+                        $self.find(".window-registation-step3-user input").one('focus', function(){
+                            $self.find('.registation3_errore_message').css('display','none');
                         });
                     }
                 });
@@ -634,12 +644,12 @@ var PORTAL = (function (PORTAL, $) {
 
                 inputEmailFill();
 
-                if ($("input[name='selected-role']:checked").val() === 'cheked_part'){
+                if ($self.find("input[name='selected-role']:checked").val() === 'cheked_part'){
 
                     dataRegistration.userType =  "PARTNER";
                     lastStepRegPartner();
 
-                }else if ($("input[name='selected-role']:checked").val() === 'cheked_us'){
+                }else if ($self.find("input[name='selected-role']:checked").val() === 'cheked_us'){
 
                     dataRegistration.userType =  "USER";
                     lastStepRegUser();
