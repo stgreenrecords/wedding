@@ -172,7 +172,7 @@
 
                     <div class="consent-user-div">
 
-                        <input type="checkbox" id="consent-partner-check" class="consent-check" name="consent" value="consent-user">
+                        <input type="checkbox" id="consent-user-check" class="consent-check" name="consent" value="consent-user">
                         <span>  Я принимаю </span>
                         <span class="consent-working"> Условия сотрудничества </span>
 
@@ -230,7 +230,7 @@
 
                     <div class="consent-user-div">
 
-                        <input type="checkbox" id="consent-user-check" class="consent-check" name="consent" value="consent-user">
+                        <input type="checkbox" id="consent-partner-check" class="consent-check" name="consent" value="consent-user">
                         <span>  Я принимаю </span>
                         <span class="consent-working"> Условия сотрудничества </span>
 
