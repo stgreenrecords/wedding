@@ -186,14 +186,20 @@ var PORTAL = (function (PORTAL, $) {
                 dataRegistration.authType = userLoginInfo.authType;
             }
 
+
+
+
             function initSocial(){
 
                 /*VK.init({
-                    apiId: 6428473
-                });*/
+                    apiId: 6428473,
 
-           /*     VK.init(function() {
-                    apiId: 6428473
+                });*/
+                // console.log('INIT VK SUCCESS!!!!!!');
+
+       /*         VK.init(function() {
+                    // apiId: 6428473
+                    console.log('INIT VK SUCCESS!!!!!!');
                     // API initialization succeeded
                     // Your code here
                 }, function() {
@@ -201,23 +207,80 @@ var PORTAL = (function (PORTAL, $) {
                     // Can reload page here
                 }, '5.73');*/
 
-                window.fbAsyncInit = function () {
+          /*      VK.api("wall.post", {"message": "Hello!", "v":"5.73"}, function (data) {
+                    alert("Post ID:" + data.response.post_id);
+                });
 
-                    FB.init({
-                        appId: '119308788738222',
-                        autoLogAppEvents: true,
-                        cookie: true,
-                        status: true,
-                        xfbml: true,
-                        version: 'v2.12'
+                VK.callMethod("showSettingsBox", 8214);*/
+
+                // window.fbAsyncInit = function () {
+
+              /*  FB.init({
+                    appId: '119308788738222',
+                    autoLogAppEvents: true,
+                    cookie: true,
+                    status: true,
+                    xfbml: true,
+                    oauth: true,
+                    version: 'v2.12'
+                }, function(err){
+                    console.log(err);
+
+                });
+
+                // initialize: function () {
+                //      FB.init({ appId: ID приложения, cookie: true, oauth: true}, function(err){
+                //           console.log(err);
+                //      });
+                //
+                //       this.render();
+                // };
+
+                console.log('INIT FB SUCCESS!!!!!!');
+
+                //     FB.AppEvents.logPageView();
+                // };*/
+
+
+
+//OK ---------------------------
+
+           /* $.ajax({
+                url: 'https://connect.ok.ru/oauth/authorize?client_id={1264974848}&scope={scope}&response_type={{response_type}}&redirect_uri={redirectUri}&layout={layout}&state={state}',
+                type: "GET",
+                dataType: "json",
+                success:  (data) => {
+
+                console.log('success OK !!!!!');
+
+                },
+                    error: (e) => {
+                        console.log(e);
+                    }
+                });*/
+
+           /*     OKSDK.init(1264974848, function() {
+
+
+
+                    OKSDK.REST.call('users.getCurrentUser', null, function(status, data, error) {
+                        if (status == 'ok') {
+                            document.getElementById('content').innerHTML = 'Hello World and hi, ' + data.name + '.';
+                        } else {
+                            alert('Unable to retrieve current user ' + OKSDK.Util.toString(error));
+                        }
                     });
+                }, function(error) {
+                    alert('OKSDK error' + OKSDK.Util.toString(error));
+                });*/
 
-                    FB.AppEvents.logPageView();
-                };
 
             }
 
             initSocial();
+
+
+
 
             var V_K = {
 

@@ -28,7 +28,7 @@ var PORTAL = (function (PORTAL, $) {
                 console.dir(allCategories);
 
                 for (var prop in allCategories){
-                    $partner_categ_select.append('<option value="'+prop+ '">' + prop + '</option>');
+                    $partner_categ_select.append(`<option value="${prop}">${prop}</option>`);
                 }
 
                 getSelectedCat();
