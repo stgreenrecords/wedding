@@ -15,7 +15,8 @@ var PORTAL = (function (PORTAL, $) {
         $city_select.on('change', getSelectedCat);
         $self.find('#search-usually-cont').on('click', showSelectPerson);
 
-
+        var getFromCatalogCat = (window.location.hash).slice(1);
+        console.log(getFromCatalogCat);
 
         $.ajax({ // добавление всех категорий в селект
 
@@ -28,7 +29,10 @@ var PORTAL = (function (PORTAL, $) {
                 console.dir(allCategories);
 
                 for (var prop in allCategories){
-                    $partner_categ_select.append(`<option value="${prop}">${prop}</option>`);
+                    if(getFromCatalogCat !== prop)
+                        $partner_categ_select.append(`<option value="${prop}">${prop}</option>`);
+                    else
+                        $partner_categ_select.append(`<option value="${prop}" selected>${prop}</option>`);
                 }
 
                 getSelectedCat();

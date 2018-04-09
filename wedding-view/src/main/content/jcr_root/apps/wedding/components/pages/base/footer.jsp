@@ -31,9 +31,9 @@
             <div class="mini-menu">
                 <img src="/etc/clientlibs/wedding/pages/images/on_all_pages/header/drop_arrow_menu.png" alt="drop-down">
                 <ul class="mini-menu-drop hidden_cl">
-                    <li id="mini-menu_my-page">Моя страница</li>
-                    <li id="mini-menu_options">Настройки</li>
-                    <li id="mini-menu_exit">Выход</li>
+                    <li id="mini-menu_my-page"><a href="/content/wedding/catalog/category/partner.html"> Моя страница</a>  </li>
+                    <li id="mini-menu_options"> Настройки </li>
+                    <li id="mini-menu_exit"> Выход </li>
                 </ul>
             </div>
 
@@ -149,12 +149,12 @@
                     <!-- 	<p><input id="city_finish-user" type="text" name="city" placeholder="Город"  value="Менск">  </p> -->
 
                     <select id="city_finish-user" name="city_finish-user">
-                        <option value="Minsk" selected>Минск</option>
-                        <option value="Brest">Брест</option>
-                        <option value="Vitebsk">Витебск</option>
-                        <option value="Gomel">Гомель</option>
-                        <option value="Grodno">Гродно</option>
-                        <option value="Mogilev">Могилев</option>
+                        <option value="minsk" selected>Минск</option>
+                        <option value="brest">Брест</option>
+                        <option value="vitebsk">Витебск</option>
+                        <option value="gomel">Гомель</option>
+                        <option value="grodno">Гродно</option>
+                        <option value="mogilev">Могилев</option>
                     </select>
 
                     <p><input id="tel_finish-user" type="tel" name="tel" placeholder="Номер телефона" value="+375(29)3222232">  </p>
@@ -207,12 +207,12 @@
 
                     <!-- <p><input id="city_finish-partner"  type="text" name="user-name" placeholder="Город, Страна? (может разбить?)" value="Менск">  </p> -->
                     <select id="city_finish-partner" name="city_finish-user">
-                        <option value="Minsk" selected>Минск</option>
-                        <option value="Brest">Брест</option>
-                        <option value="Vitebsk">Витебск</option>
-                        <option value="Gomel">Гомель</option>
-                        <option value="Grodno">Гродно</option>
-                        <option value="Mogilev">Могилев</option>
+                        <option value="minsk" selected>Минск</option>
+                        <option value="brest">Брест</option>
+                        <option value="vitebsk">Витебск</option>
+                        <option value="gomel">Гомель</option>
+                        <option value="grodno">Гродно</option>
+                        <option value="mogilev">Могилев</option>
                     </select>
                     <p><input id="tel_finish-partner" type="tel" name="user-surname" placeholder="Номер телефона" value="+375(29)3222232">  </p>
                     <p><input id="email_finish-patner"  type="email" name="user-email" placeholder="email" disabled>  </p>

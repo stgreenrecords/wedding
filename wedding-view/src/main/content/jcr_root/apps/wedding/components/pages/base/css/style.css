@@ -544,3 +544,44 @@ footer > div a, footer > div{
 
 /*  =========  end  форма входа and reg */
 
+/*Experiment*/
+
+#vk_auth_div_block{
+    width: 200px;
+    height: 150px;
+    background-color: #337;
+    border: 1px solid red;
+    margin: 0 auto;
+}
+
+/* another pages */
+/* ========================= CATALOG */
+.main-block-catalog{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.catalog_unit{
+    height: 250px;
+    box-sizing: border-box;
+    width: 23%;
+    margin: 1% 1% 2% 1%;
+    font-size: 24pt;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+.catalog_unit p {
+    margin-top: 100px;
+    background-color: rgba(152,115,056, 0.7);
+    overflow:  hidden;
+}
+
+/*  ========================= CATALOG off */
