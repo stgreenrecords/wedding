@@ -250,19 +250,41 @@ main{
 }
 
 .top-bar{
-  min-height: 150px;
-  background-color: #f4f4f4;
-  text-align: center;
-  margin: 2%;
+    min-height: 150px;
+    background-color: #f4f4f4;
+    text-align: center;
+    margin-top: 2%;
 }
 
 .top-bar input, .top-bar select{
-    height: 30px;
-    margin: 10px 0;
-    padding: 1px 1% 1px 3%;
+    height: 40px;
+    margin: 10px 12px;
+    padding: 2px 5px 0 15px;
     box-sizing: border-box;
     border: none;
     font-size: 15pt;
+    box-shadow:  5px 5px 23px -2px #A0A07D;
+
+}
+
+#partner_categories_select{
+    width: 235px;
+}
+
+#city_select{
+    width: 225px;
+}
+
+.num_field{
+    width: 100px;
+}
+
+.num_field_label{
+    padding-left: 9px;
+}
+
+.num_field_label2{
+    padding-right: 20px;
 }
 
 .pro_vk a{

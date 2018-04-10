@@ -17,7 +17,7 @@
                 </select>
 
                 <select id="city_select" name="City">
-                    <!-- <optgroup selected label = "Годрод"> -->
+
                     <option value="minsk" disabled> Город </option>
                     <option value="minsk" selected> Минск </option>
                     <option value="brest"> Брест </option>
@@ -33,15 +33,16 @@
             </div>
 
             <div>
-                <label for="ticketNum"> Бютжет: </label>
-                <input type="number" name="min"  placeholder="от" value="500" step="50">
-                <input type="number"  placeholder="до" name="max" value="1000" step="50">
-                <label for="ticketNum">Сортировать по:</label>
+                <label class="num_field_label" for="ticketNum"> Бюджет</label>
+                <input class="num_field" type="number" name="min"  placeholder="от" value="500" step="50">
+                <input class="num_field" type="number" name="max"  placeholder="до" value="1000" step="50">
+                <label class="num_field_label2" for="max"> руб. </label>
 
-                <select name="sort">
-                    <option value="ved">Цене</option>
-                    <option value="photo" selected>Популярности</option>
-                    <option value="art">Рейтингу</option>
+                <label for="ticketNum">Сортировать по:</label>
+                <select id="sort_select" name="sort">
+                    <option value="prise">Цене</option>
+                    <option value="popular" selected>Популярности</option>
+                    <option value="reit">Рейтингу</option>
                 </select>
 
             </div>

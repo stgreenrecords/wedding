@@ -8,12 +8,12 @@ var PORTAL = (function (PORTAL, $) {
 
         console.log('Component: "Partner"');
 
-        $self.find('gg').click(function () {
+        $self.find('#gg').click(function () {
             console.log('so good');
             alert('so good');
         });
 
-        $self.find('gg').on('click',function () {
+        $self.find('#gg').on('click',function () {
             console.log('so very good');
             alert('so very good');
         });
