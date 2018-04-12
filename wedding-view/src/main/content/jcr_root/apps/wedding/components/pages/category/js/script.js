@@ -17,6 +17,8 @@ var PORTAL = (function (PORTAL, $) {
 
         var getFromCatalogCat = (window.location.hash).slice(1);
         console.log(getFromCatalogCat);
+        var dataUsers;
+        var selectedPerson;
 
         $.ajax({ // добавление всех категорий в селект
 
@@ -137,17 +139,32 @@ var PORTAL = (function (PORTAL, $) {
         }
 
         function showSelectPerson(event){
-            console.log("showSelectPerson");
-            console.log($self.find('event.target').attr('userId'));
 
-            $.ajax({
-                url: "http://wedding-services.mycloud.by/services/rest.users/minsk.json?userId=a931a267-ff17-4d89-ab80-e478c0a6de0a",
-                type: "GET",
-                dataType: "json",
-                success: function (data) {
-                    console.dir(data);
+            var selectedPersonId;
+            var b;
+            console.dir(dataUsers);
+
+            if ($(event.target).attr('data_userId')!=undefined)
+                selectedPersonId = $(event.target).attr('data_userId');
+            else
+                selectedPersonId = $(event.target).parents('.search-usually').attr('data_userId');
+            b = selectedPersonId;
+            for (var i = 0; i<dataUsers.length; i++){
+                for (b in dataUsers[i]) {
+                    if (dataUsers[i].hasOwnProperty(b))
+                        selectedPerson = dataUsers[i];
                 }
-            });
+            }
+
+            for (var preper in selectedPerson){
+                sessionStorage.setItem(preper, selectedPerson[preper]);
+            }
+
+            console.dir(selectedPerson);
+            console.log(selectedPersonId);
+            document.location.href = `/content/wedding/catalog/category/partner.html#${selectedPersonId}`;
+
+
 
 
         }
