@@ -65,7 +65,13 @@ var PORTAL = (function (PORTAL, $) {
                 success: function (data) {
 
                     console.log("success");
+
                     console.dir(data);
+                    /*     console.log(data[4].firstName);
+                              console.log(data[4].lastName);
+                              console.log(data[4].speciality);
+                              console.log(data[4].type);
+                              console.log(data[4].vip);*/
 
                     var pro_div = document.querySelector(".search-pro");
                     pro_div.style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_5.jpg')";
@@ -94,7 +100,7 @@ var PORTAL = (function (PORTAL, $) {
                         copy_div.querySelector(".search-usually_img").style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_"+k+".jpg')";
                         copy_div.querySelector(".search-usually_content_name").innerHTML = data[i].firstName + " "+ data[i].lastName;
                         copy_div.querySelector(".search-usually_content_speciality").innerHTML = data[i].speciality;
-                        copy_div.setAttribute('userId', data[i].userId);
+                        copy_div.setAttribute('data_userId', data[i].userId);
                         main_container.appendChild(copy_div);
                     }
 
@@ -102,21 +108,22 @@ var PORTAL = (function (PORTAL, $) {
 
                 }
 
-            });
+            });  // ---  AJAX finish
 
         }
 
 
         function getAllPersonInCat (selectItems) {
 
-            $.ajax({
+            $.ajax({  // ---  AJAX All
 
                 url: selectItems.url_all,
                 type: "GET",
                 dataType: "json",
                 success: function (allUser) {
-
+                    dataUsers = allUser;
                     console.dir(allUser);
+                    console.log(selectItems.url_all);
                     var all_div = document.querySelectorAll(".search-usually");
                     var first_div = document.querySelector(".search-usually");
                     var main_container =  document.querySelector("#search-usually-cont");
@@ -128,9 +135,15 @@ var PORTAL = (function (PORTAL, $) {
                             copy_div.querySelector(".search-usually_img").style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_"+k+".jpg')";
                             copy_div.querySelector(".search-usually_content_name").innerHTML = allUser[i].firstName + " "+ allUser[i].lastName;
                             copy_div.querySelector(".search-usually_content_speciality").innerHTML = allUser[i].speciality;
+                            copy_div.querySelector('.search-usually_img').setAttribute('data_userId', allUser[i].userId);
                             main_container.appendChild(copy_div);
                         }
                     }
+                    /*
+                                  for (var i = 0; i < all_div.length; i++) {
+                                      all_div[i].querySelector(".search-usually_content_name").innerHTML = photo_all[i].firstName + " " + photo_all[i].lastName;
+                                      all_div[i].querySelector(".search-usually_content_speciality").innerHTML = photo_all[i].speciality;
+                                  }*/
 
                 }
 
