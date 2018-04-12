@@ -607,3 +607,69 @@ footer > div a, footer > div{
 }
 
 /*  ========================= CATALOG off */
+
+/* ================================ PARTNER */
+
+#partner-page-content{
+    font-family: 'Open Sans', sans-serif;
+}
+
+#partner_photo, #partner_video, #partner_akcii, #partner_otzyvy{
+
+}
+
+.partner_menu{
+    padding-bottom: 20px;
+}
+
+.partner_menu ul{
+    display: flex;
+    justify-content: center;
+}
+
+.partner_menu li{
+    list-style-type: none;
+    width: 10%;
+    cursor: pointer;
+
+}
+
+.partner-page-wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+.h_line{
+    padding-bottom: 15px;
+}
+
+#partner_aside{
+
+    width: 32%;
+    min-height: 800px;
+    background-color: #fda;
+}
+
+.partner_aside_photo{
+    margin: 15px auto;
+    width: 75%;
+    min-height: 350px;
+    background-image: url('../etc/clientlibs/wedding/pages/images/any_img/d2_4.jpg');
+    background-size: cover;
+}
+
+
+#partner-page-pages{
+    width: 61%;
+    min-height: 300px;
+    background-color: #fcb;
+}
+
+.partner_name{
+    text-align: center;
+}
+
+
+
+
+/* ================================ PARTNER off */
