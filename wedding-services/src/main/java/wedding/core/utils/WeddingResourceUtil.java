@@ -11,7 +11,10 @@ import wedding.core.model.UserData;
 
 import javax.jcr.query.Query;
 import java.io.IOException;
-import java.util.*;
+import java.util.Iterator;
+import java.util.Optional;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -80,4 +83,7 @@ public final class WeddingResourceUtil {
                 .orElse(StringUtils.EMPTY);
     }
 
+    public static Resource getResourceByID(String id) {
+        return null;
+    }
 }

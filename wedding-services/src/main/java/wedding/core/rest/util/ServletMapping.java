@@ -9,17 +9,19 @@ import java.util.Arrays;
 
 public enum ServletMapping {
 
-    CATALOG_CATEGORIES("catalog-categories", CatalogCategories.class),
-    PARTNERS("partners",Partners.class),
-    USERS("users", Users.class),
-    TENDERS("tenders",Tenders.class);
+    CATALOG_CATEGORIES("catalog-categories", CatalogCategories.class, ""),
+    PARTNERS("partners", Partners.class, "/home/users/wedding/partners"),
+    USERS("users", Users.class, "/home/users/wedding/users"),
+    TENDERS("tenders", Tenders.class, "/home/users/wedding/users");
 
     private String selector;
     private Class servletClass;
+    private String jcrPath;
 
-    ServletMapping(String selector, Class servletClass) {
+    ServletMapping(String selector, Class servletClass, String jcrPath) {
         this.selector = selector;
         this.servletClass = servletClass;
+        this.jcrPath = jcrPath;
     }
 
     private String getSelector(){

@@ -1,6 +1,7 @@
 package wedding.core.utils;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.osgi.framework.Bundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,6 +11,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -55,7 +61,7 @@ public final class ReflectionUtil {
     }
 
     public static Predicate<Field> checkAnnotations(Class<? extends Annotation> annotationClass,
-                                                     Predicate<Annotation[]> function) {
+                                                    Predicate<Annotation[]> function) {
         return field -> function.test(field.getDeclaredAnnotationsByType(annotationClass));
     }
 
@@ -73,5 +79,39 @@ public final class ReflectionUtil {
             LOG.error(e.getMessage(), e);
         }
         return new Class<?>[0];
+    }
+
+
+    public static boolean isFieldPresent(String fieldName, Object classObject) {
+        return Arrays.stream(classObject.getClass().getDeclaredFields())
+                .anyMatch(field -> field.getName().equals(fieldName));
+
+    }
+
+
+    public static void setFieldValue(String fieldName, String fieldvalue, Object classObject) {
+        try {
+            Field field = classObject.getClass().getDeclaredField(fieldName);
+            field.set(String.class, fieldvalue);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            LOG.error(e.getMessage());
+        }
+    }
+
+    public static String[] getAllClassesFromPackage(Bundle bundle, String packageName) {
+        Enumeration classUrls = bundle.findEntries("/" + packageName.replace('.', '/'), "*.class", true);
+        List<String> classes = new ArrayList<>();
+        while (classUrls.hasMoreElements()) {
+            URL url = (URL) classUrls.nextElement();
+            classes.add(toClassName(url));
+        }
+
+        return classes.toArray(new String[]{});
+    }
+
+    private static String toClassName(URL url) {
+        String f = url.getFile();
+        String cn = f.substring(1, f.length() - ".class".length());
+        return cn.replace('/', '.');
     }
 }
