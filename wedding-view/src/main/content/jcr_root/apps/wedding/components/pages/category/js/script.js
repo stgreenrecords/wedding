@@ -13,7 +13,6 @@ var PORTAL = (function (PORTAL, $) {
 
         $partner_categ_select.on('change', getSelectedCat);
         $city_select.on('change', getSelectedCat);
-        $self.find('#search-usually-cont').on('click', showSelectPerson);
 
         var getFromCatalogCat = (window.location.hash).slice(1);
         console.log(getFromCatalogCat);
@@ -144,7 +143,7 @@ var PORTAL = (function (PORTAL, $) {
                                       all_div[i].querySelector(".search-usually_content_name").innerHTML = photo_all[i].firstName + " " + photo_all[i].lastName;
                                       all_div[i].querySelector(".search-usually_content_speciality").innerHTML = photo_all[i].speciality;
                                   }*/
-
+                    $self.find('.search-usually').on('click', showSelectPerson);
                 }
 
             });
@@ -155,13 +154,14 @@ var PORTAL = (function (PORTAL, $) {
 
             var selectedPersonId;
             var b;
-            console.dir(dataUsers);
+            // console.dir(dataUsers);
 
             if ($(event.target).attr('data_userId')!=undefined)
                 selectedPersonId = $(event.target).attr('data_userId');
             else
-                selectedPersonId = $(event.target).parents('.search-usually').attr('data_userId');
+                selectedPersonId = $(event.target).closest('.search-usually').attr('data_userId'); // parents
             b = selectedPersonId;
+
             for (var i = 0; i<dataUsers.length; i++){
                 for (b in dataUsers[i]) {
                     if (dataUsers[i].hasOwnProperty(b))
@@ -169,15 +169,16 @@ var PORTAL = (function (PORTAL, $) {
                 }
             }
 
-            for (var preper in selectedPerson){
-                sessionStorage.setItem(preper, selectedPerson[preper]);
-            }
+            console.log(JSON.stringify(selectedPerson));
+            sessionStorage.setItem('selectedPerson', JSON.stringify(selectedPerson) );
+
+            /* for (var preper in selectedPerson){
+               sessionStorage.setItem(preper, selectedPerson[preper]);
+             }*/
 
             console.dir(selectedPerson);
             console.log(selectedPersonId);
             document.location.href = `/content/wedding/catalog/category/partner.html#${selectedPersonId}`;
-
-
 
 
         }
