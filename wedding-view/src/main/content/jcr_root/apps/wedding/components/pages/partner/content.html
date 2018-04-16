@@ -4,11 +4,11 @@
 
         <ul>
 
-            <li id="partner_about_btn" >О себе</li>
-            <li id="partner_photo_btn">Фото</li>
-            <li id="partner_video_btn">Видео</li>
-            <li id="partner_stock_btn">Акции</li>
-            <li id="partner_comments_btn">Отзывы</li>
+            <li > <span id="partner_about_btn" 	class="partner_menu_btn partner_menu_btn_active">  	О себе </span>	</li>
+            <li > <span id="partner_photo_btn"  class="partner_menu_btn">	Фото </span>	</li>
+            <li > <span id="partner_video_btn"  class="partner_menu_btn">	Видео </span>	</li>
+            <li > <span id="partner_stock_btn" 	class="partner_menu_btn">	Акции </span>	</li>
+            <li > <span id="partner_comments_btn" class="partner_menu_btn">	Отзывы </span>	</li>
 
         </ul>
 
@@ -20,17 +20,50 @@
         <aside id="partner_aside"  class="" >
 
             <div class="avatar_and_btn">
-                <div class="partner_avatar"></div>
+
+                <div class="partner_avatar"> Тут когда-нибудь будет фото этого прекрасного идивидума с женским именем и мужской фамилией ))</div>
+
+                <div class="partner_avatar_btn">
+                    <div class="partner_avatar_btn_mail"><img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/wright.png" alt="avatar_btn_mail" title="Написать сообщение"> </div>
+                    <div class="partner_avatar_btn_likes"><img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/estimate.png" alt="avatar_btn_likes" title="Оценить"></div>
+                    <div class="partner_avatar_btn_calc"><img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/import_calc.png" alt="avatar_btn_calc" title="Добавить в калькулятор"></div>
+                </div>
+
             </div>
 
-            <p class="partner_name"></p>
-            <p class="partner_secondname"></p>
-            <p class="speciality"> </p>
+            <p class="profil_name"> </p>
+            <p class="profil_secondname"> </p>
+            <p class="partner_speciality"> </p>
+
             <div class="info_reit_block">
-                <span class="views_icon"></span> <span class="likes_icon"></span>
-                <p class="reiting_string"></p>
+                <span class="profil_views_icon" title="Показатель общего количества просмотров"> <img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/count_views.png" alt="views_icon" > 42 </span>
+                <span class="profil_likes_icon" title="Показатель общего количества оценок"> <img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/count_mark.png" alt="views_icon" > 15 </span>
+                <div class="profil_reiting_string">
+                    <div id="reit_heart1" class="reit_heart_all"></div>
+                    <div id="reit_heart2" class="reit_heart_all"></div>
+                    <div id="reit_heart3" class="reit_heart_all"></div>
+                    <div id="reit_heart4" class="reit_heart_all"></div>
+                    <div id="reit_heart5" class="reit_heart_all"></div>
+                </div>
+            </div>
 
+            <p class="info_string prise_string"></p>
+            <p class="info_string phone_string"></p>
+            <p class="info_string mail_string"></p>
+            <p class="info_string link_string"> http:// </p>
+            <p class="info_string vk_string"></p>
+            <p class="info_string fb_string"></p>
+            <p class="info_string insta_string"></p>
 
+            <div class="partner_aside_calendar">
+                <div class="calendar_date_fild"> Июнь 2018 </div>
+
+                <div class="calendar_main_fild"></div>
+
+                <div class="calendar_colontitle_fild">
+                    <p class="full_busy">Занят целый день</p>
+                    <p class="part_busy">Занят частично</p>
+                </div>
             </div>
 
 
@@ -46,8 +79,8 @@
                 <div >
 
                     <h2 class="partner_title"> О себе </h2>
-                    <p class="h_line">___________</p>
-                    <p class="content_about_oneself"> Тру-ля-ля</p>
+
+                    <p class="content content_about_oneself"> Тут Вам необходимо коротко, сторок на 20, расписать информацию О СЕБЕ.</p>
 
                 </div>
 
@@ -56,10 +89,9 @@
             <section id="partner_photo" class="hidden_full">
 
                 <div >
-
                     <h2 class="partner_title"> Фото </h2>
-                    <p class="h_line">___________</p>
-                    <p class="content_"> photo </p>
+
+                    <p class="content content_"> photo </p>
                 </div>
 
 
@@ -70,8 +102,8 @@
                 <div >
 
                     <h2 class="partner_title"> Видео </h2>
-                    <p class="h_line">___________</p>
-                    <p class="content_"> video </p>
+
+                    <p class="content content_"> video </p>
                 </div>
 
 
@@ -82,8 +114,8 @@
                 <div >
 
                     <h2 class="partner_title"> Акции </h2>
-                    <p class="h_line">___________</p>
-                    <p class="content_"> stock </p>
+
+                    <p class="content content_"> stock </p>
 
                 </div>
 
@@ -95,8 +127,8 @@
                 <div >
 
                     <h2 class="partner_title"> Отзывы </h2>
-                    <p class="h_line">___________</p>
-                    <p class="content_"> comments </p>
+
+                    <p class="content content_"> comments </p>
 
                 </div>
 

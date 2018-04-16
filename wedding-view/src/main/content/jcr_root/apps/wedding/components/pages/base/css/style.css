@@ -96,6 +96,8 @@
     font-style: normal;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+
 body{
   font-family: 'Theano Didot',  serif;
   font-weight: lighter;
@@ -119,7 +121,7 @@ img, body, header, footer, nav, aside, article, section, figure, button, p, ul, 
 a {  text-decoration: none; color: #222; white-space: nowrap; }
 
 .central-head{
-  align-self: center;
+  align-self: flex-end;
   padding: 0 7%;
 }
 
@@ -612,6 +614,7 @@ footer > div a, footer > div{
 
 #partner-page-content{
     font-family: 'Open Sans', sans-serif;
+    background-color: #f4f4f4;
 }
 
 #partner_photo, #partner_video, #partner_akcii, #partner_otzyvy{
@@ -619,7 +622,7 @@ footer > div a, footer > div{
 }
 
 .partner_menu{
-    padding-bottom: 20px;
+    padding: 25px 0 20px;
 }
 
 .partner_menu ul{
@@ -628,12 +631,29 @@ footer > div a, footer > div{
 }
 
 .partner_menu li{
-    font-size: 19pt;
+    font-size: 17pt;
     list-style-type: none;
     width: 10%;
+    margin-right: 2%;
     cursor: pointer;
+    padding-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.partner_menu_btn{
+    display: inline-block;
+    border-bottom: 2px solid #f4f4f4;
 
 }
+
+.partner_menu_btn:hover{
+    color: #afa58e;
+}
+
+/*.partner_menu_btn:active,*/ .partner_menu_btn_active{
+                                  color: #afa58e;
+                                  border-bottom: 2px solid #afa58e;
+                              }
 
 .partner-page-wrapper{
 
@@ -644,6 +664,8 @@ footer > div a, footer > div{
 
 .partner_title{
     font-size: 30pt;
+    display: inline-block;
+    border-bottom: 2px solid #000;
 
 }
 
@@ -653,37 +675,127 @@ footer > div a, footer > div{
 
 }
 
+.content{
+    padding: 15px 0;
+}
+
 #partner_aside{
     width: 32%;
     min-height: 800px;
-    background-color: #fda;
+    background-color: #fff;
+}
+
+.avatar_and_btn{
+    display: flex;
 }
 
 .partner_avatar{
-    margin: 15px auto;
+    margin: 35px 0 15px 10%;
     width: 75%;
-    min-height: 350px;
-    background-image: url('../etc/clientlibs/wedding/pages/images/any_img/d2_4.jpg');
+    min-height: 320px;
+    background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_1.jpg');
     background-size: cover;
 }
 
+.partner_avatar_btn{
+    width: 15%;
+    align-self: flex-end;
+}
+
+.partner_avatar_btn_mail, .partner_avatar_btn_likes, .partner_avatar_btn_calc, .calendar_date_fild{
+    cursor: pointer;
+}
+
+.profil_reiting_string{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.reit_heart_all{
+    background-image: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/red_heart_reit.png');
+    background-size: cover;
+    height: 14px;
+    width: 17px;
+    margin: 3px 3px 25px;
+}
+
+.info_string{
+
+    padding:  7px 0 7px 20%;
+    font-size: 12pt;
+    min-height: 20px;
+}
+
+.prise_string{
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/wallet.png') 10% no-repeat;
+}
+
+.phone_string{
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/phone.png') 10% no-repeat;
+}
+
+.mail_string{
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/envelope.png') 10% no-repeat;
+}
+
+.link_string{
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/link.png') 10% no-repeat;
+}
+
+.vk_string{
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/vk.png') 10% no-repeat;
+}
+
+.fb_string{
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/facebook.png') 10% no-repeat;
+}
+
+.insta_string{
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/instagram.png') 10% no-repeat;
+}
+
+.calendar_colontitle_fild{
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/full_day_indicator.png') 1% 20px no-repeat,
+    url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/part_day_indicator.png') 1% 50px no-repeat;
+}
 
 #partner-page-pages{
     width: 61%;
     min-height: 300px;
-    background-color: #fcb;
+    background-color: #fff;
     box-sizing: border-box;
     padding: 15px 7%;
 
 }
-
-.partner_name, .partner_secondname{
+.profil_name, .profil_secondname, .partner_speciality, .info_reit_block{
     text-align: center;
-    font-size: 20pt;
-    font-weight: 600;
 }
 
+.profil_name, .profil_secondname{
 
+    font-size: 22pt;
+    font-weight: 600;
+    /*text-transform: uppercase;*/
+}
 
+.info_reit_block, .partner_speciality{
+    margin: 7px 0;
+}
+
+.calendar_main_fild{
+    min-height: 250px;
+}
+
+.calendar_date_fild, .calendar_colontitle_fild{
+    padding: 15px 12%;
+    background-color: #f4f4f4;
+}
+
+.calendar_date_fild{
+    text-align: center;
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/arrow_left.png') 10% no-repeat,
+    url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/arrow_right.png') 90% no-repeat;
+}
 
 /* ================================ PARTNER off */

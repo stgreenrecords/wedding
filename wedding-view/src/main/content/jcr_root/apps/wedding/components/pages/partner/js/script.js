@@ -9,9 +9,20 @@ var PORTAL = (function (PORTAL, $) {
         console.log('Component: "Partner"');
 
         var selectedPerson = JSON.parse(sessionStorage.getItem('selectedPerson'));
-
+        console.log('INFO:');
         console.dir(selectedPerson);
 
+        $self.find('.profil_name').text(selectedPerson.firstName);
+        $self.find('.profil_secondname').text(selectedPerson.lastName);
+        $self.find('.partner_speciality').text(selectedPerson.speciality);
+
+        $self.find('.prise_string').text(`${selectedPerson.priceStart}-${selectedPerson.priceEnd} рублей`);
+        $self.find('.phone_string').text(selectedPerson.phone);
+        $self.find('.mail_string').text(selectedPerson.email);
+        $self.find('.link_string').text(selectedPerson.siteLink);
+        $self.find('.vk_string').text(selectedPerson.vkLink);
+        $self.find('.fb_string').text(selectedPerson.facebookLink);
+        $self.find('.insta_string').text(selectedPerson.instagramLink);
 
         (function(){  //  функция переключения страниц
             var page_section_btn = {};
@@ -31,9 +42,6 @@ var PORTAL = (function (PORTAL, $) {
             console.dir(partner_page_section);
             console.dir(page_section_btn);
 
-            $self.find('.partner_name').text(selectedPerson.firstName);
-            $self.find('.partner_secondname').text(selectedPerson.lastName);
-
             for (var prop in page_section_btn){
                 page_section_btn[prop].on('click', openPage);
             }
@@ -43,11 +51,17 @@ var PORTAL = (function (PORTAL, $) {
                 console.log(event.target.id);
 
                 for (var propp in partner_page_section){
-                    if (propp != event.target.id)
+                    if (propp != event.target.id){
                         partner_page_section[propp].addClass('hidden_full');
+                    }
+                }
+                partner_page_section[event.target.id].removeClass('hidden_full');
+
+                for (var prop in page_section_btn){
+                    page_section_btn[prop].removeClass('partner_menu_btn_active');
                 }
 
-                partner_page_section[event.target.id].removeClass('hidden_full');
+                $self.find('#'+event.target.id).addClass('partner_menu_btn_active');
 
             }
         }());
