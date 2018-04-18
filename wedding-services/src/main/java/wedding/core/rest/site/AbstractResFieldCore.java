@@ -10,13 +10,10 @@ public abstract class AbstractResFieldCore implements RestFieldCore {
     static final String REQUEST_PARAMETER_SORT_PRICE_DOWN = "priceDown";
     static final String REQUEST_PARAMETER_SORT_VIP_STATUS = "vipStatus";
     static final String REQUEST_PARAMETER_SORT_DATE_PUBLISHING = "datePublishing";
-    static final String REQUEST_PARAMETER_USER_ID = "userId";
-    public static final String REQUEST_PARAMETER_WEDDING_RESOURCE_ID = "wedding:resourceID";
 
     static final String TENDER_QUERY = "SELECT * FROM [nt:unstructured] AS tender WHERE ISDESCENDANTNODE([/home/users/wedding/users%s]) AND NAME() = 'tender'";
-    static final String PARTNER_QUERY = "SELECT * FROM [rep:User] AS user WHERE ISDESCENDANTNODE([/home/users/wedding/partners%s])";
+    static final String PARTNER_QUERY = "SELECT * FROM [rep:User] AS user WHERE ISDESCENDANTNODE([/home/users/wedding/partners%s]) %s";
     static final String USER_QUERY = "SELECT * FROM [rep:User] AS user WHERE ISDESCENDANTNODE([/home/users/wedding/users%s]) %s";
-    static final String PART_USER_QUERY = "AND user.[userId] = '%s'";
 
     @Override
     public Object getObject(SlingHttpServletRequest request) {

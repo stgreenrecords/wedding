@@ -4,6 +4,7 @@ import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
 import wedding.core.model.UserData;
+import wedding.core.utils.SlingModelUtil;
 import wedding.core.utils.WeddingResourceUtil;
 
 import javax.jcr.query.Query;
@@ -20,7 +21,7 @@ public class Partners extends AbstractResFieldCore {
     @Override
     public Object getObject(SlingHttpServletRequest request) {
         return Optional.of(request.getResourceResolver())
-                .map(resolver -> resolver.findResources(String.format(PARTNER_QUERY, getSuffixPathFromRequest(request)), Query.SQL))
+                .map(resolver -> resolver.findResources(String.format(PARTNER_QUERY, getSuffixPathFromRequest(request), getIdQueryPart(request)), Query.SQL))
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
                 .map(resource -> resource.adaptTo(UserData.class))
@@ -30,8 +31,11 @@ public class Partners extends AbstractResFieldCore {
     }
 
     @Override
-    public Object createObject(SlingHttpServletRequest request) {
-        return super.createObject(request);
+    public Object updateObject(SlingHttpServletRequest request) {
+        UserData userData = request.adaptTo(UserData.class);
+        Optional.ofNullable(userData)
+                .ifPresent(SlingModelUtil::updateModel);
+        return userData;
     }
 
     private Comparator<UserData> applySorting(final SlingHttpServletRequest request) {

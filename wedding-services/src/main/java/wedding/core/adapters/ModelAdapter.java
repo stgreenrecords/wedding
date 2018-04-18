@@ -64,9 +64,10 @@ public class ModelAdapter implements AdapterFactory {
             return null;
 
         return (AdapterType) Optional.ofNullable(request.getParameter(AbstractResFieldCore.REQUEST_PARAMETER_WEDDING_RESOURCE_ID))
-                .map(WeddingResourceUtil::getResourceByID)
+                .map(WeddingResourceUtil.getResourceByID(request.getResourceResolver()))
                 .map(resource -> resource.adaptTo(aClass))
-                .map(model -> setPropertyToModel(request, model)).orElse(null);
+                .map(model -> setPropertyToModel(request, model))
+                .orElse(null);
     }
 
     private Object setPropertyToModel(SlingHttpServletRequest request, Object model) {

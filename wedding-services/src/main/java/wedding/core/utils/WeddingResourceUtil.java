@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.Spliterator;
 import java.util.Spliterators;
+import java.util.function.Function;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -22,6 +23,7 @@ public final class WeddingResourceUtil {
 
     private static final Logger LOG = LoggerFactory.getLogger(WeddingResourceUtil.class);
     private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final String RESOURCE_BY_ID_QUERY = "SELECT * FROM [rep:User] AS user WHERE ISDESCENDANTNODE([/home/users/wedding]) AND user.[userId] = '%s'";
 
     private WeddingResourceUtil() {
     }
@@ -83,7 +85,11 @@ public final class WeddingResourceUtil {
                 .orElse(StringUtils.EMPTY);
     }
 
-    public static Resource getResourceByID(String id) {
-        return null;
+    public static Function<String, Resource> getResourceByID(ResourceResolver resolver) {
+        return id -> {
+            final String query = String.format(RESOURCE_BY_ID_QUERY, id);
+            Iterator<Resource> resourceIterator = resolver.findResources(query, Query.SQL);
+            return resourceIterator.hasNext() ? resourceIterator.next() : null;
+        };
     }
 }
