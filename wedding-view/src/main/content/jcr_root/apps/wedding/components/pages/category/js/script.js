@@ -163,8 +163,8 @@ var PORTAL = (function (PORTAL, $) {
             b = selectedPersonId;
 
             for (var i = 0; i<dataUsers.length; i++){
-                for (b in dataUsers[i]) {
-                    if (dataUsers[i].hasOwnProperty(b))
+                for (var prop in dataUsers[i]) {
+                    if (dataUsers[i].userId ===  b)
                         selectedPerson = dataUsers[i];
                 }
             }
