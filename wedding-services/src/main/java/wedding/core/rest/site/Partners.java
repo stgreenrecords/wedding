@@ -21,13 +21,18 @@ public class Partners extends AbstractResFieldCore {
     @Override
     public Object getObject(SlingHttpServletRequest request) {
         return Optional.of(request.getResourceResolver())
-                .map(resolver -> resolver.findResources(String.format(PARTNER_QUERY, getSuffixPathFromRequest(request), getIdQueryPart(request)), Query.SQL))
+                .map(resolver -> resolver.findResources(String.format(PARTNER_QUERY, WeddingResourceUtil.getSuffixPathFromRequest(request), WeddingResourceUtil.getIdQueryPart(request)), Query.SQL))
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
                 .map(resource -> resource.adaptTo(UserData.class))
                 .sorted(applySorting(request))
                 .limit(getLimit(request))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Object createObject(SlingHttpServletRequest request) {
+        return super.createObject(request);
     }
 
     @Override

@@ -19,7 +19,7 @@ public class CatalogCategories extends AbstractResFieldCore {
     @Override
     public Map<String, String> getObject(SlingHttpServletRequest request) {
         return Optional.of(request.getResourceResolver())
-                .map(resolver -> resolver.getResource(getSuffixPathFromRequest(request)))
+                .map(resolver -> resolver.getResource(WeddingResourceUtil.getSuffixPathFromRequest(request)))
                 .map(Resource::listChildren)
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
