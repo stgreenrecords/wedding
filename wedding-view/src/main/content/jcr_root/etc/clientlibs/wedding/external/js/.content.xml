@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
           jcr:primaryType="sling:OrderedFolder"
-          embed="[/etc/clientlibs/wedding/external/js/auth/vk_auth.js,/etc/clientlibs/wedding/external/js/auth/ok.js,/etc/clientlibs/wedding/external/js/auth/gmail_auth.js,/etc/clientlibs/wedding/external/js/auth/facebook_auth.js,/etc/clientlibs/wedding/external/js/jquery/jquery-3.3.1.js,/etc/clientlibs/wedding/external/js/plugins/cookiesPlugin.js]"/>
+          embed="[/etc/clientlibs/wedding/external/js/auth/vk_auth.js,/etc/clientlibs/wedding/external/js/auth/ok.js,/etc/clientlibs/wedding/external/js/auth/gmail_auth.js,/etc/clientlibs/wedding/external/js/auth/facebook_auth.js,/etc/clientlibs/wedding/external/js/jquery/jquery-3.3.1.js,/etc/clientlibs/wedding/external/js/plugins/cookiesPlugin.js,/etc/clientlibs/wedding/external/js/plugins/fullcalendar-3.9.0/lib/moment.min.js,/etc/clientlibs/wedding/external/js/plugins/fullcalendar-3.9.0/fullcalendar.js]"/>

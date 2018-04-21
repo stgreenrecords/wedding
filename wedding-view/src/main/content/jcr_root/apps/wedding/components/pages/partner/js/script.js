@@ -8,63 +8,95 @@ var PORTAL = (function (PORTAL, $) {
 
         console.log('Component: "Partner"');
 
-        var selectedPerson = JSON.parse(sessionStorage.getItem('selectedPerson'));
-        console.log('INFO:');
-        console.dir(selectedPerson);
+        var selectedPerson;
 
-        $self.find('.profil_name').text(selectedPerson.firstName);
-        $self.find('.profil_secondname').text(selectedPerson.lastName);
-        $self.find('.partner_speciality').text(selectedPerson.speciality);
+        if (localStorage.getItem('PersonRequest')){
 
-        $self.find('.prise_string').text(`${selectedPerson.priceStart}-${selectedPerson.priceEnd} рублей`);
-        $self.find('.phone_string').text(selectedPerson.phone);
-        $self.find('.mail_string').text(selectedPerson.email);
-        $self.find('.link_string').text(selectedPerson.siteLink);
-        $self.find('.vk_string').text(selectedPerson.vkLink);
-        $self.find('.fb_string').text(selectedPerson.facebookLink);
-        $self.find('.insta_string').text(selectedPerson.instagramLink);
+            var selectedPersonRequest = localStorage.getItem('PersonRequest');
+            console.log('ESucsess');
+            console.log(selectedPersonRequest);
 
-        (function(){  //  функция переключения страниц
-            var page_section_btn = {};
-            page_section_btn.about = $self.find('#partner_about_btn');
-            page_section_btn.photo = $self.find('#partner_photo_btn');
-            page_section_btn.video = $self.find('#partner_video_btn');
-            page_section_btn.stock = $self.find('#partner_stock_btn');
-            page_section_btn.comments = $self.find('#partner_comments_btn');
+            $.ajax({
+                url: selectedPersonRequest,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    selectedPerson = data[0];
 
-            var partner_page_section = {};
-            partner_page_section.partner_about_btn = $self.find('#partner_about_oneself');
-            partner_page_section.partner_photo_btn = $self.find('#partner_photo');
-            partner_page_section.partner_video_btn = $self.find('#partner_video');
-            partner_page_section.partner_stock_btn = $self.find('#partner_stock');
-            partner_page_section.partner_comments_btn = $self.find('#partner_comments');
+                    console.log('INFO:');
+                    console.dir(selectedPerson);
 
-            console.dir(partner_page_section);
-            console.dir(page_section_btn);
+                    $self.find('.profil_name').text(selectedPerson.firstName);
+                    $self.find('.profil_secondname').text(selectedPerson.lastName);
+                    $self.find('.partner_speciality').text(selectedPerson.speciality);
 
-            for (var prop in page_section_btn){
-                page_section_btn[prop].on('click', openPage);
-            }
-
-            function openPage(event){
-
-                console.log(event.target.id);
-
-                for (var propp in partner_page_section){
-                    if (propp != event.target.id){
-                        partner_page_section[propp].addClass('hidden_full');
-                    }
+                    $self.find('.prise_string').text(`${selectedPerson.priceStart}-${selectedPerson.priceEnd} рублей`);
+                    $self.find('.phone_string').text(selectedPerson.phone);
+                    $self.find('.mail_string').text(selectedPerson.email);
+                    $self.find('.link_string').text(selectedPerson.siteLink);
+                    $self.find('.vk_string').text(selectedPerson.vkLink);
+                    $self.find('.fb_string').text(selectedPerson.facebookLink);
+                    $self.find('.insta_string').text(selectedPerson.instagramLink);
                 }
-                partner_page_section[event.target.id].removeClass('hidden_full');
+            });
+
+
+            (function(){  //  функция переключения страниц
+                var page_section_btn = {};
+                page_section_btn.about = $self.find('#partner_about_btn');
+                page_section_btn.photo = $self.find('#partner_photo_btn');
+                page_section_btn.video = $self.find('#partner_video_btn');
+                page_section_btn.stock = $self.find('#partner_stock_btn');
+                page_section_btn.comments = $self.find('#partner_comments_btn');
+
+                var partner_page_section = {};
+                partner_page_section.partner_about_btn = $self.find('#partner_about_oneself');
+                partner_page_section.partner_photo_btn = $self.find('#partner_photo');
+                partner_page_section.partner_video_btn = $self.find('#partner_video');
+                partner_page_section.partner_stock_btn = $self.find('#partner_stock');
+                partner_page_section.partner_comments_btn = $self.find('#partner_comments');
+
+                console.dir(partner_page_section);
+                console.dir(page_section_btn);
 
                 for (var prop in page_section_btn){
-                    page_section_btn[prop].removeClass('partner_menu_btn_active');
+                    page_section_btn[prop].on('click', openPage);
                 }
 
-                $self.find('#'+event.target.id).addClass('partner_menu_btn_active');
+                function openPage(event){
 
-            }
-        }());
+                    console.log(event.target.id);
+
+                    for (var propp in partner_page_section){
+                        if (propp != event.target.id){
+                            partner_page_section[propp].addClass('hidden_full');
+                        }
+                    }
+                    partner_page_section[event.target.id].removeClass('hidden_full');
+
+                    for (var prop in page_section_btn){
+                        page_section_btn[prop].removeClass('partner_menu_btn_active');
+                    }
+
+                    $self.find('#'+event.target.id).addClass('partner_menu_btn_active');
+
+                }
+            }());
+
+
+        }else{
+            document.location.href = '/content/wedding/catalog/category.html';
+        }
+
+
+        (function() {
+            // page is now ready, initialize the calendar...
+            $self.find('#calendar').fullCalendar({
+                // put your options and callbacks here
+
+
+            });
+        })();
 
 
 
