@@ -44,4 +44,14 @@
     <sly-test-page
             jcr:primaryType="nt:unstructured"
             sling:resourceType="wedding/components/pages/sly-test-page"/>
+    <events
+            jcr:primaryType="nt:unstructured">
+        <test-event
+                jcr:primaryType="nt:unstructured"
+                userId="test-event-id"
+                title="Акция"
+                description="Акция!!!!"
+                startDate="{Date}2018-04-24 00:00:00"
+                endDate="{Date}2018-12-24 11:59:59"/>
+    </events>
 </jcr:root>

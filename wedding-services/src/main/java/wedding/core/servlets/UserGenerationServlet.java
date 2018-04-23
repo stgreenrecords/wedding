@@ -90,6 +90,16 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                             int priceStart = random.nextInt(1000);
                             user.setProperty("priceStart", ValueFactoryImpl.getInstance().createValue(priceStart));
                             user.setProperty("priceEnd", ValueFactoryImpl.getInstance().createValue(priceStart + random.nextInt(200)));
+                            user.setProperty("eventIds", ValueFactoryImpl.getInstance().createValue("test-event-id"));
+                            user.setProperty("comments", new Value[] {
+                                    ValueFactoryImpl.getInstance().createValue("<p><strong>comment</strong></p>"),
+                                    ValueFactoryImpl.getInstance().createValue("<p>comment <em>comment </em>comment</p>"),
+                                    ValueFactoryImpl.getInstance().createValue("<p>comment<sub>comment</sub></p>")
+                            });
+                            user.setProperty("videos", new Value[] {
+                                    ValueFactoryImpl.getInstance().createValue("https://www.youtube.com/watch?v=tD99WhUKJR4"),
+                                    ValueFactoryImpl.getInstance().createValue("https://www.youtube.com/watch?v=epJJimCVlyk")
+                            });
                             user.setProperty("vipStatus", ValueFactoryImpl.getInstance().createValue(Math.random() < 0.5));
                             user.setProperty("bookedDates", SerialValueFactory.makeSerialValueArray(new Value[]
                                     {

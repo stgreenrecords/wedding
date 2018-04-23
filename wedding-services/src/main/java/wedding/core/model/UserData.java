@@ -10,6 +10,7 @@ import wedding.core.services.binary.impl.Type;
 import wedding.core.utils.WeddingResourceUtil;
 
 import javax.annotation.PostConstruct;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -62,10 +63,15 @@ public class UserData {
     @ValueMapValue
     private String[] bookedDates;
     @ValueMapValue
-    private List<String> video;
+    private List<String> videos;
+    @ValueMapValue
+    private List<String> comments;
+    @ValueMapValue
+    private List<String> eventIds;
 
     private String avatar;
     private List<String> portfolio;
+    private List<EventData> events;
 
     @PostConstruct
     public void init() {
@@ -80,6 +86,12 @@ public class UserData {
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
                 .map(Resource::getPath)
+                .collect(Collectors.toList());
+        events = Optional.ofNullable(eventIds)
+                .map(Collection::stream)
+                .orElse(Stream.empty())
+                .map(id -> WeddingResourceUtil.getResourceByID(resource.getResourceResolver()).apply(id))
+                .map(res -> res.adaptTo(EventData.class))
                 .collect(Collectors.toList());
     }
 
@@ -247,11 +259,27 @@ public class UserData {
         return vipStatus;
     }
 
-    public List<String> getVideo() {
-        return video;
+    public List<String> getVideos() {
+        return videos;
     }
 
-    public void setVideo(List<String> video) {
-        this.video = video;
+    public void setVideos(List<String> videos) {
+        this.videos = videos;
+    }
+
+    public List<String> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<String> comments) {
+        this.comments = comments;
+    }
+
+    public List<EventData> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<EventData> events) {
+        this.events = events;
     }
 }
