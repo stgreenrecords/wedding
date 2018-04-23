@@ -633,7 +633,7 @@ footer > div a, footer > div{
 .partner_menu li{
     font-size: 17pt;
     list-style-type: none;
-    width: 10%;
+    width: 100px;
     margin-right: 2%;
     cursor: pointer;
     padding-bottom: 15px;
@@ -680,7 +680,7 @@ footer > div a, footer > div{
 }
 
 #partner_aside{
-    width: 32%;
+    width: 420px;
     min-height: 800px;
     background-color: #fff;
 }
@@ -702,7 +702,7 @@ footer > div a, footer > div{
     align-self: flex-end;
 }
 
-.partner_avatar_btn_mail, .partner_avatar_btn_likes, .partner_avatar_btn_calc, .calendar_date_fild{
+.partner_avatar_btn_mail, .partner_avatar_btn_likes, .partner_avatar_btn_calc, #calendar, .calendar_date_fild{
     cursor: pointer;
 }
 
@@ -755,14 +755,54 @@ footer > div a, footer > div{
     background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/instagram.png') 10% no-repeat;
 }
 
+/*----------------Calendar*/
+
+
+
+.calendar_main_fild{
+    min-height: 250px;
+}
+
+
+
+#calendar .fc-view-container{
+    /* line-height: 1;*/
+    padding-right: 15px;
+}
+
+#calendar tbody .fc-row .fc-content-skeleton tbody tr td{
+    padding-bottom: 0;
+}
+
+#calendar .fc-header-toolbar{
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/arrow_left.png') 10% no-repeat,
+    url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/arrow_right.png') 90% no-repeat;
+}
+
+#calendar .fc-header-toolbar h2{
+    margin-left: 100px;  /*переделать центровку TODOLater*/
+}
+
+#calendar td, #calendar th{
+    border-width: 0;
+}
+
 .calendar_colontitle_fild{
     background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/full_day_indicator.png') 1% 20px no-repeat,
     url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/part_day_indicator.png') 1% 50px no-repeat;
 }
 
-#partner-page-pages{
-    width: 61%;
+#calendar .fc-header-toolbar, .calendar_colontitle_fild{
+    padding: 15px 12%;
+    background-color: #f4f4f4;
+}
+/*----------------Calendar FINISH*/
+
+
+#partner-page-pages{  /*   Page */
+    width: 60%;
     min-height: 300px;
+    margin-left: 5%;
     background-color: #fff;
     box-sizing: border-box;
     padding: 15px 7%;
@@ -783,19 +823,7 @@ footer > div a, footer > div{
     margin: 7px 0;
 }
 
-.calendar_main_fild{
-    min-height: 250px;
-}
 
-.calendar_date_fild, .calendar_colontitle_fild{
-    padding: 15px 12%;
-    background-color: #f4f4f4;
-}
-
-.calendar_date_fild{
-    text-align: center;
-    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/arrow_left.png') 10% no-repeat,
-    url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/arrow_right.png') 90% no-repeat;
-}
 
 /* ================================ PARTNER off */
+

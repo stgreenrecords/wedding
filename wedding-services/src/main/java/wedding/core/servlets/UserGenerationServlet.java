@@ -13,6 +13,7 @@ import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.servlets.SlingSafeMethodsServlet;
 import org.apache.sling.jackrabbit.usermanager.CreateUser;
 import org.apache.sling.jcr.base.util.AccessControlUtil;
+import wedding.core.utils.WeddingResourceUtil;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -47,7 +48,7 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                 }).orElse(null);
         IntStream.range(0, 10000)
                 .forEach(i -> {
-                    String name = UUID.randomUUID().toString();
+                    String name = WeddingResourceUtil.generateId(request, false);
                     try {
                         boolean isPartner = Math.random() < 0.5;
                         User user;

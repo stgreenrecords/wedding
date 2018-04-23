@@ -1,17 +1,20 @@
 package wedding.core.adapters;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.adapter.AdapterFactory;
+import org.apache.sling.api.resource.Resource;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import wedding.core.rest.site.AbstractResFieldCore;
+import wedding.core.rest.util.ServletMapping;
 import wedding.core.utils.ReflectionUtil;
 import wedding.core.utils.WeddingResourceUtil;
 
@@ -60,14 +63,28 @@ public class ModelAdapter implements AdapterFactory {
     }
 
     private <AdapterType> AdapterType adaptRequestToModel(SlingHttpServletRequest request, Class<AdapterType> aClass) {
-        if (!request.getParameterMap().containsKey(AbstractResFieldCore.REQUEST_PARAMETER_WEDDING_RESOURCE_ID))
+        final String id = WeddingResourceUtil.getId(request);
+        Optional<Resource> modelResource;
+        if (StringUtils.isEmpty(id)) {
+//            modelResource = createResource(request);
             return null;
+        }
+        modelResource = Optional.ofNullable(WeddingResourceUtil.getResourceByID(request.getResourceResolver()).apply(id));
 
-        return (AdapterType) Optional.ofNullable(request.getParameter(AbstractResFieldCore.REQUEST_PARAMETER_WEDDING_RESOURCE_ID))
-                .map(WeddingResourceUtil.getResourceByID(request.getResourceResolver()))
-                .map(resource -> resource.adaptTo(aClass))
+        return (AdapterType) modelResource.map(resource -> resource.adaptTo(aClass))
                 .map(model -> setPropertyToModel(request, model))
                 .orElse(null);
+    }
+
+    private Optional<Resource> createResource(SlingHttpServletRequest request) {
+        final String[] selectors = request.getRequestPathInfo().getSelectors();
+        final String relPath = request.getRequestPathInfo().getSuffix();
+        if (StringUtils.isEmpty(relPath) || ArrayUtils.isEmpty(selectors)) {
+            return Optional.empty();
+        }
+        final String modelPath = ServletMapping.getPathBySelector(selectors[0]) + relPath;
+        // TODO: 4/20/2018 create logic
+        return null;
     }
 
     private Object setPropertyToModel(SlingHttpServletRequest request, Object model) {

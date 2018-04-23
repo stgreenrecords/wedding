@@ -8,8 +8,8 @@ var PORTAL = (function (PORTAL, $) {
 
         console.log('Component: "Category"');
 
-        $partner_categ_select = $self.find('#partner_categories_select');
-        $city_select = $self.find('#city_select');
+        var $partner_categ_select = $self.find('#partner_categories_select');
+        var $city_select = $self.find('#city_select');
 
         $partner_categ_select.on('change', getSelectedCat);
         $city_select.on('change', getSelectedCat);
@@ -18,6 +18,8 @@ var PORTAL = (function (PORTAL, $) {
         console.log(getFromCatalogCat);
         var dataUsers;
         var selectedPerson;
+        var forPersonRequest;
+        var selectedPersonRequest;
 
         $.ajax({ // добавление всех категорий в селект
 
@@ -53,7 +55,7 @@ var PORTAL = (function (PORTAL, $) {
             selectItems.$city_val = $city_select.val();
             selectItems.url_first = "http://wedding-services.mycloud.by/services/rest.partners/"+selectItems.$cat_val+"/"+selectItems.$city_val+".14.json";
             selectItems.url_all = "http://wedding-services.mycloud.by/services/rest.partners/"+selectItems.$cat_val+"/"+selectItems.$city_val+".json";
-
+            // http://wedding-services.mycloud.by/services/rest.partners/photographers/minsk.json?userId=XXX
             console.dir(selectItems);
 
             $.ajax({
@@ -64,13 +66,7 @@ var PORTAL = (function (PORTAL, $) {
                 success: function (data) {
 
                     console.log("success");
-
                     console.dir(data);
-                    /*     console.log(data[4].firstName);
-                              console.log(data[4].lastName);
-                              console.log(data[4].speciality);
-                              console.log(data[4].type);
-                              console.log(data[4].vip);*/
 
                     var pro_div = document.querySelector(".search-pro");
                     pro_div.style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_5.jpg')";
@@ -134,16 +130,13 @@ var PORTAL = (function (PORTAL, $) {
                             copy_div.querySelector(".search-usually_img").style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_"+k+".jpg')";
                             copy_div.querySelector(".search-usually_content_name").innerHTML = allUser[i].firstName + " "+ allUser[i].lastName;
                             copy_div.querySelector(".search-usually_content_speciality").innerHTML = allUser[i].speciality;
-                            copy_div.querySelector('.search-usually_img').setAttribute('data_userId', allUser[i].userId);
+                            copy_div.setAttribute('data_userId', allUser[i].userId);
                             main_container.appendChild(copy_div);
                         }
                     }
-                    /*
-                                  for (var i = 0; i < all_div.length; i++) {
-                                      all_div[i].querySelector(".search-usually_content_name").innerHTML = photo_all[i].firstName + " " + photo_all[i].lastName;
-                                      all_div[i].querySelector(".search-usually_content_speciality").innerHTML = photo_all[i].speciality;
-                                  }*/
+
                     $self.find('.search-usually').on('click', showSelectPerson);
+                    forPersonRequest = selectItems.url_all;
                 }
 
             });
@@ -154,31 +147,26 @@ var PORTAL = (function (PORTAL, $) {
 
             var selectedPersonId;
             var b;
-            // console.dir(dataUsers);
 
             if ($(event.target).attr('data_userId')!=undefined)
                 selectedPersonId = $(event.target).attr('data_userId');
             else
                 selectedPersonId = $(event.target).closest('.search-usually').attr('data_userId'); // parents
-            b = selectedPersonId;
 
-            for (var i = 0; i<dataUsers.length; i++){
-                for (b in dataUsers[i]) {
-                    if (dataUsers[i].hasOwnProperty(b))
-                        selectedPerson = dataUsers[i];
-                }
-            }
+            localStorage.setItem('partnerIdRequest', selectedPersonId);
 
-            console.log(JSON.stringify(selectedPerson));
-            sessionStorage.setItem('selectedPerson', JSON.stringify(selectedPerson) );
-
-            /* for (var preper in selectedPerson){
-               sessionStorage.setItem(preper, selectedPerson[preper]);
-             }*/
 
             console.dir(selectedPerson);
             console.log(selectedPersonId);
             document.location.href = `/content/wedding/catalog/category/partner.html#${selectedPersonId}`;
+
+
+            selectedPersonRequest = forPersonRequest +'?userId='+ selectedPersonId;
+
+            localStorage.setItem('PersonRequest', selectedPersonRequest);
+
+            console.log(selectedPersonRequest);
+
 
 
         }

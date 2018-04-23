@@ -61,6 +61,8 @@ public class UserData {
     private String city;
     @ValueMapValue
     private String[] bookedDates;
+    @ValueMapValue
+    private List<String> video;
 
     private String avatar;
     private List<String> portfolio;
@@ -245,19 +247,11 @@ public class UserData {
         return vipStatus;
     }
 
-    public Boolean getVipStatus() {
-        return vipStatus;
+    public List<String> getVideo() {
+        return video;
     }
 
-    public void setVipStatus(Boolean vipStatus) {
-        this.vipStatus = vipStatus;
-    }
-
-    public String[] getBookedDates() {
-        return bookedDates;
-    }
-
-    public void setBookedDates(String[] bookedDates) {
-        this.bookedDates = bookedDates;
+    public void setVideo(List<String> video) {
+        this.video = video;
     }
 }

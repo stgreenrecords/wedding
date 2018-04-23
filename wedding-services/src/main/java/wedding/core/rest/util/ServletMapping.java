@@ -6,6 +6,7 @@ import wedding.core.rest.site.Tenders;
 import wedding.core.rest.site.Users;
 
 import java.util.Arrays;
+import java.util.function.Function;
 
 public enum ServletMapping {
 
@@ -32,12 +33,23 @@ public enum ServletMapping {
         return servletClass;
     }
 
+    private String getJcrPath() {
+        return jcrPath;
+    }
+
     public static Class getClassBySelector(String selector){
+        return getBySelector(selector, ServletMapping::getServletClass);
+    }
+
+    public static String getPathBySelector(String selector) {
+        return getBySelector(selector, ServletMapping::getJcrPath);
+    }
+
+    private static <T> T getBySelector(String selector, Function<ServletMapping, T> function) {
         return Arrays.stream(ServletMapping.values())
                 .filter(element -> element.getSelector().equals(selector))
-                .map(ServletMapping::getServletClass)
+                .map(function)
                 .findFirst()
                 .orElse(null);
-
     }
 }

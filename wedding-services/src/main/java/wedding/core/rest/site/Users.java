@@ -19,7 +19,7 @@ public class Users extends AbstractResFieldCore {
     @Override
     public Object getObject(SlingHttpServletRequest request) {
         return Optional.of(request.getResourceResolver())
-                .map(resolver -> resolver.findResources(String.format(USER_QUERY, getSuffixPathFromRequest(request), getIdQueryPart(request)), Query.SQL))
+                .map(resolver -> resolver.findResources(String.format(USER_QUERY, WeddingResourceUtil.getSuffixPathFromRequest(request), WeddingResourceUtil.getIdQueryPart(request)), Query.SQL))
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
                 .map(resource -> resource.adaptTo(UserData.class))
