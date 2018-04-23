@@ -386,7 +386,7 @@ var PORTAL = (function (PORTAL, $) {
                 }
             };
 
-            var FB = {
+            var FBook = {
 
                 "login": function() {
                     FB.login(function (response) {
