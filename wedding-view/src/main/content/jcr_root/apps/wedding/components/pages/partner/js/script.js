@@ -30,7 +30,7 @@ var PORTAL = (function (PORTAL, $) {
                     $self.find('.profil_secondname').text(selectedPerson.lastName);
                     $self.find('.partner_speciality').text(selectedPerson.speciality);
 
-                    $self.find('.prise_string').text(`${selectedPerson.priceStart}-${selectedPerson.priceEnd} рублей`);
+                    $self.find('.prise_string').text(`${selectedPerson.priceStart} - ${selectedPerson.priceEnd} рублей`);
                     $self.find('.phone_string').text(selectedPerson.phone);
                     $self.find('.mail_string').text(selectedPerson.email);
                     $self.find('.link_string').text(selectedPerson.siteLink);
@@ -85,18 +85,39 @@ var PORTAL = (function (PORTAL, $) {
 
 
         }else{
+
             document.location.href = '/content/wedding/catalog/category.html';
+
         }
 
-
-        (function() {
+/*        (function() {  // - работа с календарем
             // page is now ready, initialize the calendar...
-            $self.find('#calendar').fullCalendar({
-                // put your options and callbacks here
 
-
+            $('#calendar').fullCalendar('option', {
+                locale: 'ru',
+                isRTL: true
             });
-        })();
+
+            $('#calendar').fullCalendar({
+
+                dayClick: function() {
+                    alert('a day has been clicked!');
+                }
+                // put your options and callbacks here
+            });
+
+            var calendar =  $self.find('#calendar').fullCalendar('getCalendar');
+            calendar.next();
+            console.log(calendar);
+
+            $('#calendar').fullCalendar('option', 'locale', 'ru');
+
+
+            calendar.on('dayClick', function(date, jsEvent, view) {
+                console.log('clicked on ' + date.format());
+            });
+
+        })();*/
 
 
 
