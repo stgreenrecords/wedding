@@ -1873,4 +1873,4 @@ jQuery.trumbowyg.langs.ru = {
     text: 'Текст'
 };
 
-
+$.trumbowyg.svgPath = '/etc/clientlibs/wedding/external/icons/richtext/icons.svg';
