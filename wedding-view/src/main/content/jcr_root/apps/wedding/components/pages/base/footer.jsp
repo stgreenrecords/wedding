@@ -252,7 +252,7 @@
 
 </section>
 
-
+<script src="/etc/clientlibs/wedding/external/js/jquery/jquery-3.3.1.js"></script>
 
 <cpn:clientlib type="js" path="/etc/clientlibs/wedding/external" />
 <cpn:clientlib type="js" path="/etc/clientlibs/wedding/pages" />

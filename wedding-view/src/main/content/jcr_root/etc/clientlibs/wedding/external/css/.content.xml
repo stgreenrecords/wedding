@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
           jcr:primaryType="sling:OrderedFolder"
-          embed="[/etc/clientlibs/wedding/external/js/plugins/fullcalendar_3_9_0/fullcalendar.min.css]"/>
+          embed="[/etc/clientlibs/wedding/external/css/plugins/richtext.css]"/>
