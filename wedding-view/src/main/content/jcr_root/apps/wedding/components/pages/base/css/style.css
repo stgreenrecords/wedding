@@ -610,7 +610,7 @@ footer > div a, footer > div{
 
 /*  ========================= CATALOG off */
 
-/* ================================ PARTNER */
+/* ================================ PARTNER  and litle user*/
 
 #partner-page-content{
     font-family: 'Open Sans', sans-serif;
@@ -640,20 +640,20 @@ footer > div a, footer > div{
     text-transform: uppercase;
 }
 
-.partner_menu_btn{
-    display: inline-block;
-    border-bottom: 2px solid #f4f4f4;
+/*.partner_menu_btn{
+  display: inline-block;
+  border-bottom: 2px solid #f4f4f4;
 
 }
 
 .partner_menu_btn:hover{
-    color: #afa58e;
-}
+  color: #afa58e;
+}*/
 
-/*.partner_menu_btn:active,*/ .partner_menu_btn_active{
-                                  color: #afa58e;
-                                  border-bottom: 2px solid #afa58e;
-                              }
+.user_menu_btn_active, .partner_menu_btn_active{
+    color: #afa58e;
+    border-bottom: 2px solid #afa58e;
+}
 
 .partner-page-wrapper{
 
@@ -689,7 +689,7 @@ footer > div a, footer > div{
     display: flex;
 }
 
-.partner_avatar{
+.partner_avatar, .user_avatar{
     margin: 35px 0 15px 10%;
     width: 75%;
     min-height: 320px;
@@ -697,12 +697,12 @@ footer > div a, footer > div{
     background-size: cover;
 }
 
-.partner_avatar_btn{
+.partner_avatar_btn, .user_avatar_btn{
     width: 15%;
     align-self: flex-end;
 }
 
-.partner_avatar_btn_mail, .partner_avatar_btn_likes, .partner_avatar_btn_calc, #calendar, .calendar_date_fild{
+.partner_avatar_btn_mail, .partner_avatar_btn_likes, .partner_avatar_btn_calc, #calendar, .calendar_date_fild, .budget_calc, .calc_aside_edit, .user_avatar_btn{
     cursor: pointer;
 }
 
@@ -753,10 +753,10 @@ footer > div a, footer > div{
 
 .insta_string{
     background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/instagram.png') 10% no-repeat;
+    margin-bottom: 40px;
 }
 
 /*----------------Calendar*/
-
 
 
 .calendar_main_fild{
@@ -792,6 +792,17 @@ footer > div a, footer > div{
     url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/part_day_indicator.png') 1% 50px no-repeat;
 }
 
+#calendar .fc-past{
+    color: #9999993b;
+}
+
+
+#calendar .fc-today{
+    color: #1fe855;
+    /*background-color: #a2d9e6;*/
+    border: 1px solid #000;
+}
+
 #calendar .fc-header-toolbar, .calendar_colontitle_fild{
     padding: 15px 12%;
     background-color: #f4f4f4;
@@ -800,9 +811,9 @@ footer > div a, footer > div{
 
 
 #partner-page-pages{  /*   Page */
-    width: 60%;
+    width: 62%;
     min-height: 300px;
-    margin-left: 5%;
+    margin-left: 3%;
     background-color: #fff;
     box-sizing: border-box;
     padding: 15px 7%;
@@ -826,4 +837,61 @@ footer > div a, footer > div{
 
 
 /* ================================ PARTNER off */
+
+
+
+/* ===---    USER start ====----- */
+#user-page-content{
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f4f4f4;
+}
+
+#cabinet_aside_sect{
+    width: 420px;
+    min-height: 800px;
+    background-color: #fff;
+}
+
+.partner_menu li{
+    width: auto;
+}
+
+.user_avatar{
+    background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_13.jpg');
+}
+
+.red_refer{
+    color: #dc5e4e;
+    text-decoration: underline;
+}
+
+.calc_aside  {
+    /* background: url('/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/edit.png') 95%  0% no-repeat;*/
+    padding: 15px;
+    margin: 10px auto;
+}
+
+#user_calc{
+    min-height: 750px;
+}
+
+.calc_aside p{
+    margin: 15px;
+    text-align:  center;
+    background-color: #f4f4f4;
+}
+
+.balance_calc{
+    color: #dc5e4e;
+}
+
+.input-price_budget{
+    width: 80px;
+}
+
+.calc_aside_edit{
+    padding-left: 80%;
+}
+
+/*========------- USER finish  -=-=-=-=-=-*/
 
