@@ -244,4 +244,20 @@ public class UserData {
     public Boolean isVip() {
         return vipStatus;
     }
+
+    public Boolean getVipStatus() {
+        return vipStatus;
+    }
+
+    public void setVipStatus(Boolean vipStatus) {
+        this.vipStatus = vipStatus;
+    }
+
+    public String[] getBookedDates() {
+        return bookedDates;
+    }
+
+    public void setBookedDates(String[] bookedDates) {
+        this.bookedDates = bookedDates;
+    }
 }
