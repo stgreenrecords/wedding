@@ -8,6 +8,13 @@ var PORTAL = (function (PORTAL, $) {
 
         console.log('Component: "Tenders"');
 
+
+
+
+
+
+
+
     };
 
     return PORTAL;
