@@ -78,7 +78,7 @@ var PORTAL = (function (PORTAL, $) {
                 cabinet_success.style.display = "none";
                 cabinet_login.style.display = "block";
                 Cookies.set('authStatus', 'NotAuth');
-                Cookies.set('authType', '');
+                // Cookies.set('authType', '');
             }
 
             function setCookiesAuth(authStatusValue, authTypeValue){
