@@ -1,6 +1,7 @@
 package wedding.core.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
@@ -10,6 +11,7 @@ import wedding.core.services.binary.impl.Type;
 import wedding.core.utils.WeddingResourceUtil;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Named;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -24,8 +26,9 @@ public class UserData {
     @JsonIgnore
     private Resource resource;
 
+    @Named(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID)
     @ValueMapValue
-    private String userId;
+    private String id;
     @ValueMapValue
     private String authType;
     @ValueMapValue
@@ -63,11 +66,11 @@ public class UserData {
     @ValueMapValue
     private String[] bookedDates;
     @ValueMapValue
-    private List<String> videos;
+    private String[] videos;
     @ValueMapValue
-    private List<String> comments;
+    private String[] comments;
     @ValueMapValue
-    private List<String> eventIds;
+    private String[] eventIds;
 
     private String avatar;
     private List<String> portfolio;
@@ -88,19 +91,19 @@ public class UserData {
                 .map(Resource::getPath)
                 .collect(Collectors.toList());
         events = Optional.ofNullable(eventIds)
-                .map(Collection::stream)
+                .map(Stream::of)
                 .orElse(Stream.empty())
                 .map(id -> WeddingResourceUtil.getResourceByID(resource.getResourceResolver()).apply(id))
                 .map(res -> res.adaptTo(EventData.class))
                 .collect(Collectors.toList());
     }
 
-    public String getUserId() {
-        return userId;
+    public String getId() {
+        return id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getAuthType() {
@@ -259,19 +262,19 @@ public class UserData {
         return vipStatus;
     }
 
-    public List<String> getVideos() {
+    public String[] getVideos() {
         return videos;
     }
 
-    public void setVideos(List<String> videos) {
+    public void setVideos(String[] videos) {
         this.videos = videos;
     }
 
-    public List<String> getComments() {
+    public String[] getComments() {
         return comments;
     }
 
-    public void setComments(List<String> comments) {
+    public void setComments(String[] comments) {
         this.comments = comments;
     }
 

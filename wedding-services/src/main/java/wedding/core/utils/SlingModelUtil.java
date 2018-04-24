@@ -57,7 +57,10 @@ public final class SlingModelUtil {
                 return;
             }
             Optional.ofNullable(resource.adaptTo(ModifiableValueMap.class))
-                    .ifPresent(properties -> properties.putAll(modelValues));
+                    .ifPresent(properties -> {
+                        modelValues.forEach((k, v) -> properties.remove(k));
+                        properties.putAll(modelValues);
+                    });
             try {
                 resource.getResourceResolver().commit();
             } catch (PersistenceException e) {

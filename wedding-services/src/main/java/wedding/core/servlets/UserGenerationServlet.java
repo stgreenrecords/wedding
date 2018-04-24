@@ -62,7 +62,9 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                         } else {
                             user = Objects.requireNonNull(userManager).createUser(name, "123", () -> name, "/home/users/wedding/users/" + city + "/" + name.substring(0, 2));
                         }
-                        Node portfolio = resourceResolver.getResource(user.getPath()).adaptTo(Node.class).addNode("portfolio");
+                        Node userNode = resourceResolver.getResource(user.getPath()).adaptTo(Node.class);
+                        userNode.addMixin(WeddingResourceUtil.NT_WEDDING_RESOURCE_MIXIN);
+                        Node portfolio = userNode.addNode("portfolio");
                         resourceResolver.getResource("/etc/clientlibs/wedding/pages/images/assets")
                                 .listChildren()
                                 .forEachRemaining(resource -> {
@@ -75,7 +77,7 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                         Node avatar = resourceResolver.getResource(user.getPath()).adaptTo(Node.class).addNode("avatar");
                         JcrUtils.putFile(avatar, "26.jpg", "image/jpeg", resourceResolver.getResource("/etc/clientlibs/wedding/pages/images/assets/26.jpg").adaptTo(InputStream.class));
                         addPropertyToUser(user, "authType", AUTH_TYPES.getAuthType().name());
-                        addPropertyToUser(user, "userId", name);
+                        addPropertyToUser(user, WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID, name);
                         addPropertyToUser(user, "firstName", NAMES.getName().name());
                         addPropertyToUser(user, "lastName", SECOND_NAME.getName().name());
                         addPropertyToUser(user, "phone", "+37529" + random.nextInt(1000000) + 1000000);

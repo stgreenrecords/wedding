@@ -1,0 +1,11 @@
+<wedding = 'http://wedding-services.mycloud.by/wedding'>
+<sling = 'http://sling.apache.org/jcr/sling/1.0'>
+
+/**
+ * Wedding resource
+ */
+[wedding:resource] > nt:unstructured
+  - wedding:resourceId (string)
+
+[mix:weddingResource] > wedding:resource mixin
+  - wedding:resourceId (string)

@@ -6,7 +6,9 @@ import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
+import wedding.core.utils.WeddingResourceUtil;
 
+import javax.inject.Named;
 import java.util.Calendar;
 
 @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
@@ -16,8 +18,9 @@ public class TenderData {
     @JsonIgnore
     private Resource resource;
 
+    @Named(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID)
     @ValueMapValue
-    private String tenderId;
+    private String id;
     @ValueMapValue
     private Calendar datePublication;
     @ValueMapValue
@@ -39,12 +42,12 @@ public class TenderData {
         this.resource = resource;
     }
 
-    public String getTenderId() {
-        return tenderId;
+    public String getId() {
+        return id;
     }
 
-    public void setTenderId(String tenderId) {
-        this.tenderId = tenderId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Calendar getDatePublication() {

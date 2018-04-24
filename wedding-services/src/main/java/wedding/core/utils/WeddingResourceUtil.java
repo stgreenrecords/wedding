@@ -22,13 +22,15 @@ public final class WeddingResourceUtil {
 
     private static final Logger LOG = LoggerFactory.getLogger(WeddingResourceUtil.class);
 
-    public static final String REQUEST_PARAMETER_WEDDING_RESOURCE_ID = "wedding:resourceID";
-    public static final String REQUEST_PARAMETER_USER_ID = "userId";
+    public static final String NT_WEDDING_RESOURCE = "wedding:resource";
+    public static final String NT_WEDDING_RESOURCE_MIXIN = "mix:weddingResource";
+    public static final String REQUEST_PARAMETER_WEDDING_RESOURCE_ID = "wedding:resourceId";
+    public static final String REQUEST_PARAMETER_ID = "id";
     private static final ObjectMapper MAPPER = new ObjectMapper();
 //    private static final String RESOURCE_BY_ID_QUERY = "SELECT * FROM [rep:User] AS user WHERE ISDESCENDANTNODE([/home/users/wedding]) AND user.[userId] = '%s'";
-    private static final String RESOURCE_BY_ID_QUERY = "SELECT * FROM [nt:unstructured] AS user WHERE user.[userId] = '%s'";
-    private static final String PART_USER_QUERY = "AND user.[userId] = '%s'";
-    private static final List<String> ID_LIST = ImmutableList.of(REQUEST_PARAMETER_WEDDING_RESOURCE_ID, REQUEST_PARAMETER_USER_ID);
+    private static final String RESOURCE_BY_ID_QUERY = "SELECT * FROM [wedding:resource] AS user WHERE user.[wedding:resourceId] = '%s'";
+    private static final String PART_USER_QUERY = "AND user.[wedding:resourceId] = '%s'";
+    private static final List<String> ID_LIST = ImmutableList.of(REQUEST_PARAMETER_WEDDING_RESOURCE_ID, REQUEST_PARAMETER_ID);
     public static final String CREATE_EXTENTION = "create";
 
     private WeddingResourceUtil() {

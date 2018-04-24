@@ -92,7 +92,7 @@ public class ModelAdapter implements AdapterFactory {
         while (parameterNames.hasMoreElements()) {
             Optional.of((String) parameterNames.nextElement())
                     .filter(parameter -> ReflectionUtil.isFieldPresent(parameter, model))
-                    .ifPresent(parameter -> ReflectionUtil.setFieldValue(parameter, request.getParameter(parameter), model));
+                    .ifPresent(parameter -> ReflectionUtil.setFieldValue(parameter, request.getParameterValues(parameter), model));
 
         }
         return model;

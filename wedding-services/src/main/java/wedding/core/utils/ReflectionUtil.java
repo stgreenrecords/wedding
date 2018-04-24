@@ -89,12 +89,16 @@ public final class ReflectionUtil {
     }
 
 
-    public static void setFieldValue(String fieldName, String fieldValue, Object classObject) {
+    public static void setFieldValue(String fieldName, String[] fieldValues, Object classObject) {
         try {
             Field field = classObject.getClass().getDeclaredField(fieldName);
+            Object value = fieldValues;
+            if (!field.getType().isArray()) {
+                value = fieldValues[0];
+            }
             boolean accessible = field.isAccessible();
             field.setAccessible(true);
-            field.set(classObject, fieldValue);
+            field.set(classObject, value);
             field.setAccessible(accessible);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             LOG.error(e.getMessage());

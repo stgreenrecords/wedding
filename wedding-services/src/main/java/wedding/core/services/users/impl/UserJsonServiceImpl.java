@@ -28,7 +28,7 @@ public class UserJsonServiceImpl implements UserJsonService {
     }
 
     private Consumer<UserData> updateModel(ResourceResolver resourceResolver) {
-        return userData -> WeddingResourceUtil.getUserResource(resourceResolver, userData.getUserId())
+        return userData -> WeddingResourceUtil.getUserResource(resourceResolver, userData.getId())
                 .ifPresent(resource -> {
                     userData.setResource(resource);
                     SlingModelUtil.updateModel(userData);

@@ -6,6 +6,9 @@ import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
+import wedding.core.utils.WeddingResourceUtil;
+
+import javax.inject.Named;
 
 @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class EventData {
@@ -14,9 +17,9 @@ public class EventData {
     @JsonIgnore
     private Resource resource;
 
+    @Named(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID)
     @ValueMapValue
-    // please forgive me
-    private String userId;
+    private String id;
     @ValueMapValue
     private String title;
     @ValueMapValue
@@ -34,12 +37,12 @@ public class EventData {
         this.resource = resource;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getId() {
+        return id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
