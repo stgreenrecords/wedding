@@ -78,7 +78,7 @@ var PORTAL = (function (PORTAL, $) {
                 cabinet_success.style.display = "none";
                 cabinet_login.style.display = "block";
                 Cookies.set('authStatus', 'NotAuth');
-                Cookies.set('authType', '');
+                // Cookies.set('authType', '');
             }
 
             function setCookiesAuth(authStatusValue, authTypeValue){
@@ -642,13 +642,14 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.okLink =  ok;
                     dataRegistration.siteLink =  site;
 
-                    if (($self.find("input[name='consent-part']:checked").val() === 'consent-partner') && city && tel && work_sphere /*!= 'null'*/) {
+                    if ( work_sphere  &&  tel &&  city && ($self.find("input[name='consent-part']:checked").val() === 'consent-partner')  /*!= 'null'*/) {
                         mwindow3.style.visibility = "hidden";
                         modal.style.visibility = "hidden";
                         showCabinetSuccess();
                         console.dir(dataRegistration);
                         setCookiesAuth('authorized', authType);
                         sendRegInfo("http://wedding-services.mycloud.by/services/rest.partner.create");
+                        document.location.href = `/content/wedding/catalog/category/partner.html#`/*${registrationId}*/;
 
                     } else /*if ($("input[name='consent']:checked").val() === undefined)*/{
                         $self.find('.registation3_errore_message').css('display','flex');
@@ -665,7 +666,7 @@ var PORTAL = (function (PORTAL, $) {
 
                 console.log("lastStepRegUSSEERRR ON success ");
                 $self.find(".window-registation-step2").css('visibility', "hidden");
-                var mwindow3 = document.querySelector(".window-registation-step3-user"); // TODO заменить на function
+                var mwindow3 = document.querySelector(".window-registation-step3-user"); // TODOc заменить на function
                 mwindow3.style.visibility = "visible";
                 mwindow3.style.left = (document.documentElement.clientWidth - mwindow3.getBoundingClientRect().width)/2 + "px";
                 mwindow3.style.top = (document.documentElement.clientHeight - mwindow3.getBoundingClientRect().height)/3 + "px";
@@ -684,7 +685,7 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.fbLink =  fb;
                     dataRegistration.okLink =  ok;
 
-                    if (($self.find("#consent-user-check:checked").val() === 'consent-user')   && city && tel){
+                    if ( tel && city &&  ($self.find("#consent-user-check:checked").val() === 'consent-user')){
                         mwindow3.style.visibility = "hidden";
                         modal.style.visibility = "hidden";
                         showCabinetSuccess();
@@ -692,6 +693,11 @@ var PORTAL = (function (PORTAL, $) {
                         setCookiesAuth('authorized', authType);
                         sendRegInfo("http://wedding-services.mycloud.by/services/rest.users.create");
 
+                        Cookies.set('userType', 'user');
+                        Cookies.set('city', city);
+                        Cookies.set('userId', 'id');
+                        document.location.href = '/content/wedding/catalog.html#';
+                        document.location.href = `/content/wedding/user.html#`/*${registrationId}`*/;
 
                     } else /*if ($("input[name='consent']:checked").val() === undefined)*/{
                         $self.find('.registation3_errore_message').css('display','flex');

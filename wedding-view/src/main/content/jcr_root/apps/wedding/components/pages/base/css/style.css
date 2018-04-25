@@ -834,13 +834,9 @@ footer > div a, footer > div{
     margin: 7px 0;
 }
 
-
-
 /* ================================ PARTNER off */
-
-
-
 /* ===---    USER start ====----- */
+
 #user-page-content{
     font-family: 'Open Sans', sans-serif;
     background-color: #f4f4f4;
@@ -863,6 +859,10 @@ footer > div a, footer > div{
 .red_refer{
     color: #dc5e4e;
     text-decoration: underline;
+}
+
+.red_font{
+    color: #dc5e4e;
 }
 
 .calc_aside  {
@@ -894,4 +894,77 @@ footer > div a, footer > div{
 }
 
 /*========------- USER finish  -=-=-=-=-=-*/
+/*========------- tenders  start  -=-=-=-=-=-*/
 
+#tenders-page-content{
+    font-family: 'Open Sans', sans-serif;
+    /* background-color: #f4f4f4;*/
+}
+
+.tender_cards-cont{
+    display: flex;
+    padding: 2%;
+    flex-wrap: wrap;
+}
+
+.tender_card{
+    margin: 5% 5% 0 5%;
+    width: 40%;
+}
+
+.tender_card-author{
+    display: flex;
+    align-items: center;
+}
+
+.tender_card-img{
+    margin-top: 15px;
+    height: 350px;
+    background: url('/etc/clientlibs/wedding/pages/images/any_img/d2_12.jpg') 50% 50% no-repeat;
+    display: flex;
+    align-items: flex-end;
+}
+
+.tender_card-need{
+    width: 100%;
+    color: #fff;
+    padding: 5% 0 5% 7%;
+    background: linear-gradient(to bottom, transparent,  rgba(22, 22, 22, 0.9));
+}
+
+.tender_card-need_cat{
+    font-size: 24pt;
+    text-transform: uppercase;
+}
+
+.tender_card-line1{
+    padding-top: 15px;
+    font-size: 12pt;
+    color: #a0a0a0;
+}
+
+.tender_card-publish{
+    padding-left: 35px;
+    background: url('/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/publishing.png') 1px no-repeat;
+}
+
+.count_proposals{
+    padding-left: 35px;
+    background: url('/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/proposals.png') 10px no-repeat;
+}
+
+.tender_card-line2{
+    padding: 15px 0;
+}
+
+.tender_card-line2 .vert-line, .tender_card-budget{
+    color: #a0a0a0;
+}
+
+.short_text_text{
+    padding-right: 20px;
+    background: url('/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/more.png') 100% no-repeat;
+}
+
+
+/*========------- tenders finish  -=-=-=-=-=-*/
