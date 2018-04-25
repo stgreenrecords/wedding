@@ -8,6 +8,7 @@ import wedding.core.utils.SlingModelUtil;
 import wedding.core.utils.WeddingResourceUtil;
 
 import javax.jcr.query.Query;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -23,6 +24,7 @@ public class Users extends AbstractResFieldCore {
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
                 .map(resource -> resource.adaptTo(UserData.class))
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 

@@ -9,6 +9,7 @@ import wedding.core.utils.WeddingResourceUtil;
 import javax.jcr.query.Query;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -24,6 +25,7 @@ public class Tenders extends AbstractResFieldCore {
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
                 .map(resource -> resource.adaptTo(TenderData.class))
+                .filter(Objects::nonNull)
                 .sorted(applySorting(request))
                 .limit(getLimit(request))
                 .collect(Collectors.toList());
