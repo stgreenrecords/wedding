@@ -3,7 +3,7 @@ package wedding.core.services.users.impl;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.resource.ResourceResolver;
-import wedding.core.model.UserData;
+import wedding.core.model.ClientModel;
 import wedding.core.services.users.UserJsonService;
 import wedding.core.utils.SlingModelUtil;
 import wedding.core.utils.WeddingResourceUtil;
@@ -23,11 +23,11 @@ public class UserJsonServiceImpl implements UserJsonService {
 
     @Override
     public void setUserData(ResourceResolver resourceResolver, String jsonData) {
-        WeddingResourceUtil.fromJson(jsonData, UserData.class)
+        WeddingResourceUtil.fromJson(jsonData, ClientModel.class)
                 .ifPresent(updateModel(resourceResolver));
     }
 
-    private Consumer<UserData> updateModel(ResourceResolver resourceResolver) {
+    private Consumer<ClientModel> updateModel(ResourceResolver resourceResolver) {
         return userData -> WeddingResourceUtil.getUserResource(resourceResolver, userData.getId())
                 .ifPresent(resource -> {
                     userData.setResource(resource);

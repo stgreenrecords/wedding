@@ -3,7 +3,8 @@ package wedding.core.rest.site;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
-import wedding.core.model.UserData;
+import wedding.core.model.ClientModel;
+import wedding.core.model.PartnerModel;
 import wedding.core.utils.SlingModelUtil;
 import wedding.core.utils.WeddingResourceUtil;
 
@@ -25,7 +26,7 @@ public class Partners extends AbstractResFieldCore {
                 .map(resolver -> resolver.findResources(String.format(PARTNER_QUERY, WeddingResourceUtil.getSuffixPathFromRequest(request), WeddingResourceUtil.getIdQueryPart(request)), Query.SQL))
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
-                .map(resource -> resource.adaptTo(UserData.class))
+                .map(resource -> resource.adaptTo(PartnerModel.class))
                 .filter(Objects::nonNull)
                 .sorted(applySorting(request))
                 .limit(getLimit(request))
@@ -39,13 +40,13 @@ public class Partners extends AbstractResFieldCore {
 
     @Override
     public Object updateObject(SlingHttpServletRequest request) {
-        UserData userData = request.adaptTo(UserData.class);
-        Optional.ofNullable(userData)
+        ClientModel clientModel = request.adaptTo(ClientModel.class);
+        Optional.ofNullable(clientModel)
                 .ifPresent(SlingModelUtil::updateModel);
-        return userData;
+        return clientModel;
     }
 
-    private Comparator<UserData> applySorting(final SlingHttpServletRequest request) {
+    private Comparator<PartnerModel> applySorting(final SlingHttpServletRequest request) {
         return Optional.ofNullable(request.getParameter(REQUEST_PARAMETER_SORTED_BY))
                 .map(Comparators::getComparatorByName)
                 .orElse(Comparators.COMPARATOR_BY_VIP_STATUS.getComparator());
@@ -58,17 +59,17 @@ public class Partners extends AbstractResFieldCore {
                         compareTo(Integer.parseInt(secondUser.getPriceStart()))),
 
         COMPARATOR_BY_VIP_STATUS(REQUEST_PARAMETER_SORT_VIP_STATUS,
-                Comparator.comparing(UserData::isVip).reversed());
+                Comparator.comparing(PartnerModel::isVip).reversed());
 
-        private Comparator<UserData> comparator;
+        private Comparator<PartnerModel> comparator;
         private String comparatorName;
 
-        Comparators(String comparatorName, Comparator<UserData> comparator){
+        Comparators(String comparatorName, Comparator<PartnerModel> comparator) {
             this.comparator = comparator;
             this.comparatorName = comparatorName;
         }
 
-        public static Comparator<UserData> getComparatorByName(String comparatorName){
+        public static Comparator<PartnerModel> getComparatorByName(String comparatorName) {
             return Arrays.stream(Comparators.values())
                     .filter(comparator -> comparator.getComparatorName().equals(comparatorName))
                     .map(Comparators::getComparator)
@@ -79,7 +80,7 @@ public class Partners extends AbstractResFieldCore {
             return comparatorName;
         }
 
-        public Comparator<UserData> getComparator() {
+        public Comparator<PartnerModel> getComparator() {
             return comparator;
         }
     }

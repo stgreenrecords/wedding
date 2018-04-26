@@ -3,7 +3,7 @@ package wedding.core.rest.site;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
-import wedding.core.model.TenderData;
+import wedding.core.model.TenderModel;
 import wedding.core.utils.WeddingResourceUtil;
 
 import javax.jcr.query.Query;
@@ -24,7 +24,7 @@ public class Tenders extends AbstractResFieldCore {
                 .map(resourceResolver -> resourceResolver.findResources(String.format(TENDER_QUERY, WeddingResourceUtil.getSuffixPathFromRequest(request)), Query.SQL))
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
-                .map(resource -> resource.adaptTo(TenderData.class))
+                .map(resource -> resource.adaptTo(TenderModel.class))
                 .filter(Objects::nonNull)
                 .sorted(applySorting(request))
                 .limit(getLimit(request))
@@ -46,7 +46,7 @@ public class Tenders extends AbstractResFieldCore {
         return null;
     }
 
-    private Comparator<TenderData> applySorting(final SlingHttpServletRequest request) {
+    private Comparator<TenderModel> applySorting(final SlingHttpServletRequest request) {
         return Optional.ofNullable(request.getParameter(REQUEST_PARAMETER_SORTED_BY))
                 .map(Comparators::getComparatorByName)
                 .orElse(Comparators.COMPARATOR_BY_DATE_PUBLISHING.getComparator());
@@ -55,17 +55,17 @@ public class Tenders extends AbstractResFieldCore {
     private enum Comparators {
 
         COMPARATOR_BY_DATE_PUBLISHING(REQUEST_PARAMETER_SORT_DATE_PUBLISHING,
-                Comparator.comparing(TenderData::getDatePublication).reversed());
+                Comparator.comparing(TenderModel::getDatePublication).reversed());
 
-        private Comparator<TenderData> comparator;
+        private Comparator<TenderModel> comparator;
         private String comparatorName;
 
-        Comparators(String comparatorName, Comparator<TenderData> comparator) {
+        Comparators(String comparatorName, Comparator<TenderModel> comparator) {
             this.comparator = comparator;
             this.comparatorName = comparatorName;
         }
 
-        public static Comparator<TenderData> getComparatorByName(String comparatorName) {
+        public static Comparator<TenderModel> getComparatorByName(String comparatorName) {
             return Arrays.stream(Comparators.values())
                     .filter(comparator -> comparator.getComparatorName().equals(comparatorName))
                     .map(Comparators::getComparator)
@@ -76,7 +76,7 @@ public class Tenders extends AbstractResFieldCore {
             return comparatorName;
         }
 
-        public Comparator<TenderData> getComparator() {
+        public Comparator<TenderModel> getComparator() {
             return comparator;
         }
     }

@@ -46,7 +46,7 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                     }
                     return null;
                 }).orElse(null);
-        IntStream.range(0, 10000)
+        IntStream.range(0, 9000)
                 .forEach(i -> {
                     String name = WeddingResourceUtil.generateId(request, false);
                     try {
@@ -64,16 +64,7 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                         }
                         Node userNode = resourceResolver.getResource(user.getPath()).adaptTo(Node.class);
                         userNode.addMixin(WeddingResourceUtil.NT_WEDDING_RESOURCE_MIXIN);
-                        Node portfolio = userNode.addNode("portfolio");
-                        resourceResolver.getResource("/etc/clientlibs/wedding/pages/images/assets")
-                                .listChildren()
-                                .forEachRemaining(resource -> {
-                                    try {
-                                        JcrUtils.putFile(portfolio, resource.getName(), "image/jpeg", resource.adaptTo(InputStream.class));
-                                    } catch (RepositoryException e) {
-                                        e.printStackTrace();
-                                    }
-                                });
+
                         Node avatar = resourceResolver.getResource(user.getPath()).adaptTo(Node.class).addNode("avatar");
                         JcrUtils.putFile(avatar, "26.jpg", "image/jpeg", resourceResolver.getResource("/etc/clientlibs/wedding/pages/images/assets/26.jpg").adaptTo(InputStream.class));
                         addPropertyToUser(user, "authType", AUTH_TYPES.getAuthType().name());
@@ -86,9 +77,30 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                         addPropertyToUser(user, "facebookLink", "http://facebook.com/" + getGeneratedUUID());
                         addPropertyToUser(user, "instagramLink", "http://instagram.com/" + getGeneratedUUID());
                         addPropertyToUser(user, "city", citeEnum.getCityName());
-                        addPropertyToUser(user, "speciality", category.getCategoryName());
+
                         if (isPartner) {
-                            user.setProperty("type", ValueFactoryImpl.getInstance().createValue("partner"));
+
+                            Node portfolio = userNode.addNode("portfolio");
+                            resourceResolver.getResource("/etc/clientlibs/wedding/pages/images/assets")
+                                    .listChildren()
+                                    .forEachRemaining(resource -> {
+                                        try {
+                                            JcrUtils.putFile(portfolio, resource.getName(), "image/jpeg", resource.adaptTo(InputStream.class));
+                                        } catch (RepositoryException e) {
+                                            e.printStackTrace();
+                                        }
+                                    });
+
+                            addPropertyToUser(user, "speciality", category.getCategoryName());
+                            if (random.nextInt(10) == 5) {
+                                addPropertyToUser(user, "./events/event/wedding:resourceId", getGeneratedUUID());
+                                addPropertyToUser(user, "./events/event/title", getGeneratedUUID());
+                                addPropertyToUser(user, "./events/event/description", getGeneratedUUID());
+                                user.setProperty("./events/event/startDate", ValueFactoryImpl.getInstance().createValue(new GregorianCalendar(2018, Math.round((float) Math.random() * 5) + 1, Math.round((float) Math.random() * 27) + 1)));
+                                user.setProperty("./events/event/endDate", ValueFactoryImpl.getInstance().createValue(new GregorianCalendar(2018, Math.round((float) Math.random() * 4) + 5, Math.round((float) Math.random() * 27) + 1)));
+
+
+                            }
                             int priceStart = random.nextInt(1000);
                             user.setProperty("priceStart", ValueFactoryImpl.getInstance().createValue(priceStart));
                             user.setProperty("priceEnd", ValueFactoryImpl.getInstance().createValue(priceStart + random.nextInt(200)));
@@ -119,7 +131,6 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                                     }));
 
                         } else {
-                            addPropertyToUser(user, "type", "user");
                             if (random.nextInt(10) == 5) {
                                 addPropertyToUser(user, "./tenders/tender/tenderId", getGeneratedUUID());
                                 addPropertyToUser(user, "./tenders/tender/photoUrl", getGeneratedUUID());
@@ -134,6 +145,7 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                             }
                         }
                         Objects.requireNonNull(session).save();
+                        System.out.println(i + " =========== " + name);
                     } catch (RepositoryException e) {
                         e.printStackTrace();
                     }

@@ -8,8 +8,6 @@ import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import wedding.core.utils.WeddingResourceUtil;
 
-import javax.inject.Named;
-
 @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class EventData {
 
@@ -17,8 +15,7 @@ public class EventData {
     @JsonIgnore
     private Resource resource;
 
-    @Named(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID)
-    @ValueMapValue
+    @ValueMapValue(name = WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID)
     private String id;
     @ValueMapValue
     private String title;

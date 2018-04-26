@@ -9,7 +9,7 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import wedding.core.model.UserData;
+import wedding.core.model.ClientModel;
 
 import javax.jcr.query.Query;
 import java.io.IOException;
@@ -103,9 +103,9 @@ public final class WeddingResourceUtil {
         }
     }
 
-    public static Optional<UserData> getUserData(ResourceResolver resourceResolver, String id) {
+    public static Optional<ClientModel> getUserData(ResourceResolver resourceResolver, String id) {
         return getUserResource(resourceResolver, id)
-                .map(resource -> resource.adaptTo(UserData.class));
+                .map(resource -> resource.adaptTo(ClientModel.class));
     }
 
     public static Optional<Resource> getUserResource(ResourceResolver resourceResolver, String id) {
