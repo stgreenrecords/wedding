@@ -21,7 +21,7 @@ public class Tenders extends AbstractResFieldCore {
     @Override
     public Object getObject(SlingHttpServletRequest request) {
         return Optional.of(request.getResourceResolver())
-                .map(resourceResolver -> resourceResolver.findResources(String.format(TENDER_QUERY, WeddingResourceUtil.getSuffixPathFromRequest(request)), Query.SQL))
+                .map(resolver -> resolver.findResources(String.format(TENDER_QUERY, WeddingResourceUtil.getSuffixPathFromRequest(request), WeddingResourceUtil.getIdQueryPart(request)), Query.SQL))
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
                 .map(resource -> resource.adaptTo(TenderModel.class))

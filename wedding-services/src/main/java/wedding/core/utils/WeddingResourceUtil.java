@@ -29,7 +29,7 @@ public final class WeddingResourceUtil {
     private static final ObjectMapper MAPPER = new ObjectMapper();
 //    private static final String RESOURCE_BY_ID_QUERY = "SELECT * FROM [rep:User] AS user WHERE ISDESCENDANTNODE([/home/users/wedding]) AND user.[userId] = '%s'";
     private static final String RESOURCE_BY_ID_QUERY = "SELECT * FROM [wedding:resource] AS user WHERE user.[wedding:resourceId] = '%s'";
-    private static final String PART_USER_QUERY = "AND user.[wedding:resourceId] = '%s'";
+    private static final String PART_USER_QUERY = "AND resource.[wedding:resourceId] = '%s'";
     private static final List<String> ID_LIST = ImmutableList.of(REQUEST_PARAMETER_WEDDING_RESOURCE_ID, REQUEST_PARAMETER_ID);
     public static final String CREATE_EXTENTION = "create";
 
