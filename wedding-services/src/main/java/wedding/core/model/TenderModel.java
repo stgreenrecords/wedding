@@ -6,9 +6,14 @@ import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
+import wedding.core.services.binary.impl.Type;
+import wedding.core.utils.SlingModelUtil;
 import wedding.core.utils.WeddingResourceUtil;
 
+import javax.annotation.PostConstruct;
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.Optional;
 
 @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class TenderModel {
@@ -31,6 +36,26 @@ public class TenderModel {
     private String offers;
     @ValueMapValue
     private String moneyLimit;
+    @ValueMapValue
+    private String firstName;
+    @ValueMapValue
+    private String lastName;
+    @ValueMapValue
+    private String city;
+
+    private String avatar;
+    private String backGroundImage;
+
+    @PostConstruct
+    public void init() {
+        Optional.ofNullable(SlingModelUtil.getBaseUserModelResourceFromChildResources(resource))
+        .map(res -> res.getChild(Type.AVATAR.getRelPath()))
+                .map(Resource::listChildren)
+                .filter(Iterator::hasNext)
+                .map(Iterator::next)
+                .map(Resource::getPath)
+                .ifPresent(this::setAvatar);
+    }
 
     public Resource getResource() {
         return resource;
@@ -94,5 +119,45 @@ public class TenderModel {
 
     public void setMoneyLimit(String moneyLimit) {
         this.moneyLimit = moneyLimit;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getBackGroundImage() {
+        return backGroundImage;
+    }
+
+    public void setBackGroundImage(String backGroundImage) {
+        this.backGroundImage = backGroundImage;
     }
 }

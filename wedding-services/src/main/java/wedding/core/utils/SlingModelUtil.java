@@ -72,4 +72,13 @@ public final class SlingModelUtil {
             }
         };
     }
+
+    public static Resource getBaseUserModelResourceFromChildResources(Resource childResource){
+        return Optional.of(childResource.getValueMap())
+                .filter(properties -> properties.containsKey(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_TYPE))
+                .map(properties -> properties.get(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_TYPE, String.class))
+                .filter(resourceType -> resourceType.equals(WeddingResourceUtil.WEDDING_RESOURCE_TYPE_USER))
+                .map(properties -> childResource)
+                .orElse(getBaseUserModelResourceFromChildResources(childResource.getParent()));
+    }
 }

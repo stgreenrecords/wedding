@@ -66,11 +66,15 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                         userNode.addMixin(WeddingResourceUtil.NT_WEDDING_RESOURCE_MIXIN);
 
                         Node avatar = resourceResolver.getResource(user.getPath()).adaptTo(Node.class).addNode("avatar");
+                        addPropertyToUser(user, "wedding:resourceType", "user");
+
                         JcrUtils.putFile(avatar, "26.jpg", "image/jpeg", resourceResolver.getResource("/etc/clientlibs/wedding/pages/images/assets/26.jpg").adaptTo(InputStream.class));
+                        String firstName = NAMES.getName().name();
+                        String secondName = SECOND_NAME.getName().name();
                         addPropertyToUser(user, "authType", AUTH_TYPES.getAuthType().name());
                         addPropertyToUser(user, WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID, name);
-                        addPropertyToUser(user, "firstName", NAMES.getName().name());
-                        addPropertyToUser(user, "lastName", SECOND_NAME.getName().name());
+                        addPropertyToUser(user, "firstName", firstName);
+                        addPropertyToUser(user, "lastName", secondName);
                         addPropertyToUser(user, "phone", "+37529" + random.nextInt(1000000) + 1000000);
                         addPropertyToUser(user, "email", getGeneratedUUID() + "@gmail.com");
                         addPropertyToUser(user, "vkLink", "http://vk.com/" + getGeneratedUUID());
@@ -95,7 +99,7 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                             if (random.nextInt(10) == 5) {
                                 addPropertyToUser(user, "./events/event/wedding:resourceId", getGeneratedUUID());
                                 addPropertyToUser(user, "./events/event/title", getGeneratedUUID());
-                                addPropertyToUser(user, "./events/event/weddingResourceType", "event");
+                                addPropertyToUser(user, "./events/event/wedding:resourceType", "event");
                                 addPropertyToUser(user, "./events/event/description", getGeneratedUUID());
                                 user.setProperty("./events/event/startDate", ValueFactoryImpl.getInstance().createValue(new GregorianCalendar(2018, Math.round((float) Math.random() * 5) + 1, Math.round((float) Math.random() * 27) + 1)));
                                 user.setProperty("./events/event/endDate", ValueFactoryImpl.getInstance().createValue(new GregorianCalendar(2018, Math.round((float) Math.random() * 4) + 5, Math.round((float) Math.random() * 27) + 1)));
@@ -135,7 +139,10 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                             if (random.nextInt(10) == 5) {
                                 addPropertyToUser(user, "./tenders/tender/wedding:resourceId", getGeneratedUUID());
                                 addPropertyToUser(user, "./tenders/tender/photoUrl", getGeneratedUUID());
-                                addPropertyToUser(user, "./tenders/tender/weddingResourceType", "tender");
+                                addPropertyToUser(user, "./tenders/tender/firstName", firstName);
+                                addPropertyToUser(user, "./tenders/tender/lastName", secondName);
+                                addPropertyToUser(user, "./tenders/tender/city", city);
+                                addPropertyToUser(user, "./tenders/tender/wedding:resourceType", "tender");
                                 user.setProperty("./tenders/tender/datePublication", ValueFactoryImpl.getInstance().createValue(new GregorianCalendar(2018, Math.round((float) Math.random() * 5) + 1, Math.round((float) Math.random() * 27) + 1)));
                                 user.setProperty("./tenders/tender/deadline", ValueFactoryImpl.getInstance().createValue(new GregorianCalendar(2018, Math.round((float) Math.random() * 4) + 5, Math.round((float) Math.random() * 27) + 1)));
                                 addPropertyToUser(user, "./tenders/tender/shortText", getGeneratedUUID());

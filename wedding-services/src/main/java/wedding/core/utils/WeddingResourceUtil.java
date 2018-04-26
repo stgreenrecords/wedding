@@ -25,6 +25,8 @@ public final class WeddingResourceUtil {
     public static final String NT_WEDDING_RESOURCE = "wedding:resource";
     public static final String NT_WEDDING_RESOURCE_MIXIN = "mix:weddingResource";
     public static final String REQUEST_PARAMETER_WEDDING_RESOURCE_ID = "wedding:resourceId";
+    public static final String REQUEST_PARAMETER_WEDDING_RESOURCE_TYPE = "wedding:resourceType";
+    public static final String WEDDING_RESOURCE_TYPE_USER = "user";
     public static final String REQUEST_PARAMETER_ID = "id";
     private static final ObjectMapper MAPPER = new ObjectMapper();
 //    private static final String RESOURCE_BY_ID_QUERY = "SELECT * FROM [rep:User] AS user WHERE ISDESCENDANTNODE([/home/users/wedding]) AND user.[userId] = '%s'";

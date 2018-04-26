@@ -5,6 +5,4 @@
     <filter root="/content/images"/>
     <filter root="/apps/wedding"/>
     <filter root="/etc/clientlibs/wedding"/>
-<!--    <filter root="/home/groups/w" mode="update"/>
-    <filter root="/home/users/wedding" mode="update"/>-->
 </workspaceFilter>

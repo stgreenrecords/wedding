@@ -7,5 +7,8 @@
 [wedding:resource] > nt:unstructured
   - wedding:resourceId (string)
 
+[wedding:resource] > nt:unstructured
+  - wedding:resourceType (string)
+
 [mix:weddingResource] > wedding:resource mixin
   - wedding:resourceId (string)

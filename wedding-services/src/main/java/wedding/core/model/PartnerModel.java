@@ -136,4 +136,20 @@ public class PartnerModel extends BaseUserModel {
     public void setEvents(List<EventModel> events) {
         this.events = events;
     }
+
+    public Boolean getVipStatus() {
+        return vipStatus;
+    }
+
+    public void setVipStatus(Boolean vipStatus) {
+        this.vipStatus = vipStatus;
+    }
+
+    public void setBookedDates(String[] bookedDates) {
+        this.bookedDates = bookedDates;
+    }
+
+    public String[] getBookedDates() {
+        return bookedDates;
+    }
 }
