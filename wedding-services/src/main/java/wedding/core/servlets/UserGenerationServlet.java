@@ -132,7 +132,7 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
 
                         } else {
                             if (random.nextInt(10) == 5) {
-                                addPropertyToUser(user, "./tenders/tender/tenderId", getGeneratedUUID());
+                                addPropertyToUser(user, "./tenders/tender/wedding:resourceId", getGeneratedUUID());
                                 addPropertyToUser(user, "./tenders/tender/photoUrl", getGeneratedUUID());
                                 user.setProperty("./tenders/tender/datePublication", ValueFactoryImpl.getInstance().createValue(new GregorianCalendar(2018, Math.round((float) Math.random() * 5) + 1, Math.round((float) Math.random() * 27) + 1)));
                                 user.setProperty("./tenders/tender/deadline", ValueFactoryImpl.getInstance().createValue(new GregorianCalendar(2018, Math.round((float) Math.random() * 4) + 5, Math.round((float) Math.random() * 27) + 1)));
@@ -145,7 +145,6 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                             }
                         }
                         Objects.requireNonNull(session).save();
-                        System.out.println(i + " =========== " + name);
                     } catch (RepositoryException e) {
                         e.printStackTrace();
                     }
