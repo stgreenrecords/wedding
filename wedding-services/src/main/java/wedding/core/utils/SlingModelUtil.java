@@ -4,6 +4,7 @@ import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.ModifiableValueMap;
 import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -74,11 +76,15 @@ public final class SlingModelUtil {
     }
 
     public static Resource getBaseUserModelResourceFromChildResources(Resource childResource){
-        return Optional.of(childResource.getValueMap())
-                .filter(properties -> properties.containsKey(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_TYPE))
-                .map(properties -> properties.get(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_TYPE, String.class))
-                .filter(resourceType -> resourceType.equals(WeddingResourceUtil.WEDDING_RESOURCE_TYPE_USER))
-                .map(properties -> childResource)
-                .orElse(getBaseUserModelResourceFromChildResources(childResource.getParent()));
+        ValueMap valueMap = childResource.getValueMap();
+        if (valueMap.containsKey(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_TYPE)) {
+            String resourceType = valueMap.get(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_TYPE, String.class);
+            if (WeddingResourceUtil.WEDDING_RESOURCE_TYPE_USER.equals(resourceType)) {
+                return childResource;
+            } else {
+                return getBaseUserModelResourceFromChildResources(Objects.requireNonNull(childResource.getParent()));
+            }
+        }
+        return getBaseUserModelResourceFromChildResources(Objects.requireNonNull(childResource.getParent()));
     }
 }
