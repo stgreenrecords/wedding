@@ -35,7 +35,12 @@ public class Partners extends AbstractResFieldCore {
 
     @Override
     public Object createObject(SlingHttpServletRequest request) {
-        return super.createObject(request);
+        if (WeddingResourceUtil.isResourceExist(request)) {
+            return null;
+        }
+        return Optional.ofNullable(request.adaptTo(PartnerModel.class))
+                .map(SlingModelUtil::createModel)
+                .orElse(null);
     }
 
     @Override

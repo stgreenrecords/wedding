@@ -40,6 +40,10 @@ public final class SlingModelUtil {
                 .ifPresent(updateResourceFields(model, fields));
     }
 
+    public static Object createModel(Object model) {
+        return null;
+    }
+
     public static <M> void updateModel(SlingHttpServletRequest request, Class<M> modelClass, Function<M, M> updateAction) {
         Optional.ofNullable(request.adaptTo(modelClass))
                 .map(updateAction)

@@ -128,4 +128,11 @@ public final class WeddingResourceUtil {
             return resourceIterator.hasNext() ? resourceIterator.next() : null;
         };
     }
+
+    public static boolean isResourceExist(SlingHttpServletRequest request) {
+        return Optional.ofNullable(request.getParameter(REQUEST_PARAMETER_WEDDING_RESOURCE_ID))
+                .map(getResourceByID(request.getResourceResolver()))
+                .isPresent();
+
+    }
 }
