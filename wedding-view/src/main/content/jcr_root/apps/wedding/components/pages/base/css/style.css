@@ -966,5 +966,24 @@ footer > div a, footer > div{
     background: url('/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/more.png') 100% no-repeat;
 }
 
-
 /*========------- tenders finish  -=-=-=-=-=-*/
+/*========------- TendeR -=-=-=-=-=-*/
+
+#tender-cont .tender_card{
+    width: 80%;
+    margin: 5% 10% 0;
+}
+
+.tender_card-img{
+    height: 370px;
+}
+
+.tender_card-full_text{
+    color: #a0a0a0;
+}
+
+/*========------- TendeR finish  -=-=-=-=-=-*/
+
+
+
+
