@@ -1,9 +1,6 @@
 package wedding.core.rest.util;
 
-import wedding.core.rest.site.CatalogCategories;
-import wedding.core.rest.site.Partners;
-import wedding.core.rest.site.Tenders;
-import wedding.core.rest.site.Users;
+import wedding.core.rest.site.*;
 
 import java.util.Arrays;
 import java.util.function.Function;
@@ -13,6 +10,7 @@ public enum ServletMapping {
     CATALOG_CATEGORIES("catalog-categories", CatalogCategories.class, ""),
     PARTNERS("partners", Partners.class, "/home/users/wedding/partners"),
     USERS("users", Users.class, "/home/users/wedding/users"),
+    EVENTS("events", Events.class, "/home/users/wedding/partners"),
     TENDERS("tenders", Tenders.class, "/home/users/wedding/users");
 
     private String selector;

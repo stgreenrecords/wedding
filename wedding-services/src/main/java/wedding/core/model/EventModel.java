@@ -9,7 +9,7 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import wedding.core.utils.WeddingResourceUtil;
 
 @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-public class EventData {
+public class EventModel {
 
     @Self
     @JsonIgnore

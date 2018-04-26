@@ -38,7 +38,7 @@ public class PartnerModel extends BaseUserModel {
     @ValueMapValue
     private String[] comments;
     @ChildResource
-    private List<EventData> events;
+    private List<EventModel> events;
 
     private List<String> portfolio;
 
@@ -129,11 +129,11 @@ public class PartnerModel extends BaseUserModel {
         this.comments = comments;
     }
 
-    public List<EventData> getEvents() {
+    public List<EventModel> getEvents() {
         return events;
     }
 
-    public void setEvents(List<EventData> events) {
+    public void setEvents(List<EventModel> events) {
         this.events = events;
     }
 }
