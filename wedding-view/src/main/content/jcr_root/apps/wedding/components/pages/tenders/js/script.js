@@ -54,7 +54,7 @@ var PORTAL = (function (PORTAL, $) {
             var selectItems = {};
             selectItems.$cat_val = $tender_categ_select.val();
             selectItems.$city_val = $city_select.val();
-            selectItems.$city_name =  $city_select.find("option:selected").text(); //  TODOc Убрать, когда города начнуть приходить в ресте
+            selectItems.$city_name =  $city_select.find("option:selected").text(); //  TODO Убрать, когда города начнуть приходить в ресте // Хотя науя? может и так работать )()
             selectItems.url_first = "http://wedding-services.mycloud.by/services/rest.tenders/"/*+selectItems.$cat_val+"/"*/+selectItems.$city_val+".8.json";
             selectItems.url_all = "http://wedding-services.mycloud.by/services/rest.tenders/"/*+selectItems.$cat_val+"/"*/+selectItems.$city_val+".json";
             console.dir(selectItems);
@@ -70,6 +70,7 @@ var PORTAL = (function (PORTAL, $) {
                     console.dir(data);
 
                     $self.find('#tender_cards-cont > div').detach();
+
                     var first_div = document.querySelector(".hidden_full .tender_card");
                     var main_container =  document.querySelector("#tender_cards-cont");
                     var k=0;
@@ -82,9 +83,12 @@ var PORTAL = (function (PORTAL, $) {
                         // publDate.getDate() > 10 ? dateGood.month = publDate.getDate() : dateGood.month = '0'+ ;
                         // console.log(publDate.month);
                         var deadLine = new Date(data[i].deadline);
+
                         copy_div = first_div.cloneNode(true);
                         k= i%13+1;
-                        copy_div.querySelector(".mini-avatar").style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_"+k+".jpg')";
+                        copy_div.querySelector(".tender_card_href").setAttribute("href",`/content/wedding/tenders/tender.html?${data[i].id}#${data[i].city}`);
+                        copy_div.querySelector('.tender_card-author_name').innerHTML = data[i].firstName+' ' +data[i].lastName;
+                        copy_div.querySelector(".mini-avatar").style.backgroundImage = `url('${data[i].avatar}')`;
                         copy_div.querySelector(".publish_date").innerHTML = `${publDate.getDate()}.${publDate.getMonth()+1}.${publDate.getFullYear()}`;
                         copy_div.querySelector(".tender_card-city").innerHTML = `г. ${selectItems.$city_name}`;
                         copy_div.querySelector(".tender_card-dead_line").innerHTML = `${deadLine.getDate()}.${deadLine.getMonth()+1}.${deadLine.getFullYear()}`;
@@ -101,6 +105,7 @@ var PORTAL = (function (PORTAL, $) {
 
         }
 
+
         function getAllTend (selectItems){
 
             $.ajax({
@@ -108,38 +113,45 @@ var PORTAL = (function (PORTAL, $) {
                 url: selectItems.url_all,
                 type: "GET",
                 dataType: "json",
-                success: function (allTend) {
+                success: function (data) {
 
                     console.log("success");
-                    console.dir(allTend);
+                    console.dir(data);
 
                     var first_div = document.querySelector(".hidden_full .tender_card");
                     var main_container =  document.querySelector("#tender_cards-cont");
                     var k=0;
                     var copy_div = first_div.cloneNode(true);
 
-                    if (allTend.length > 8){
-                        for (var i = 8; i<allTend.length; i++){
-                            var publDate = new Date(allTend[i].datePublication);
-                            var deadLine = new Date(allTend[i].deadline);
+                    if (data.length > 8){
+                        for (var i = 8; i<data.length; i++){
+                            var publDate = new Date(data[i].datePublication);
+                            var deadLine = new Date(data[i].deadline);
                             copy_div = first_div.cloneNode(true);
                             k= i%13+1;
-                            copy_div.querySelector(".mini-avatar").style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_"+k+".jpg')";
+                            copy_div.querySelector(".tender_card_href").setAttribute("href",`/content/wedding/tenders/tender.html?${data[i].id}#${data[i].city}`);
+                            copy_div.querySelector('.tender_card-author_name').innerHTML = data[i].firstName+' ' +data[i].lastName;
+                            copy_div.querySelector(".mini-avatar").style.backgroundImage = `url('${data[i].avatar}')`;
                             copy_div.querySelector(".publish_date").innerHTML = `${publDate.getDate()}.${publDate.getMonth()+1}.${publDate.getFullYear()}`;
                             copy_div.querySelector(".tender_card-city").innerHTML = `г. ${selectItems.$city_name}`;
                             copy_div.querySelector(".tender_card-dead_line").innerHTML = `${deadLine.getDate()}.${deadLine.getMonth()+1}.${deadLine.getFullYear()}`;
-                            copy_div.querySelector(".tender_card-budget_count").innerHTML = allTend[i].moneyLimit;
-                            copy_div.querySelector(".short_text_text").innerHTML = allTend[i].shortText;
+                            copy_div.querySelector(".tender_card-budget_count").innerHTML = data[i].moneyLimit;
+                            copy_div.querySelector(".short_text_text").innerHTML = data[i].shortText;
                             main_container.appendChild(copy_div);
                         }
                     }
 
-                    // $self.find('.search-usually').on('click', showSelectTend);
+                    $self.find('.search-usually').on('click', showSelectTend);
                     // forPersonRequest = selectItems.url_all;
 
                 }
 
             });
+
+        }
+
+
+        function showSelectTend(event){
 
         }
 

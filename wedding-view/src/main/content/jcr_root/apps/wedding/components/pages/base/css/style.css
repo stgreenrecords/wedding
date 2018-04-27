@@ -99,8 +99,9 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
 
 body{
-  font-family: 'Theano Didot',  serif;
-  font-weight: lighter;
+  /*font-family: 'Theano Didot',  serif;*/
+  font-family: 'Open Sans', sans-serif;
+  /*font-weight: lighter;*/
   font-size: 20px;
   line-height: 1.5;
   background-color: #f4f4f4;
@@ -967,18 +968,28 @@ footer > div a, footer > div{
 }
 
 /*========------- tenders finish  -=-=-=-=-=-*/
-/*========------- TendeR -=-=-=-=-=-*/
+/*========------- TendeRRRRRRR -=-=-=-=-=-*/
 
 #tender-cont{
     margin-top: 70px;
 }
 
 #tender-cont .tender_card{
-    width: 80%;
-    margin: 5% 10% 0;
+    width: 85%;
+    margin: 5% 7.5% 7%;
 }
 
-.tender_card-img{
+#tender-cont .tender_card-line2{
+    position: relative;
+}
+
+#tender-cont .tender_card-receive_order{
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+
+#tender-cont .tender_card-img{
     height: 370px;
 }
 
@@ -986,9 +997,48 @@ footer > div a, footer > div{
     color: #a0a0a0;
 }
 
-.comment_inter{
-    width: 90%;
-    height: 120px;
+.comment-inter_area .trumbowyg-box{
+    min-height: 100px;
+}
+.comment-inter_area .trumbowyg-editor{
+    min-height: 100px;
+}
+
+.tender_comment-cont{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.comment_field{
+    position: relative;
+    padding-left: 80px;
+    margin-top: 30px;
+    color: #a0a0a0;
+}
+
+.comment_field .mini-avatar{
+    position: absolute;
+    left: -15px;
+
+}
+
+.comment_field-author_name{
+    color: #606060;
+}
+
+.comment_field-text{
+    font-size: 12pt;
+    color: #606060;
+}
+
+.comment_field-date_fild{
+    text-align: right;
+    font-size: 12pt;
+}
+
+#tender-cont .tender_card .add_btn{
+    text-align: right;
+    cursor: pointer;
 }
 
 
