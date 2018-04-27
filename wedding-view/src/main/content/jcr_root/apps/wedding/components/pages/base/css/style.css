@@ -894,6 +894,27 @@ footer > div a, footer > div{
     padding-left: 80%;
 }
 
+.user_tenders-head{
+    position: relative;
+}
+
+.create_tender_icon{
+    position: absolute;
+    right: -22px;
+    cursor: pointer;
+}
+
+.user_tenders-container .tender_card{
+    width: 100%;
+    margin: 50px 0 0 0;
+}
+
+.tender_card_edit{
+    text-align: right;
+    cursor: pointer;
+}
+
+
 /*========------- USER finish  -=-=-=-=-=-*/
 /*========------- tenders  start  -=-=-=-=-=-*/
 

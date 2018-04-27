@@ -8,13 +8,13 @@ var PORTAL = (function (PORTAL, $) {
 
         console.log('Component: "User"');
 
-
         var selectedPerson;
 
         if (Cookies.get('authStatus') === 'authorized'){
 
-            var userUrl = 'http://wedding-services.mycloud.by/services/rest.users/minsk.json?userId=a931a267-ff17-4d89-ab80-e478c0a6de0a';
-            console.log('ESucsess');
+            // var userUrl = 'http://wedding-services.mycloud.by/services/rest.users/minsk.json?userId=a931a267-ff17-4d89-ab80-e478c0a6de0a';
+            var userUrl = 'http://wedding-services.mycloud.by/services/rest.users/minsk.json?id=a9cce9a5-5820-49d8-8bd7-f44fc706cb90';
+            console.log(userUrl);
             // console.log(selectedPersonRequest);
 
             $.ajax({
@@ -24,9 +24,10 @@ var PORTAL = (function (PORTAL, $) {
                 success: function (data) {
                     selectedPerson = data[0];
 
+
                     console.log('INFO:');
                     console.dir(selectedPerson);
-
+//                $self.find(".user_avatar").css("background-image", `url('${selectedPerson.avatar}')`);
                     $self.find('.profil_name').text(selectedPerson.firstName);
                     $self.find('.profil_secondname').text(selectedPerson.lastName);
                     $self.find('.phone_string').text(selectedPerson.phone);
@@ -35,10 +36,34 @@ var PORTAL = (function (PORTAL, $) {
                     $self.find('.vk_string').text(selectedPerson.vkLink);
                     // $self.find('.fb_string').text(selectedPerson.facebookLink);
                     // $self.find('.insta_string').text(selectedPerson.instagramLink);
+
+                    if (selectedPerson.tenders.length>=1){
+
+                        $self.find('.user_tenders-container > div').detach();
+                        var first_div = document.querySelector(".hidden_full .tender_card");
+                        var main_container =  document.querySelector(".user_tenders-container");
+                        var copy_div = first_div.cloneNode(true);
+
+                        for (var i = 0; i<selectedPerson.tenders.length; i++){
+                            var publDate = new Date(selectedPerson.tenders[i].datePublication);
+                            var deadLine = new Date(selectedPerson.tenders[i].deadline);
+                            copy_div = first_div.cloneNode(true);
+                            copy_div.querySelector(".tender_card_href").setAttribute("href",`/content/wedding/tenders/tender.html?${selectedPerson.tenders[i].id}#${selectedPerson.tenders[i].city}`);
+                            copy_div.querySelector(".publish_date").innerHTML = `${publDate.getDate()}.${publDate.getMonth()+1}.${publDate.getFullYear()}`;
+                            copy_div.querySelector(".tender_card-city").innerHTML = `г. ${selectedPerson.tenders[i].city}`;
+                            copy_div.querySelector(".tender_card-dead_line").innerHTML = `${deadLine.getDate()}.${deadLine.getMonth()+1}.${deadLine.getFullYear()}`;
+                            copy_div.querySelector(".tender_card-budget_count").innerHTML = selectedPerson.tenders[i].moneyLimit;
+                            copy_div.querySelector(".short_text_text").innerHTML = selectedPerson.tenders[i].shortText;
+                            main_container.appendChild(copy_div);
+                        }
+
+                    }
+
                 }
+
             });
 
-            var calc_aside =  $self.find('#calc_aside_sect ');
+            var calc_aside =  $self.find('#calc_aside_sect');
 
             (function(){  //  функции переключения страниц
 
@@ -49,8 +74,11 @@ var PORTAL = (function (PORTAL, $) {
                 var tend_btn = $self.find('#user_tenders_btn');
                 var cabinet_aside = $self.find('#cabinet_aside_sect');
 
+
                 calc_btn.on('click', openPageCalc);
                 tend_btn.on('click', openPageTend);
+
+
 
                 function openPageCalc(event){
                     console.log(event.target.id);
@@ -91,6 +119,8 @@ var PORTAL = (function (PORTAL, $) {
 
                 bird_icon.on('click', saveBudget);
 
+
+
                 function editBudget() {
                     price_budget_val = Number($self.find('.price_budget span')
                         .html());
@@ -118,6 +148,7 @@ var PORTAL = (function (PORTAL, $) {
                     bird_icon.toggleClass('hidden_full');
                     edit_icon.toggleClass('hidden_full');
                     price_balance.html(price_budget_val);
+
                 }
 
             }());
