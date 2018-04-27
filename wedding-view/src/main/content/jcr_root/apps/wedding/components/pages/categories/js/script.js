@@ -23,7 +23,7 @@ var PORTAL = (function (PORTAL, $) {
                 var k = 0;
 
                 for (var prop in allCategories){
-                    k=(k+1)%9+1;
+                    k=(k+1)%13+1;
                     $block_catalog.append(`<div class="catalog_unit"data_name_cat="${prop}"><p class='catalog_unit-name'>${prop}</p></div>`);
                     $block_catalog.find('.catalog_unit:eq(-1)').css("backgroundImage", "url('/etc/clientlibs/wedding/pages/images/any_img/d2_"+k+".jpg')");
                     // console.log(`success : ${prop} ${k}`);

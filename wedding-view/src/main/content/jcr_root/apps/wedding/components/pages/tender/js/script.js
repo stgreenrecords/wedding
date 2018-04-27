@@ -8,9 +8,12 @@ var PORTAL = (function (PORTAL, $) {
 
         console.log('Component: "TendeR"');
 
+
+
         function getSelectTend(value){
 
             var selectItems = {};
+            //  TODO Убрать, когда города начнуть приходить в ресте // Хотя науя? может и так работать )()
 
             // selectItems.url_first = "http://wedding-services.mycloud.by/services/rest.tenders/"/*+selectItems.$cat_val+"/"*/+selectItems.$city_val+".8.json";
             // selectItems.url_all = "http://wedding-services.mycloud.by/services/rest.tenders/"/*+selectItems.$cat_val+"/"*/+selectItems.$city_val+".json";
@@ -40,6 +43,8 @@ var PORTAL = (function (PORTAL, $) {
                     console.log("success");
                     console.dir(data);
 
+
+
                     var main_container =  document.querySelector("#tender-cont");
                     var required_container = copy_div.querySelector(".tender_card-full_text");
                     var k=0;
@@ -66,8 +71,13 @@ var PORTAL = (function (PORTAL, $) {
                             required_container.appendChild(forRequired);
                         }
 
+
+
+
                         main_container.appendChild(copy_div);
                     }
+
+
 
                 }
 
@@ -76,6 +86,21 @@ var PORTAL = (function (PORTAL, $) {
         }
 
         getSelectTend();
+
+        $("textarea").trumbowyg({
+            svgPath: '/etc/clientlibs/wedding/external/icons/richtext/icons.svg',
+            lang: 'ru'
+        });
+
+
+
+
+
+        function showSelectTend(event){
+
+
+
+        }
 
 
 

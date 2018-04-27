@@ -969,6 +969,10 @@ footer > div a, footer > div{
 /*========------- tenders finish  -=-=-=-=-=-*/
 /*========------- TendeR -=-=-=-=-=-*/
 
+#tender-cont{
+    margin-top: 70px;
+}
+
 #tender-cont .tender_card{
     width: 80%;
     margin: 5% 10% 0;
@@ -981,6 +985,13 @@ footer > div a, footer > div{
 .tender_card-full_text{
     color: #a0a0a0;
 }
+
+.comment_inter{
+    width: 90%;
+    height: 120px;
+}
+
+
 
 /*========------- TendeR finish  -=-=-=-=-=-*/
 
