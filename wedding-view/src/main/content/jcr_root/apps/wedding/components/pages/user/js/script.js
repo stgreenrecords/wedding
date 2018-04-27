@@ -9,6 +9,8 @@ var PORTAL = (function (PORTAL, $) {
         console.log('Component: "User"');
 
         var selectedPerson;
+        var calc_aside =  $self.find('#calc_aside_sect');
+        var user_tenders = $self.find('#user_tenders');
 
         if (Cookies.get('authStatus') === 'authorized'){
 
@@ -27,7 +29,7 @@ var PORTAL = (function (PORTAL, $) {
 
                     console.log('INFO:');
                     console.dir(selectedPerson);
-//                $self.find(".user_avatar").css("background-image", `url('${selectedPerson.avatar}')`);
+                    $self.find(".user_avatar").css("background-image", `url('${selectedPerson.avatar}')`);
                     $self.find('.profil_name').text(selectedPerson.firstName);
                     $self.find('.profil_secondname').text(selectedPerson.lastName);
                     $self.find('.phone_string').text(selectedPerson.phone);
@@ -57,13 +59,22 @@ var PORTAL = (function (PORTAL, $) {
                             main_container.appendChild(copy_div);
                         }
 
+                        user_tenders.find('.tender_card-remove_icon').on('click', removeTender);
+
                     }
 
                 }
 
             });
 
-            var calc_aside =  $self.find('#calc_aside_sect');
+            function removeTender(){
+
+                var isAdmin = confirm("Вы действительно хотите удалить тендер?");
+                if (isAdmin){
+                    alert('Тендер Удались!');
+                }
+
+            }
 
             (function(){  //  функции переключения страниц
 
@@ -114,14 +125,11 @@ var PORTAL = (function (PORTAL, $) {
                 var input_price = calc_aside.find('.input-price_budget');
 
                 price_balance.html(price_budget_val);
-
                 edit_icon.on('click', editBudget);
-
                 bird_icon.on('click', saveBudget);
 
-
-
                 function editBudget() {
+
                     price_budget_val = Number($self.find('.price_budget span')
                         .html());
                     price_budget.find('span').detach();
