@@ -11,16 +11,8 @@ var PORTAL = (function (PORTAL, $) {
         var $tender_categ_select = $self.find('#tender_categories_select');
         var $city_select = $self.find('#city_select');
 
-
         $tender_categ_select.on('change', getFirstTend);
         $city_select.on('change', getFirstTend);
-
-        // var getFromCatalogCat = (window.location.hash).slice(1);
-        // console.log(getFromCatalogCat);
-        var dataUsers;
-        var selectedTend;
-        var forPersonRequest;
-        var selectedPersonRequest;
 
         $.ajax({ // добавление всех категорий в селект
 
@@ -54,9 +46,9 @@ var PORTAL = (function (PORTAL, $) {
             var selectItems = {};
             selectItems.$cat_val = $tender_categ_select.val();
             selectItems.$city_val = $city_select.val();
-            selectItems.$city_name =  $city_select.find("option:selected").text(); //  TODO Убрать, когда города начнуть приходить в ресте // Хотя науя? может и так работать )()
-            selectItems.url_first = "http://wedding-services.mycloud.by/services/rest.tenders/"/*+selectItems.$cat_val+"/"*/+selectItems.$city_val+".8.json";
-            selectItems.url_all = "http://wedding-services.mycloud.by/services/rest.tenders/"/*+selectItems.$cat_val+"/"*/+selectItems.$city_val+".json";
+            selectItems.$city_name =  $city_select.find("option:selected").text(); //  TODO Убрать, когда города начнуть приходить в ресте //   может и так работать )()
+            selectItems.url_first = "http://wedding-services.mycloud.by/services/rest.tenders/"+selectItems.$city_val+".8.json";
+            selectItems.url_all = "http://wedding-services.mycloud.by/services/rest.tenders/"+selectItems.$city_val+".json";
             console.dir(selectItems);
 
             $.ajax({
@@ -68,12 +60,9 @@ var PORTAL = (function (PORTAL, $) {
 
                     console.log("success");
                     console.dir(data);
-
                     $self.find('#tender_cards-cont > div').detach();
-
                     var first_div = document.querySelector(".hidden_full .tender_card");
                     var main_container =  document.querySelector("#tender_cards-cont");
-                    var k=0;
                     var copy_div = first_div.cloneNode(true);
 
                     for (var i = 0; i<data.length; i++){
@@ -83,9 +72,7 @@ var PORTAL = (function (PORTAL, $) {
                         // publDate.getDate() > 10 ? dateGood.month = publDate.getDate() : dateGood.month = '0'+ ;
                         // console.log(publDate.month);
                         var deadLine = new Date(data[i].deadline);
-
                         copy_div = first_div.cloneNode(true);
-                        k= i%13+1;
                         copy_div.querySelector(".tender_card_href").setAttribute("href",`/content/wedding/tenders/tender.html?${data[i].id}#${data[i].city}`);
                         copy_div.querySelector('.tender_card-author_name').innerHTML = data[i].firstName+' ' +data[i].lastName;
                         copy_div.querySelector(".mini-avatar").style.backgroundImage = `url('${data[i].avatar}')`;
@@ -117,10 +104,8 @@ var PORTAL = (function (PORTAL, $) {
 
                     console.log("success");
                     console.dir(data);
-
                     var first_div = document.querySelector(".hidden_full .tender_card");
                     var main_container =  document.querySelector("#tender_cards-cont");
-                    var k=0;
                     var copy_div = first_div.cloneNode(true);
 
                     if (data.length > 8){
@@ -128,7 +113,6 @@ var PORTAL = (function (PORTAL, $) {
                             var publDate = new Date(data[i].datePublication);
                             var deadLine = new Date(data[i].deadline);
                             copy_div = first_div.cloneNode(true);
-                            k= i%13+1;
                             copy_div.querySelector(".tender_card_href").setAttribute("href",`/content/wedding/tenders/tender.html?${data[i].id}#${data[i].city}`);
                             copy_div.querySelector('.tender_card-author_name').innerHTML = data[i].firstName+' ' +data[i].lastName;
                             copy_div.querySelector(".mini-avatar").style.backgroundImage = `url('${data[i].avatar}')`;
@@ -141,17 +125,9 @@ var PORTAL = (function (PORTAL, $) {
                         }
                     }
 
-                    $self.find('.search-usually').on('click', showSelectTend);
-                    // forPersonRequest = selectItems.url_all;
-
                 }
 
             });
-
-        }
-
-
-        function showSelectTend(event){
 
         }
 
