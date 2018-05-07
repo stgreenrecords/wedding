@@ -65,7 +65,7 @@ public class MainRestServlet extends SlingAllMethodsServlet {
 
     private Optional<RestFieldCore> processRequest(RequestPathInfo pathInfo) {
         return Optional.ofNullable(pathInfo.getExtension())
-                .map(ServletMapping::getClassBySelector)
+                .map(ServletMapping::getClassByExtension)
                 .map(this::getServesFromContextByClassName);
     }
 

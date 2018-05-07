@@ -29,7 +29,7 @@ public class BinaryResourceUploaderService implements BinaryUploaderService {
 
     @Override
     public void updateRepositoryBinariesAndClose(ResourceResolver resourceResolver, String userID, Map<Type, List<BinaryFile>> files) {
-        final Resource resource = WeddingResourceUtil.getUserResource(resourceResolver, userID)
+        final Resource resource = WeddingResourceUtil.getUserResourcePath(resourceResolver, userID)
                 .orElse(null);
         if (resource == null) {
             return;

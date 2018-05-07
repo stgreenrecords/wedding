@@ -4,13 +4,20 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.jackrabbit.api.security.user.User;
+import org.apache.jackrabbit.api.security.user.UserManager;
 import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.*;
+import org.apache.sling.api.wrappers.SlingHttpServletRequestWrapper;
+import org.apache.sling.jcr.base.util.AccessControlUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import wedding.core.model.ClientModel;
+import wedding.core.model.WeddingBaseModel;
+import wedding.core.rest.util.ServletMapping;
 
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import javax.jcr.query.Query;
 import java.io.IOException;
 import java.util.*;
@@ -29,11 +36,9 @@ public final class WeddingResourceUtil {
     public static final String WEDDING_RESOURCE_TYPE_USER = "user";
     public static final String REQUEST_PARAMETER_ID = "id";
     private static final ObjectMapper MAPPER = new ObjectMapper();
-//    private static final String RESOURCE_BY_ID_QUERY = "SELECT * FROM [rep:User] AS user WHERE ISDESCENDANTNODE([/home/users/wedding]) AND user.[userId] = '%s'";
     private static final String RESOURCE_BY_ID_QUERY = "SELECT * FROM [wedding:resource] AS user WHERE user.[wedding:resourceId] = '%s'";
     private static final String PART_USER_QUERY = "AND resource.[wedding:resourceId] = '%s'";
     private static final List<String> ID_LIST = ImmutableList.of(REQUEST_PARAMETER_WEDDING_RESOURCE_ID, REQUEST_PARAMETER_ID);
-    public static final String CREATE_EXTENTION = "create";
 
     private WeddingResourceUtil() {
     }
@@ -52,10 +57,7 @@ public final class WeddingResourceUtil {
                 .orElse(null);
     }
 
-    public static String generateId(SlingHttpServletRequest request, boolean formRequest) {
-        if (formRequest && !CREATE_EXTENTION.equals(request.getRequestPathInfo().getExtension())) {
-            return null;
-        }
+    public static String generateId() {
         return UUID.randomUUID().toString();
     }
 
@@ -65,6 +67,59 @@ public final class WeddingResourceUtil {
                 .orElse(StringUtils.EMPTY);
     }
 
+    public static <T extends WeddingBaseModel> T createModel(SlingHttpServletRequest request, Class<T> modelClass) throws PersistenceException {
+        final String path = request.getParameter("path");
+        if (StringUtils.isEmpty(path)) {
+            return null;
+        }
+        final String id = generateId();
+        final String resourceType = ServletMapping.getResourceTypeFromRequest(request);
+        final Resource resource = "rep:User".equals(resourceType)
+                ? createUser(request, id, path)
+                : createResource(request.getResourceResolver(), path, resourceType);
+        Optional.ofNullable(resource)
+                .map(res -> res.adaptTo(ModifiableValueMap.class))
+                .ifPresent(properties -> properties.put(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID, id));
+        final T model = CreateUserRequest.of(request, id).adaptTo(modelClass);
+        model.setId(id);
+        model.setResource(resource);
+        request.getResourceResolver().commit();
+        return model;
+    }
+
+    private static Resource createUser(SlingHttpServletRequest request, String id, String path) {
+        final ResourceResolver resolver = request.getResourceResolver();
+
+        return Optional.ofNullable(resolver.adaptTo(Session.class))
+                .map(session -> {
+                    try {
+                        return AccessControlUtil.getUserManager(session);
+                    } catch (RepositoryException e) {
+                        LOG.error(e.getMessage(), e);
+                        return null;
+                    }
+                })
+                .map(getUserResourcePath(id, path))
+                .map(resolver::getResource)
+                .orElse(null);
+    }
+
+    private static Function<UserManager, String> getUserResourcePath(String id, String path) {
+        return userManager -> {
+            try {
+                final String userPath = path + "/" + StringUtils.substring(id, 0, 2);
+                final User user = userManager.createUser(id, id, () -> id, userPath);
+                return user.getPath();
+            } catch (RepositoryException e) {
+                LOG.error(e.getMessage(), e);
+                return null;
+            }
+        };
+    }
+
+    private static Resource createResource(ResourceResolver resourceResolver, String path, String resourceType) throws PersistenceException {
+        return ResourceUtil.getOrCreateResource(resourceResolver, path, resourceType, null, true);
+    }
 
     public static <T> Stream<T> findModels(ResourceResolver resourceResolver, String query, Class<T> modelClass,
                                            int type, boolean parallel) {
@@ -106,11 +161,11 @@ public final class WeddingResourceUtil {
     }
 
     public static Optional<ClientModel> getUserData(ResourceResolver resourceResolver, String id) {
-        return getUserResource(resourceResolver, id)
+        return getUserResourcePath(resourceResolver, id)
                 .map(resource -> resource.adaptTo(ClientModel.class));
     }
 
-    public static Optional<Resource> getUserResource(ResourceResolver resourceResolver, String id) {
+    public static Optional<Resource> getUserResourcePath(ResourceResolver resourceResolver, String id) {
         final String query = String.format(Constants.USER_QUERY, id);
         return iteratorToOrderedStream(resourceResolver.findResources(query, Query.SQL))
                 .findFirst();
@@ -136,5 +191,31 @@ public final class WeddingResourceUtil {
                 .map(getResourceByID(request.getResourceResolver()))
                 .isPresent();
 
+    }
+
+    private static class CreateUserRequest extends SlingHttpServletRequestWrapper {
+
+        private String id;
+
+        public CreateUserRequest(SlingHttpServletRequest wrappedRequest) {
+            super(wrappedRequest);
+        }
+
+        private CreateUserRequest(SlingHttpServletRequest wrappedRequest, String id) {
+            super(wrappedRequest);
+            this.id = id;
+        }
+
+        public static CreateUserRequest of(SlingHttpServletRequest wrappedRequest, String id) {
+            return new CreateUserRequest(wrappedRequest, id);
+        }
+
+        @Override
+        public String getParameter(String name) {
+            if (WeddingResourceUtil.REQUEST_PARAMETER_ID.equals(name)) {
+                return id;
+            }
+            return super.getParameter(name);
+        }
     }
 }

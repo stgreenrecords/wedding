@@ -48,7 +48,7 @@ public class UserGenerationServlet extends SlingSafeMethodsServlet {
                 }).orElse(null);
         IntStream.range(0, 9000)
                 .forEach(i -> {
-                    String name = WeddingResourceUtil.generateId(request, false);
+                    String name = WeddingResourceUtil.generateId();
                     try {
                         boolean isPartner = Math.random() < 0.5;
                         User user;
