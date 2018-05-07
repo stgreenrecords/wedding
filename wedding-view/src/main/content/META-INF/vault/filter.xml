@@ -2,6 +2,7 @@
 <workspaceFilter version="1.0">
     <filter root="/content/wedding"/>
     <filter root="/content/wedding-partners"/>
+    <!--    <filter root="/content/mail" mode="merge"/>-->
     <filter root="/content/images"/>
     <filter root="/apps/wedding"/>
     <filter root="/etc/clientlibs/wedding"/>

@@ -1,0 +1,33 @@
+<div id="admin-mail-page-content">
+    <sly data-sly-use.adminMailModel="wedding.core.model.mail.AdminMailModel"></sly>
+    <div class="mail-menu">
+        <h3>Создать новое письмо</h3>
+        <div class="inputs-creation">
+            <label><input type="text" class="new-mail-title">Название письма</label>
+            <input type="submit" class="new-mail-submit">
+        </div>
+    </div>
+
+    <div class="mail-table">
+        <table>
+            <caption>Созданные письма</caption>
+            <tr>
+                <th>Названия письма</th>
+                <th>Дата создания</th>
+                <th>Путь до письма</th>
+            </tr>
+            <sly data-sly-list.baseMailModel="${adminMailModel.mails}">
+                <tr>
+                    <td>${baseMailModel.title}</td>
+                    <td>${baseMailModel.date}</td>
+                    <td>${baseMailModel.path}.html</td>
+                </tr>
+            </sly>
+
+
+        </table>
+        <div class="table-row-title"></div>
+        <div class="table-row-path"></div>
+        <div class="table-row-data-creation"></div>
+    </div>
+</div>

@@ -107,6 +107,18 @@
             <artifactId>org.apache.jackrabbit.vault</artifactId>
             <groupId>org.apache.jackrabbit.vault</groupId>
         </dependency>
+        <dependency>
+            <artifactId>mail</artifactId>
+            <groupId>javax.mail</groupId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

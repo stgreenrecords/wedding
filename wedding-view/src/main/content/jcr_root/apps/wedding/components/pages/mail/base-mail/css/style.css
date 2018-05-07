@@ -1,0 +1,15 @@
+.mail-form{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.mail-form button{
+    height: 40px;
+    background-color: #a59a7e;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+}

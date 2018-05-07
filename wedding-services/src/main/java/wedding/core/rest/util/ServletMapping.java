@@ -11,6 +11,7 @@ public enum ServletMapping {
     PARTNERS("partners", Partners.class, "/home/users/wedding/partners"),
     USERS("users", Users.class, "/home/users/wedding/users"),
     EVENTS("events", Events.class, "/home/users/wedding/partners"),
+    MAIL("mail", Mail.class, ""),
     TENDERS("tenders", Tenders.class, "/home/users/wedding/users");
 
     private String selector;
