@@ -10,7 +10,7 @@ var PORTAL = (function (PORTAL, $) {
 
         var richtext = $(".richtext textarea");
 
-        richtext = .trumbowyg({
+        richtext.trumbowyg({
             lang: 'ru'
         });
 
