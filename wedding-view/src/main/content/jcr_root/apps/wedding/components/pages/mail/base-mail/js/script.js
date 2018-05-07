@@ -8,20 +8,22 @@ var PORTAL = (function (PORTAL, $) {
 
         console.log('Component: "BaseMail"');
 
-        $(".richtext textarea").trumbowyg({
-           lang: 'ru'
+        var richtext = $(".richtext textarea");
+
+        richtext = .trumbowyg({
+            lang: 'ru'
         });
 
         $('.recipient-container').multifield();
 
-        $self.find("input.new-mail-submit").click(function(){
+        $self.find("button.save").click(function(){
             $.ajax({
                 url: "/services/rest.mail.json",
                 type: "PUT",
                 data: {
                     title : $self.find(".new-mail-submit").val(),
                     subject : $self.find(".new-mail-submit").val(),
-                    text : $self.find(".new-mail-submit").val(),
+                    text : richtext.trumbowyg('html'),
                     recipients : [],
                     allUsers : $self.find(".new-mail-submit").val(),
                     allPartners : $self.find(".new-mail-submit").val()

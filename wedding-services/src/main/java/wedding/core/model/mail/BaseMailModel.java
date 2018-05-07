@@ -28,6 +28,10 @@ public class BaseMailModel {
     @ValueMapValue
     private String subject;
 
+    private boolean allUsers;
+
+    private boolean allPartners;
+
     @ValueMapValue
     private String[] recipients;
 
@@ -84,5 +88,21 @@ public class BaseMailModel {
 
     public void setRecipients(String[] recipients) {
         this.recipients = recipients;
+    }
+
+    public boolean isAllUsers() {
+        return allUsers;
+    }
+
+    public void setAllUsers(boolean allUsers) {
+        this.allUsers = allUsers;
+    }
+
+    public boolean isAllPartners() {
+        return allPartners;
+    }
+
+    public void setAllPartners(boolean allPartners) {
+        this.allPartners = allPartners;
     }
 }
