@@ -1,16 +1,21 @@
 package wedding.core.utils;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.jackrabbit.api.security.user.User;
+import org.apache.jackrabbit.api.security.user.UserManager;
 import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.resource.ModifiableValueMap;
-import org.apache.sling.api.resource.PersistenceException;
-import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ValueMap;
+import org.apache.sling.api.resource.*;
+import org.apache.sling.jcr.base.util.AccessControlUtil;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import wedding.core.model.WeddingBaseModel;
+import wedding.core.rest.util.ServletMapping;
 
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Map;
@@ -19,6 +24,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class SlingModelUtil {
 
@@ -32,7 +38,7 @@ public final class SlingModelUtil {
         if (!modelClass.isAnnotationPresent(Model.class)) {
             return;
         }
-        final Field[] fields = modelClass.getDeclaredFields();
+        final Field[] fields = aggregateFields(modelClass);
         Arrays.stream(fields)
                 .filter(field -> Resource.class.equals(field.getType()))
                 .filter(ReflectionUtil.isAnnotatedWith(Self.class))
@@ -42,8 +48,69 @@ public final class SlingModelUtil {
                 .ifPresent(updateResourceFields(model, fields));
     }
 
-    public static Object createModel(Object model) {
-        return null;
+    private static Field[] aggregateFields(Class<?> modelClass) {
+        return aggregateFieldsStream(modelClass).toArray(Field[]::new);
+    }
+
+    private static Stream<Field> aggregateFieldsStream(Class<?> modelClass) {
+        final Stream<Field> fieldStream = Stream.of(modelClass.getDeclaredFields());
+        final Class<?> superclass = modelClass.getSuperclass();
+        if (superclass != null) {
+            return Stream.concat(fieldStream, aggregateFieldsStream(superclass));
+        }
+        return fieldStream;
+    }
+
+    public static <T extends WeddingBaseModel> T createModel(SlingHttpServletRequest request, Class<T> modelClass) throws PersistenceException {
+        final String path = request.getParameter("path");
+        if (StringUtils.isEmpty(path)) {
+            return null;
+        }
+        final String id = WeddingResourceUtil.generateId();
+        final String resourceType = ServletMapping.getResourceTypeFromRequest(request);
+        final Resource resource = "rep:User".equals(resourceType)
+                ? createUser(request, id, path)
+                : createResource(request.getResourceResolver(), path, resourceType);
+        Optional.ofNullable(resource)
+                .map(res -> res.adaptTo(ModifiableValueMap.class))
+                .ifPresent(properties -> properties.put(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID, id));
+        final T model = resource.adaptTo(modelClass);
+        updateModel(model);
+        return model;
+    }
+
+    private static Resource createUser(SlingHttpServletRequest request, String id, String path) {
+        final ResourceResolver resolver = request.getResourceResolver();
+
+        return Optional.ofNullable(resolver.adaptTo(Session.class))
+                .map(session -> {
+                    try {
+                        return AccessControlUtil.getUserManager(session);
+                    } catch (RepositoryException e) {
+                        LOG.error(e.getMessage(), e);
+                        return null;
+                    }
+                })
+                .map(getUserResourcePath(id, path))
+                .map(resolver::getResource)
+                .orElse(null);
+    }
+
+    private static Function<UserManager, String> getUserResourcePath(String id, String path) {
+        return userManager -> {
+            try {
+                final String userPath = path + "/" + StringUtils.substring(id, 0, 2);
+                final User user = userManager.createUser(id, id, () -> id, userPath);
+                return user.getPath();
+            } catch (RepositoryException e) {
+                LOG.error(e.getMessage(), e);
+                return null;
+            }
+        };
+    }
+
+    private static Resource createResource(ResourceResolver resourceResolver, String path, String resourceType) throws PersistenceException {
+        return ResourceUtil.getOrCreateResource(resourceResolver, path, resourceType, null, true);
     }
 
     public static <M> void updateModel(SlingHttpServletRequest request, Class<M> modelClass, Function<M, M> updateAction) {

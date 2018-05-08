@@ -4,13 +4,21 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.jackrabbit.api.security.user.User;
+import org.apache.jackrabbit.api.security.user.UserManager;
 import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.*;
+import org.apache.sling.api.wrappers.SlingHttpServletRequestWrapper;
+import org.apache.sling.jcr.base.util.AccessControlUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import wedding.core.adapters.wrapper.CreateUserRequest;
 import wedding.core.model.ClientModel;
+import wedding.core.model.WeddingBaseModel;
+import wedding.core.rest.util.ServletMapping;
 
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import javax.jcr.query.Query;
 import java.io.IOException;
 import java.util.*;
@@ -29,11 +37,9 @@ public final class WeddingResourceUtil {
     public static final String WEDDING_RESOURCE_TYPE_USER = "user";
     public static final String REQUEST_PARAMETER_ID = "id";
     private static final ObjectMapper MAPPER = new ObjectMapper();
-//    private static final String RESOURCE_BY_ID_QUERY = "SELECT * FROM [rep:User] AS user WHERE ISDESCENDANTNODE([/home/users/wedding]) AND user.[userId] = '%s'";
     private static final String RESOURCE_BY_ID_QUERY = "SELECT * FROM [wedding:resource] AS user WHERE user.[wedding:resourceId] = '%s'";
     private static final String PART_USER_QUERY = "AND resource.[wedding:resourceId] = '%s'";
     private static final List<String> ID_LIST = ImmutableList.of(REQUEST_PARAMETER_WEDDING_RESOURCE_ID, REQUEST_PARAMETER_ID);
-    public static final String CREATE_EXTENTION = "create";
 
     private WeddingResourceUtil() {
     }
@@ -52,10 +58,7 @@ public final class WeddingResourceUtil {
                 .orElse(null);
     }
 
-    public static String generateId(SlingHttpServletRequest request, boolean formRequest) {
-        if (formRequest && !CREATE_EXTENTION.equals(request.getRequestPathInfo().getExtension())) {
-            return null;
-        }
+    public static String generateId() {
         return UUID.randomUUID().toString();
     }
 
@@ -64,7 +67,6 @@ public final class WeddingResourceUtil {
                 .map(user -> String.format(PART_USER_QUERY, user))
                 .orElse(StringUtils.EMPTY);
     }
-
 
     public static <T> Stream<T> findModels(ResourceResolver resourceResolver, String query, Class<T> modelClass,
                                            int type, boolean parallel) {
@@ -106,11 +108,11 @@ public final class WeddingResourceUtil {
     }
 
     public static Optional<ClientModel> getUserData(ResourceResolver resourceResolver, String id) {
-        return getUserResource(resourceResolver, id)
+        return getUserResourcePath(resourceResolver, id)
                 .map(resource -> resource.adaptTo(ClientModel.class));
     }
 
-    public static Optional<Resource> getUserResource(ResourceResolver resourceResolver, String id) {
+    public static Optional<Resource> getUserResourcePath(ResourceResolver resourceResolver, String id) {
         final String query = String.format(Constants.USER_QUERY, id);
         return iteratorToOrderedStream(resourceResolver.findResources(query, Query.SQL))
                 .findFirst();

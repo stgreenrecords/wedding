@@ -1,14 +1,11 @@
 package wedding.core.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
-import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import wedding.core.services.binary.impl.Type;
 import wedding.core.utils.SlingModelUtil;
-import wedding.core.utils.WeddingResourceUtil;
 
 import javax.annotation.PostConstruct;
 import java.util.Calendar;
@@ -16,14 +13,8 @@ import java.util.Iterator;
 import java.util.Optional;
 
 @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-public class TenderModel {
+public class TenderModel extends WeddingBaseModel {
 
-    @Self
-    @JsonIgnore
-    private Resource resource;
-
-    @ValueMapValue(name = WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID)
-    private String id;
     @ValueMapValue
     private Calendar datePublication;
     @ValueMapValue
@@ -48,29 +39,13 @@ public class TenderModel {
 
     @PostConstruct
     public void init() {
-        Optional.ofNullable(SlingModelUtil.getBaseUserModelResourceFromChildResources(resource))
+        Optional.ofNullable(SlingModelUtil.getBaseUserModelResourceFromChildResources(getResource()))
         .map(res -> res.getChild(Type.AVATAR.getRelPath()))
                 .map(Resource::listChildren)
                 .filter(Iterator::hasNext)
                 .map(Iterator::next)
                 .map(Resource::getPath)
                 .ifPresent(this::setAvatar);
-    }
-
-    public Resource getResource() {
-        return resource;
-    }
-
-    public void setResource(Resource resource) {
-        this.resource = resource;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public Calendar getDatePublication() {

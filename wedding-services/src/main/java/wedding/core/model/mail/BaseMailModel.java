@@ -7,14 +7,12 @@ import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
+import wedding.core.model.WeddingBaseModel;
 
 import javax.annotation.PostConstruct;
 
 @Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-public class BaseMailModel {
-
-    @Self
-    private Resource resource;
+public class BaseMailModel extends WeddingBaseModel {
 
     @ValueMapValue(name = JcrConstants.JCR_TITLE)
     private String title;
@@ -39,7 +37,7 @@ public class BaseMailModel {
 
     @PostConstruct
     public void init() {
-        path = resource.getPath();
+        path = getResource().getPath();
     }
 
     public String getTitle() {

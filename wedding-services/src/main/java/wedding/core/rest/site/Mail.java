@@ -3,6 +3,8 @@ package wedding.core.rest.site;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.resource.PersistenceException;
+import wedding.core.model.ClientModel;
 import wedding.core.model.mail.BaseMailModel;
 import wedding.core.utils.SlingModelUtil;
 
@@ -14,9 +16,11 @@ public class Mail extends AbstractResFieldCore {
 
     @Override
     public Object createObject(SlingHttpServletRequest request) {
-        return Optional.ofNullable(request.adaptTo(BaseMailModel.class))
-                .map(SlingModelUtil::createModel)
-                .orElse(null);
+        try {
+            return SlingModelUtil.createModel(request, BaseMailModel.class);
+        } catch (PersistenceException e) {
+            return null;
+        }
     }
 
 }

@@ -1,6 +1,5 @@
 package wedding.core.adapters;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
@@ -14,7 +13,7 @@ import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import wedding.core.rest.util.ServletMapping;
+import wedding.core.adapters.wrapper.CreateUserRequest;
 import wedding.core.utils.ReflectionUtil;
 import wedding.core.utils.WeddingResourceUtil;
 
@@ -74,17 +73,6 @@ public class ModelAdapter implements AdapterFactory {
         return (AdapterType) modelResource.map(resource -> resource.adaptTo(aClass))
                 .map(model -> setPropertyToModel(request, model))
                 .orElse(null);
-    }
-
-    private Optional<Resource> createResource(SlingHttpServletRequest request) {
-        final String[] selectors = request.getRequestPathInfo().getSelectors();
-        final String relPath = request.getRequestPathInfo().getSuffix();
-        if (StringUtils.isEmpty(relPath) || ArrayUtils.isEmpty(selectors)) {
-            return Optional.empty();
-        }
-        final String modelPath = ServletMapping.getPathBySelector(selectors[0]) + relPath;
-        // TODO: 4/20/2018 create logic
-        return null;
     }
 
     private Object setPropertyToModel(SlingHttpServletRequest request, Object model) {

@@ -3,6 +3,7 @@ package wedding.core.rest.site;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.resource.PersistenceException;
 import wedding.core.model.ClientModel;
 import wedding.core.utils.SlingModelUtil;
 import wedding.core.utils.WeddingResourceUtil;
@@ -34,5 +35,14 @@ public class Users extends AbstractResFieldCore {
         Optional.ofNullable(clientModel)
                 .ifPresent(SlingModelUtil::updateModel);
         return clientModel;
+    }
+
+    @Override
+    public Object createObject(SlingHttpServletRequest request) {
+        try {
+            return SlingModelUtil.createModel(request, ClientModel.class);
+        } catch (PersistenceException e) {
+            return null;
+        }
     }
 }
