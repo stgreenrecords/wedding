@@ -43,7 +43,7 @@ public class ModelAdapter implements AdapterFactory {
             final String[] adaptersOld = (String[]) props.get(propertyAdapters);
             final String adaptables = SlingHttpServletRequest.class.getName();
             final String[] adapters = ReflectionUtil.getAllClassesFromPackage(componentContext.getBundleContext().getBundle(), MODELS_PACKAGE);
-            if (adaptables.equals(adaptablesOld) && Arrays.asList(adapters).containsAll(Arrays.asList(adaptersOld))) {
+            if (adaptablesOld != null && adaptersOld != null && adaptables.equals(adaptablesOld) && Arrays.asList(adapters).containsAll(Arrays.asList(adaptersOld))) {
                 return;
             }
             props.put(propertyAdaptables, adaptables);
