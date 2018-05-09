@@ -83,15 +83,18 @@ public final class ReflectionUtil {
 
 
     public static boolean isFieldPresent(String fieldName, Object classObject) {
-        return Arrays.stream(classObject.getClass().getDeclaredFields())
+        return isFieldPresent(fieldName, classObject.getClass());
+    }
+
+    public static boolean isFieldPresent(String fieldName, Class<?> modelClass) {
+        return Arrays.stream(modelClass.getDeclaredFields())
                 .anyMatch(field -> field.getName().equals(fieldName));
 
     }
 
-
-    public static void setFieldValue(String fieldName, String[] fieldValues, Object classObject) {
+    public static void setFieldValue(String fieldName, String[] fieldValues, Object classObject, Class<?> modelClass) {
         try {
-            Field field = classObject.getClass().getDeclaredField(fieldName);
+            Field field = modelClass.getDeclaredField(fieldName);
             Object value = fieldValues;
             if (!field.getType().isArray()) {
                 value = fieldValues[0];
@@ -103,6 +106,25 @@ public final class ReflectionUtil {
         } catch (NoSuchFieldException | IllegalAccessException e) {
             LOG.error(e.getMessage());
         }
+    }
+
+    public static void setFieldValueDeep(String fieldName, String[] fieldValues, Object classObject) {
+        final Class<?> realModelClass = getClassWithField(classObject.getClass(), fieldName);
+        if (realModelClass != null) {
+            setFieldValue(fieldName, fieldValues, classObject, realModelClass);
+        }
+    }
+
+    private static Class<?> getClassWithField(Class<?> modelClass, String fieldName) {
+        final boolean present = isFieldPresent(fieldName, modelClass);
+        if (present) {
+            return modelClass;
+        }
+        final Class<?> superClass = modelClass.getSuperclass();
+        if (superClass != null) {
+            return getClassWithField(superClass, fieldName);
+        }
+        return null;
     }
 
     public static String[] getAllClassesFromPackage(Bundle bundle, String packageName) {

@@ -38,7 +38,7 @@ public class Tenders extends AbstractResFieldCore {
 
     @Override
     public Object createObject(SlingHttpServletRequest request) {
-        return null;
+        return createModel(request, TenderModel.class);
     }
 
     @Override

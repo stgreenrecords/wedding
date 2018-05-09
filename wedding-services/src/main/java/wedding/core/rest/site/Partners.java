@@ -36,11 +36,7 @@ public class Partners extends AbstractResFieldCore {
 
     @Override
     public Object createObject(SlingHttpServletRequest request) {
-        try {
-            return SlingModelUtil.createModel(request, PartnerModel.class);
-        } catch (PersistenceException e) {
-            return null;
-        }
+        return createModel(request, ClientModel.class);
     }
 
     @Override

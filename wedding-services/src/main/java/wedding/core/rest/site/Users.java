@@ -39,10 +39,6 @@ public class Users extends AbstractResFieldCore {
 
     @Override
     public Object createObject(SlingHttpServletRequest request) {
-        try {
-            return SlingModelUtil.createModel(request, ClientModel.class);
-        } catch (PersistenceException e) {
-            return null;
-        }
+        return createModel(request, ClientModel.class);
     }
 }

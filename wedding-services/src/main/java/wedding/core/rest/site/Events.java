@@ -38,7 +38,7 @@ public class Events extends AbstractResFieldCore {
 
     @Override
     public Object createObject(SlingHttpServletRequest request) {
-        return null;
+        return createModel(request, EventModel.class);
     }
 
     @Override

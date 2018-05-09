@@ -1,6 +1,8 @@
 package wedding.core.rest.site;
 
 import org.apache.sling.api.SlingHttpServletRequest;
+import wedding.core.model.WeddingBaseModel;
+import wedding.core.utils.SlingModelUtil;
 
 public abstract class AbstractResFieldCore implements RestFieldCore {
 
@@ -34,5 +36,14 @@ public abstract class AbstractResFieldCore implements RestFieldCore {
     @Override
     public Object deleteObject(SlingHttpServletRequest request) {
         return null;
+    }
+
+    protected <M extends WeddingBaseModel> M createModel(SlingHttpServletRequest request, Class<M> modelClass) {
+        final M model = request.adaptTo(modelClass);
+        if (model == null) {
+            return null;
+        }
+        SlingModelUtil.updateModel(model);
+        return model;
     }
 }

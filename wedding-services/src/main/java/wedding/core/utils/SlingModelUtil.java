@@ -61,6 +61,14 @@ public final class SlingModelUtil {
         return fieldStream;
     }
 
+    public static Resource createModelResource(SlingHttpServletRequest request, String path) {
+        final String id = WeddingResourceUtil.generateId();
+        final String resourceType = ServletMapping.getResourceTypeFromRequest(request);
+        return "rep:User".equals(resourceType)
+                ? createUser(request, id, path)
+                : createResource(request.getResourceResolver(), path, resourceType);
+    }
+
     public static <T extends WeddingBaseModel> T createModel(SlingHttpServletRequest request, Class<T> modelClass) throws PersistenceException {
         final String path = request.getParameter("path");
         if (StringUtils.isEmpty(path)) {
@@ -109,8 +117,13 @@ public final class SlingModelUtil {
         };
     }
 
-    private static Resource createResource(ResourceResolver resourceResolver, String path, String resourceType) throws PersistenceException {
-        return ResourceUtil.getOrCreateResource(resourceResolver, path, resourceType, null, true);
+    private static Resource createResource(ResourceResolver resourceResolver, String path, String resourceType) {
+        try {
+            return ResourceUtil.getOrCreateResource(resourceResolver, path, resourceType, null, true);
+        } catch (PersistenceException e) {
+            LOG.error(e.getMessage(), e);
+            return null;
+        }
     }
 
     public static <M> void updateModel(SlingHttpServletRequest request, Class<M> modelClass, Function<M, M> updateAction) {

@@ -1,10 +1,7 @@
 package wedding.core.adapters;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.felix.scr.annotations.Activate;
-import org.apache.felix.scr.annotations.Component;
-import org.apache.felix.scr.annotations.Reference;
-import org.apache.felix.scr.annotations.Service;
+import org.apache.felix.scr.annotations.*;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.adapter.AdapterFactory;
 import org.apache.sling.api.resource.Resource;
@@ -14,14 +11,13 @@ import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import wedding.core.adapters.wrapper.CreateUserRequest;
+import wedding.core.rest.util.ServletMapping;
 import wedding.core.utils.ReflectionUtil;
+import wedding.core.utils.SlingModelUtil;
 import wedding.core.utils.WeddingResourceUtil;
 
 import java.io.IOException;
-import java.util.Dictionary;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Optional;
+import java.util.*;
 
 @Component(immediate = true, metatype = true)
 @Service
@@ -41,11 +37,17 @@ public class ModelAdapter implements AdapterFactory {
         try {
             Configuration config = configAdmin.getConfiguration(
                     this.getClass().getName());
-            Dictionary props = Optional.ofNullable(config.getProperties()).orElse(new Hashtable());
+            final Dictionary props = Optional.ofNullable(config.getProperties()).orElse(new Hashtable());
 
-            if (props.get(propertyAdaptables) != null && props.get(propertyAdapters) != null) return;
-            props.put(propertyAdaptables, SlingHttpServletRequest.class.getName());
-            props.put(propertyAdapters, ReflectionUtil.getAllClassesFromPackage(componentContext.getBundleContext().getBundle(), MODELS_PACKAGE));
+            final String adaptablesOld = (String) props.get(propertyAdaptables);
+            final String[] adaptersOld = (String[]) props.get(propertyAdapters);
+            final String adaptables = SlingHttpServletRequest.class.getName();
+            final String[] adapters = ReflectionUtil.getAllClassesFromPackage(componentContext.getBundleContext().getBundle(), MODELS_PACKAGE);
+            if (adaptables.equals(adaptablesOld) && Arrays.asList(adapters).containsAll(Arrays.asList(adaptersOld))) {
+                return;
+            }
+            props.put(propertyAdaptables, adaptables);
+            props.put(propertyAdapters, adapters);
             config.update(props);
         } catch (IOException e) {
             LOG.info(e.getMessage());
@@ -63,14 +65,16 @@ public class ModelAdapter implements AdapterFactory {
 
     private <AdapterType> AdapterType adaptRequestToModel(SlingHttpServletRequest request, Class<AdapterType> aClass) {
         final String id = WeddingResourceUtil.getId(request);
-        Optional<Resource> modelResource;
+        final String path = request.getParameter("path");
+        Resource modelResource = null;
         if (StringUtils.isEmpty(id)) {
-//            modelResource = createResource(request);
-            return null;
+            modelResource = StringUtils.isNotEmpty(path)
+                    ? SlingModelUtil.createModelResource(request, path)
+                    : WeddingResourceUtil.getResourceByID(request.getResourceResolver()).apply(id);
         }
-        modelResource = Optional.ofNullable(WeddingResourceUtil.getResourceByID(request.getResourceResolver()).apply(id));
 
-        return (AdapterType) modelResource.map(resource -> resource.adaptTo(aClass))
+        return (AdapterType) Optional.ofNullable(modelResource)
+                .map(resource -> resource.adaptTo(aClass))
                 .map(model -> setPropertyToModel(request, model))
                 .orElse(null);
     }
@@ -79,9 +83,7 @@ public class ModelAdapter implements AdapterFactory {
         Enumeration parameterNames = request.getParameterNames();
         while (parameterNames.hasMoreElements()) {
             Optional.of((String) parameterNames.nextElement())
-                    .filter(parameter -> ReflectionUtil.isFieldPresent(parameter, model))
-                    .ifPresent(parameter -> ReflectionUtil.setFieldValue(parameter, request.getParameterValues(parameter), model));
-
+                    .ifPresent(parameter -> ReflectionUtil.setFieldValueDeep(parameter, request.getParameterValues(parameter), model));
         }
         return model;
     }
