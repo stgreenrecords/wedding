@@ -18,6 +18,13 @@ public class WeddingBaseModel {
     @ValueMapValue(name = WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID)
     private String id;
 
+    private String resourcePath;
+
+    public String getResourcePath() {
+        resourcePath = resource.getPath();
+        return resourcePath;
+    }
+
     public String getId() {
         return id;
     }
