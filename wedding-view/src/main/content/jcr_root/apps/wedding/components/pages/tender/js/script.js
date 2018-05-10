@@ -54,15 +54,11 @@ var PORTAL = (function (PORTAL, $) {
                     // cloneObject.
 
                     for (var i = 0; i<data.length; i++){
-                        var publDate = new Date(data[i].datePublication);
-                        var deadLine = new Date(data[i].deadline);
-                        // copy_div = first_div.cloneNode(true);
-
                         copy_div.querySelector('.tender_card-author_name').innerHTML = data[i].firstName+' ' +data[i].lastName;
                         cloneObject.avatar.style.backgroundImage = `url('${data[i].avatar}')`;
-                        cloneObject.publish_date.innerHTML = `${publDate.getDate()}.${publDate.getMonth()+1}.${publDate.getFullYear()}`;
+                        cloneObject.publish_date.innerHTML = formatDate(data[i].datePublication);
+                        cloneObject.deadLine.innerHTML = formatDate(data[i].deadline);
                         cloneObject.city.innerHTML = data[i].city;  /* г. нужноВРестеОтправлять*/
-                        cloneObject.deadLine.innerHTML = `${deadLine.getDate()}.${deadLine.getMonth()+1}.${deadLine.getFullYear()}`;
                         cloneObject.budget.innerHTML = data[i].moneyLimit;
                         cloneObject.offers.innerHTML = data[i].offers;
 
@@ -84,6 +80,16 @@ var PORTAL = (function (PORTAL, $) {
         }
 
         getSelectTend();
+
+        function formatDate(datt) {
+            var date = new Date (datt);
+            var dd = date.getDate();
+            if (dd < 10) dd = '0' + dd;
+            var mm = date.getMonth() + 1;
+            if (mm < 10) mm = '0' + mm;
+            var yy = date.getFullYear();
+            return dd + '.' + mm + '.' + yy;
+        }
 
     };
 
