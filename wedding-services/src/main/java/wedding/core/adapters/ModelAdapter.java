@@ -1,7 +1,10 @@
 package wedding.core.adapters;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.felix.scr.annotations.*;
+import org.apache.felix.scr.annotations.Activate;
+import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Reference;
+import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.adapter.AdapterFactory;
 import org.apache.sling.api.resource.Resource;
@@ -10,8 +13,6 @@ import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import wedding.core.adapters.wrapper.CreateUserRequest;
-import wedding.core.rest.util.ServletMapping;
 import wedding.core.utils.ReflectionUtil;
 import wedding.core.utils.SlingModelUtil;
 import wedding.core.utils.WeddingResourceUtil;
