@@ -39,7 +39,7 @@ var PORTAL = (function (PORTAL, $) {
 
         var dayTimer = function () {
 
-            var date_finish = new Date(2018, 4, 30, 17, 0, 0, 0);
+            var date_finish = new Date(2018, 5, 15, 17, 0, 0, 0);
 
             var Date_remained = function (date_finish, current_date) {
                 this.remained_all = date_finish - current_date;
@@ -51,6 +51,11 @@ var PORTAL = (function (PORTAL, $) {
                 this.minute_remained = Math.floor(this.remained_all % 3600000 / 60000);
                 this.hour_remained = Math.floor(this.remained_all % 86400000 / 3600000);
                 this.day_remained = Math.floor(this.remained_all % 31536000000 / 86400000);
+
+                this.day_remained = (this.day_remained < 10) ? '0'+this.day_remained : this.day_remained;
+                this.hour_remained = (this.hour_remained < 10) ? '0'+this.hour_remained : this.hour_remained;
+                this.minute_remained = (this.minute_remained < 10) ? '0'+this.minute_remained : this.minute_remained;
+                this.second_remained = (this.second_remained < 10) ? '0'+this.second_remained : this.second_remained;
             };
 
             var our_date;
