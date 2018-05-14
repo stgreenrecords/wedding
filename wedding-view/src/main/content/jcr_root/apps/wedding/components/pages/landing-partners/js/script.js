@@ -8,8 +8,6 @@ var PORTAL = (function (PORTAL, $) {
 
         console.log('Component: "LandingPartners"');
 
-        console.log("Jabadabadoooo!"); // TO DO del
-
         var partners_div = document.querySelectorAll(".with-us-div");
 
         for (var i = 0; i < partners_div.length; i++) {
@@ -17,25 +15,6 @@ var PORTAL = (function (PORTAL, $) {
         }
 
         document.querySelector("footer").style.backgroundColor = "#fff";
-
-      /*  $(".with-us-div").on( "click", function(evt) {
-
-            $( this ).text('That help happened');
-
-            console.log('That help happened'+ ' ' +evt.target);
-
-        });
-
-        $("footer").on("click", function () {
-            this.style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_6.jpg')";
-        });*/
-
-        /*  $self( ".with-us-div" ).on( "click", function() {
-           console.log('That help happened');
-            alert( $( this ).text('That help happened') );
-          });*/
-
-
 
         var dayTimer = function () {
 
@@ -52,10 +31,10 @@ var PORTAL = (function (PORTAL, $) {
                 this.hour_remained = Math.floor(this.remained_all % 86400000 / 3600000);
                 this.day_remained = Math.floor(this.remained_all % 31536000000 / 86400000);
 
-                this.day_remained = (this.day_remained < 10) ? '0'+this.day_remained : this.day_remained;
-                this.hour_remained = (this.hour_remained < 10) ? '0'+this.hour_remained : this.hour_remained;
-                this.minute_remained = (this.minute_remained < 10) ? '0'+this.minute_remained : this.minute_remained;
-                this.second_remained = (this.second_remained < 10) ? '0'+this.second_remained : this.second_remained;
+                this.day_remained = this.day_remained < 10 ? '0'+this.day_remained : this.day_remained;
+                this.hour_remained = this.hour_remained < 10 ? '0'+this.hour_remained : this.hour_remained;
+                this.minute_remained = this.minute_remained < 10 ? '0'+this.minute_remained : this.minute_remained;
+                this.second_remained = this.second_remained < 10 ? '0'+this.second_remained : this.second_remained;
             };
 
             var our_date;
@@ -86,11 +65,15 @@ var PORTAL = (function (PORTAL, $) {
             $(".btn-become-partner2").on("click", showRegistrationForm);
 
             function showRegistrationForm() {
-                $("#entrance-form").css('visibility','visible');
-                let mwindow = document.querySelector(".window-registation");
-                mwindow.style.visibility = "visible";
-                mwindow.style.left = (document.documentElement.clientWidth - mwindow.getBoundingClientRect().width)/2 + "px";
-                mwindow.style.top = (document.documentElement.clientHeight - mwindow.getBoundingClientRect().height)/3 + "px";
+
+                if (Cookies.get('authStatus') !== 'authorized' ){
+                    $("#entrance-form").css('visibility','visible');
+                    var mwindow = document.querySelector(".window-registation");
+                    mwindow.style.visibility = "visible";
+                    mwindow.style.left = (document.documentElement.clientWidth - mwindow.getBoundingClientRect().width)/2 + "px";
+                    mwindow.style.top = (document.documentElement.clientHeight - mwindow.getBoundingClientRect().height)/3 + "px";
+                }
+
             };
         })();
 
