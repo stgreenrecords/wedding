@@ -24,7 +24,10 @@ var PORTAL = (function (PORTAL, $) {
             dataType: "json",
             success: function (data) {
 
-                console.log(data[0].firstName);
+                if (data.length === 0){
+                    document.location.href = '/content/wedding/catalog/category.html';
+                    console.log(" NO data ! !");
+                }
 
                 selectedPerson = data[0];
 
