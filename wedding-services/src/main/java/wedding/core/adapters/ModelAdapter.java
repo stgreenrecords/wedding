@@ -7,6 +7,8 @@ import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.adapter.AdapterFactory;
+import org.apache.sling.api.resource.ModifiableValueMap;
+import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.Resource;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
@@ -17,6 +19,8 @@ import wedding.core.utils.ReflectionUtil;
 import wedding.core.utils.SlingModelUtil;
 import wedding.core.utils.WeddingResourceUtil;
 
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import java.io.IOException;
 import java.util.*;
 
@@ -68,16 +72,38 @@ public class ModelAdapter implements AdapterFactory {
         final String id = WeddingResourceUtil.getId(request);
         final String path = request.getParameter("path");
         Resource modelResource = null;
-        if (StringUtils.isEmpty(id)) {
-            modelResource = StringUtils.isNotEmpty(path)
-                    ? SlingModelUtil.createModelResource(request, path)
-                    : WeddingResourceUtil.getResourceByID(request.getResourceResolver()).apply(id);
+        if (StringUtils.isNotEmpty(path)) {
+            modelResource = SlingModelUtil.createModelResource(request, path);
+            updateNewResource(modelResource);
+        } else if (StringUtils.isNotEmpty(id)) {
+            modelResource = WeddingResourceUtil.getResourceByID(request.getResourceResolver()).apply(id);
         }
 
         return (AdapterType) Optional.ofNullable(modelResource)
                 .map(resource -> resource.adaptTo(aClass))
                 .map(model -> setPropertyToModel(request, model))
                 .orElse(null);
+    }
+
+    private void updateNewResource(Resource modelResource) {
+        if (modelResource == null) {
+            LOG.warn("Model resource is null");
+            return;
+        }
+        final Node resourceNode = modelResource.adaptTo(Node.class);
+        final ModifiableValueMap properties = modelResource.adaptTo(ModifiableValueMap.class);
+        if (resourceNode == null || properties == null) {
+            LOG.warn("Model node [] or properties [] is null", resourceNode, properties);
+            return;
+        }
+        final String id = WeddingResourceUtil.generateId();
+        properties.put(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID, id);
+        try {
+            resourceNode.addMixin(WeddingResourceUtil.NT_WEDDING_RESOURCE_MIXIN);
+            modelResource.getResourceResolver().commit();
+        } catch (RepositoryException | PersistenceException e) {
+            LOG.error(e.getMessage(), e);
+        }
     }
 
     private Object setPropertyToModel(SlingHttpServletRequest request, Object model) {
