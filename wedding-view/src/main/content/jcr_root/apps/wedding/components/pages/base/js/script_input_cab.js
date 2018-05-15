@@ -581,7 +581,7 @@ var PORTAL = (function (PORTAL, $) {
                         dataRegistration.firstName =  firstName;
                         dataRegistration.lastName =  lastName;
                         dataRegistration.email =  email;
-                        dataRegistration.password = password;
+                        // dataRegistration.password = password;
                         console.dir(dataRegistration);
 
                     } else {
@@ -662,11 +662,38 @@ var PORTAL = (function (PORTAL, $) {
 
             }
 
+            function sendUserRegInfo(url_link, city){
+
+                $.ajax({
+                    url: url_link, // 'http://wedding-services.mycloud.by/services/rest.users/create.json'
+                    type: "POST",
+                    dataType: "json",
+                    data: dataRegistration, // Все данные из инпутов
+                    path: `/home/users/wedding/users/${city}`,
+                    beforeSend: function () {
+                        console.log("как сча отправлю !");
+                    },
+                    success: function (data) {
+
+                        console.log(data);
+                        // console.dir(dataRegistration);
+                        // showCabinetPage(data);
+                        console.log('Наверное еще не настроили приемку на сервере | ');
+
+                    },
+                    error: function (e) {
+                        console.log('Что-то пошло не так (');
+                        console.log(e);
+                    }
+                });
+
+            }
+
             function lastStepRegUser(){
 
                 console.log("lastStepRegUSSEERRR ON success ");
                 $self.find(".window-registation-step2").css('visibility', "hidden");
-                var mwindow3 = document.querySelector(".window-registation-step3-user"); // TODOc заменить на function
+                var mwindow3 = document.querySelector(".window-registation-step3-user");
                 mwindow3.style.visibility = "visible";
                 mwindow3.style.left = (document.documentElement.clientWidth - mwindow3.getBoundingClientRect().width)/2 + "px";
                 mwindow3.style.top = (document.documentElement.clientHeight - mwindow3.getBoundingClientRect().height)/3 + "px";
@@ -680,24 +707,24 @@ var PORTAL = (function (PORTAL, $) {
                     var ok = $self.find("#ok_finish-user").val();
 
                     dataRegistration.city =  city;
-                    dataRegistration.tel =  tel;
+                    dataRegistration.phone =  tel;
                     dataRegistration.vkLink =  vk;
                     dataRegistration.fbLink =  fb;
                     dataRegistration.okLink =  ok;
+                    dataRegistration.id =  'ff'+Math.floor(Math.random()*1000000)+'-'+Math.floor(Math.random()*10000)+'-'+Math.floor(Math.random()*10000)+'-'+Math.floor(Math.random()*10000)+'-'+Math.floor(Math.random()*100000000)+'user';
 
                     if ( tel && city &&  ($self.find("#consent-user-check:checked").val() === 'consent-user')){
                         mwindow3.style.visibility = "hidden";
                         modal.style.visibility = "hidden";
+                        sendUserRegInfo('http://wedding-services.mycloud.by/services/rest.users/create.json', dataRegistration.city);
                         showCabinetSuccess();
                         console.dir(dataRegistration);
                         setCookiesAuth('authorized', authType);
-                        sendRegInfo("http://wedding-services.mycloud.by/services/rest.users.create");
 
                         Cookies.set('userType', 'user');
                         Cookies.set('city', city);
                         Cookies.set('userId', 'id');
-                        document.location.href = '/content/wedding/catalog.html#';
-                        document.location.href = `/content/wedding/user.html#`/*${registrationId}`*/;
+                        // document.location.href = '/content/wedding/catalog.html#';
 
                     } else /*if ($("input[name='consent']:checked").val() === undefined)*/{
                         $self.find('.registation3_errore_message').css('display','flex');
@@ -715,12 +742,12 @@ var PORTAL = (function (PORTAL, $) {
 
                 if ($self.find("input[name='selected-role']:checked").val() === 'cheked_part'){
 
-                    dataRegistration.userType =  "PARTNER";
+                    // dataRegistration.userType =  "PARTNER";
                     lastStepRegPartner();
 
                 }else if ($self.find("input[name='selected-role']:checked").val() === 'cheked_us'){
 
-                    dataRegistration.userType =  "USER";
+                    // dataRegistration.userType =  "USER";
                     lastStepRegUser();
 
                 }
