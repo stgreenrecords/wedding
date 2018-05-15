@@ -16,10 +16,6 @@ var PORTAL = (function (PORTAL, $) {
 
         var getFromCatalogCat = (window.location.hash).slice(1);
         console.log(getFromCatalogCat);
-        var dataUsers;
-        var selectedPerson;
-        var forPersonRequest;
-        var selectedPersonRequest;
 
         $.ajax({ // добавление всех категорий в селект
 
@@ -48,14 +44,13 @@ var PORTAL = (function (PORTAL, $) {
 
         });
 
-        function getSelectedCat(value){
+        function getSelectedCat(){
 
             var selectItems = {};
             selectItems.$cat_val = $partner_categ_select.val();
             selectItems.$city_val = $city_select.val();
-            selectItems.url_first = "http://wedding-services.mycloud.by/services/rest.partners/"+selectItems.$cat_val+"/"+selectItems.$city_val+".14.json";
+            selectItems.url_first = "http://wedding-services.mycloud.by/services/rest.partners/"+selectItems.$cat_val+"/"+selectItems.$city_val+".11.json";
             selectItems.url_all = "http://wedding-services.mycloud.by/services/rest.partners/"+selectItems.$cat_val+"/"+selectItems.$city_val+".json";
-            // http://wedding-services.mycloud.by/services/rest.partners/photographers/minsk.json?userId=XXX
             console.dir(selectItems);
 
             $.ajax({
@@ -95,7 +90,8 @@ var PORTAL = (function (PORTAL, $) {
                         copy_div.querySelector(".search-usually_img").style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_"+k+".jpg')";
                         copy_div.querySelector(".search-usually_content_name").innerHTML = data[i].firstName + " "+ data[i].lastName;
                         copy_div.querySelector(".search-usually_content_speciality").innerHTML = data[i].speciality;
-                        copy_div.setAttribute('data_userId', data[i].userId);
+                        copy_div.querySelector(".partner_card_href").setAttribute("href",`/content/wedding/catalog/category/partner.html?${data[i].id}#${selectItems.$cat_val}&${selectItems.$city_val}`);
+                        copy_div.setAttribute('data_userId', data[i].id);
                         main_container.appendChild(copy_div);
                     }
 
@@ -103,71 +99,41 @@ var PORTAL = (function (PORTAL, $) {
 
                 }
 
-            });  // ---  AJAX finish
+            });
 
         }
 
 
         function getAllPersonInCat (selectItems) {
 
-            $.ajax({  // ---  AJAX All
+            $.ajax({
 
                 url: selectItems.url_all,
                 type: "GET",
                 dataType: "json",
-                success: function (allUser) {
-                    dataUsers = allUser;
-                    console.dir(allUser);
+                success: function (data) {
+
+                    console.dir(data);
                     console.log(selectItems.url_all);
                     var all_div = document.querySelectorAll(".search-usually");
                     var first_div = document.querySelector(".search-usually");
                     var main_container =  document.querySelector("#search-usually-cont");
                     var k=0;
-                    if (allUser.length > 12){
-                        for (var i = 12; i<allUser.length; i++){
+                    if (data.length > 12){
+                        for (var i = 12; i<data.length; i++){
                             var copy_div = first_div.cloneNode(true);
                             k= i%9+1;
                             copy_div.querySelector(".search-usually_img").style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_"+k+".jpg')";
-                            copy_div.querySelector(".search-usually_content_name").innerHTML = allUser[i].firstName + " "+ allUser[i].lastName;
-                            copy_div.querySelector(".search-usually_content_speciality").innerHTML = allUser[i].speciality;
-                            copy_div.setAttribute('data_userId', allUser[i].userId);
+                            copy_div.querySelector(".search-usually_content_name").innerHTML = data[i].firstName + " "+ data[i].lastName;
+                            copy_div.querySelector(".search-usually_content_speciality").innerHTML = data[i].speciality;
+                            copy_div.querySelector(".partner_card_href").setAttribute("href",`/content/wedding/catalog/category/partner.html?${data[i].id}#${selectItems.$cat_val}&${selectItems.$city_val}`);
+                            copy_div.setAttribute('data_userId', data[i].id);
                             main_container.appendChild(copy_div);
                         }
                     }
-
-                    $self.find('.search-usually').on('click', showSelectPerson);
-                    forPersonRequest = selectItems.url_all;
                 }
 
             });
-
-        }
-
-        function showSelectPerson(event){
-
-            var selectedPersonId;
-            var b;
-
-            if ($(event.target).attr('data_userId')!=undefined)
-                selectedPersonId = $(event.target).attr('data_userId');
-            else
-                selectedPersonId = $(event.target).closest('.search-usually').attr('data_userId'); // parents
-
-            localStorage.setItem('partnerIdRequest', selectedPersonId);
-
-
-            console.dir(selectedPerson);
-            console.log(selectedPersonId);
-            document.location.href = `/content/wedding/catalog/category/partner.html#${selectedPersonId}`;
-
-
-            selectedPersonRequest = forPersonRequest +'?userId='+ selectedPersonId;
-
-            localStorage.setItem('PersonRequest', selectedPersonRequest);
-
-            console.log(selectedPersonRequest);
-
-
 
         }
 
