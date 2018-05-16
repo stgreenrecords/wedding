@@ -96,7 +96,6 @@ var PORTAL = (function (PORTAL, $) {
                 mwindow3.style.visibility = "visible";
                 mwindow3.style.left = (document.documentElement.clientWidth - mwindow3.getBoundingClientRect().width)/2 + "px";
                 mwindow3.style.top = (document.documentElement.clientHeight - mwindow3.getBoundingClientRect().height)/3 + "px";
-                console.log('openMWindow good WORK');
             }
 
             /*---*/
