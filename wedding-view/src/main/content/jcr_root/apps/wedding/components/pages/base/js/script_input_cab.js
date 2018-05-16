@@ -664,36 +664,45 @@ var PORTAL = (function (PORTAL, $) {
 
             function sendUserRegInfo(url_link, city){
 
+                // dataRegistration.resourcePath = `/home/users/wedding/users/${city}`;
+
+
                 $.ajax({
                     url: url_link, // 'http://wedding-services.mycloud.by/services/rest.users/create.json'
                     type: "POST",
                     dataType: "json",
-                    data: dataRegistration, // Все данные из инпутов
-                    path: `/home/users/wedding/users/${city}`,
-                    beforeSend: function () {
-                        console.log("как сча отправлю !");
+                    data: dataRegistration, // Все данные
+                    // path: `/home/users/wedding/users/${city}`,
+                    // path: '/home/users/wedding/users/minsk',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:admin"));
+                        console.log("beforeSend post !");
                     },
                     success: function (data) {
-
-                        console.log(data);
+                        // if (data) {
+                        console.log('Ниже должен быть ответ:');
+                        console.dir(data);
                         // console.dir(dataRegistration);
                         // showCabinetPage(data);
-                        console.log('Наверное еще не настроили приемку на сервере | ');
 
+                        // }
+                    },
+                    complete: function () {
                     },
                     error: function (e) {
-                        console.log('Что-то пошло не так (');
+                        console.log('Что-то пошло не так :( ');
                         console.log(e);
                     }
                 });
 
             }
 
+
             function lastStepRegUser(){
 
                 console.log("lastStepRegUSSEERRR ON success ");
                 $self.find(".window-registation-step2").css('visibility', "hidden");
-                var mwindow3 = document.querySelector(".window-registation-step3-user");
+                var mwindow3 = document.querySelector(".window-registation-step3-user"); // TODO заменить на function
                 mwindow3.style.visibility = "visible";
                 mwindow3.style.left = (document.documentElement.clientWidth - mwindow3.getBoundingClientRect().width)/2 + "px";
                 mwindow3.style.top = (document.documentElement.clientHeight - mwindow3.getBoundingClientRect().height)/3 + "px";
@@ -709,16 +718,19 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.city =  city;
                     dataRegistration.phone =  tel;
                     dataRegistration.vkLink =  vk;
-                    dataRegistration.fbLink =  fb;
-                    dataRegistration.okLink =  ok;
-                    dataRegistration.id =  'ff'+Math.floor(Math.random()*1000000)+'-'+Math.floor(Math.random()*10000)+'-'+Math.floor(Math.random()*10000)+'-'+Math.floor(Math.random()*10000)+'-'+Math.floor(Math.random()*100000000)+'user';
+                    dataRegistration.facebookLink =  fb;
+                    dataRegistration.instagramLink =  ok;		/*todo - переделать под инсту*/
+                    dataRegistration.resourcePath = '/home/users/wedding/users/minsk';
+                    dataRegistration.authType =  authType;
+
+                    // dataRegistration.id =  'ff'+Math.floor(Math.random()*1000000)+'-'+Math.floor(Math.random()*10000)+'-'+Math.floor(Math.random()*10000)+'-'+Math.floor(Math.random()*10000)+'-'+Math.floor(Math.random()*100000000)+'user';
 
                     if ( tel && city &&  ($self.find("#consent-user-check:checked").val() === 'consent-user')){
                         mwindow3.style.visibility = "hidden";
                         modal.style.visibility = "hidden";
                         sendUserRegInfo('http://wedding-services.mycloud.by/services/rest.users/create.json', dataRegistration.city);
                         showCabinetSuccess();
-                        console.dir(dataRegistration);
+                        // console.dir(dataRegistration);
                         setCookiesAuth('authorized', authType);
 
                         Cookies.set('userType', 'user');
