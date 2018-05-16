@@ -29,9 +29,9 @@ var PORTAL = (function (PORTAL, $) {
 
                 for (var prop in allCategories){
                     if(getFromCatalogCat !== prop)
-                        $partner_categ_select.append(`<option value="${prop}">${prop}</option>`);
+                        $partner_categ_select.append(`<option value="${prop}">${allCategories[prop]}</option>`);
                     else
-                        $partner_categ_select.append(`<option value="${prop}" selected>${prop}</option>`);
+                        $partner_categ_select.append(`<option value="${prop}" selected>${allCategories[prop]}</option>`);
                 }
 
                 getSelectedCat();
