@@ -127,9 +127,9 @@
                 <h2 class="title-inter2">В качестве кого вы хотите зарегистрироваться ?</h2>
 
                 <span title="У вас скоро свадьба. Вам нужны профессионалы"> Клиента </span>
-                <input id="cheked_user" class="inp" name="selected-role" type="radio" value="cheked_us" title="У вас скоро свадьба. Вам нужны профессионалы" >
+                <input id="cheked_user" class="inp" name="selected-role" type="radio" value="cheked_us" title="У вас скоро свадьба. Вам нужны профессионалы" checked >
                 <p class="mwindow-or"> или </p>
-                <input id="cheked_partner" class="inp" name="selected-role" type="radio" title="Вы работаете или хотите начать работу в свадебном бизнесе" value="cheked_part" checked >
+                <input id="cheked_partner" class="inp" name="selected-role" type="radio" title="Вы работаете или хотите начать работу в свадебном бизнесе" value="cheked_part"  >
                 <span title="Вы работаете или хотите начать работу в свадебном бизнесе"> Партнера </span>
 
                 <div><button  id="btn-registration-futher2" class="btn-enter-2"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/further.png" alt="ДАЛЕЕ">  </button> </div>
@@ -172,7 +172,7 @@
 
                     <div class="consent-user-div">
 
-                        <input type="checkbox" id="consent-user-check" class="consent-check" name="consent-us" value="consent-user">
+                        <input type="checkbox" id="consent-user-check" class="consent-check" name="consent-us" value="consent-user" checked>
                         <span>  Я принимаю </span>
                         <span class="consent-working"> Условия сотрудничества </span>
 
@@ -199,7 +199,7 @@
                 <form id="form-reg-step3-partner" action="" method="post">
 
                     <select id="work-sphere" name="work-sphere">
-                        <option value="title" selected disabled>Сфера деятельности</option>
+                        <option value="title"  disabled>Сфера деятельности</option>
                         <!-- <option value="photo">Фотограф</option>
                         <option value="aminer">Ведущий</option>
                         <option value="style" selected>Стилист</option> -->
