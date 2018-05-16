@@ -201,10 +201,30 @@ var PORTAL = (function (PORTAL, $) {
 
             })();
 
+
+
             function secondStepRegWindow(){
                 closeMWindow(".window-registation");
                 openMWindow(".window-registation-step2");
             }
+
+            reg_futher2.addEventListener("click", function(){
+
+                inputEmailFill();
+
+                if ($self.find("input[name='selected-role']:checked").val() === 'cheked_part'){
+
+                    dataRegistration.userType =  "PARTNER";
+                    lastStepRegPartner();
+
+                }else if ($self.find("input[name='selected-role']:checked").val() === 'cheked_us'){
+
+                    dataRegistration.userType =  "USER";
+                    lastStepRegUser();
+
+                }
+
+            });
 
             function lastStepRegPartner(){
 
@@ -241,28 +261,29 @@ var PORTAL = (function (PORTAL, $) {
                     /*  var googl = $("#googl_finish-partner").val();*/
                     var site = $self.find("#site_finish-partner").val();
 
-                    dataRegistration.workSphere =  work_sphere;
+                    dataRegistration.speciality =  work_sphere;
                     dataRegistration.city =  city;
-                    dataRegistration.tel =  tel;
+                    dataRegistration.phone =  tel;
                     dataRegistration.vkLink =  vk;
-                    dataRegistration.fbLink =  fb;
+                    dataRegistration.facebookLink =  fb;
                     dataRegistration.okLink =  ok;
+                    dataRegistration.instagramLink =  instagramLink;
                     dataRegistration.siteLink =  site;
-                    // dataRegistration.id =  'prtnr'+Math.floor(Math.random()*100000000000)+'ghjk';
-
+                    dataRegistration.authType =  authType;
+                    dataRegistration.resourcePath =  resourcePath;
 
                     if ( work_sphere  &&  tel &&  city && ($self.find("input[name='consent-part']:checked").val() === 'consent-partner')  /*!= 'null'*/) {
 
                         closeMWindow(".window-registation-step3-partner");
-                        showCabinetSuccess();
-                        console.dir(dataRegistration);
-                        setCookiesAuth('authorized', authType);
                         sendPartnerRegInfo("http://wedding-services.mycloud.by/services/rest.partner.create");
+                        console.dir(dataRegistration);
+                        showCabinetSuccess();
+                        setCookiesAuth('authorized', authType);
 
                         Cookies.set('userType', 'partner');
                         Cookies.set('workSphere', work_sphere);
                         Cookies.set('city', city);
-                        Cookies.set('userId', 'id');
+
                         // document.location.href = `/content/wedding/catalog/category/partner.html#`/*${registrationId}*/;
 
                     } else /*if ($("input[name='consent']:checked").val() === undefined)*/{
@@ -285,17 +306,21 @@ var PORTAL = (function (PORTAL, $) {
                     dataType: "json",
                     data: dataRegistration,
                     path: `/home/users/wedding/users/+city`,
-                    beforeSend: function () {
-                        console.log("как сча отправлю !");
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+                        console.log("beforeSend post !");
+                        console.dir(dataRegistration);
                     },
                     success: function (data) {
                         // if (data) {
-                        console.log(data);
-                        showCabinetPage(data);
+                        console.log('Ниже должен быть ответ:');
+                        console.dir(data);
+                        Cookies.set('userId', data.id);
+                        // showCabinetPage(data);
                         // }
                     },
                     complete: function () {
-                        console.log('Наверное еще не настроили приемку на сервере |');
+
                     },
                     error: function (e) {
                         console.log('Что-то пошло не так (');
@@ -306,13 +331,7 @@ var PORTAL = (function (PORTAL, $) {
             }
 
 
-// Определённый партнер по id
-// /services/rest.partners/photographers/minsk.json?id=XXX
-
-
             function sendUserRegInfo(url_link, city){
-
-                // dataRegistration.resourcePath = `/home/users/wedding/users/${city}`;
 
                 $.ajax({
                     url: url_link, // 'http://wedding-services.mycloud.by/services/rest.users/create.json'
@@ -330,7 +349,7 @@ var PORTAL = (function (PORTAL, $) {
                         // if (data) {
                         console.log('Ниже должен быть ответ:');
                         console.dir(data);
-
+                        Cookies.set('userId', data.id);
                         // showCabinetPage(data);
 
                         // }
@@ -364,25 +383,19 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.vkLink =  vk;
                     dataRegistration.facebookLink =  fb;
                     dataRegistration.instagramLink =  ok;		/*todo - переделать под инсту*/
-                    dataRegistration.resourcePath = '/home/users/wedding/users/minsk';
+                    dataRegistration.resourcePath = '/home/users/wedding/users/minsk'; // dataRegistration.resourcePath = `/home/users/wedding/users/${city}`;
                     dataRegistration.authType =  authType;
-
-                    // dataRegistration.id =  'ff'+Math.floor(Math.random()*1000000)+'-'+Math.floor(Math.random()*10000)+'-'+Math.floor(Math.random()*10000)+'-'+Math.floor(Math.random()*10000)+'-'+Math.floor(Math.random()*100000000)+'user';
 
                     if ( tel && city &&  ($self.find("#consent-user-check:checked").val() === 'consent-user')){
 
-                        // mwindow3.style.visibility = "hidden";
-                        // modal.style.visibility = "hidden";
                         closeMWindow(".window-registation-step3-user");
 
                         sendUserRegInfo('http://wedding-services.mycloud.by/services/rest.users/create.json', dataRegistration.city);
                         showCabinetSuccess();
-                        // console.dir(dataRegistration);
                         setCookiesAuth('authorized', authType);
 
                         Cookies.set('userType', 'user');
                         Cookies.set('city', city);
-                        Cookies.set('userId', 'id');
                         // document.location.href = '/content/wedding/catalog.html#';
 
                     } else /*if ($("input[name='consent']:checked").val() === undefined)*/{
@@ -395,31 +408,13 @@ var PORTAL = (function (PORTAL, $) {
 
             }
 
-            reg_futher2.addEventListener("click", function(){
-
-                inputEmailFill();
-
-                if ($self.find("input[name='selected-role']:checked").val() === 'cheked_part'){
-
-                    dataRegistration.userType =  "PARTNER";
-                    lastStepRegPartner();
-
-                }else if ($self.find("input[name='selected-role']:checked").val() === 'cheked_us'){
-
-                    dataRegistration.userType =  "USER";
-                    lastStepRegUser();
-
-                }
-
-            });
-
             modal.addEventListener("click", function(evt) {
                 if (evt.target === document.querySelector("#entrance-form")) {
                     this.style.visibility = "hidden";
                     Array.from(this.children).forEach(function(elem) {
                         elem.style.visibility = "hidden";
                     });
-                };
+                }
             });
 
 

@@ -835,6 +835,16 @@ footer > div a, footer > div{
     margin: 7px 0;
 }
 
+.video_field{
+    margin: 1.9%;
+}
+
+.partner_video-wrapper .video_item{
+    width: 100%;
+    min-height: 350px;
+    margin: 50px 0 70px;
+}
+
 /* ================================ PARTNER off */
 /* ===---    USER start ====----- */
 
@@ -914,6 +924,9 @@ footer > div a, footer > div{
     cursor: pointer;
 }
 
+.tender_card_edit img{
+    margin-left: 5px;
+}
 
 /*========------- USER finish  -=-=-=-=-=-*/
 /*========------- tenders  start  -=-=-=-=-=-*/

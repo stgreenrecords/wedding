@@ -8,10 +8,18 @@ var PORTAL = (function (PORTAL, $) {
 
         console.log('Component: "Partner"');
 
+        $("textarea").trumbowyg({  // RichText
+            svgPath: '/etc/clientlibs/wedding/external/icons/richtext/icons.svg',
+            lang: 'ru'
+
+        });
+
         var selectedPerson;
         var getPartnerId = (window.location.search).slice(1);
         var getPartnerSpecCity = (window.location.hash).slice(1);
         getPartnerSpecCity = getPartnerSpecCity.replace('&','/');
+
+
 
         var selectedPersonRequest = `http://wedding-services.mycloud.by/services/rest.partners/${getPartnerSpecCity}.json?id=${getPartnerId}`;
 
@@ -26,7 +34,7 @@ var PORTAL = (function (PORTAL, $) {
 
                 if (data.length === 0){
                     document.location.href = '/content/wedding/catalog/category.html';
-                    console.log(" NO data ! !");
+                    console.log(" NO data !!!!!!!!!!!!");
                 }
 
                 selectedPerson = data[0];
@@ -46,9 +54,45 @@ var PORTAL = (function (PORTAL, $) {
                 $self.find('.fb_string').text(selectedPerson.facebookLink);
                 $self.find('.insta_string').text(selectedPerson.instagramLink);
 
+                fillVidosy(selectedPerson.videos);
+                fillComments(selectedPerson.comments);
+
+
             }
 
         });
+
+        function fillVidosy(video){
+
+            var vid = $self.find('.video_field');
+            var wrapper = $self.find('.partner_video-wrapper');
+
+            video.forEach(function(elem, i, arr){
+
+                var newItem = vid.clone();
+                // newItem.find('.video_item').attr('src', elem);
+                console.log(elem);
+                wrapper.append(newItem);
+
+            });
+
+        }
+
+        function fillComments(comments){ // todo - расширить и переделать , когда доделают запрос
+
+            var comm = $self.find('.comment_field');
+            var wrapper = $self.find('.partner_comments-wrapper');
+
+            comments.forEach(function(elem, i, arr){
+
+                var newItem = comm.clone();
+                newItem.find('.comment_field-text').html(elem);
+                wrapper.append(newItem);
+
+            });
+        }
+
+
 
 
         (function(){  //  функция переключения страниц

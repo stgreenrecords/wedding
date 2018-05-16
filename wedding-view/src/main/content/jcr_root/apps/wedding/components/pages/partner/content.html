@@ -12,7 +12,6 @@
 
         </ul>
 
-
     </div>
 
     <div class="partner-page-wrapper">
@@ -70,15 +69,13 @@
             </div>
 
 
-
-
         </aside>
 
 
 
         <div id="partner-page-pages">
 
-            <section id="partner_about_oneself" >
+            <section id="partner_about_oneself" class="hidden_full">
 
                 <div >
 
@@ -101,15 +98,29 @@
 
             </section>
 
-            <section id="partner_video" class="hidden_full">
+            <section id="partner_video" >
 
-                <div >
+                <div class="partner_video-wrapper">
 
                     <h2 class="partner_title"> Видео </h2>
 
-                    <p class="content content_"> video </p>
-                </div>
+                    <div class="hidden_full" >  <!--  -->
 
+                        <div class="video_field ">
+
+                            <iframe class="video_item" src="https://www.youtube.com/embed/QCBtOO1bBKo?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+                        </div>
+
+                        <!--  <iframe id = "receiver" src = "https://www.youtube.com/embed/QCBtOO1bBKo?rel=0"  height = "200">
+
+                           <p> Ваш браузер не поддерживает iframe. </p>
+
+                         </iframe> -->
+
+                    </div>
+
+                </div>
 
             </section>
 
@@ -128,12 +139,31 @@
 
             <section id="partner_comments" class="hidden_full">
 
-                <div >
+                <div class="partner_comments-wrapper">
 
                     <h2 class="partner_title"> Отзывы </h2>
 
-                    <p class="content content_"> comments </p>
+                    <!-- <p class="content content_"> comments </p> -->
+                    <div class="hidden_full">
+                        <div class="comment_field">
+                            <div class="mini-avatar"> </div>
+                            <div class="comment_field-author_name"> Эйчантрис Васильевна </div>
+                            <div class="comment_field-author_category"> vj </div>
+                            <p class="comment_field-text"> Здравствуйте Олеся, меня зовут Мария. Буду рада предложить Вам отыграть свадьбу на все 200.
+                                У нас в арсенале - дерижабль с обезьянами, танцующие пингвины и слон-бормоглот.
+                            </p>
+                            <div class="comment_field-date_fild"> 18.04.2018</div>
+                        </div>
+                    </div>
 
+                </div>
+
+                <div class="comment-inter_area">
+                    <textarea class="comment_inter" name="comment_inter" placeholder="Оставьте комментарий" > </textarea>
+                </div>
+
+                <div class="add_btn">
+                    <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
                 </div>
 
 
