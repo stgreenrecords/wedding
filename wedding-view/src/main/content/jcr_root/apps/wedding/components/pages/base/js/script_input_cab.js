@@ -266,7 +266,7 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.phone =  tel;
                     dataRegistration.vkLink =  vk;
                     dataRegistration.facebookLink =  fb;
-                    dataRegistration.okLink =  ok;
+                    // dataRegistration.okLink =  ok;
                     dataRegistration.instagramLink =  ok;
                     dataRegistration.siteLink =  site;
                     dataRegistration.authType =  authType;
@@ -342,7 +342,7 @@ var PORTAL = (function (PORTAL, $) {
                     type: "POST",
                     dataType: "json",
                     // data: dataRegistration,
-                    data: {'path': '/home/users/wedding/users/minsk/test', 'city': 'minsk' },
+                    data: {'path': '/home/users/wedding/users/minsk/test','city': 'minsk'},
                     // path: `/home/users/wedding/users/${city}`,
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
@@ -366,7 +366,48 @@ var PORTAL = (function (PORTAL, $) {
                         console.log('Что-то пошло не так :( ');
                         console.log(e);
                     }
+
                 });
+
+                $.ajax({
+                    url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
+                    type: "POST",
+                    dataType: "json",
+                    data: dataRegistration,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+                    },
+                    success: function (data) {
+                        console.log('Ниже должен быть ответ:');
+                        console.dir(data);
+                    },
+                    error: function (e) {
+                        console.log('Что-то пошло не так :( ');
+                        console.log(e);
+                    }
+
+                });
+
+                $.ajax({
+                    url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
+                    type: "POST",
+                    dataType: "json",
+                    data: {'path': '/home/users/wedding/users/minsk/test'},
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+                    },
+                    success: function (data) {
+                        console.log('Ниже должен быть ответ:');
+                        console.dir(data);
+                    },
+                    error: function (e) {
+                        console.log('Что-то пошло не так :( ');
+                        console.log(e);
+                    }
+
+                });
+
+
 
 /*
                 $.ajax({
@@ -412,14 +453,14 @@ var PORTAL = (function (PORTAL, $) {
                     var fb = $self.find("#fb_finish-user").val();
                     var ok = $self.find("#ok_finish-user").val();
 
-                    dataRegistration.city =  city;
-                    dataRegistration.phone =  tel;
-                    dataRegistration.vkLink =  vk;
-                    dataRegistration.facebookLink =  fb;
-                    dataRegistration.instagramLink =  ok;		/*todo - переделать под инсту*/
-                    dataRegistration.resourcePath = '/home/users/wedding/users/minsk'; // dataRegistration.resourcePath = `/home/users/wedding/users/${city}`;
-                    dataRegistration.path = '/home/users/wedding/users/minsk'; // dataRegistration.resourcePath = `/home/users/wedding/users/${city}`;
-                    dataRegistration.authType =  authType;
+                    // dataRegistration.city =  city;
+                    // dataRegistration.phone =  tel;
+                    // dataRegistration.vkLink =  vk;
+                    // dataRegistration.facebookLink =  fb;
+                    // dataRegistration.instagramLink =  ok;		/*todo - переделать под инсту*/
+                    // dataRegistration.resourcePath = '/home/users/wedding/users/minsk'; // dataRegistration.resourcePath = `/home/users/wedding/users/${city}`;
+                    // dataRegistration.path = '/home/users/wedding/users/minsk'; // dataRegistration.resourcePath = `/home/users/wedding/users/${city}`;
+                    // dataRegistration.authType =  authType;
 
                     if ( tel && city &&  ($self.find("#consent-user-check:checked").val() === 'consent-user')){
 
