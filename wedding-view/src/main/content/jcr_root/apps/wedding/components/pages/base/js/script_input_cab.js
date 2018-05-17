@@ -334,13 +334,13 @@ var PORTAL = (function (PORTAL, $) {
 
 
             function sendUserRegInfo(url_link, city){
-
-             /*   $.ajax({
+                var dataSend =  JSON.stringify(dataRegistration);
+                $.ajax({
                     // url: url_link, // 'http://wedding-services.mycloud.by/services/rest.users/create.json'
                     url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
                     type: "POST",
                     dataType: "json",
-                    data: dataRegistration, // Все данные
+                    data: dataSend, // Все данные
                     // path: `/home/users/wedding/users/${city}`,
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
@@ -360,31 +360,6 @@ var PORTAL = (function (PORTAL, $) {
                     },
                     error: function (e) {
                         console.log('Что-то пошло не так :( ');
-                        console.log(e);
-                    }
-                });    */
-
-                $.ajax({
-                    url: '/services/rest.users/create.json',
-                    type: "POST",
-                    dataType: "json",
-                    data: {'path': '/home/users/wedding/users/minsk/test'}, // Все данные
-
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
-                        console.log("beforeSend post !");
-                        console.dir('');
-                    },
-                    success: function (data) {
-
-                        console.log('Ниже должен быть ответ:');
-                        console.dir(data);
-
-                    },
-                    complete: function () {
-                    },
-                    error: function (e) {
-                        console.log('Что-то пошло не так   ');
                         console.log(e);
                     }
                 });
