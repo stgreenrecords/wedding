@@ -267,7 +267,7 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.vkLink =  vk;
                     dataRegistration.facebookLink =  fb;
                     dataRegistration.okLink =  ok;
-                    dataRegistration.instagramLink =  instagramLink;
+                    dataRegistration.instagramLink =  ok;
                     dataRegistration.siteLink =  site;
                     dataRegistration.authType =  authType;
                     dataRegistration.resourcePath =  '/home/users/wedding/partners/photographers/minsk';
@@ -335,13 +335,13 @@ var PORTAL = (function (PORTAL, $) {
 
 
             function sendUserRegInfo(url_link, city){
-                // var dataSend =  JSON.stringify(dataRegistration);
+                 var dataSend =  JSON.stringify(dataRegistration);
                 $.ajax({
                     // url: url_link, // 'http://wedding-services.mycloud.by/services/rest.users/create.json'
                     url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
                     type: "POST",
                     dataType: "json",
-                    data: dataRegistration, // Все данные
+                    data: dataSend, // Все данные
                     // path: `/home/users/wedding/users/${city}`,
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
@@ -352,6 +352,7 @@ var PORTAL = (function (PORTAL, $) {
                         // if (data) {
                         console.log('Ниже должен быть ответ:');
                         console.dir(data);
+                        console.log('это успех!');
                         Cookies.set('userId', data.id);
                         // showCabinetPage(data);
 
