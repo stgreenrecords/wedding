@@ -1,11 +1,11 @@
 package wedding.core.utils;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.osgi.framework.Bundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Named;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -35,7 +35,7 @@ public final class ReflectionUtil {
     }
 
     public static String getNamedValue(Field field) {
-        return getName(field, Named.class, Named::value);
+        return getName(field, ValueMapValue.class, ValueMapValue::name);
     }
 
     public static Function<Field, Object> getFiledValue(Object object) {
