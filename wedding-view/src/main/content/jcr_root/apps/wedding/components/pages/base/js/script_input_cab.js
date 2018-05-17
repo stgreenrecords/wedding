@@ -270,12 +270,13 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.instagramLink =  instagramLink;
                     dataRegistration.siteLink =  site;
                     dataRegistration.authType =  authType;
-                    dataRegistration.resourcePath =  resourcePath;
+                    dataRegistration.resourcePath =  '/home/users/wedding/partners/photographers/minsk';
 
                     if ( work_sphere  &&  tel &&  city && ($self.find("input[name='consent-part']:checked").val() === 'consent-partner')  /*!= 'null'*/) {
 
                         closeMWindow(".window-registation-step3-partner");
-                        sendPartnerRegInfo("http://wedding-services.mycloud.by/services/rest.partner.create");
+                        // sendPartnerRegInfo("http://wedding-services.mycloud.by/services/rest.partner.create");
+                        sendPartnerRegInfo("http://wedding-services.mycloud.by/services/rest.users/create.json");
                         console.dir(dataRegistration);
                         showCabinetSuccess();
                         setCookiesAuth('authorized', authType);
@@ -301,11 +302,12 @@ var PORTAL = (function (PORTAL, $) {
             function sendPartnerRegInfo(url_link, city){
 
                 $.ajax({
-                    url: url_link,
+                    // url: url_link,
+                    url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
                     type: "POST",
                     dataType: "json",
                     data: dataRegistration,
-                    path: `/home/users/wedding/users/+city`,
+                    // path: `/home/users/wedding/users/minsk`,
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
                         console.log("beforeSend post !");
@@ -334,12 +336,12 @@ var PORTAL = (function (PORTAL, $) {
             function sendUserRegInfo(url_link, city){
 
                 $.ajax({
-                    url: url_link, // 'http://wedding-services.mycloud.by/services/rest.users/create.json'
+                    // url: url_link, // 'http://wedding-services.mycloud.by/services/rest.users/create.json'
+                    url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
                     type: "POST",
                     dataType: "json",
                     data: dataRegistration, // Все данные
                     // path: `/home/users/wedding/users/${city}`,
-                    // path: '/home/users/wedding/users/minsk',
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
                         console.log("beforeSend post !");
