@@ -334,18 +334,18 @@ var PORTAL = (function (PORTAL, $) {
 
 
             function sendUserRegInfo(url_link, city){
-                var dataSend =  JSON.stringify(dataRegistration);
+                // var dataSend =  JSON.stringify(dataRegistration);
                 $.ajax({
                     // url: url_link, // 'http://wedding-services.mycloud.by/services/rest.users/create.json'
                     url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
                     type: "POST",
                     dataType: "json",
-                    data: dataSend, // Все данные
+                    data: dataRegistration, // Все данные
                     // path: `/home/users/wedding/users/${city}`,
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
                         console.log("beforeSend post !");
-                        console.dir(dataRegistration);
+                        console.log(dataSend);
                     },
                     success: function (data) {
                         // if (data) {
@@ -363,6 +363,32 @@ var PORTAL = (function (PORTAL, $) {
                         console.log(e);
                     }
                 });
+
+/*
+                $.ajax({
+                    url: '/services/rest.users/create.json',
+                    type: "POST",
+                    dataType: "json",
+                    data: {'path': '/home/users/wedding/users/minsk/test'}, // Все данные
+
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+                        console.log("beforeSend post !");
+                        console.dir(dataSend);
+                    },
+                    success: function (data) {
+
+                        console.log('Ниже должен быть ответ:');
+                        console.dir(data);
+
+                    },
+                    complete: function () {
+                    },
+                    error: function (e) {
+                        console.log('Что-то пошло не так   ');
+                        console.log(e);
+                    }
+                });*/
 
 
 
@@ -387,7 +413,8 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.vkLink =  vk;
                     dataRegistration.facebookLink =  fb;
                     dataRegistration.instagramLink =  ok;		/*todo - переделать под инсту*/
-                    dataRegistration.resourcePath = '/home/users/wedding/users/minsk'; // dataRegistration.resourcePath = `/home/users/wedding/users/${city}`;
+                    // dataRegistration.resourcePath = '/home/users/wedding/users/minsk'; // dataRegistration.resourcePath = `/home/users/wedding/users/${city}`;
+                    dataRegistration.path = '/home/users/wedding/users/minsk'; // dataRegistration.resourcePath = `/home/users/wedding/users/${city}`;
                     dataRegistration.authType =  authType;
 
                     if ( tel && city &&  ($self.find("#consent-user-check:checked").val() === 'consent-user')){
