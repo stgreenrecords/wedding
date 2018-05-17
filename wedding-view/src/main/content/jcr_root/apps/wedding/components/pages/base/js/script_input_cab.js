@@ -317,6 +317,7 @@ var PORTAL = (function (PORTAL, $) {
                         // if (data) {
                         console.log('Ниже должен быть ответ:');
                         console.dir(data);
+                        console.log('это успех!');
                         Cookies.set('userId', data.id);
                         // showCabinetPage(data);
                         // }
@@ -345,7 +346,7 @@ var PORTAL = (function (PORTAL, $) {
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
                         console.log("beforeSend post !");
-                        console.log(dataSend);
+                        console.log(dataRegistration);
                     },
                     success: function (data) {
                         // if (data) {
