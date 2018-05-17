@@ -247,7 +247,7 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
 /*=====  main start ======*/
 
 main{
-  width: 70%;
+  width: 75%;
   margin: 0 auto;
   background-color: #fff;
 }
@@ -694,7 +694,7 @@ footer > div a, footer > div{
     margin: 35px 0 15px 10%;
     width: 75%;
     min-height: 320px;
-    background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_10.jpg');
+    background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_1.jpg');
     background-size: cover;
 }
 
@@ -812,12 +812,12 @@ footer > div a, footer > div{
 
 
 #partner-page-pages{  /*   Page */
-    width: 62%;
+    width: 65%;
     min-height: 300px;
     margin-left: 3%;
     background-color: #fff;
     box-sizing: border-box;
-    padding: 15px 7%;
+    padding: 15px 3%;
 
 }
 .profil_name, .profil_secondname, .partner_speciality, .info_reit_block{
@@ -833,6 +833,26 @@ footer > div a, footer > div{
 
 .info_reit_block, .partner_speciality{
     margin: 7px 0;
+}
+
+.partner_photo-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.photo_unit{
+    width: 31.3333%;
+    box-sizing: border-box;
+    padding: 0.5%;
+    margin: 1%;
+}
+
+.partner_title{
+    margin: 1.5%;
+}
+
+.photo_unit img{
+    width: 100%;
 }
 
 .video_field{

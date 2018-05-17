@@ -54,13 +54,31 @@ var PORTAL = (function (PORTAL, $) {
                 $self.find('.fb_string').text(selectedPerson.facebookLink);
                 $self.find('.insta_string').text(selectedPerson.instagramLink);
 
+                fillPhoto(selectedPerson.portfolio);
                 fillVidosy(selectedPerson.videos);
                 fillComments(selectedPerson.comments);
-
 
             }
 
         });
+
+
+        function fillPhoto(photo){
+
+            var wrapper = $self.find('.partner_photo-wrapper');
+
+            photo.forEach(function(elem){
+
+                console.log(elem);
+                wrapper.append(`<div class="photo_unit"> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> </div>`);
+                wrapper.append(`<div class="photo_unit"> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> </div>`);
+                wrapper.append(`<div class="photo_unit"> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> </div>`);
+                wrapper.append(`<div class="photo_unit"> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> </div>`);
+                wrapper.append(`<div class="photo_unit"> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> </div>`);
+                wrapper.append(`<div class="photo_unit"> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> </div>`);
+            });
+
+        }
 
         function fillVidosy(video){
 
