@@ -3,9 +3,7 @@ package wedding.core.rest.site;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
-import wedding.core.model.ClientModel;
 import wedding.core.model.PartnerModel;
-import wedding.core.utils.SlingModelUtil;
 import wedding.core.utils.WeddingResourceUtil;
 
 import javax.jcr.query.Query;
@@ -35,15 +33,12 @@ public class Partners extends AbstractResFieldCore {
 
     @Override
     public Object createObject(SlingHttpServletRequest request) {
-        return createModel(request, ClientModel.class);
+        return createOrUpdateModel(request, PartnerModel.class);
     }
 
     @Override
     public Object updateObject(SlingHttpServletRequest request) {
-        ClientModel clientModel = request.adaptTo(ClientModel.class);
-        Optional.ofNullable(clientModel)
-                .ifPresent(SlingModelUtil::updateModel);
-        return clientModel;
+        return createOrUpdateModel(request, PartnerModel.class);
     }
 
     private Comparator<PartnerModel> applySorting(final SlingHttpServletRequest request) {

@@ -11,7 +11,11 @@ public class Mail extends AbstractResFieldCore {
 
     @Override
     public Object createObject(SlingHttpServletRequest request) {
-        return createModel(request, BaseMailModel.class);
+        return createOrUpdateModel(request, BaseMailModel.class);
     }
 
+    @Override
+    public Object updateObject(SlingHttpServletRequest request) {
+        return createOrUpdateModel(request, BaseMailModel.class);
+    }
 }

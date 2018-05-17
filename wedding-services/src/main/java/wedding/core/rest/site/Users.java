@@ -4,7 +4,6 @@ import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
 import wedding.core.model.ClientModel;
-import wedding.core.utils.SlingModelUtil;
 import wedding.core.utils.WeddingResourceUtil;
 
 import javax.jcr.query.Query;
@@ -30,14 +29,11 @@ public class Users extends AbstractResFieldCore {
 
     @Override
     public Object updateObject(SlingHttpServletRequest request) {
-        ClientModel clientModel = request.adaptTo(ClientModel.class);
-        Optional.ofNullable(clientModel)
-                .ifPresent(SlingModelUtil::updateModel);
-        return clientModel;
+        return createOrUpdateModel(request, ClientModel.class);
     }
 
     @Override
     public Object createObject(SlingHttpServletRequest request) {
-        return createModel(request, ClientModel.class);
+        return createOrUpdateModel(request, ClientModel.class);
     }
 }

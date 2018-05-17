@@ -16,6 +16,11 @@ var PORTAL = (function (PORTAL, $) {
                     title : $self.find(".new-mail-title").val(),
                     resourceType : "wedding/components/pages/mail/base-mail",
                     path : "/mail/mails"
+                },
+                success : function(baseMailObject){
+                     if (baseMailObject){
+                        $self.find(".mail-table tbody").append('<tr><td><a href="'+ baseMailObject.resourcePath+'.html">'+baseMailObject.title+'</a></td></tr>')
+                     }
                 }
             });
         });

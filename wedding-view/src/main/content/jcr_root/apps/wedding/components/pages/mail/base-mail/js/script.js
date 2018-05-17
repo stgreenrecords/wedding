@@ -16,17 +16,21 @@ var PORTAL = (function (PORTAL, $) {
 
         $('.recipient-container').multifield();
 
-        $self.find("button.save").click(function(){
+        $self.find("button[name='save']").click(function(){
+        var recipients = [];
+        $(".recipient-container input[class='form-control']").each(function(item){
+        recipients.push($(this).val());
+        });
             $.ajax({
-                url: "/services/rest.mail.json",
+                url: "/services/rest.mail/update.json",
                 type: "PUT",
                 data: {
-                    title : $self.find(".new-mail-submit").val(),
-                    subject : $self.find(".new-mail-submit").val(),
+                    id : location.href.substr(location.href.lastIndexOf("/") + 1).replace(".html",""),
+                    subject : $self.find("input[name='subject']").val(),
                     text : richtext.trumbowyg('html'),
-                    recipients : [],
-                    allUsers : $self.find(".new-mail-submit").val(),
-                    allPartners : $self.find(".new-mail-submit").val()
+                    recipients : recipients,
+                    allUsers : $self.find("input[name='allUsers']").val(),
+                    allPartners : $self.find("input[name='allPartners']").val()
                 }
             });
         });

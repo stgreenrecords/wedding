@@ -38,7 +38,7 @@ public abstract class AbstractResFieldCore implements RestFieldCore {
         return null;
     }
 
-    protected <M extends WeddingBaseModel> M createModel(SlingHttpServletRequest request, Class<M> modelClass) {
+    protected <M extends WeddingBaseModel> M createOrUpdateModel(SlingHttpServletRequest request, Class<M> modelClass) {
         final M model = request.adaptTo(modelClass);
         if (model == null) {
             return null;
