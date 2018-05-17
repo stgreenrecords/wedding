@@ -335,13 +335,14 @@ var PORTAL = (function (PORTAL, $) {
 
 
             function sendUserRegInfo(url_link, city){
-                 var dataSend =  JSON.stringify(dataRegistration);
+                 // var dataSend =  JSON.stringify(dataRegistration);
                 $.ajax({
                     // url: url_link, // 'http://wedding-services.mycloud.by/services/rest.users/create.json'
                     url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
                     type: "POST",
                     dataType: "json",
-                    data: dataSend, // Все данные
+                    // data: dataRegistration,
+                    data: {'path': '/home/users/wedding/users/minsk/test'},
                     // path: `/home/users/wedding/users/${city}`,
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
@@ -415,7 +416,7 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.vkLink =  vk;
                     dataRegistration.facebookLink =  fb;
                     dataRegistration.instagramLink =  ok;		/*todo - переделать под инсту*/
-                    // dataRegistration.resourcePath = '/home/users/wedding/users/minsk'; // dataRegistration.resourcePath = `/home/users/wedding/users/${city}`;
+                    dataRegistration.resourcePath = '/home/users/wedding/users/minsk'; // dataRegistration.resourcePath = `/home/users/wedding/users/${city}`;
                     dataRegistration.path = '/home/users/wedding/users/minsk'; // dataRegistration.resourcePath = `/home/users/wedding/users/${city}`;
                     dataRegistration.authType =  authType;
 
