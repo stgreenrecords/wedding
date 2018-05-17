@@ -12,15 +12,13 @@
         <table>
             <caption>Созданные письма</caption>
             <tr>
-                <th>Названия письма</th>
+                <th>Письмо</th>
                 <th>Дата создания</th>
-                <th>Путь до письма</th>
             </tr>
             <sly data-sly-list.baseMailModel="${adminMailModel.mails}">
                 <tr>
-                    <td>${baseMailModel.title}</td>
+                    <td><a href="${baseMailModel.resourcePath}.html">${baseMailModel.title}</a></td>
                     <td>${baseMailModel.date}</td>
-                    <td>${baseMailModel.path}.html</td>
                 </tr>
             </sly>
 

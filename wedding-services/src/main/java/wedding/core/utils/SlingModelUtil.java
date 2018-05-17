@@ -66,10 +66,10 @@ public final class SlingModelUtil {
         final String resourceType = ServletMapping.getResourceTypeFromRequest(request);
         return "rep:User".equals(resourceType)
                 ? createUser(request, id, path)
-                : createResource(request.getResourceResolver(), path, resourceType);
+                : createResource(request.getResourceResolver(), path + "/" + id, resourceType);
     }
 
-    public static <T extends WeddingBaseModel> T createModel(SlingHttpServletRequest request, Class<T> modelClass) throws PersistenceException {
+    public static <T extends WeddingBaseModel> T createModel(SlingHttpServletRequest request, Class<T> modelClass) {
         final String path = request.getParameter("path");
         if (StringUtils.isEmpty(path)) {
             return null;
@@ -78,7 +78,7 @@ public final class SlingModelUtil {
         final String resourceType = ServletMapping.getResourceTypeFromRequest(request);
         final Resource resource = "rep:User".equals(resourceType)
                 ? createUser(request, id, path)
-                : createResource(request.getResourceResolver(), path, resourceType);
+                : createResource(request.getResourceResolver(), path + "/" + id, resourceType);
         Optional.ofNullable(resource)
                 .map(res -> res.adaptTo(ModifiableValueMap.class))
                 .ifPresent(properties -> properties.put(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID, id));

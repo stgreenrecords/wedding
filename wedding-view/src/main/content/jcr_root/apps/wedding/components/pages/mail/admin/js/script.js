@@ -10,10 +10,12 @@ var PORTAL = (function (PORTAL, $) {
 
         $self.find("input.new-mail-submit").click(function(){
             $.ajax({
-                url: "/services/rest.mail.json",
+                url: "/services/rest.mail/create.json",
                 type: "POST",
                 data: {
-                    title : $self.find(".new-mail-submit").val()
+                    title : $self.find(".new-mail-title").val(),
+                    resourceType : "wedding/components/pages/mail/base-mail",
+                    path : "/mail/mails"
                 }
             });
         });

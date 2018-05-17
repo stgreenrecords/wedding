@@ -36,7 +36,7 @@ public class MailService {
     @Property(value = "smtp.gmail.com")
     private static final String MAIL_HOST = "mail.host";
 
-    @Property(intValue = 465)
+    @Property(intValue = 587)
     private static final String MAIL_PORT = "mail.port";
 
     @Property(value = "info@myevent.by")
@@ -48,38 +48,41 @@ public class MailService {
     @Property(value = "UTF-8")
     private static final String MAIL_CHARSET = "mail.charset";
 
-    @Property(value = "info")
+    @Property(value = "info@myevent.by")
     private static final String MAIL_LOGIN = "mail.login";
 
     @Property(passwordValue = "you_can't_match_this_password")
     private static final String MAIL_PASSWORD = "mail.password";
 
-    private HtmlEmail email;
-
+    private ComponentContext componentContext;
 
     @Activate
-    public void activate(ComponentContext componentContext) throws EmailException {
+    public void activate(ComponentContext componentContext) {
+        this.componentContext = componentContext;
+    }
+
+
+    public boolean sendRichTextEmail(Resource mailResource) throws EmailException {
         Dictionary dictionary = componentContext.getProperties();
-        email = new HtmlEmail();
+        HtmlEmail email = new HtmlEmail();
         email.setHostName(PropertiesUtil.toString(dictionary.get(MAIL_HOST), StringUtils.EMPTY));
+        email.setStartTLSEnabled(true);
+        email.setStartTLSRequired(true);
+        email.setSSLOnConnect(true);
         email.setFrom(PropertiesUtil.toString(dictionary.get(MAIL_USER), StringUtils.EMPTY), PropertiesUtil.toString(dictionary.get(MAIL_NAME), StringUtils.EMPTY));
-        email.setSmtpPort(PropertiesUtil.toInteger(dictionary.get(MAIL_PORT), 465));
+        email.setSmtpPort(PropertiesUtil.toInteger(dictionary.get(MAIL_PORT), 587));
         email.setCharset(PropertiesUtil.toString(dictionary.get(MAIL_CHARSET), StringUtils.EMPTY));
         email.setAuthenticator(
                 new DefaultAuthenticator(PropertiesUtil.toString(dictionary.get(MAIL_LOGIN), StringUtils.EMPTY)
                         , PropertiesUtil.toString(dictionary.get(MAIL_PASSWORD), StringUtils.EMPTY)));
-    }
-
-
-    public boolean sendRichTextEmail(Resource mailResource) {
         return Optional.ofNullable(mailResource)
                 .map(Resource::getValueMap)
                 .filter(properties -> properties.containsKey(PROPERTY_TEXT))
-                .map(this::send)
+                .map(properties -> send(properties, email))
                 .orElse(false);
     }
 
-    private boolean send(ValueMap properties) {
+    private boolean send(ValueMap properties, HtmlEmail email) {
         try {
             List<InternetAddress> internetAddresses = Optional.ofNullable(properties.get(PROPERTY_RECIPIENTS, String[].class))
                     .map(Stream::of)

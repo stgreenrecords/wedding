@@ -18,6 +18,9 @@ public class WeddingBaseModel {
     @ValueMapValue(name = WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID)
     private String id;
 
+    @ValueMapValue(name = "sling:resourceType")
+    private String resourceType;
+
     private String resourcePath;
 
     public String getResourcePath() {
@@ -39,5 +42,13 @@ public class WeddingBaseModel {
 
     public void setResource(Resource resource) {
         this.resource = resource;
+    }
+
+    public String getResourceType() {
+        return resourceType;
+    }
+
+    public void setResourceType(String resourceType) {
+        this.resourceType = resourceType;
     }
 }
