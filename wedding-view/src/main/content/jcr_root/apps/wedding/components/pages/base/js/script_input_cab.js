@@ -342,7 +342,7 @@ var PORTAL = (function (PORTAL, $) {
                     type: "POST",
                     dataType: "json",
                     // data: dataRegistration,
-                    data: {'path': '/home/users/wedding/users/minsk/test','city': 'minsk'},
+                    data: {'path': '/home/users/wedding/users/minsk','city': 'minsk'},
                     // path: `/home/users/wedding/users/${city}`,
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
@@ -465,7 +465,7 @@ var PORTAL = (function (PORTAL, $) {
                     // dataRegistration.facebookLink =  fb;
                     // dataRegistration.instagramLink =  ok;		/*todo - переделать под инсту*/
                     // dataRegistration.resourcePath = '/home/users/wedding/users/minsk'; // dataRegistration.resourcePath = `/home/users/wedding/users/${city}`;
-                    // dataRegistration.path = '/home/users/wedding/users/minsk'; // dataRegistration.resourcePath = `/home/users/wedding/users/${city}`;
+                    dataRegistration.path = '/home/users/wedding/users/minsk'; // dataRegistration.resourcePath = `/home/users/wedding/users/${city}`;
                     // dataRegistration.authType =  authType;
 
                     if ( tel && city &&  ($self.find("#consent-user-check:checked").val() === 'consent-user')){
