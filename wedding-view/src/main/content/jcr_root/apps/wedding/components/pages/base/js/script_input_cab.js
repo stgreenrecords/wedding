@@ -346,9 +346,9 @@ var PORTAL = (function (PORTAL, $) {
                     // path: `/home/users/wedding/users/${city}`,
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
-                        console.log("beforeSend post !");
+                        console.log(" Шлем №3 это:  beforeSend post !");
                         // console.log(dataRegistration);
-                        console.log(dataSend);
+                        console.log({'path': '/home/users/wedding/users/minsk/test','city': 'minsk'});
                     },
                     success: function (data) {
                         // if (data) {
@@ -378,8 +378,11 @@ var PORTAL = (function (PORTAL, $) {
                         xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
                     },
                     success: function (data) {
+                        console.log("Шлем №2 это:");
+                        console.dir(dataRegistration);
                         console.log('Ниже должен быть ответ:');
                         console.dir(data);
+                        console.log(data);
                     },
                     error: function (e) {
                         console.log('Что-то пошло не так :( ');
@@ -392,12 +395,15 @@ var PORTAL = (function (PORTAL, $) {
                     url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
                     type: "POST",
                     dataType: "json",
-                    data: {'path': '/home/users/wedding/users/minsk/test'},
+                    data: {'path': '/home/users/wedding/users/minsk'},
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+
                     },
-                    success: function (data) {
-                        console.log('Ниже должен быть ответ:');
+                success: function (data) {
+                    console.log("Шлем №1 это:");
+                    console.log({'path': '/home/users/wedding/users/minsk'});
+                    console.log('Ниже должен быть ответ:');
                         console.dir(data);
                     },
                     error: function (e) {
