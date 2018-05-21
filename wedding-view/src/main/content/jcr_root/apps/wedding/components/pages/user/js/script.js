@@ -43,7 +43,7 @@ var PORTAL = (function (PORTAL, $) {
                     // $self.find('.fb_string').text(selectedPerson.facebookLink);
                     // $self.find('.insta_string').text(selectedPerson.instagramLink);
 
-                    if (selectedPerson.tenders.length>=1){
+                    if (selectedPerson.tenders && selectedPerson.tenders.length>=1){
 
                         $self.find('.user_tenders-container > div').detach();
                         var first_div = document.querySelector(".hidden_full .tender_card");

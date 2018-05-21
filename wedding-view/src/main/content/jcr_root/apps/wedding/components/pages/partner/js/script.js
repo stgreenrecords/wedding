@@ -19,6 +19,8 @@ var PORTAL = (function (PORTAL, $) {
         var getPartnerSpecCity = (window.location.hash).slice(1);
         getPartnerSpecCity = getPartnerSpecCity.replace('&','/');
 
+        if (getPartnerId === Cookies.get('userId'))
+            console.log("WaU - the MY CABINET  !!!!");
 
 
         var selectedPersonRequest = `http://wedding-services.mycloud.by/services/rest.partners/${getPartnerSpecCity}.json?id=${getPartnerId}`;
@@ -33,7 +35,7 @@ var PORTAL = (function (PORTAL, $) {
             success: function (data) {
 
                 if (data.length === 0){
-                    document.location.href = '/content/wedding/catalog/category.html';
+                    // document.location.href = '/content/wedding/catalog/category.html';
                     console.log(" NO data !!!!!!!!!!!!");
                 }
 
@@ -54,9 +56,14 @@ var PORTAL = (function (PORTAL, $) {
                 $self.find('.fb_string').text(selectedPerson.facebookLink);
                 $self.find('.insta_string').text(selectedPerson.instagramLink);
 
-                fillPhoto(selectedPerson.portfolio);
-                fillVidosy(selectedPerson.videos);
-                fillComments(selectedPerson.comments);
+                if (selectedPerson.portfolio)
+                    fillPhoto(selectedPerson.portfolio);
+
+                if (selectedPerson.videos)
+                    fillVidosy(selectedPerson.videos);
+
+                if (selectedPerson.comments)
+                    fillComments(selectedPerson.comments);
 
             }
 

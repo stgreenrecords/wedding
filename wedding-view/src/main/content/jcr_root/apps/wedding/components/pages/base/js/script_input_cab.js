@@ -73,6 +73,7 @@ var PORTAL = (function (PORTAL, $) {
                 cabinet_login.style.display = "block";
                 Cookies.set('authStatus', 'NotAuth');
                 // Cookies.set('authType', '');
+                document.location.reload();
             }
 
             function setCookiesAuth(authStatusValue, authTypeValue){
@@ -275,15 +276,12 @@ var PORTAL = (function (PORTAL, $) {
                     if ( work_sphere  &&  tel &&  city && ($self.find("input[name='consent-part']:checked").val() === 'consent-partner')  /*!= 'null'*/) {
 
                         closeMWindow(".window-registation-step3-partner");
-                        // sendPartnerRegInfo("http://wedding-services.mycloud.by/services/rest.partner.create");
-                        sendPartnerRegInfo("http://wedding-services.mycloud.by/services/rest.users/create.json");
+                        sendPartnerRegInfo("http://wedding-services.mycloud.by/services/rest.partners/create.json");
                         console.dir(dataRegistration);
                         showCabinetSuccess();
                         setCookiesAuth('authorized', authType);
 
-                        Cookies.set('userType', 'partner');
-                        Cookies.set('workSphere', work_sphere);
-                        Cookies.set('city', city);
+
 
                         // document.location.href = `/content/wedding/catalog/category/partner.html#`/*${registrationId}*/;
 
@@ -302,25 +300,28 @@ var PORTAL = (function (PORTAL, $) {
             function sendPartnerRegInfo(url_link, city){
 
                 $.ajax({
-                    // url: url_link,
-                    url: 'http://wedding-services.mycloud.by/services/rest.partners/create.json',
+                    url: url_link,
+                    // url: 'http://wedding-services.mycloud.by/services/rest.partners/create.json',
                     type: "POST",
                     dataType: "json",
                     data: dataRegistration,
-                    // path: `/home/users/wedding/users/minsk`,
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
                         console.log("beforeSend post !");
                         console.dir(dataRegistration);
                     },
                     success: function (data) {
-                        // if (data) {
-                        console.log('Ниже должен быть ответ:');
-                        console.dir(data);
-                        console.log('это успех!');
-                        Cookies.set('userId', data.id);
-                        // showCabinetPage(data);
-                        // }
+                         if (data && work_sphere) {
+                             console.log('Ниже должен быть ответ:');
+                             console.dir(data);
+                             console.log('это успех!');
+                             Cookies.set('userId', data.id);
+
+                             Cookies.set('userType', 'partner');
+                             Cookies.set('workSphere', work_sphere);
+                             Cookies.set('city', city);
+                             document.location.href = `/content/wedding/catalog/category/partner.html?${data.id}#${work_sphere}&${city}`;
+                         }
                     },
                     complete: function () {
 
