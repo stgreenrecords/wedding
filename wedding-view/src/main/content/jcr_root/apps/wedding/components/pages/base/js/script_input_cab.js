@@ -271,7 +271,7 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.instagramLink =  ok;
                     dataRegistration.siteLink =  site;
                     dataRegistration.authType =  authType;
-                    dataRegistration.path =  '/home/users/wedding/partners/photographers/grodno';
+                    dataRegistration.path =  '/home/users/wedding/partners/rest/brest';
 
                     if ( work_sphere  &&  tel &&  city && ($self.find("input[name='consent-part']:checked").val() === 'consent-partner')  /*!= 'null'*/) {
 
@@ -354,7 +354,6 @@ var PORTAL = (function (PORTAL, $) {
                         console.dir(data);
                         Cookies.set('userId', data.id);
                         // Cookies.set('city', data.city);
-                        // showCabinetPage(data);
                         // }
                         // document.location.href = '/content/wedding/catalog.html#'; // TODOC - сделать переход в каталог - когда заполнят всех юзеров
                         document.location.href = `/content/wedding/user.html`;
