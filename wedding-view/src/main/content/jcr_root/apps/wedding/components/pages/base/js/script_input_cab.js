@@ -276,7 +276,7 @@ var PORTAL = (function (PORTAL, $) {
                     if ( work_sphere  &&  tel &&  city && ($self.find("input[name='consent-part']:checked").val() === 'consent-partner')  /*!= 'null'*/) {
 
                         closeMWindow(".window-registation-step3-partner");
-                        sendPartnerRegInfo("http://wedding-services.mycloud.by/services/rest.partners/create.json");
+                        sendPartnerRegInfo("http://wedding-services.mycloud.by/services/rest.partners/create.json", city, work_sphere);
                         console.dir(dataRegistration);
                         showCabinetSuccess();
                         setCookiesAuth('authorized', authType);
@@ -297,7 +297,7 @@ var PORTAL = (function (PORTAL, $) {
             }
 
 
-            function sendPartnerRegInfo(url_link, city){
+            function sendPartnerRegInfo(url_link, city, work_sphere){
 
                 $.ajax({
                     url: url_link,
