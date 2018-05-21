@@ -42,7 +42,7 @@ var PORTAL = (function (PORTAL, $) {
 
                 selectedPerson = data[0];
 
-                if (getPartnerId === Cookies.get('userId') === selectedPerson.id )
+                if (Cookies.get('userId') === selectedPerson.id )
                     console.log("It's REALY MY CABINET  !!!!");
 
                 console.log('INFO:');
