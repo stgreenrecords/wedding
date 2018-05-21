@@ -271,7 +271,7 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.instagramLink =  ok;
                     dataRegistration.siteLink =  site;
                     dataRegistration.authType =  authType;
-                    dataRegistration.path =  '/home/users/wedding/partners/rest/minsk';
+                    dataRegistration.path =  `/home/users/wedding/partners/${work_sphere}/${city}`;
 
                     if ( work_sphere  &&  tel &&  city && ($self.find("input[name='consent-part']:checked").val() === 'consent-partner')  /*!= 'null'*/) {
 
@@ -280,10 +280,6 @@ var PORTAL = (function (PORTAL, $) {
                         console.dir(dataRegistration);
                         showCabinetSuccess();
                         setCookiesAuth('authorized', authType);
-
-
-
-                        // document.location.href = `/content/wedding/catalog/category/partner.html#`/*${registrationId}*/;
 
                     } else /*if ($("input[name='consent']:checked").val() === undefined)*/{
                         $self.find('.registation3_errore_message').css('display','flex');
@@ -320,7 +316,7 @@ var PORTAL = (function (PORTAL, $) {
                              Cookies.set('userType', 'partner');
                              Cookies.set('workSphere', work_sphere);
                              Cookies.set('city', city);
-                             // document.location.href = `/content/wedding/catalog/category/partner.html?${data.id}#${work_sphere}&${city}`;
+                             document.location.href = `/content/wedding/catalog/category/partner.html?${data.id}#${work_sphere}&${city}`;
                          }
                     },
                     complete: function () {
