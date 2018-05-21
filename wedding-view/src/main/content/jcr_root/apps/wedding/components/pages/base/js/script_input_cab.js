@@ -246,7 +246,7 @@ var PORTAL = (function (PORTAL, $) {
                     error: function () { // На случай если запрос не прошел - сферу пишет вручную
                         $self.find('#work-sphere').detach();
                         $self.find('#form-reg-step3-partner').prepend('<p><input id="work-sphere" type="text" placeholder="Сфера деятельности"></p>');
-                        console.log("success allCategories");
+                        console.log("it's BIG Fail");
                     }
                 });
 
@@ -352,8 +352,12 @@ var PORTAL = (function (PORTAL, $) {
                         console.log('Ниже должен быть ответ:');
                         console.dir(data);
                         Cookies.set('userId', data.id);
+                        // Cookies.set('city', data.city);
                         // showCabinetPage(data);
                         // }
+                        // document.location.href = '/content/wedding/catalog.html#'; // TODOC - сделать переход в каталог - когда заполнят всех юзеров
+                        document.location.href = `/content/wedding/user.html`;
+
                     },
                     complete: function () {
                     },
@@ -384,7 +388,7 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.phone =  tel;
                     dataRegistration.vkLink =  vk;
                     dataRegistration.facebookLink =  fb;
-                    dataRegistration.instagramLink =  ok;		/*todo - переделать под инсту*/
+                    dataRegistration.instagramLink =  ok;		/*todoc - переделать под инсту*/
                     dataRegistration.path = `/home/users/wedding/users/${city}`; // dataRegistration.resourcePath = `/home/users/wedding/users/${city}`;
                     dataRegistration.authType =  authType;
 
@@ -398,7 +402,8 @@ var PORTAL = (function (PORTAL, $) {
 
                         Cookies.set('userType', 'user');
                         Cookies.set('city', city);
-                        // document.location.href = '/content/wedding/catalog.html#';
+
+
 
                     } else /*if ($("input[name='consent']:checked").val() === undefined)*/{
                         $self.find('.registation3_errore_message').css('display','flex');

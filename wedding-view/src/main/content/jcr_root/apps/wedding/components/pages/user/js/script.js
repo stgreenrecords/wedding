@@ -11,11 +11,15 @@ var PORTAL = (function (PORTAL, $) {
         var selectedPerson;
         var calc_aside =  $self.find('#calc_aside_sect');
         var user_tenders = $self.find('#user_tenders');
+        var user_id = Cookies.get('userId');
+        var user_city = Cookies.get('city');
+        console.log(user_city, user_id);
 
         if (Cookies.get('authStatus') === 'authorized'){
 
             // var userUrl = 'http://wedding-services.mycloud.by/services/rest.users/minsk.json?userId=a931a267-ff17-4d89-ab80-e478c0a6de0a';
-            var userUrl = 'http://wedding-services.mycloud.by/services/rest.users/minsk.json?id=a9cce9a5-5820-49d8-8bd7-f44fc706cb90';
+            // var userUrl = 'http://wedding-services.mycloud.by/services/rest.users/minsk.json?id=a9cce9a5-5820-49d8-8bd7-f44fc706cb90';
+            var userUrl = `http://wedding-services.mycloud.by/services/rest.users/${user_city}.json?id=${user_id}`;
             console.log(userUrl);
             // console.log(selectedPersonRequest);
 
