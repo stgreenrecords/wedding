@@ -341,8 +341,7 @@ var PORTAL = (function (PORTAL, $) {
                     // url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
                     type: "POST",
                     dataType: "json",
-                    data: dataSend, // Все данные
-                    // path: `/home/users/wedding/users/${city}`,
+                    data: dataRegistration, // Все данные
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
                         console.log("beforeSend post !");
@@ -354,7 +353,6 @@ var PORTAL = (function (PORTAL, $) {
                         console.dir(data);
                         Cookies.set('userId', data.id);
                         // showCabinetPage(data);
-
                         // }
                     },
                     complete: function () {
