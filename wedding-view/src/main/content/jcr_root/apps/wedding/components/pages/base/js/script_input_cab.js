@@ -271,7 +271,7 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.instagramLink =  ok;
                     dataRegistration.siteLink =  site;
                     dataRegistration.authType =  authType;
-                    dataRegistration.path =  '/home/users/wedding/partners/rest/brest';
+                    dataRegistration.path =  '/home/users/wedding/partners/rest/minsk';
 
                     if ( work_sphere  &&  tel &&  city && ($self.find("input[name='consent-part']:checked").val() === 'consent-partner')  /*!= 'null'*/) {
 
