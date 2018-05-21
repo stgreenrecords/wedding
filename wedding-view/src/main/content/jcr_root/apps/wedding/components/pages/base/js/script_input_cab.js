@@ -320,7 +320,7 @@ var PORTAL = (function (PORTAL, $) {
                              Cookies.set('userType', 'partner');
                              Cookies.set('workSphere', work_sphere);
                              Cookies.set('city', city);
-                             document.location.href = `/content/wedding/catalog/category/partner.html?${data.id}#${work_sphere}&${city}`;
+                             // document.location.href = `/content/wedding/catalog/category/partner.html?${data.id}#${work_sphere}&${city}`;
                          }
                     },
                     complete: function () {

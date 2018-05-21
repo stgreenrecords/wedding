@@ -19,11 +19,12 @@ var PORTAL = (function (PORTAL, $) {
         var getPartnerSpecCity = (window.location.hash).slice(1);
         getPartnerSpecCity = getPartnerSpecCity.replace('&','/');
 
-        if (getPartnerId === Cookies.get('userId'))
+        if (getPartnerId === Cookies.get('userId') )
             console.log("WaU - the MY CABINET  !!!!");
 
 
         var selectedPersonRequest = `http://wedding-services.mycloud.by/services/rest.partners/${getPartnerSpecCity}.json?id=${getPartnerId}`;
+
 
         console.log(selectedPersonRequest);
 
@@ -40,6 +41,9 @@ var PORTAL = (function (PORTAL, $) {
                 }
 
                 selectedPerson = data[0];
+
+                if (getPartnerId === Cookies.get('userId') === selectedPerson.id )
+                    console.log("It's REALY MY CABINET  !!!!");
 
                 console.log('INFO:');
                 console.dir(selectedPerson);
@@ -103,7 +107,7 @@ var PORTAL = (function (PORTAL, $) {
 
         }
 
-        function fillComments(comments){ // todo - расширить и переделать , когда доделают запрос
+        function fillComments(comments){ // todoc - расширить и переделать , когда доделают запрос
 
             var comm = $self.find('.comment_field');
             var wrapper = $self.find('.partner_comments-wrapper');
