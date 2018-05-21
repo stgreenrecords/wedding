@@ -29,11 +29,11 @@ public enum ServletMapping {
         this.jcrPath = jcrPath;
     }
 
-    private String getExtension(){
+    private String getExtension() {
         return extension;
     }
 
-    private Class getServletClass(){
+    private Class getServletClass() {
         return servletClass;
     }
 
@@ -45,7 +45,7 @@ public enum ServletMapping {
         return jcrPath;
     }
 
-    public static Class getClassByExtension(String extension){
+    public static Class getClassByExtension(String extension) {
         return getByExtension(extension, ServletMapping::getServletClass);
     }
 

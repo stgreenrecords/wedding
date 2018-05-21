@@ -61,12 +61,17 @@ public final class SlingModelUtil {
         return fieldStream;
     }
 
-    public static Resource createModelResource(SlingHttpServletRequest request, String path) {
+    public static Resource createModelResource(SlingHttpServletRequest request, String path, Class aClass) {
         final String id = WeddingResourceUtil.generateId();
         final String resourceType = ServletMapping.getResourceTypeFromRequest(request);
-        return "rep:User".equals(resourceType)
+        Resource resource = "rep:User".equals(resourceType)
                 ? createUser(request, id, path)
                 : createResource(request.getResourceResolver(), path + "/" + id, resourceType);
+        Optional.ofNullable(resource)
+                .map(res -> res.adaptTo(ModifiableValueMap.class))
+                .ifPresent(properties -> properties.put(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID, id));
+        updateModel(resource.adaptTo(aClass));
+        return resource;
     }
 
     public static <T extends WeddingBaseModel> T createModel(SlingHttpServletRequest request, Class<T> modelClass) {
@@ -79,9 +84,7 @@ public final class SlingModelUtil {
         final Resource resource = "rep:User".equals(resourceType)
                 ? createUser(request, id, path)
                 : createResource(request.getResourceResolver(), path + "/" + id, resourceType);
-        Optional.ofNullable(resource)
-                .map(res -> res.adaptTo(ModifiableValueMap.class))
-                .ifPresent(properties -> properties.put(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID, id));
+
         final T model = resource.adaptTo(modelClass);
         updateModel(model);
         return model;
@@ -155,7 +158,7 @@ public final class SlingModelUtil {
         };
     }
 
-    public static Resource getBaseUserModelResourceFromChildResources(Resource childResource){
+    public static Resource getBaseUserModelResourceFromChildResources(Resource childResource) {
         ValueMap valueMap = childResource.getValueMap();
         if (valueMap.containsKey(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_TYPE)) {
             String resourceType = valueMap.get(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_TYPE, String.class);

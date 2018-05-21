@@ -73,7 +73,7 @@ public class ModelAdapter implements AdapterFactory {
         final String path = request.getParameter("path");
         Resource modelResource = null;
         if (StringUtils.isNotEmpty(path)) {
-            modelResource = SlingModelUtil.createModelResource(request, path);
+            modelResource = SlingModelUtil.createModelResource(request, path, aClass);
             updateNewResource(modelResource);
         } else if (StringUtils.isNotEmpty(id)) {
             modelResource = WeddingResourceUtil.getResourceByID(request.getResourceResolver()).apply(id);

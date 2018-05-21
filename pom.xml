@@ -46,6 +46,7 @@
     <modules>
         <module>wedding-view</module>
         <module>wedding-services</module>
+        <module>sling-rest-wrapper</module>
     </modules>
 
     <dependencyManagement>
@@ -192,16 +193,16 @@
                 <scope>provided</scope>
             </dependency>
             <!--<dependency>-->
-                <!--<groupId>org.apache.sling</groupId>-->
-                <!--<artifactId>org.apache.sling.scripting.sightly</artifactId>-->
-                <!--<version>1.0.34</version>-->
-                <!--<scope>provided</scope>-->
+            <!--<groupId>org.apache.sling</groupId>-->
+            <!--<artifactId>org.apache.sling.scripting.sightly</artifactId>-->
+            <!--<version>1.0.34</version>-->
+            <!--<scope>provided</scope>-->
             <!--</dependency>-->
             <!--<dependency>-->
-                <!--<groupId>org.apache.sling</groupId>-->
-                <!--<artifactId>org.apache.sling.scripting.sightly.compiler.java</artifactId>-->
-                <!--<version>1.0.10</version>-->
-                <!--<scope>provided</scope>-->
+            <!--<groupId>org.apache.sling</groupId>-->
+            <!--<artifactId>org.apache.sling.scripting.sightly.compiler.java</artifactId>-->
+            <!--<version>1.0.10</version>-->
+            <!--<scope>provided</scope>-->
             <!--</dependency>-->
         </dependencies>
     </dependencyManagement>

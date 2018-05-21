@@ -25,7 +25,7 @@ public class WeddingUtils {
 
     private ResourceResolver resourceResolver;
 
-    public static byte[] gzip(String data) throws Exception{
+    public static byte[] gzip(String data) throws Exception {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         GZIPOutputStream gzip = new GZIPOutputStream(byteArrayOutputStream);
         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(gzip, StandardCharsets.UTF_8);

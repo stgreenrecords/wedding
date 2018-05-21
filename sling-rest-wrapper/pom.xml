@@ -6,12 +6,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.bear</groupId>
-        <artifactId>bear</artifactId>
+        <groupId>com.wedding</groupId>
+        <artifactId>wedding</artifactId>
         <version>1.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>sling-rest-wrapper</artifactId>
+    <artifactId>restextension</artifactId>
     <packaging>bundle</packaging>
 
     <name>${project.groupId} - ${project.artifactId}</name>

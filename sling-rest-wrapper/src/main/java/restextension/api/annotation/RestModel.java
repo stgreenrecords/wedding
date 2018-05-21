@@ -1,4 +1,4 @@
-package com.vodkamishkabalalaika.sling.restextension.api.annotation;
+package restextension.api.annotation;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jackrabbit.JcrConstants;
@@ -11,9 +11,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface RestModel {
-    String modelNodeType();
-    String modelMixin();
+    String modelMixin() default StringUtils.EMPTY;
+
     String extension();
+
     String nodeType() default JcrConstants.NT_UNSTRUCTURED;
-    String jcrPath() default StringUtils.EMPTY;
 }

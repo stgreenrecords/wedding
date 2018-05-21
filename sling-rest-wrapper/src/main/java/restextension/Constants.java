@@ -1,4 +1,4 @@
-package com.vodkamishkabalalaika.sling.restextension;
+package restextension;
 
 public interface Constants {
     String DOT = ".";

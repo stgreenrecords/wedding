@@ -1,4 +1,4 @@
-package com.vodkamishkabalalaika.sling.restextension.api.model;
+package restextension.api.model;
 
 public interface RestApiModel {
 }

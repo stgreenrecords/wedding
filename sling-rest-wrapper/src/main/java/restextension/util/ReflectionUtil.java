@@ -1,4 +1,4 @@
-package com.vodkamishkabalalaika.sling.restextension.util;
+package restextension.util;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;

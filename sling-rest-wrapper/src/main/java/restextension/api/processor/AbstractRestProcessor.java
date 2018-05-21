@@ -1,4 +1,4 @@
-package com.vodkamishkabalalaika.sling.restextension.api.processor;
+package restextension.api.processor;
 
 import org.apache.sling.api.SlingHttpServletRequest;
 

@@ -1,23 +1,27 @@
-package com.vodkamishkabalalaika.sling.restextension.api.servlet;
+package restextension.api.servlet;
 
-import com.vodkamishkabalalaika.sling.restextension.util.MockUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.felix.scr.annotations.Activate;
+import org.apache.felix.scr.annotations.*;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.request.RequestPathInfo;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.component.ComponentContext;
-import com.vodkamishkabalalaika.sling.restextension.Constants;
-import com.vodkamishkabalalaika.sling.restextension.api.processor.RestProcessor;
-import com.vodkamishkabalalaika.sling.restextension.util.WriterUtil;
+import restextension.Constants;
+import restextension.api.processor.RestProcessor;
+import restextension.util.WriterUtil;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.function.Function;
 
+@Component(immediate = true)
+@Service
+@Properties({
+        @Property(name = "sling.servlet.paths", value = {""}),
+})
 public class RestServlet extends SlingAllMethodsServlet {
     private transient BundleContext bundleContext;
 
@@ -62,7 +66,7 @@ public class RestServlet extends SlingAllMethodsServlet {
 
     private Optional<RestProcessor> processRequest(RequestPathInfo pathInfo) {
         return Optional.ofNullable(pathInfo.getExtension())
-                .map(MockUtil::getModelClass) // TODO: 5/20/2018  implement mapper
+                .map(extension -> RestProcessor.class) // TODO: 5/20/2018  implement mapper
                 .map(this::getServesFromContextByClassName);
     }
 

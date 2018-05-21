@@ -1,6 +1,5 @@
 package wedding.core.rest.site;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import wedding.core.data.Constants;
 

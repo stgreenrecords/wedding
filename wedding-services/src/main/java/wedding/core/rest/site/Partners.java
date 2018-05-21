@@ -4,6 +4,7 @@ import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
 import wedding.core.model.PartnerModel;
+import wedding.core.rest.annotations.ModelGate;
 import wedding.core.utils.WeddingResourceUtil;
 
 import javax.jcr.query.Query;
@@ -16,6 +17,7 @@ import java.util.stream.Stream;
 
 @Component(immediate = true)
 @Service(Partners.class)
+@ModelGate(extension = "catalog-categories", serviceClass = Partners.class, nodeType = "", jcrPath = "")
 public class Partners extends AbstractResFieldCore {
 
     @Override
@@ -47,7 +49,7 @@ public class Partners extends AbstractResFieldCore {
                 .orElse(Comparators.COMPARATOR_BY_VIP_STATUS.getComparator());
     }
 
-    private enum Comparators{
+    private enum Comparators {
 
         COMPARATOR_BY_PRICE_DOWN(REQUEST_PARAMETER_SORT_PRICE_DOWN,
                 (firstUser, secondUser) -> Integer.valueOf(firstUser.getPriceStart()).

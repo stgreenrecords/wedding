@@ -1,9 +1,5 @@
-package com.vodkamishkabalalaika.sling.restextension.api.adapter;
+package restextension.api.adapter;
 
-import com.vodkamishkabalalaika.sling.restextension.Constants;
-import com.vodkamishkabalalaika.sling.restextension.util.MockUtil;
-import com.vodkamishkabalalaika.sling.restextension.util.ReflectionUtil;
-import com.vodkamishkabalalaika.sling.restextension.util.SlingModelUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
@@ -19,9 +15,9 @@ import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import restextension.util.ReflectionUtil;
 
 import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 import java.io.IOException;
 import java.util.*;
 
@@ -70,14 +66,14 @@ public class RestModelAdapter implements AdapterFactory {
     }
 
     private <AdapterType> AdapterType adaptRequestToModel(SlingHttpServletRequest request, Class<AdapterType> aClass) {
-        final String id = MockUtil.getId(request);
+        final String id = /*MockUtil.getId(request);*/ "";
         final String path = request.getParameter("path");
         Resource modelResource = null;
         if (StringUtils.isNotEmpty(path)) {
-            modelResource = SlingModelUtil.createModelResource(request, path);
-            updateNewResource(modelResource);
+/*            modelResource = SlingModelUtil.createModelResource(request, path);
+            updateNewResource(modelResource);*/
         } else if (StringUtils.isNotEmpty(id)) {
-            modelResource = MockUtil.getResourceByID(request.getResourceResolver()).apply(id);
+            //   modelResource = MockUtil.getResourceByID(request.getResourceResolver()).apply(id);
         }
 
         return (AdapterType) Optional.ofNullable(modelResource)
@@ -97,12 +93,12 @@ public class RestModelAdapter implements AdapterFactory {
             LOG.warn("Model node [] or properties [] is null", resourceNode, properties);
             return;
         }
-        final String id = MockUtil.generateId();
-        properties.put(Constants.REQUEST_PARAMETER_RESOURCE_ID, id);
+        //   final String id = MockUtil.generateId();
+        //     properties.put(Constants.REQUEST_PARAMETER_RESOURCE_ID, id);
         try {
-            resourceNode.addMixin(WeddingResourceUtil.NT_WEDDING_RESOURCE_MIXIN);
+            //   resourceNode.addMixin(WeddingResourceUtil.NT_WEDDING_RESOURCE_MIXIN);
             modelResource.getResourceResolver().commit();
-        } catch (RepositoryException | PersistenceException e) {
+        } catch (PersistenceException e) {
             LOG.error(e.getMessage(), e);
         }
     }

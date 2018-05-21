@@ -1,9 +1,9 @@
-package com.vodkamishkabalalaika.sling.restextension.api.processor;
+package restextension.api.processor;
 
-import com.vodkamishkabalalaika.sling.restextension.Constants;
-import com.vodkamishkabalalaika.sling.restextension.api.model.RestApiModel;
-import com.vodkamishkabalalaika.sling.restextension.util.SlingModelUtil;
 import org.apache.sling.api.SlingHttpServletRequest;
+import restextension.Constants;
+import restextension.api.model.RestApiModel;
+import restextension.util.SlingModelUtil;
 
 import java.util.Optional;
 
@@ -17,7 +17,7 @@ public interface RestProcessor {
 
     Object deleteObject(SlingHttpServletRequest request);
 
-    default  <M extends RestApiModel> M createOrUpdateModel(SlingHttpServletRequest request, Class<M> modelClass) {
+    default <M extends RestApiModel> M createOrUpdateModel(SlingHttpServletRequest request, Class<M> modelClass) {
         final M model = request.adaptTo(modelClass);
         if (model == null) {
             return null;

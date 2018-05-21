@@ -21,7 +21,7 @@ public class ClosableResourceResolver implements AutoCloseable, ResourceResolver
 
     @Deprecated
     public static ResourceResolver createAdministrative(ResourceResolverFactory factory) throws LoginException {
-        return createAdministrative(factory,null);
+        return createAdministrative(factory, null);
     }
 
     public static ResourceResolver create(ResourceResolverFactory factory, Map<String, Object> params) throws LoginException {

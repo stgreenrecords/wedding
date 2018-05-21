@@ -110,7 +110,7 @@ public final class WeddingResourceUtil {
                 .findFirst();
     }
 
-    public static String getStringPropertyFromResource(Resource resource, String propertyName){
+    public static String getStringPropertyFromResource(Resource resource, String propertyName) {
         return Optional.of(resource)
                 .map(Resource::getValueMap)
                 .map(properties -> properties.get(propertyName, String.class))

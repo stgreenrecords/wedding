@@ -2,7 +2,6 @@ package wedding.core.services;
 
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
-import org.apache.jackrabbit.util.Base64;
 import org.apache.sling.api.SlingHttpServletResponse;
 
 import javax.servlet.http.Cookie;

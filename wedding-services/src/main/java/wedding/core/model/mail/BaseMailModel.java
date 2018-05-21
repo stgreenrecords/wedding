@@ -5,7 +5,6 @@ import org.apache.jackrabbit.vault.util.JcrConstants;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
-import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import wedding.core.model.WeddingBaseModel;
 
@@ -26,9 +25,11 @@ public class BaseMailModel extends WeddingBaseModel {
     @ValueMapValue
     private String subject;
 
-    private boolean allUsers;
+    @ValueMapValue
+    private String allUsers;
 
-    private boolean allPartners;
+    @ValueMapValue
+    private String allPartners;
 
     @ValueMapValue
     private String[] recipients;
@@ -88,19 +89,19 @@ public class BaseMailModel extends WeddingBaseModel {
         this.recipients = recipients;
     }
 
-    public boolean isAllUsers() {
+    public String isAllUsers() {
         return allUsers;
     }
 
-    public void setAllUsers(boolean allUsers) {
+    public void setAllUsers(String allUsers) {
         this.allUsers = allUsers;
     }
 
-    public boolean isAllPartners() {
+    public String isAllPartners() {
         return allPartners;
     }
 
-    public void setAllPartners(boolean allPartners) {
+    public void setAllPartners(String allPartners) {
         this.allPartners = allPartners;
     }
 }

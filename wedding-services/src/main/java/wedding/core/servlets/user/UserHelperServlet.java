@@ -13,9 +13,9 @@ import org.apache.sling.servlets.post.JSONResponse;
 import wedding.core.data.Constants;
 import wedding.core.services.binary.BinaryUploaderService;
 import wedding.core.services.binary.impl.BinaryFile;
+import wedding.core.services.binary.impl.Type;
 import wedding.core.services.users.UserJsonService;
 import wedding.core.utils.BinaryFileUtil;
-import wedding.core.services.binary.impl.Type;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
