@@ -1,6 +1,7 @@
 package wedding.core.utils;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.osgi.framework.Bundle;
 import org.slf4j.Logger;
@@ -28,7 +29,7 @@ public final class ReflectionUtil {
     }
 
     public static <A extends Annotation> String getName(Field field, Class<A> annotationClass, Function<A, String> function) {
-        if (isAnnotatedWith(annotationClass).test(field)) {
+        if (isAnnotatedWith(annotationClass).test(field) && !StringUtils.EMPTY.equals(field.getAnnotation(ValueMapValue.class).name())) {
             return function.apply(field.getAnnotation(annotationClass));
         }
         return field.getName();
