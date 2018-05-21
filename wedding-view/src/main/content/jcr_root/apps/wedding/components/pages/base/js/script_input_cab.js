@@ -270,7 +270,7 @@ var PORTAL = (function (PORTAL, $) {
                     dataRegistration.instagramLink =  ok;
                     dataRegistration.siteLink =  site;
                     dataRegistration.authType =  authType;
-                    dataRegistration.resourcePath =  '/home/users/wedding/partners/photographers/minsk';
+                    dataRegistration.path =  '/home/users/wedding/partners/photographers/grodno';
 
                     if ( work_sphere  &&  tel &&  city && ($self.find("input[name='consent-part']:checked").val() === 'consent-partner')  /*!= 'null'*/) {
 
@@ -303,7 +303,7 @@ var PORTAL = (function (PORTAL, $) {
 
                 $.ajax({
                     // url: url_link,
-                    url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
+                    url: 'http://wedding-services.mycloud.by/services/rest.partners/create.json',
                     type: "POST",
                     dataType: "json",
                     data: dataRegistration,
@@ -345,7 +345,7 @@ var PORTAL = (function (PORTAL, $) {
                     beforeSend: function (xhr) {
                         xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
                         console.log("beforeSend post !");
-                        console.log(dataSend);
+                        console.dir(dataRegistration);
                     },
                     success: function (data) {
                         // if (data) {
@@ -362,112 +362,6 @@ var PORTAL = (function (PORTAL, $) {
                         console.log(e);
                     }
                 });
-
-
-                /*$.ajax({
-                    // url: url_link, // 'http://wedding-services.mycloud.by/services/rest.users/create.json'
-                    url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
-                    type: "POST",
-                    dataType: "json",
-                    // data: dataRegistration,
-                    data: {'path': '/home/users/wedding/users/minsk','city': 'minsk'},
-                    // path: `/home/users/wedding/users/${city}`,
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
-                        console.log(" Шлем №3 это:  beforeSend post !");
-                        // console.log(dataRegistration);
-                        console.log({'path': '/home/users/wedding/users/minsk/test','city': 'minsk'});
-                    },
-                    success: function (data) {
-                        // if (data) {
-                        console.log('Ниже должен быть ответ:');
-                        console.dir(data);
-                        console.log('это успех!');
-                        Cookies.set('userId', data.id);
-                        // showCabinetPage(data);
-
-                        // }
-                    },
-                    complete: function () {
-                    },
-                    error: function (e) {
-                        console.log('Что-то пошло не так :( ');
-                        console.log(e);
-                    }
-                });*/
-
-          /*      $.ajax({
-                    url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
-                    type: "POST",
-                    dataType: "json",
-                    data: dataRegistration,
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
-                    },
-                    success: function (data) {
-                        console.log("Шлем №2 это:");
-                        console.dir(dataRegistration);
-                        console.log('Ниже должен быть ответ:');
-                        console.dir(data);
-                        console.log(data);
-                    },
-                    error: function (e) {
-                        console.log('Что-то пошло не так :( ');
-                        console.log(e);
-                    }
-
-                });*/
-
-      /*          $.ajax({
-                    url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
-                    type: "POST",
-                    dataType: "json",
-                    data: {'path': '/home/users/wedding/users/minsk'},
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
-
-                    },
-                success: function (data) {
-                    console.log("Шлем №1 это:");
-                    console.log({'path': '/home/users/wedding/users/minsk'});
-                    console.log('Ниже должен быть ответ:');
-                        console.dir(data);
-                    },
-                    error: function (e) {
-                        console.log('Что-то пошло не так :( ');
-                        console.log(e);
-                    }
-
-                });*/
-
-
-
-/*
-                $.ajax({
-                    url: '/services/rest.users/create.json',
-                    type: "POST",
-                    dataType: "json",
-                    data: {'path': '/home/users/wedding/users/minsk/test'}, // Все данные
-
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
-                        console.log("beforeSend post !");
-                        console.dir(dataSend);
-                    },
-                    success: function (data) {
-
-                        console.log('Ниже должен быть ответ:');
-                        console.dir(data);
-
-                    },
-                    complete: function () {
-                    },
-                    error: function (e) {
-                        console.log('Что-то пошло не так   ');
-                        console.log(e);
-                    }
-                });*/
-
 
 
             }
@@ -539,3 +433,114 @@ var PORTAL = (function (PORTAL, $) {
     return PORTAL;
 
 })(PORTAL || {}, jQuery);
+
+
+
+
+
+                // TEMP - delete tomorrow
+
+                /*$.ajax({
+                    // url: url_link, // 'http://wedding-services.mycloud.by/services/rest.users/create.json'
+                    url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
+                    type: "POST",
+                    dataType: "json",
+                    // data: dataRegistration,
+                    data: {'path': '/home/users/wedding/users/minsk','city': 'minsk'},
+                    // path: `/home/users/wedding/users/${city}`,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+                        console.log(" Шлем №3 это:  beforeSend post !");
+                        // console.log(dataRegistration);
+                        console.log({'path': '/home/users/wedding/users/minsk/test','city': 'minsk'});
+                    },
+                    success: function (data) {
+                        // if (data) {
+                        console.log('Ниже должен быть ответ:');
+                        console.dir(data);
+                        console.log('это успех!');
+                        Cookies.set('userId', data.id);
+                        // showCabinetPage(data);
+
+                        // }
+                    },
+                    complete: function () {
+                    },
+                    error: function (e) {
+                        console.log('Что-то пошло не так :( ');
+                        console.log(e);
+                    }
+                });*/
+
+/*      $.ajax({
+          url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
+          type: "POST",
+          dataType: "json",
+          data: dataRegistration,
+          beforeSend: function (xhr) {
+              xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+          },
+          success: function (data) {
+              console.log("Шлем №2 это:");
+              console.dir(dataRegistration);
+              console.log('Ниже должен быть ответ:');
+              console.dir(data);
+              console.log(data);
+          },
+          error: function (e) {
+              console.log('Что-то пошло не так :( ');
+              console.log(e);
+          }
+
+      });*/
+
+/*          $.ajax({
+              url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
+              type: "POST",
+              dataType: "json",
+              data: {'path': '/home/users/wedding/users/minsk'},
+              beforeSend: function (xhr) {
+                  xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+
+              },
+          success: function (data) {
+              console.log("Шлем №1 это:");
+              console.log({'path': '/home/users/wedding/users/minsk'});
+              console.log('Ниже должен быть ответ:');
+                  console.dir(data);
+              },
+              error: function (e) {
+                  console.log('Что-то пошло не так :( ');
+                  console.log(e);
+              }
+
+          });*/
+
+
+
+/*
+                $.ajax({
+                    url: '/services/rest.users/create.json',
+                    type: "POST",
+                    dataType: "json",
+                    data: {'path': '/home/users/wedding/users/minsk/test'}, // Все данные
+
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+                        console.log("beforeSend post !");
+                    },
+                    success: function (data) {
+
+                        console.log('Ниже должен быть ответ:');
+                        console.dir(data);
+
+                    },
+                    complete: function () {
+                    },
+                    error: function (e) {
+                        console.log('Что-то пошло не так   ');
+                        console.log(e);
+                    }
+                });*/
+
+
