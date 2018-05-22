@@ -30,48 +30,165 @@ var PORTAL = (function (PORTAL, $) {
                 success: function (data) {
                     selectedPerson = data[0];
 
-                    if (Cookies.get('userId') === selectedPerson.id )
-                        console.log("It's   MY UYSESR  CABINET   I can redact it  !!!!");
-
                     console.log('INFO:');
                     console.dir(selectedPerson);
-                    $self.find(".user_avatar").css("background-image", `url('${selectedPerson.avatar}')`);
-                    $self.find('.profil_name').text(selectedPerson.firstName);
-                    $self.find('.profil_secondname').text(selectedPerson.lastName);
-                    $self.find('.phone_string').text(selectedPerson.phone);
-                    $self.find('.mail_string').text(selectedPerson.email);
 
-                    $self.find('.vk_string').text(selectedPerson.vkLink);
-                    // $self.find('.fb_string').text(selectedPerson.facebookLink);
-                    // $self.find('.insta_string').text(selectedPerson.instagramLink);
+                    if (data)
+                        fillStrings(selectedPerson);
 
-                    if (selectedPerson.tenders && selectedPerson.tenders.length>=1){
 
-                        $self.find('.user_tenders-container > div').detach();
-                        var first_div = document.querySelector(".hidden_full .tender_card");
-                        var main_container =  document.querySelector(".user_tenders-container");
-                        var copy_div = first_div.cloneNode(true);
-
-                        for (var i = 0; i<selectedPerson.tenders.length; i++){
-                            var publDate = new Date(selectedPerson.tenders[i].datePublication);
-                            var deadLine = new Date(selectedPerson.tenders[i].deadline);
-                            copy_div = first_div.cloneNode(true);
-                            copy_div.querySelector(".tender_card_href").setAttribute("href",`/content/wedding/tenders/tender.html?${selectedPerson.tenders[i].id}#${selectedPerson.tenders[i].city}`);
-                            copy_div.querySelector(".publish_date").innerHTML = `${publDate.getDate()}.${publDate.getMonth()+1}.${publDate.getFullYear()}`;
-                            copy_div.querySelector(".tender_card-city").innerHTML = `г. ${selectedPerson.tenders[i].city}`;
-                            copy_div.querySelector(".tender_card-dead_line").innerHTML = `${deadLine.getDate()}.${deadLine.getMonth()+1}.${deadLine.getFullYear()}`;
-                            copy_div.querySelector(".tender_card-budget_count").innerHTML = selectedPerson.tenders[i].moneyLimit;
-                            copy_div.querySelector(".short_text_text").innerHTML = selectedPerson.tenders[i].shortText;
-                            main_container.appendChild(copy_div);
-                        }
-
-                        user_tenders.find('.tender_card-remove_icon').on('click', removeTender);
-
+                    if (Cookies.get('userId') === selectedPerson.id) {
+                        console.log("It's REALY MY **** USER ***** CABINET  !!!!");
+                        myCabinet();
                     }
+
+
+                    if (selectedPerson.tenders)
+                        fillTenders(selectedPerson.tenders);
 
                 }
 
             });
+
+
+            var btn_change = $self.find('.avatar_btn_change');
+            var btn_save = $self.find('.btn_change_save_change');
+
+
+            var firstName =  $self.find('.profil_name');
+            var lastName = $self.find('.profil_secondname');
+            var phoneNum =  $self.find('.phone_string');
+            var eMail = $self.find('.mail_string');
+            var vkLink = $self.find('.vk_string');
+
+
+            function myCabinet(){
+
+                btn_change.removeClass('hidden_full');
+                btn_change.on('click', onChangeFields);
+                $self.find('.user_avatar_btn_mail').addClass('hidden_full');
+
+
+            }
+
+            function onChangeFields(){
+
+                console.log('Я могу ВСЕ изменить!!!!');
+                btn_change.addClass('hidden_full');
+                btn_save.removeClass('hidden_full');
+                onInputFields();
+                btn_save.one('click', saveChangeFields);
+            }
+
+            function onInputFields(){
+
+                var changeName = firstName.html();
+                var changeLastName = lastName.html();
+                var changePhoneNum = phoneNum.html();
+                var changeVkLink = vkLink.html();
+
+                firstName.html(`<input value=${changeName}>`);
+                lastName.html(`<input value=${changeLastName}>`);
+                phoneNum.html(`<input value=${changePhoneNum}>`);
+                vkLink.html(`<input value=${changeVkLink}>`);
+
+                console.log(changeName);
+
+            }
+
+
+
+
+            function saveChangeFields() {
+
+                var dataSend = {};
+                btn_save.addClass('hidden_full');
+                btn_change.removeClass('hidden_full');
+
+                dataSend.firstName = firstName.find('input').val();
+                dataSend.lastName = lastName.find('input').val();
+                dataSend.phone = phoneNum.find('input').val();
+                dataSend.vkLink = vkLink.find('input').val();
+
+                firstName.html(`${dataSend.firstName}`);
+                lastName.html(`${dataSend.lastName}`);
+                phoneNum.html(`${dataSend.phone}`);
+                vkLink.html(`${dataSend.vkLink}`);
+
+                sendChangeRequest(dataSend);
+                console.log(dataSend);
+
+            }
+
+
+
+            function sendChangeRequest(dataSend){
+
+                $.ajax({
+
+                    url: 'http://wedding-services.mycloud.by/services/rest.users/update.json',
+                    type: 'PUT',
+                    dataType: 'json',
+                    data: dataSend,
+                    success: function(data){
+                        console.log('What you send for me?');
+                        console.log(data);
+
+                    }
+
+                });
+
+                revertStandartFields();
+
+            }
+
+            function revertStandartFields(){
+
+
+            }
+
+
+
+            function fillStrings(selectedPerson){
+
+                firstName.text(selectedPerson.firstName);
+                lastName.text(selectedPerson.lastName);
+                phoneNum.text(selectedPerson.phone);
+
+                if(selectedPerson.avatar)
+                    $self.find(".user_avatar").css("background-image", `url('${selectedPerson.avatar}')`);
+                if(selectedPerson.email)
+                    eMail.text(selectedPerson.email);
+                if(selectedPerson.vkLink)
+                    vkLink.text(selectedPerson.vkLink);
+                // $self.find('.fb_string').text(selectedPerson.facebookLink);
+                // $self.find('.insta_string').text(selectedPerson.instagramLink);
+
+            }
+
+            function fillTenders(tenders){
+
+                $self.find('.user_tenders-container > div').detach();
+                var first_div = document.querySelector(".hidden_full .tender_card");
+                var main_container =  document.querySelector(".user_tenders-container");
+                var copy_div = first_div.cloneNode(true);
+
+                for (var i = 0; i<tenders.length; i++){
+                    var publDate = new Date(tenders[i].datePublication);
+                    var deadLine = new Date(tenders[i].deadline);
+                    copy_div = first_div.cloneNode(true);
+                    copy_div.querySelector(".tender_card_href").setAttribute("href",`/content/wedding/tenders/tender.html?${tenders[i].id}#${tenders[i].city}`);
+                    copy_div.querySelector(".publish_date").innerHTML = `${publDate.getDate()}.${publDate.getMonth()+1}.${publDate.getFullYear()}`;
+                    copy_div.querySelector(".tender_card-city").innerHTML = `г. ${tenders[i].city}`;
+                    copy_div.querySelector(".tender_card-dead_line").innerHTML = `${deadLine.getDate()}.${deadLine.getMonth()+1}.${deadLine.getFullYear()}`;
+                    copy_div.querySelector(".tender_card-budget_count").innerHTML = tenders[i].moneyLimit;
+                    copy_div.querySelector(".short_text_text").innerHTML = tenders[i].shortText;
+                    main_container.appendChild(copy_div);
+                }
+
+                user_tenders.find('.tender_card-remove_icon').on('click', removeTender);
+
+            }
 
             function removeTender(){
 

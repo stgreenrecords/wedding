@@ -70,25 +70,34 @@ var PORTAL = (function (PORTAL, $) {
 
         });
 
+        var btn_change = $self.find('.avatar_btn_change');
+        var btn_save = $self.find('.btn_change_save_change');
+
         function myCabinet(){
-            
-            $self.find('.avatar_btn_change').removeClass('hidden_full');
+
+            btn_change.removeClass('hidden_full');
+            btn_change.on('click', onChangeFields);
             $self.find('.partner_avatar_btn_calc').addClass('hidden_full');
             $self.find('.partner_avatar_btn_mail').addClass('hidden_full');
-            $self.find('.partner_avatar_btn_likes').addClass('hidden_full');            
-            $self.find('.avatar_btn_change').on('click', onChangeFields);
+            $self.find('.partner_avatar_btn_likes').addClass('hidden_full');
+
         }
 
         function onChangeFields(){
 
             console.log('Я могу ВСЕ изменить!!!!');
-            $self.find('.avatar_btn_change').addClass('hidden_full');
-            $self.find('.btn_change_save_change').removeClass('hidden_full');
-            $self.find('.btn_change_save_change').on('click', saveChangeFields);
+            btn_change.addClass('hidden_full');
+            btn_save.removeClass('hidden_full');
+            btn_save.on('click', saveChangeFields);
+
         }
-        
+
         function saveChangeFields() {
+
+            btn_save.addClass('hidden_full');
+            btn_change.removeClass('hidden_full');
             console.log('Я могу ВСЕ Засейвить !!!!');
+
         }
 
         function fillStrings(selectedPerson) {
