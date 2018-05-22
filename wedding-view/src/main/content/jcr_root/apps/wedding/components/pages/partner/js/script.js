@@ -43,7 +43,7 @@ var PORTAL = (function (PORTAL, $) {
                 selectedPerson = data[0];
 
                 if (Cookies.get('userId') === selectedPerson.id )
-                    console.log("It's REALY MY CABINET  !!!!");
+                    console.log("It's REALY MY CABINET  of Partner  !!!!");
 
                 console.log('INFO:');
                 console.dir(selectedPerson);

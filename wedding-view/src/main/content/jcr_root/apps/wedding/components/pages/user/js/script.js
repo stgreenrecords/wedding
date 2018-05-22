@@ -30,6 +30,8 @@ var PORTAL = (function (PORTAL, $) {
                 success: function (data) {
                     selectedPerson = data[0];
 
+                    if (Cookies.get('userId') === selectedPerson.id )
+                        console.log("It's   MY UYSESR  CABINET   I can redact it  !!!!");
 
                     console.log('INFO:');
                     console.dir(selectedPerson);
