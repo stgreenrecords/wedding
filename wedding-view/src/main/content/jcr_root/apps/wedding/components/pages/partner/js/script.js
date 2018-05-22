@@ -22,11 +22,6 @@ var PORTAL = (function (PORTAL, $) {
         if (getPartnerId === Cookies.get('userId') )
             console.log("WaU - the MY CABINET  !!!!");
 
-        // if (!getPartnerSpecCity){  //TODOC  - Подключить после подключения регистрации
-        //    var getPartnerSpecCity = Cookies.get('partnerSpec') + '/'+ Cookies.get('partnerCity');
-        //    var getPartnerId =  Cookies.get('partnerId');
-        // }
-
 
         var selectedPersonRequest = `http://wedding-services.mycloud.by/services/rest.partners/${getPartnerSpecCity}.json?id=${getPartnerId}`;
 
@@ -50,7 +45,24 @@ var PORTAL = (function (PORTAL, $) {
                 console.log('INFO:');
                 console.dir(selectedPerson);
 
-                fillStrings(selectedPerson);
+                $self.find('.profil_name').text(selectedPerson.firstName);
+                $self.find('.profil_secondname').text(selectedPerson.lastName);
+                $self.find('.partner_speciality').text(selectedPerson.speciality);
+
+                if (selectedPerson.priceEnd || selectedPerson.priceStart)
+                    $self.find('.prise_string').text(`${selectedPerson.priceStart}-${selectedPerson.priceEnd} рублей`);
+                if (selectedPerson.phone)
+                    $self.find('.phone_string').text(selectedPerson.phone);
+                if (selectedPerson.email)
+                    $self.find('.mail_string').text(selectedPerson.email);
+                if (selectedPerson.siteLink)
+                    $self.find('.link_string').text(selectedPerson.siteLink);
+                if (selectedPerson.vkLink )
+                    $self.find('.vk_string').text(selectedPerson.vkLink);
+                if (selectedPerson.facebookLink )
+                    $self.find('.fb_string').text(selectedPerson.facebookLink);
+                if (selectedPerson.instagramLink )
+                    $self.find('.insta_string').text(selectedPerson.instagramLink);
 
                 if (Cookies.get('userId') === selectedPerson.id ) {
                     console.log("It's REALY MY CABINET  of Partner  !!!!");
@@ -89,29 +101,6 @@ var PORTAL = (function (PORTAL, $) {
         
         function saveChangeFields() {
             console.log('Я могу ВСЕ Засейвить !!!!');
-        }
-
-        function fillStrings(selectedPerson) {
-
-            $self.find('.profil_name').text(selectedPerson.firstName);
-            $self.find('.profil_secondname').text(selectedPerson.lastName);
-            $self.find('.partner_speciality').text(selectedPerson.speciality);
-
-            if (selectedPerson.priceEnd || selectedPerson.priceStart)
-                $self.find('.prise_string').text(`${selectedPerson.priceStart}-${selectedPerson.priceEnd} рублей`);
-            if (selectedPerson.phone)
-                $self.find('.phone_string').text(selectedPerson.phone);
-            if (selectedPerson.email)
-                $self.find('.mail_string').text(selectedPerson.email);
-            if (selectedPerson.siteLink)
-                $self.find('.link_string').text(selectedPerson.siteLink);
-            if (selectedPerson.vkLink )
-                $self.find('.vk_string').text(selectedPerson.vkLink);
-            if (selectedPerson.facebookLink )
-                $self.find('.fb_string').text(selectedPerson.facebookLink);
-            if (selectedPerson.instagramLink )
-                $self.find('.insta_string').text(selectedPerson.instagramLink);
-
         }
 
         function fillPhoto(photo){

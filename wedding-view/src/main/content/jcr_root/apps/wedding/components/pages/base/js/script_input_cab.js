@@ -36,9 +36,6 @@ var PORTAL = (function (PORTAL, $) {
 
             $self.find('#mini-menu_exit').on('click', hideCabinetSuccess);
 
-            // if(true)
-            // $self.find('#mini-menu_my-page a').attr('href', '/content/wedding/catalog/category/partner.html');
-
             if (authStatusFromCookie === "authorized" && authTypeFromCookie) {
                 //PORTAL.modules.LoginRegistration.AUTH[authType].status();
                 showCabinetSuccess();
@@ -75,7 +72,6 @@ var PORTAL = (function (PORTAL, $) {
                 cabinet_success.style.display = "none";
                 cabinet_login.style.display = "block";
                 Cookies.set('authStatus', 'NotAuth');
-                //Cookies.set('userId', 'null');  todoc - разкоментить позже
                 // Cookies.set('authType', '');
                 document.location.reload();
             }
