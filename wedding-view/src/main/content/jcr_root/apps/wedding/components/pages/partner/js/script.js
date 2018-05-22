@@ -47,13 +47,15 @@ var PORTAL = (function (PORTAL, $) {
 
                 selectedPerson = data[0];
 
-                if (Cookies.get('userId') === selectedPerson.id )
-                    console.log("It's REALY MY CABINET  of Partner  !!!!");
-
                 console.log('INFO:');
                 console.dir(selectedPerson);
 
                 fillStrings(selectedPerson);
+
+                if (Cookies.get('userId') === selectedPerson.id ) {
+                    console.log("It's REALY MY CABINET  of Partner  !!!!");
+                    myCabinet();
+                }
 
                 if (selectedPerson.portfolio)
                     fillPhoto(selectedPerson.portfolio);
@@ -68,6 +70,26 @@ var PORTAL = (function (PORTAL, $) {
 
         });
 
+        function myCabinet(){
+            
+            $self.find('.avatar_btn_change').removeClass('hidden_full');
+            $self.find('.partner_avatar_btn_calc').addClass('hidden_full');
+            $self.find('.partner_avatar_btn_mail').addClass('hidden_full');
+            $self.find('.partner_avatar_btn_likes').addClass('hidden_full');            
+            $self.find('.avatar_btn_change').on('click', onChangeFields);
+        }
+
+        function onChangeFields(){
+
+            console.log('Я могу ВСЕ изменить!!!!');
+            $self.find('.avatar_btn_change').addClass('hidden_full');
+            $self.find('.btn_change_save_change').removeClass('hidden_full');
+            $self.find('.btn_change_save_change').on('click', saveChangeFields);
+        }
+        
+        function saveChangeFields() {
+            console.log('Я могу ВСЕ Засейвить !!!!');
+        }
 
         function fillStrings(selectedPerson) {
 
