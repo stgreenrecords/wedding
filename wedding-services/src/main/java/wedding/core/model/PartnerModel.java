@@ -44,6 +44,7 @@ public class PartnerModel extends BaseUserModel {
 
     @PostConstruct
     public void init() {
+        vipStatus = vipStatus != null ? vipStatus : false;
         portfolio = Optional.ofNullable(getResource().getChild(Type.PORTFOLIO.getRelPath()))
                 .map(Resource::listChildren)
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
