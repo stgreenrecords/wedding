@@ -63,7 +63,7 @@ var PORTAL = (function (PORTAL, $) {
                     console.log("success");
                     console.dir(data);
 
-                    var pro_div = document.querySelector(".search-pro");
+                 /*   var pro_div = document.querySelector(".search-pro");
                     pro_div.style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_5.jpg')";
                     pro_div.querySelector(".search-usually_content_name").innerHTML = data[0].firstName + " "+ data[0].lastName;
                     pro_div.querySelector(".search-usually_content_speciality").innerHTML = data[0].speciality;
@@ -75,7 +75,7 @@ var PORTAL = (function (PORTAL, $) {
                     pro_div2.querySelector(".search-usually_content_name").innerHTML = data[1].firstName + " "+ data[1].lastName;
                     pro_div2.querySelector(".search-usually_content_speciality").innerHTML = data[1].speciality;
                     pro_div2.querySelector(".pro_phone").innerHTML = data[1].phone;
-                    pro_div2.querySelector(".pro_vk").innerHTML = '<a href='+data[1].vkLink+' target="blank">'+data[1].vkLink+'</a>' ;
+                    pro_div2.querySelector(".pro_vk").innerHTML = '<a href='+data[1].vkLink+' target="blank">'+data[1].vkLink+'</a>' ;*/
 
                     var first_div = document.querySelector(".search-usually");
                     var main_container =  document.querySelector("#search-usually-cont");
@@ -84,7 +84,7 @@ var PORTAL = (function (PORTAL, $) {
 
                     $self.find('#search-usually-cont div').detach();
 
-                    for (var i = 2; i<data.length; i++){
+                    for (var i = 0; i<data.length; i++){
                         copy_div = first_div.cloneNode(true);
                         k= i%9+1;
                         copy_div.querySelector(".search-usually_img").style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_"+k+".jpg')";

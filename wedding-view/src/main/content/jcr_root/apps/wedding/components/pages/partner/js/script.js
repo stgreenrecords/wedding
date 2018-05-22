@@ -52,13 +52,20 @@ var PORTAL = (function (PORTAL, $) {
                 $self.find('.profil_secondname').text(selectedPerson.lastName);
                 $self.find('.partner_speciality').text(selectedPerson.speciality);
 
-                $self.find('.prise_string').text(`${selectedPerson.priceStart}-${selectedPerson.priceEnd} рублей`);
-                $self.find('.phone_string').text(selectedPerson.phone);
-                $self.find('.mail_string').text(selectedPerson.email);
-                $self.find('.link_string').text(selectedPerson.siteLink);
-                $self.find('.vk_string').text(selectedPerson.vkLink);
-                $self.find('.fb_string').text(selectedPerson.facebookLink);
-                $self.find('.insta_string').text(selectedPerson.instagramLink);
+                if (selectedPerson.priceEnd || selectedPerson.priceStart)
+                    $self.find('.prise_string').text(`${selectedPerson.priceStart}-${selectedPerson.priceEnd} рублей`);
+                if (selectedPerson.phone)
+                    $self.find('.phone_string').text(selectedPerson.phone);
+                if (selectedPerson.email)
+                    $self.find('.mail_string').text(selectedPerson.email);
+                if (selectedPerson.siteLink)
+                    $self.find('.link_string').text(selectedPerson.siteLink);
+                if (selectedPerson.vkLink )
+                    $self.find('.vk_string').text(selectedPerson.vkLink);
+                if (selectedPerson.facebookLink )
+                    $self.find('.fb_string').text(selectedPerson.facebookLink);
+                if (selectedPerson.instagramLink )
+                    $self.find('.insta_string').text(selectedPerson.instagramLink);
 
                 if (selectedPerson.portfolio)
                     fillPhoto(selectedPerson.portfolio);
