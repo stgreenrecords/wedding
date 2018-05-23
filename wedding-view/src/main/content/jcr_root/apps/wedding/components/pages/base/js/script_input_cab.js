@@ -434,9 +434,9 @@ var PORTAL = (function (PORTAL, $) {
 
             function initSocial() {				// Можно тестить
                 // Это старая инициация ВК  - временно роботает, пока не отлажена новая.
-                VK.init({
+         /*       VK.init({
                     apiId: 6428473
-                });
+                });*/
 
 
 /*                FB.init({
