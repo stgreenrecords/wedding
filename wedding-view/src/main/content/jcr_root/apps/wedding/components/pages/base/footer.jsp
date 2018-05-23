@@ -250,7 +250,7 @@
 
     </div>
 
-    <div id="vk_api_transport"></div>
+    <div id="vk_api_transport" class='hidden_full'></div>
 
 </section>
 
