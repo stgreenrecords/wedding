@@ -460,6 +460,8 @@ var PORTAL = (function (PORTAL, $) {
                     document.getElementById("vk_api_transport").appendChild(el);
                 }, 0);
 
+
+
                 window.fbAsyncInit = function() {
 
                     FB.init({
@@ -481,11 +483,9 @@ var PORTAL = (function (PORTAL, $) {
 
             }
 
-            $self.find("#vk-reg-btn").click(function () {
-                authType = "VK";
-                console.log('VK reg ON');
-                V_K.login();
-            });
+            initSocial();
+
+
 
             var V_K = {
 
@@ -516,30 +516,38 @@ var PORTAL = (function (PORTAL, $) {
                 }
             };
 
+
             var FBook = {
 
                 "login": function () {
 
-
-                    FB.init({
-                        appId: '{119308788738222}',
-                        version: 'v2.12'
+                    FB.login(function(response) {
+                        if (response.authResponse) {
+                            console.log('Welcome!  Fetching your information.... ');
+                            FB.api('/me', function(response) {
+                                console.log('Good to see you, ' + response.name + '.');
+                            });
+                        } else {
+                            console.log('User cancelled login or did not fully authorize.');
+                        }
                     });
-
-
-                    FB.login(function (res) {
-                        console.log(res);
-                    }, {scope: 'public_profile, email'});
-
-
 
                 }
             };
 
 
+            $self.find("#vk-reg-btn").click(function () {
+                authType = "VK";
+                console.log('VK reg ON');
+                V_K.login();
+            });
+
+            $self.find("#fb-reg-btn").click(function () {
+                authType = "FACEBOOK";
+                FBook.login();
+            });
 
 
-                    initSocial();
 
 
         }()); // end -  --- с окнами входа и регистрации

@@ -13,6 +13,8 @@
 
 <section id="cabinet-input-block" >
 
+    <div id="vk_api_transport"></div>
+
     <div class="cabinet-input">
 
         <div id="cabinet_login">
@@ -250,7 +252,7 @@
 
     </div>
 
-    <div id="vk_api_transport" class='hidden_full'></div>
+
 
 </section>
 
