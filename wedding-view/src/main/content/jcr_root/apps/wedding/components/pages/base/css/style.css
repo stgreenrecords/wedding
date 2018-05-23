@@ -690,10 +690,13 @@ footer > div a, footer > div{
     display: flex;
 }
 
+/*background-image: url('etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/photo_noname.png');*/
+
 .partner_avatar, .user_avatar{
     margin: 35px 0 15px 10%;
     width: 75%;
     min-height: 320px;
+    background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_12.jpg');
     background-size: cover;
 }
 
