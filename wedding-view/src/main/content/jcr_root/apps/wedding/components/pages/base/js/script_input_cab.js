@@ -446,6 +446,20 @@ var PORTAL = (function (PORTAL, $) {
                     version    : 'v2.7' // or v2.6, v2.5, v2.4, v2.3
                 });*/
 
+                window.vkAsyncInit = function() {
+                    VK.init({
+                        apiId: 6428473
+                    });
+                };
+
+                setTimeout(function() {
+                    var el = document.createElement("script");
+                    el.type = "text/javascript";
+                    el.src = "https://vk.com/js/api/openapi.js?154";
+                    el.async = true;
+                    document.getElementById("vk_api_transport").appendChild(el);
+                }, 0);
+
                 window.fbAsyncInit = function() {
 
                     FB.init({
