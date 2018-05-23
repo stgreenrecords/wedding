@@ -468,9 +468,8 @@ var PORTAL = (function (PORTAL, $) {
                         appId            : '119308788738222',
                         autoLogAppEvents : true,
                         xfbml            : true,
-                        version          : 'v2.7'
+                        version          : 'v2.3'
                     });
-                    console.log(' Может и фб инит');
                 };
 
                 (function(d, s, id){
@@ -524,6 +523,7 @@ var PORTAL = (function (PORTAL, $) {
                     FB.login(function(response) {
                         if (response.authResponse) {
                             console.log('Welcome!  Fetching your information.... ');
+                            console.log(response);
                             FB.api('/me', function(response) {
                                 console.log('Good to see you, ' + response.name + '.');
                             });
