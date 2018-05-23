@@ -105,6 +105,7 @@ var PORTAL = (function (PORTAL, $) {
                 btn_save.addClass('hidden_full');
                 btn_change.removeClass('hidden_full');
 
+                dataSend.id = selectedPerson.id;
                 dataSend.firstName = firstName.find('input').val();
                 dataSend.lastName = lastName.find('input').val();
                 dataSend.phone = phoneNum.find('input').val();
