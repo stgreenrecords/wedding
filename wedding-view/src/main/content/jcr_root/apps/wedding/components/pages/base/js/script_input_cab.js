@@ -431,6 +431,103 @@ var PORTAL = (function (PORTAL, $) {
             ====================================================================================================================================*/
 
 
+
+            function initSocial() {				// Можно тестить
+                // Это старая инициация ВК  - временно роботает, пока не отлажена новая.
+                VK.init({
+                    apiId: 6428473
+                });
+
+
+/*                FB.init({
+                    appId      : '{119308788738222}',
+                    status     : true,
+                    xfbml      : true,
+                    version    : 'v2.7' // or v2.6, v2.5, v2.4, v2.3
+                });*/
+
+                window.fbAsyncInit = function() {
+
+                    FB.init({
+                        appId            : '119308788738222',
+                        autoLogAppEvents : true,
+                        xfbml            : true,
+                        version          : 'v3.0'
+                    });
+                    console.log(' Может и фб инит');
+                };
+
+                (function(d, s, id){
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) {return;}
+                    js = d.createElement(s); js.id = id;
+                    js.src = "https://connect.facebook.net/en_US/sdk.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+
+            }
+
+            $self.find("#vk-reg-btn").click(function () {
+                authType = "VK";
+                console.log('VK reg ON');
+                V_K.login();
+            });
+
+            var V_K = {
+
+                "login": function () {
+
+                    VK.Auth.login(function (response) {
+
+                        if (response.status === "connected") {
+
+                            var responseUser = response.session.user;
+                            console.log('success VK responce');
+                            console.dir(response);
+                            userLoginInfo.userID = responseUser.hasOwnProperty("id") ? responseUser.id : "";
+                            userLoginInfo.firstName = responseUser.hasOwnProperty("first_name") ? responseUser.first_name : "";
+                            userLoginInfo.lastName = responseUser.hasOwnProperty("last_name") ? responseUser.last_name : "";
+                            userLoginInfo.nickname = responseUser.hasOwnProperty("nickname") ? responseUser.nickname : "";
+                            userLoginInfo.email = responseUser.hasOwnProperty("email") ? responseUser.email : "";
+                            userLoginInfo.href = responseUser.hasOwnProperty("href") ? responseUser.href : "";
+                            userLoginInfo.authType = "VK";
+
+                            dataRegistrationFill();
+                            inputFirstStepRegFill();
+
+                        }
+
+                    });
+
+                }
+            };
+
+            var FBook = {
+
+                "login": function () {
+
+
+                    FB.init({
+                        appId: '{119308788738222}',
+                        version: 'v2.12'
+                    });
+
+
+                    FB.login(function (res) {
+                        console.log(res);
+                    }, {scope: 'public_profile, email'});
+
+
+
+                }
+            };
+
+
+
+
+                    initSocial();
+
+
         }()); // end -  --- с окнами входа и регистрации
 
     };
@@ -438,114 +535,4 @@ var PORTAL = (function (PORTAL, $) {
     return PORTAL;
 
 })(PORTAL || {}, jQuery);
-
-
-
-
-
-                // TEMP - delete tomorrow
-
-                /*$.ajax({
-                    // url: url_link, // 'http://wedding-services.mycloud.by/services/rest.users/create.json'
-                    url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
-                    type: "POST",
-                    dataType: "json",
-                    // data: dataRegistration,
-                    data: {'path': '/home/users/wedding/users/minsk','city': 'minsk'},
-                    // path: `/home/users/wedding/users/${city}`,
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
-                        console.log(" Шлем №3 это:  beforeSend post !");
-                        // console.log(dataRegistration);
-                        console.log({'path': '/home/users/wedding/users/minsk/test','city': 'minsk'});
-                    },
-                    success: function (data) {
-                        // if (data) {
-                        console.log('Ниже должен быть ответ:');
-                        console.dir(data);
-                        console.log('это успех!');
-                        Cookies.set('userId', data.id);
-                        // showCabinetPage(data);
-
-                        // }
-                    },
-                    complete: function () {
-                    },
-                    error: function (e) {
-                        console.log('Что-то пошло не так :( ');
-                        console.log(e);
-                    }
-                });*/
-
-/*      $.ajax({
-          url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
-          type: "POST",
-          dataType: "json",
-          data: dataRegistration,
-          beforeSend: function (xhr) {
-              xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
-          },
-          success: function (data) {
-              console.log("Шлем №2 это:");
-              console.dir(dataRegistration);
-              console.log('Ниже должен быть ответ:');
-              console.dir(data);
-              console.log(data);
-          },
-          error: function (e) {
-              console.log('Что-то пошло не так :( ');
-              console.log(e);
-          }
-
-      });*/
-
-/*          $.ajax({
-              url: 'http://wedding-services.mycloud.by/services/rest.users/create.json',
-              type: "POST",
-              dataType: "json",
-              data: {'path': '/home/users/wedding/users/minsk'},
-              beforeSend: function (xhr) {
-                  xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
-
-              },
-          success: function (data) {
-              console.log("Шлем №1 это:");
-              console.log({'path': '/home/users/wedding/users/minsk'});
-              console.log('Ниже должен быть ответ:');
-                  console.dir(data);
-              },
-              error: function (e) {
-                  console.log('Что-то пошло не так :( ');
-                  console.log(e);
-              }
-
-          });*/
-
-
-
-/*
-                $.ajax({
-                    url: '/services/rest.users/create.json',
-                    type: "POST",
-                    dataType: "json",
-                    data: {'path': '/home/users/wedding/users/minsk/test'}, // Все данные
-
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
-                        console.log("beforeSend post !");
-                    },
-                    success: function (data) {
-
-                        console.log('Ниже должен быть ответ:');
-                        console.dir(data);
-
-                    },
-                    complete: function () {
-                    },
-                    error: function (e) {
-                        console.log('Что-то пошло не так   ');
-                        console.log(e);
-                    }
-                });*/
-
 
