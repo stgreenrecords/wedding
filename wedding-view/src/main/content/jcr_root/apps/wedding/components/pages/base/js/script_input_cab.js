@@ -468,7 +468,7 @@ var PORTAL = (function (PORTAL, $) {
                         appId            : '119308788738222',
                         autoLogAppEvents : true,
                         xfbml            : true,
-                        version          : 'v3.0'
+                        version          : 'v2.7'
                     });
                     console.log(' Может и фб инит');
                 };
