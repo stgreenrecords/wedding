@@ -694,8 +694,7 @@ footer > div a, footer > div{
     margin: 35px 0 15px 10%;
     width: 75%;
     min-height: 320px;
-    /*background-image: url('etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/photo_noname.png');*/
-    background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_12.jpg');
+    background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_1.jpg');
     background-size: cover;
 }
 
@@ -704,8 +703,7 @@ footer > div a, footer > div{
     align-self: flex-end;
 }
 
-.partner_avatar_btn_mail, .partner_avatar_btn_likes, .partner_avatar_btn_calc, #calendar, .calendar_date_fild, .budget_calc,
-.calc_aside_edit, .user_avatar_btn, .btn_change_save_change, .avatar_btn_change{
+.partner_avatar_btn_mail, .partner_avatar_btn_likes, .partner_avatar_btn_calc, #calendar, .calendar_date_fild, .budget_calc, .calc_aside_edit, .user_avatar_btn{
     cursor: pointer;
 }
 
@@ -885,9 +883,9 @@ footer > div a, footer > div{
     width: auto;
 }
 
-/*.user_avatar{*/
-    /*background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_13.jpg');*/
-/*}*/
+.user_avatar{
+    background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_13.jpg');
+}
 
 .red_refer{
     color: #dc5e4e;
