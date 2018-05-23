@@ -104,11 +104,11 @@ var PORTAL = (function (PORTAL, $) {
                     type: "POST",
                     dataType: "json",
                     data: tenderSend,
-                    /*  beforeSend: function (xhr) {
+                      beforeSend: function (xhr) {
                           xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
                           console.log("beforeSend post !");
                           console.log();
-                      },*/
+                      },
                     success: function (data) {
                         console.log('Ниже должен быть ответ? наверное:');
                         console.dir(data);
