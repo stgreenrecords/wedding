@@ -811,6 +811,11 @@ footer > div a, footer > div{
 }
 /*----------------Calendar FINISH*/
 
+.bgc_div{
+    background-color: #f4f4f4;
+    width: 100%;
+    height: 100%;
+}
 
 #partner-page-pages{  /*   Page */
     width: 65%;
@@ -819,8 +824,8 @@ footer > div a, footer > div{
     background-color: #fff;
     box-sizing: border-box;
     padding: 15px 3%;
-
 }
+
 .profil_name, .profil_secondname, .partner_speciality, .info_reit_block{
     text-align: center;
 }
@@ -842,10 +847,21 @@ footer > div a, footer > div{
 }
 
 .photo_unit{
+    position: relative;
     width: 31.3333%;
     box-sizing: border-box;
     padding: 0.5%;
     margin: 1%;
+    cursor: pointer;
+}
+
+.photo_unit:hover .photo_enhance{
+    position: absolute;
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/page/enhance_photo.png') center no-repeat;
+    width: 50%;
+    height:50%;
+    left: 25%;
+    top: 25%;
 }
 
 .partner_title{
@@ -901,6 +917,17 @@ footer > div a, footer > div{
     /* background: url('/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/edit.png') 95%  0% no-repeat;*/
     padding: 15px;
     margin: 10px auto;
+}
+
+.edit_avatar_btns{
+    background-color: #f4f4f455;
+    text-align: right;
+}
+
+.avatar_upd_icon,
+.avatar_remove_icon{
+    cursor: pointer;
+    padding-right: 10px;
 }
 
 #user_calc{

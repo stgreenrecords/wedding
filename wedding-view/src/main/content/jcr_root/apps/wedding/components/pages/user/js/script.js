@@ -60,22 +60,76 @@ var PORTAL = (function (PORTAL, $) {
             var phoneNum =  $self.find('.phone_string');
             var eMail = $self.find('.mail_string');
             var vkLink = $self.find('.vk_string');
+            var create_tender = $self.find('.create_tender_icon');
+            var edit_avatar = $self.find('.edit_avatar_btns');
 
 
             function myCabinet(){
 
                 btn_change.removeClass('hidden_full');
+                create_tender.removeClass('hidden_full');
                 btn_change.on('click', onChangeFields);
                 $self.find('.user_avatar_btn_mail').addClass('hidden_full');
-
+                create_tender.on('click', createTender);
 
             }
+
+            function createTender(){
+                //modalWindowsOn();
+                console.log('createTender ON');
+
+                var tenderSend = {};
+                var date = +new Date();
+                tenderSend.datePublication = date;
+                tenderSend.deadline = date + 3600000000;
+                tenderSend.shortText = 'Z,flf,fleeeee';
+                tenderSend.path = `${selectedPerson.resourcePath}/tenders`;
+                tenderSend.offers = ';kshfaksfh;aksdjfalks;jdhfalskdfbalskdfblaksdnblkajsfdlkasjdfb,.k';
+                tenderSend.moneyLimit = '500';
+                tenderSend.firstName = selectedPerson.firstName;
+                tenderSend.lastName = selectedPerson.lastName;
+                tenderSend.city = selectedPerson.city;
+                tenderSend.avatar  = selectedPerson.avatar;
+                tenderSend.backGroundImage = selectedPerson.backGroundImage;
+                tenderSend.id = selectedPerson.id;
+
+                console.dir(tenderSend);
+                console.log(tenderSend.path);
+
+
+
+                $.ajax({
+
+                    url: 'http://wedding-services.mycloud.by/services/rest.tenders/create.json',
+                    type: "POST",
+                    dataType: "json",
+                    data: tenderSend,
+                    /*  beforeSend: function (xhr) {
+                          xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+                          console.log("beforeSend post !");
+                          console.log();
+                      },*/
+                    success: function (data) {
+                        console.log('Ниже должен быть ответ? наверное:');
+                        console.dir(data);
+                    },
+                    error: function (e) {
+                        console.log('Что-то пошло не так :( ');
+                        console.log(e);
+                    }
+                });
+
+            }
+
+
+
 
             function onChangeFields(){
 
                 console.log('Я могу ВСЕ изменить!!!!');
                 btn_change.addClass('hidden_full');
                 btn_save.removeClass('hidden_full');
+                edit_avatar.removeClass('hidden_full');
                 onInputFields();
                 btn_save.one('click', saveChangeFields);
             }
@@ -103,6 +157,7 @@ var PORTAL = (function (PORTAL, $) {
 
                 var dataSend = {};
                 btn_save.addClass('hidden_full');
+                edit_avatar.addClass('hidden_full');
                 btn_change.removeClass('hidden_full');
 
                 dataSend.id = selectedPerson.id;
