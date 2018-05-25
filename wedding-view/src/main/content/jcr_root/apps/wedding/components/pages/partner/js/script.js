@@ -24,12 +24,10 @@ var PORTAL = (function (PORTAL, $) {
 
         // if (!getPartnerSpecCity){  //TODOC  - Подключить после подключения регистрации
         //    var getPartnerSpecCity = Cookies.get('partnerSpec') + '/'+ Cookies.get('partnerCity');
-        //    var getPartnerId =  Cookies.get('partnerId');
+        //    var getPartnerId =  Cookies.get('userId');
         // }
 
-
         var selectedPersonRequest = `http://wedding-services.mycloud.by/services/rest.partners/${getPartnerSpecCity}.json?id=${getPartnerId}`;
-
 
         console.log(selectedPersonRequest);
 
@@ -57,6 +55,7 @@ var PORTAL = (function (PORTAL, $) {
                     myCabinet();
                 }
 
+
                 if (selectedPerson.portfolio)
                     fillPhoto(selectedPerson.portfolio);
 
@@ -72,6 +71,132 @@ var PORTAL = (function (PORTAL, $) {
 
         var btn_change = $self.find('.avatar_btn_change');
         var btn_save = $self.find('.btn_change_save_change');
+        var btn_upPhoto = $self.find('.btn_upPhoto');
+        var input = document.querySelector('.input_upload');
+
+        (function upLoadImage(){
+            var preview = document.querySelector('.preview_upload-text');
+            input.style.opacity = 0;
+
+            input.addEventListener('change', updateImageDisplay);
+
+            function updateImageDisplay() {
+                while(preview.firstChild) {
+                    preview.removeChild(preview.firstChild);
+                }
+
+                var curFiles = input.files;
+
+                if(curFiles.length === 0) {
+                    var para = document.createElement('p');
+                    para.textContent = 'No files currently selected for upload';
+                    preview.appendChild(para);
+                } else {
+                    var list = document.createElement('ol');
+                    preview.appendChild(list);
+                    for(var i = 0; i < curFiles.length; i++) {
+                        var listItem = document.createElement('li');
+                        var para = document.createElement('p');
+                        if(validFileType(curFiles[i])) {
+                            para.textContent = 'File name ' + curFiles[i].name + ', file size ' + returnFileSize(curFiles[i].size) + '.';
+                            var image = document.createElement('img');
+                            image.src = window.URL.createObjectURL(curFiles[i]);
+
+                            listItem.appendChild(image);
+                            listItem.appendChild(para);
+
+                        } else {
+                            para.textContent = 'File name ' + curFiles[i].name + ': Not a valid file type. Update your selection.';
+                            listItem.appendChild(para);
+                        }
+
+                        list.appendChild(listItem);
+                    }
+                }
+            }
+
+            var fileTypes = [
+                'image/jpeg',
+                'image/pjpeg',
+                'image/png'
+            ];
+
+            function validFileType(file) {
+                for(var i = 0; i < fileTypes.length; i++) {
+                    if(file.type === fileTypes[i]) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            function returnFileSize(number) {
+                if(number < 1024) {
+                    return number + 'bytes';
+                } else if(number > 1024 && number < 1048576) {
+                    return (number/1024).toFixed(1) + 'KB';
+                } else if(number > 1048576) {
+                    return (number/1048576).toFixed(1) + 'MB';
+                }
+            }
+
+            btn_upPhoto.on('click', sendPortfolio)
+
+
+        })();
+
+
+        function sendPortfolio(){
+
+            var photoSend = {};
+
+            photoSend.id = selectedPerson.id;
+            photoSend.photo = input.value;
+            photoSend.portfolio = input.files;
+
+
+
+            sendChangeRequest(photoSend);
+            // if (photoSend.portfolio.length >= 1)
+
+        }
+
+
+
+        function sendChangeRequest(dataSend){
+
+            console.dir(photoSend);
+
+            console.log(' I am work if that  ');
+
+            // $.ajax({
+
+            //     url: 'http://wedding-services.mycloud.by/services/rest.partners/update.json',
+            //     type: 'PUT',
+            //     dataType: 'json',
+            //     data: dataSend,
+
+            //     beforeSend: function (xhr) {
+            //             xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+            //             console.log("beforeSend post !");
+            //             console.log();
+            //     },
+            //     success: function(data){
+            //         console.log('What you send for me?');
+            //         console.log(data);
+
+            //     }/* ,
+            //     error: function (e) {
+            //             console.log('Что-то пошло не так :( ');
+            //             console.log(e);
+            //     }*/
+
+            // });
+
+        }
+
+
 
         function myCabinet(){
 
@@ -89,16 +214,37 @@ var PORTAL = (function (PORTAL, $) {
             btn_change.addClass('hidden_full');
             btn_save.removeClass('hidden_full');
             btn_save.on('click', saveChangeFields);
-
+            onInputFields();
         }
 
         function saveChangeFields() {
 
             btn_save.addClass('hidden_full');
             btn_change.removeClass('hidden_full');
+
+
+            sendChangeRequest();
             console.log('Я могу ВСЕ Засейвить !!!!');
 
         }
+
+        function onInputFields(){
+
+        }
+
+
+        function sendChangeRequest(){
+
+
+
+
+            revertStandartFields();
+        }
+
+        function revertStandartFields(){
+
+        }
+
 
         function fillStrings(selectedPerson) {
 
@@ -123,22 +269,26 @@ var PORTAL = (function (PORTAL, $) {
 
         }
 
+
         function fillPhoto(photo){
 
             var wrapper = $self.find('.partner_photo-wrapper');
-
+            // todoc -сделать функцию отображения фоток по 12 шт. - когда сделают полный колбек.
             photo.forEach(function(elem){
 
                 console.log(elem);
-                wrapper.append(`<div class="photo_unit"> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> </div>`);
-                wrapper.append(`<div class="photo_unit"> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> </div>`);
-                wrapper.append(`<div class="photo_unit"> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> </div>`);
-                wrapper.append(`<div class="photo_unit"> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> </div>`);
-                wrapper.append(`<div class="photo_unit"> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> </div>`);
-                wrapper.append(`<div class="photo_unit"> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> </div>`);
+                wrapper.append(`<div class='photo_unit'> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> <div class='photo_enhance'> </div> </div>`);
+                wrapper.append(`<div class='photo_unit'> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> <div class='photo_enhance'> </div> </div>`);
+                wrapper.append(`<div class='photo_unit'> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> <div class='photo_enhance'> </div> </div>`);
+                wrapper.append(`<div class='photo_unit'> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> <div class='photo_enhance'> </div> </div>`);
+                wrapper.append(`<div class='photo_unit'> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> <div class='photo_enhance'> </div> </div>`);
+                wrapper.append(`<div class='photo_unit'> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> <div class='photo_enhance'> </div> </div>`);
+                wrapper.append(`<div class='photo_unit'> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> <div class='photo_enhance'> </div> </div>`);
+
             });
 
         }
+
 
         function fillVidosy(video){
 
@@ -156,7 +306,7 @@ var PORTAL = (function (PORTAL, $) {
 
         }
 
-        function fillComments(comments){ // todoc - расширить и переделать , когда доделают запрос
+        function fillComments(comments){ // todo - расширить и переделать , когда доделают запрос
 
             var comm = $self.find('.comment_field');
             var wrapper = $self.find('.partner_comments-wrapper');
@@ -171,9 +321,8 @@ var PORTAL = (function (PORTAL, $) {
         }
 
 
-
-
         (function(){  //  функция переключения страниц
+
             var page_section_btn = {};
             page_section_btn.about = $self.find('#partner_about_btn');
             page_section_btn.photo = $self.find('#partner_photo_btn');
@@ -213,6 +362,7 @@ var PORTAL = (function (PORTAL, $) {
                 $self.find('#'+event.target.id).addClass('partner_menu_btn_active');
 
             }
+
         }());
 
     };

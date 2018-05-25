@@ -117,7 +117,7 @@
 
             </section>
 
-            <section id="partner_photo" class="hidden_full">
+            <section id="partner_photo" >
 
                 <div>
 
@@ -127,11 +127,26 @@
 
                     </div>
 
+                    <div  class="upload_form">
+
+                        <div>
+                            <label for="image_uploads">Выберите файлы для загрузки (PNG, JPG)</label>
+                            <input class="input_upload" type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple>
+                        </div>
+                        <div class="preview_upload">
+                            <p class="preview_upload-text">  </p>
+                        </div>
+                        <div>
+                            <button class="btn_upPhoto">Submit</button>
+                        </div>
+
+                    </div>
+
                 </div>
 
             </section>
 
-            <section id="partner_video"  >
+            <section id="partner_video" class="hidden_full" >
 
                 <div class="partner_video-wrapper">
 
