@@ -72,20 +72,20 @@ var PORTAL = (function (PORTAL, $) {
         var btn_change = $self.find('.avatar_btn_change');
         var btn_save = $self.find('.btn_change_save_change');
         var btn_upPhoto = $self.find('.btn_upPhoto');
-        var input = document.querySelector('.input_upload');
+        var input_upload = document.querySelector('.input_upload');
 
         (function upLoadImage(){
             var preview = document.querySelector('.preview_upload-text');
-            input.style.opacity = 0;
+            input_upload.style.opacity = 0;
 
-            input.addEventListener('change', updateImageDisplay);
+            input_upload.addEventListener('change', updateImageDisplay);
 
             function updateImageDisplay() {
                 while(preview.firstChild) {
                     preview.removeChild(preview.firstChild);
                 }
 
-                var curFiles = input.files;
+                var curFiles = input_upload.files;
 
                 if(curFiles.length === 0) {
                     var para = document.createElement('p');
@@ -152,8 +152,8 @@ var PORTAL = (function (PORTAL, $) {
             var photoSend = {};
 
             photoSend.id = selectedPerson.id;
-            photoSend.photo = input.value;
-            photoSend.portfolio = input.files;
+            photoSend.photo = input_upload.value;
+            photoSend.portfolio = input_upload.files;
 
 
 
