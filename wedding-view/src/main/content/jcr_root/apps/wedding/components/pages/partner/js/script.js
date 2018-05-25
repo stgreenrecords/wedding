@@ -155,48 +155,44 @@ var PORTAL = (function (PORTAL, $) {
 
             var photoSend = {};
 
+            // if (photoSend.portfolio || photoSend.portfolio.length >= 1){
             photoSend.id = selectedPerson.id;
             photoSend.photo = input_upload.value;
             photoSend.portfolio = input_upload.files;
-
-
-
-            sendChangeRequest(photoSend);
-            // if (photoSend.portfolio.length >= 1)
+            sendChangeReq(photoSend);
 
         }
 
 
 
-        function sendChangeRequest(dataSend){
+        function sendChangeReq(dataSend){
 
-            console.dir(photoSend);
+            console.dir(dataSend);
 
             console.log(' I am work if that  ');
 
-            // $.ajax({
+            $.ajax({
 
-            //     url: 'http://wedding-services.mycloud.by/services/rest.partners/update.json',
-            //     type: 'PUT',
-            //     dataType: 'json',
-            //     data: dataSend,
+                url: 'http://wedding-services.mycloud.by/services/rest.partners/update.json',
+                type: 'PUT',
+                dataType: 'json',
+                data: dataSend,
+                // beforeSend: function (xhr) {
+                //         xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+                //         console.log("beforeSend post !");
+                //         console.log();
+                // },
+                success: function(data){
+                    console.log('What you send for me?');
+                    console.log(data);
 
-            //     beforeSend: function (xhr) {
-            //             xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
-            //             console.log("beforeSend post !");
-            //             console.log();
-            //     },
-            //     success: function(data){
-            //         console.log('What you send for me?');
-            //         console.log(data);
+                },
+                error: function (e) {
+                    console.log('Что-то пошло не так :( ');
+                    console.log(e);
+                }
 
-            //     }/* ,
-            //     error: function (e) {
-            //             console.log('Что-то пошло не так :( ');
-            //             console.log(e);
-            //     }*/
-
-            // });
+            });
 
         }
 
