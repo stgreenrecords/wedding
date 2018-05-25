@@ -76,7 +76,7 @@ var PORTAL = (function (PORTAL, $) {
 
         (function upLoadImage(){
             var preview = document.querySelector('.preview_upload-text');
-            input_upload.style.opacity = 0;
+            // input_upload.style.opacity = 0;
 
             input_upload.addEventListener('change', updateImageDisplay);
 
