@@ -74,9 +74,9 @@ var PORTAL = (function (PORTAL, $) {
         var btn_upPhoto = $self.find('.btn_upPhoto');
         var input_upload = document.querySelector('.input_upload');
 
-        (function upLoadImage(){
+        function upLoadImage(){
             var preview = document.querySelector('.preview_upload-text');
-            // input_upload.style.opacity = 0;
+            input_upload.style.opacity = 0;
 
             input_upload.addEventListener('change', updateImageDisplay);
 
@@ -144,7 +144,9 @@ var PORTAL = (function (PORTAL, $) {
             btn_upPhoto.on('click', sendPortfolio)
 
 
-        })();
+        }
+        upLoadImage();
+
 
 
         function sendPortfolio(){
