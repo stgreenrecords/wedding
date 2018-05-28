@@ -48,6 +48,9 @@ var PORTAL = (function (PORTAL, $) {
                 this.style.color = "#555";
             });
 
+            modalW.modalle("#entrance-form");
+            modalW.listenerModal();
+
             function showEntranceForm() {
 
                 // openMWindow(".window-entrance");
