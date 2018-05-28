@@ -50,8 +50,8 @@ var PORTAL = (function (PORTAL, $) {
 
             function showEntranceForm() {
 
-                openMWindow(".window-entrance");
-
+                // openMWindow(".window-entrance");
+                modalW.openMWindow(".window-entrance");
                 if (userEmailFromCookie != 'undefined') {
                     $self.find('#user_email').val(userEmailFromCookie);
                 }
@@ -136,6 +136,7 @@ var PORTAL = (function (PORTAL, $) {
                 $self.find("#registration-lastName").val(dataRegistration.lastName) ;
                 $self.find("#registration-email").val(dataRegistration.email);
                 $self.find("#vk_finish-user").val(dataRegistration.vkLink); // third step - relocate if will need.
+                $self.find("#vk_finish-partner").val(dataRegistration.vkLink); // third step - relocate if will need.
 
             }
 
