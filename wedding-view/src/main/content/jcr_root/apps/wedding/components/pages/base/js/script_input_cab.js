@@ -134,7 +134,8 @@ var PORTAL = (function (PORTAL, $) {
 
                 $self.find("#registration-firstName").val(dataRegistration.firstName) ;
                 $self.find("#registration-lastName").val(dataRegistration.lastName) ;
-                $self.find("#registration-email").val(dataRegistration.email) ;
+                $self.find("#registration-email").val(dataRegistration.email);
+                $self.find("#vk_finish-user").val(dataRegistration.vkLink); // third step - relocate if will need.
 
             }
 
@@ -152,6 +153,7 @@ var PORTAL = (function (PORTAL, $) {
                 dataRegistration.lastName =  userLoginInfo.lastName;
                 dataRegistration.email =  userLoginInfo.email;
                 dataRegistration.authType = userLoginInfo.authType;
+                dataRegistration.vkLink = userLoginInfo.href;
             }
 
             enter.addEventListener("click", function(){
@@ -460,17 +462,18 @@ var PORTAL = (function (PORTAL, $) {
                     document.getElementById("vk_api_transport").appendChild(el);
                 }, 0);*/
 
+                FB.init({
+                    appId            : '119308788738222',
+                    autoLogAppEvents : true,
+                    xfbml            : true,
+                    version          : 'v2.3'
+                });
 
 
-                window.fbAsyncInit = function() {
+             /*   window.fbAsyncInit = function() {
 
-                    FB.init({
-                        appId            : '119308788738222',
-                        autoLogAppEvents : true,
-                        xfbml            : true,
-                        version          : 'v2.3'
-                    });
-                };
+
+                };*/
 
                 (function(d, s, id){
                     var js, fjs = d.getElementsByTagName(s)[0];
