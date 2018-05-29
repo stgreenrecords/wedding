@@ -16,7 +16,7 @@
 
     <div class="partner-page-wrapper">
 
-        <aside id="partner_aside" class="">
+        <aside id="partner_aside"  class="" >
 
             <div class="avatar_and_btn">
 
@@ -27,19 +27,25 @@
                     </p>
                 </div>
 
+                <!-- 	<div class="partner_avatar_btn">
+                        <div class="partner_avatar_btn_mail"><img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/wright.png" alt="avatar_btn_mail" title="Написать сообщение"> </div>
+                        <div class="partner_avatar_btn_likes"><img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/estimate.png" alt="avatar_btn_likes" title="Оценить"></div>
+                        <div class="partner_avatar_btn_calc"><img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/import_calc.png" alt="avatar_btn_calc" title="Добавить в калькулятор"></div>
+                    </div> -->
+
                 <div class="partner_avatar_btn">
 
                     <div class="partner_avatar_btn_mail">
                         <img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/wright.png"
-                            alt="avatar_btn_mail" title="Написать сообщение">
+                             alt="avatar_btn_mail" title="Написать сообщение">
                     </div>
                     <div class="partner_avatar_btn_likes">
                         <img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/estimate.png"
-                            alt="avatar_btn_likes" title="Оценить">
+                             alt="avatar_btn_likes" title="Оценить">
                     </div>
                     <div class="partner_avatar_btn_calc">
                         <img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/import_calc.png"
-                            alt="avatar_btn_calc" title="Добавить в калькулятор">
+                             alt="avatar_btn_calc" title="Добавить в калькулятор">
                     </div>
                     <div class="avatar_btn_change hidden_full">
                         <img src="/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/edit_profil.png"
@@ -54,16 +60,13 @@
 
             </div>
 
-            <p class="profil_name"></p>
-            <p class="profil_secondname"></p>
-            <p class="partner_speciality"></p>
+            <p class="profil_name"> </p>
+            <p class="profil_secondname"> </p>
+            <p class="partner_speciality"> </p>
 
             <div class="info_reit_block">
-                <span class="profil_views_icon" title="Показатель общего количества просмотров"> <img
-                        src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/count_views.png"
-                        alt="views_icon"> 42 </span>
-                <span class="profil_likes_icon" title="Показатель общего количества оценок"> <img
-                        src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/count_mark.png" alt="views_icon"> 15 </span>
+                <span class="profil_views_icon" title="Показатель общего количества просмотров"> <img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/count_views.png" alt="views_icon" > 42 </span>
+                <span class="profil_likes_icon" title="Показатель общего количества оценок"> <img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/count_mark.png" alt="views_icon" > 15 </span>
                 <div class="profil_reiting_string">
                     <div id="reit_heart1" class="reit_heart_all"></div>
                     <div id="reit_heart2" class="reit_heart_all"></div>
@@ -73,16 +76,16 @@
                 </div>
             </div>
 
-            <p class="info_string prise_string">1 - 150 рублей</p>
+            <p class="info_string prise_string"> <span class="prise_start">1</span> - <span class="prise_end">150 </span> рублей</p>
             <p class="info_string phone_string">+375...</p>
             <p class="info_string mail_string">mail...</p>
-            <p class="info_string link_string"> http://... </p>
+            <p class="info_string link_string">http://... </p>
             <p class="info_string vk_string">vk.com/...</p>
             <p class="info_string fb_string">facebook.com/...</p>
             <p class="info_string insta_string">instagram.com/...</p>
 
             <div class="partner_aside_calendar">
-                <div class="calendar_date_fild"></div>
+                <div class="calendar_date_fild"> </div>
 
                 <div class="calendar_main_fild">
                     <div id='calendar'></div>
@@ -99,19 +102,20 @@
 
             </div>
 
+
         </aside>
+
 
 
         <div id="partner-page-pages">
 
             <section id="partner_about_oneself" class="hidden_full">
 
-                <div>
+                <div >
 
                     <h2 class="partner_title"> О себе </h2>
 
-                    <p class="content content_about_oneself"> Тут Вам необходимо коротко, сторок на 20, расписать
-                        информацию О СЕБЕ.</p>
+                    <p class="content content_about_oneself"> Тут Вам необходимо коротко, сторок на 20, расписать информацию О СЕБЕ.</p>
 
                 </div>
 
@@ -127,7 +131,9 @@
 
                     </div>
 
-                    <div  class="upload_form">
+
+                    <!-- <form  class="upload_form" method="post" enctype="multipart/form-data"> -->
+                    <div  class="upload_form hidden_full">
 
                         <div>
                             <label for="image_uploads">Выберите файлы для загрузки (PNG, JPG)</label>
@@ -136,11 +142,20 @@
                         <div class="preview_upload">
                             <p class="preview_upload-text">  </p>
                         </div>
-                        <div>
-                            <button class="btn_upPhoto">Submit</button>
+
+
+                        <div id='btn_upPhoto' class="add_btn">
+                            <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
                         </div>
 
+                        <!-- 	  <div>
+                                <button id="btn_upPhoto">Submit</button>
+                              </div> -->
+
                     </div>
+
+                    <!-- <input type="file" multiple onchange="previewFile()"><br>
+                    <img src="" height="200" alt="Image preview...">		 -->
 
                 </div>
 
@@ -152,12 +167,11 @@
 
                     <h2 class="partner_title"> Видео </h2>
 
-                    <div >  <!-- class="hidden_full" -->
+                    <div >  <!--  class="hidden_full" -->
 
                         <div class="video_field ">
 
-                            <iframe class="video_item" src="https://www.youtube.com/embed/QCBtOO1bBKo?rel=0"
-                                    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <iframe class="video_item" src="https://www.youtube.com/embed/QCBtOO1bBKo?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
                         </div>
 
@@ -169,18 +183,27 @@
 
                     </div>
 
+                    <div id='btn_add-video' class="add_btn hidden_full">
+                        <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
+                    </div>
+
+
                 </div>
 
             </section>
 
             <section id="partner_stock" class="hidden_full">
 
-                <div>
+                <div >
 
                     <h2 class="partner_title"> Акции </h2>
 
-                    <p class="content content_"> stock </p>
+                    <p class="content content_event"> stock </p>
 
+                </div>
+
+                <div id='btn_add-event' class="add_btn hidden_full">
+                    <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
                 </div>
 
 
@@ -195,11 +218,10 @@
                     <!-- <p class="content content_"> comments </p> -->
                     <div class="hidden_full">
                         <div class="comment_field">
-                            <div class="mini-avatar"></div>
-                            <div class="comment_field-author_name"> Эйчантрис Васильевна</div>
-                            <div class="comment_field-author_category"> vj</div>
-                            <p class="comment_field-text"> Здравствуйте Олеся, меня зовут Мария. Буду рада предложить
-                                Вам отыграть свадьбу на все 200.
+                            <div class="mini-avatar"> </div>
+                            <div class="comment_field-author_name"> Эйчантрис Васильевна </div>
+                            <div class="comment_field-author_category"> vj </div>
+                            <p class="comment_field-text"> Здравствуйте Олеся, меня зовут Мария. Буду рада предложить Вам отыграть свадьбу на все 200.
                                 У нас в арсенале - дерижабль с обезьянами, танцующие пингвины и слон-бормоглот.
                             </p>
                             <div class="comment_field-date_fild"> 18.04.2018</div>
@@ -209,11 +231,11 @@
                 </div>
 
                 <div class="comment-inter_area">
-                    <textarea class="comment_inter" name="comment_inter" placeholder="Оставьте комментарий"> </textarea>
+                    <textarea class="comment_inter" name="comment_inter" placeholder="Оставьте комментарий" > </textarea>
                 </div>
 
-                <div class="add_btn">
-                    <img src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
+                <div id='btn_add-comment' class="add_btn">
+                    <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
                 </div>
 
 

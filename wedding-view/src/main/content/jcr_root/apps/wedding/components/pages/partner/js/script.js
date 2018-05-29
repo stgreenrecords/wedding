@@ -39,12 +39,10 @@ var PORTAL = (function (PORTAL, $) {
             success: function (data) {
 
                 if (data.length === 0){
-                    // document.location.href = '/content/wedding/catalog/category.html';
                     console.log(" NO data !!!!!!!!!!!!");
                 }
 
                 selectedPerson = data[0];
-
                 console.log('INFO:');
                 console.dir(selectedPerson);
 
@@ -54,7 +52,6 @@ var PORTAL = (function (PORTAL, $) {
                     console.log("It's REALY MY CABINET  of Partner  !!!!");
                     myCabinet();
                 }
-
 
                 if (selectedPerson.portfolio)
                     fillPhoto(selectedPerson.portfolio);
@@ -71,14 +68,113 @@ var PORTAL = (function (PORTAL, $) {
 
         var btn_change = $self.find('.avatar_btn_change');
         var btn_save = $self.find('.btn_change_save_change');
-        var btn_upPhoto = $self.find('.btn_upPhoto');
+
+        var cabinetBtn = {};
+        var cabinetField = {};
+        var cabinetAttrHide = {};
+        var cabinetAttrVision = {};
+
+        cabinetAttrHide.btn_mail = $self.find('.partner_avatar_btn_mail');
+        cabinetAttrHide.btn_likes = $self.find('.partner_avatar_btn_likes');
+        cabinetAttrHide.btn_calc = $self.find('.partner_avatar_btn_calc');
+        cabinetAttrHide.comment_area = $self.find('.comment-inter_area');
+        cabinetAttrHide.btn_add_comment = $self.find('#btn_add-comment');
+
+        cabinetAttrVision.upload_form =  $self.find('.upload_form');
+        cabinetAttrVision.btn_add_video =  $self.find('#btn_add-video');
+        cabinetAttrVision.btn_add_event =  $self.find('#btn_add-event');
+
+        cabinetField.firstName = $self.find('.profil_name');
+        cabinetField.lastName = $self.find('.profil_secondname');
+        cabinetField.priceStart = $self.find('.prise_start');
+        cabinetField.priceEnd = $self.find('.prise_end');
+        cabinetField.phone = $self.find('.phone_string');
+        cabinetField.siteLink = $self.find('.link_string');
+        cabinetField.vkLink = $self.find('.vk_string');
+        cabinetField.facebookLink = $self.find('.fb_string');
+        cabinetField.instagramLink = $self.find('.insta_string');
+
+        var btn_upPhoto = $self.find('#btn_upPhoto');
         var input_upload = document.querySelector('.input_upload');
+        var inputFinishVal = {};
+
+        function onChangeFields(){
+
+            btn_change.addClass('hidden_full');
+            btn_save.removeClass('hidden_full');
+            btn_save.on('click', saveChangeFields);
+            onInputFields();
+
+        }
+
+        function onInputFields(){
+
+            var cabinetFieldVal = {};
+
+            for (props in cabinetField){
+                cabinetFieldVal[props] = cabinetField[props].html();
+                inputFinishVal[props] = cabinetField[props].html(`<input value=${cabinetFieldVal[props]}>`);
+            }
+
+        }
+
+        function saveChangeFields() {
+
+            btn_save.addClass('hidden_full');
+            btn_change.removeClass('hidden_full');
+            var dataSend = {};
+
+            for (props in cabinetField){
+                dataSend[props] = inputFinishVal[props].find('input').val();
+                inputFinishVal[props].html(`${dataSend[props]}`);
+            }
+
+            sendChangeRequest(dataSend);
+
+        }
+
+        function sendChangeRequest(dataSend){
+
+            inputFinishVal = {};
+            dataSend.id = selectedPerson.id;
+            console.dir(dataSend);
+
+            $.ajax({
+
+                url: 'http://wedding-services.mycloud.by/services/rest.partners/update.json',
+                type: 'PUT',
+                dataType: 'json',
+                data: dataSend,
+                success: function(data){
+                    console.log('What you send for me?');
+                    console.log(data);
+                },
+                error: function (e) {
+                    console.log('Что-то пошло не так :( ');
+                    console.log(e);
+                }
+
+            });
+
+        }
+
+        function myCabinet(){
+
+            btn_change.removeClass('hidden_full');
+            btn_change.on('click', onChangeFields);
+
+            for (prop in cabinetAttrHide)
+                cabinetAttrHide[prop].addClass('hidden_full');
+
+            for (prop in cabinetAttrVision)
+                cabinetAttrVision[prop].removeClass('hidden_full');
+
+        }
 
         function upLoadImage(){
 
             var preview = document.querySelector('.preview_upload-text');
-
-            // input_upload.style.opacity = 0;
+            input_upload.style.opacity = 0;
 
             input_upload.addEventListener('change', updateImageDisplay);
 
@@ -143,12 +239,10 @@ var PORTAL = (function (PORTAL, $) {
                 }
             }
 
-            btn_upPhoto.on('click', sendPortfolio)
-
+            btn_upPhoto.on('click', sendPortfolio);
 
         }
         upLoadImage();
-
 
 
         function sendPortfolio(){
@@ -156,13 +250,13 @@ var PORTAL = (function (PORTAL, $) {
             var photoSend = {};
 
             // if (photoSend.portfolio || photoSend.portfolio.length >= 1){
-            photoSend.id = selectedPerson.id;
-            photoSend.photo = input_upload.value;
+
+            // photoSend.photo = input_upload.value;
             photoSend.portfolio = input_upload.files;
-            sendChangeReq(photoSend);
+            // sendChangeReq(photoSend);
+            sendChangeRequest(photoSend);
 
         }
-
 
 
         function sendChangeReq(dataSend){
@@ -197,63 +291,16 @@ var PORTAL = (function (PORTAL, $) {
         }
 
 
-
-        function myCabinet(){
-
-            btn_change.removeClass('hidden_full');
-            btn_change.on('click', onChangeFields);
-            $self.find('.partner_avatar_btn_calc').addClass('hidden_full');
-            $self.find('.partner_avatar_btn_mail').addClass('hidden_full');
-            $self.find('.partner_avatar_btn_likes').addClass('hidden_full');
-
-        }
-
-        function onChangeFields(){
-
-            console.log('Я могу ВСЕ изменить!!!!');
-            btn_change.addClass('hidden_full');
-            btn_save.removeClass('hidden_full');
-            btn_save.on('click', saveChangeFields);
-            onInputFields();
-        }
-
-        function saveChangeFields() {
-
-            btn_save.addClass('hidden_full');
-            btn_change.removeClass('hidden_full');
-
-
-            sendChangeRequest();
-            console.log('Я могу ВСЕ Засейвить !!!!');
-
-        }
-
-        function onInputFields(){
-
-        }
-
-
-        function sendChangeRequest(){
-
-
-
-
-            revertStandartFields();
-        }
-
-        function revertStandartFields(){
-
-        }
-
-
         function fillStrings(selectedPerson) {
 
             $self.find('.profil_name').text(selectedPerson.firstName);
             $self.find('.profil_secondname').text(selectedPerson.lastName);
             $self.find('.partner_speciality').text(selectedPerson.speciality);
 
-            if (selectedPerson.priceEnd || selectedPerson.priceStart)
-                $self.find('.prise_string').text(`${selectedPerson.priceStart}-${selectedPerson.priceEnd} рублей`);
+            if (selectedPerson.priceStart)
+                $self.find('.prise_start').text(selectedPerson.priceStart);
+            if (selectedPerson.priceEnd)
+                $self.find('.prise_end').text(selectedPerson.priceEnd);
             if (selectedPerson.phone)
                 $self.find('.phone_string').text(selectedPerson.phone);
             if (selectedPerson.email)
