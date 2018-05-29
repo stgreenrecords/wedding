@@ -173,8 +173,14 @@ var PORTAL = (function (PORTAL, $) {
 
             console.log(content);
 
-            var commentInfo = {content:content,authorID:Cookies.get('userId'),authorCity:Cookies.get('city')}; //[]
+            var commentInfo = [{content:content,authorID:Cookies.get('userId'),authorCity:Cookies.get('city')}];
             sendChangeRequest({comments:commentInfo});
+             commentInfo = {content:content,authorID:Cookies.get('userId'),authorCity:Cookies.get('city')}; //[]
+            sendChangeRequest({comments:commentInfo});
+
+            sendChangeRequest({comments:content});
+
+
 
         }
 
