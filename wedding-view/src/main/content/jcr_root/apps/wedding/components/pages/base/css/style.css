@@ -1163,6 +1163,10 @@ footer > div a, footer > div{
     background-image: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/grey_heart_reit.png');
 }
 
+.add-video-field input{
+    width: 400px;
+}
+
 
 
 

@@ -22,8 +22,10 @@
 
                 <div class="partner_avatar">
                     <p class="edit_avatar_btns hidden_full">
-                        <img class="avatar_upd_icon" src='/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/upd_photo.png' alt="avatar_upd_icon">
-                        <img class="avatar_remove_icon " src='/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/remove_photo.png' alt="avatar_remove_icon">
+                        <img class="avatar_upd_icon" src="/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/upd_photo.png"
+                             title="Изменить аватар" alt="avatar_upd_icon">
+                        <img class="avatar_remove_icon " src="/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/remove_photo.png"
+                             title="Удалить аватар" alt="avatar_remove_icon">
                     </p>
                 </div>
 
@@ -82,7 +84,7 @@
                 <div class="calendar_date_fild"> </div>
 
                 <div class="calendar_main_fild">
-                    <div id='calendar'></div>
+                    <div id="calendar"></div>
                 </div>
 
             </div>
@@ -103,16 +105,15 @@
 
         <div id="partner-page-pages">
 
-            <section id="partner_about_oneself">
+            <section id="partner_about_oneself"  class="hidden_full">
 
                 <div >
 
                     <h2 class="partner_title"> О себе </h2>
 
-                    <!-- <p class="content content_about_oneself_my hidden_full"> Тут Вам необходимо коротко, сторок на 20, расписать информацию О СЕБЕ.</p> -->
                     <p class="content content_about_oneself"> Партнер еще не заполнил информацию о себе.</p>
 
-                    <div id='btn_add-text' class="add_btn hidden_full">
+                    <div id="btn_add-text" class="add_btn hidden_full">
                         <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
                     </div>
 
@@ -131,7 +132,6 @@
                     </div>
 
 
-                    <!-- <form  class="upload_form" method="post" enctype="multipart/form-data"> -->
                     <div  class="upload_form hidden_full">
 
                         <div>
@@ -143,47 +143,38 @@
                         </div>
 
 
-                        <div id='btn_upPhoto' class="add_btn">
+                        <div id="btn_upPhoto" class="add_btn">
                             <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
                         </div>
 
 
+
                     </div>
+
 
                 </div>
 
             </section>
 
-            <section id="partner_video" class="hidden_full" >
+            <section id="partner_video" >
 
-                <div class="partner_video-wrapper">
+                <div >
 
                     <h2 class="partner_title"> Видео </h2>
 
-                    <div >  <!--  class="hidden_full" -->
+                    <div class="partner_video-wrapper">
 
-                        <div class="video_field ">
+                        <div class="video_field "> <!--  class="hidden_full" -->
 
-                            <video tabindex="-1" class="video-stream html5-main-video" controlslist="nodownload"
-                                   style="width: 531px; height: 418px; left: 0px; top: -418px;"
-                                   src="https://www.youtube.com/watch?v=QCBtOO1bBKo">
-                                <!-- src="blob:https://www.youtube.com/b2c31dc5-370d-40e2-852a-4d623709b3f5"> -->
-
-                            </video>
-
-                            <!-- <iframe class="video_item" src="https://www.youtube.com/embed/QCBtOO1bBKo?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>						    -->
+                             <iframe class="video_item" src="https://www.youtube.com/embed/QCBtOO1bBKo?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
                         </div>
 
-                        <!--  <iframe id = "receiver" src = "https://www.youtube.com/embed/QCBtOO1bBKo?rel=0"  height = "200">
-
-                           <p> Ваш браузер не поддерживает iframe. </p>
-
-                         </iframe> -->
-
                     </div>
 
-                    <div id='btn_add-video' class="add_btn hidden_full">
+                    <p class="add-video-field"></p>
+
+                    <div id="btn_add-video" class="add_btn hidden_full">
                         <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
                     </div>
 
@@ -202,7 +193,7 @@
 
                 </div>
 
-                <div id='btn_add-event' class="add_btn hidden_full">
+                <div id="btn_add-event" class="add_btn hidden_full">
                     <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
                 </div>
 
@@ -234,7 +225,7 @@
                     <textarea class="comment_inter" name="comment_inter" placeholder="Оставьте комментарий" > </textarea>
                 </div>
 
-                <div id='btn_add-comment' class="add_btn">
+                <div id="btn_add-comment" class="add_btn">
                     <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
                 </div>
 

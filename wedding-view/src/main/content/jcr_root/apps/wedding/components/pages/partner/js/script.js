@@ -164,6 +164,17 @@ var PORTAL = (function (PORTAL, $) {
 
         }
 
+        cabinetAttrHide.btn_add_comment.on('click', sendComment);
+
+        function sendComment(){
+
+            var content = $self.find('.trumbowyg-editor').html();
+            $self.find('.trumbowyg-editor').html('');
+            console.log(content);
+            sendChangeRequest({comments:content});
+
+        }
+
         function myCabinet(){
 
             btn_change.removeClass('hidden_full');
@@ -176,8 +187,26 @@ var PORTAL = (function (PORTAL, $) {
                 cabinetAttrVision[prop].removeClass('hidden_full');
 
             cabinetAttrVision.btn_add_text.one('click', showInnerText);
+            cabinetAttrVision.btn_add_video.one('click', showInnerVideo);
+            // cabinetAttrVision.btn_add_event.one('click', showInnerEvent); todoc - подумать как реализовать
+            cabinetAttrHide.btn_add_comment.off('click', sendComment);
 
         }
+
+        function showInnerVideo(){
+            $self.find('.add-video-field').html(`<input value="Вставьте вместо это текста ссылку на Ваше видео с YouTube">`);
+            cabinetAttrVision.btn_add_video.one('click', saveInnerVideo);
+        }
+
+        function saveInnerVideo(){
+            var link =  $self.find('.add-video-field input').val();
+            $self.find('.add-video-field').html('');
+            sendChangeRequest({videos:link}); // todoc - слать надо массив - в случае подтверждения изменить !!!
+            cabinetAttrVision.btn_add_video.one('click', showInnerVideo);
+        }
+
+
+
 
         function showInnerText(){
             var textAreal = $self.find('.content_about_oneself');
@@ -280,13 +309,13 @@ var PORTAL = (function (PORTAL, $) {
             photo.forEach(function(elem){
 
                 console.log(elem);
-                wrapper.append(`<div class='photo_unit'> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> <div class='photo_enhance'> </div> </div>`);
-                wrapper.append(`<div class='photo_unit'> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> <div class='photo_enhance'> </div> </div>`);
-                wrapper.append(`<div class='photo_unit'> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> <div class='photo_enhance'> </div> </div>`);
-                wrapper.append(`<div class='photo_unit'> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> <div class='photo_enhance'> </div> </div>`);
-                wrapper.append(`<div class='photo_unit'> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> <div class='photo_enhance'> </div> </div>`);
-                wrapper.append(`<div class='photo_unit'> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> <div class='photo_enhance'> </div> </div>`);
-                wrapper.append(`<div class='photo_unit'> <img src='http://wedding-services.mycloud.by${elem}' alt='photo-unit'> <div class='photo_enhance'> </div> </div>`);
+                wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
+                wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
+                wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
+                wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
+                wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
+                wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
+                wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
 
             });
 
@@ -301,7 +330,7 @@ var PORTAL = (function (PORTAL, $) {
             video.forEach(function(elem, i, arr){
 
                 var newItem = vid.clone();
-                // newItem.find('.video_item').attr('src', elem);
+                newItem.find('.video_item').attr('src', elem);
                 console.log(elem);
                 wrapper.append(newItem);
 
@@ -309,7 +338,7 @@ var PORTAL = (function (PORTAL, $) {
 
         }
 
-        function fillComments(comments){ // todo - расширить и переделать , когда доделают запрос
+        function fillComments(comments){ // todoc - расширить и переделать , когда доделают запрос
 
             var comm = $self.find('.comment_field');
             var wrapper = $self.find('.partner_comments-wrapper');
