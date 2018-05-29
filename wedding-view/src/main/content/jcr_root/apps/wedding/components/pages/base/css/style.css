@@ -1159,7 +1159,9 @@ footer > div a, footer > div{
     cursor: pointer;
 }
 
-
+#reit_heart5{   /*relocate late*/
+    background-image: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/grey_heart_reit.png');
+}
 
 
 

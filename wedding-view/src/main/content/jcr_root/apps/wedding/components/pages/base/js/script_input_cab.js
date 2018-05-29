@@ -48,7 +48,7 @@ var PORTAL = (function (PORTAL, $) {
                 this.style.color = "#555";
             });
 
-            modalW.modalle("#entrance-form");
+            modalW.modalle("#entrance-form"); //
             modalW.listenerModal();
 
             function showEntranceForm() {
@@ -98,13 +98,13 @@ var PORTAL = (function (PORTAL, $) {
                 modal.style.visibility = "hidden";
             }*/
 
-            function openMWindow(query){ //gg
+      /*      function openMWindow(query){ //gg
                 modal.style.visibility = "visible";
                 var mwindow3 = document.querySelector(query);
                 mwindow3.style.visibility = "visible";
                 mwindow3.style.left = (document.documentElement.clientWidth - mwindow3.getBoundingClientRect().width)/2 + "px";
                 mwindow3.style.top = (document.documentElement.clientHeight - mwindow3.getBoundingClientRect().height)/3 + "px";
-            }
+            }*/
 
             /*---*/
 
@@ -216,7 +216,7 @@ var PORTAL = (function (PORTAL, $) {
 
             function secondStepRegWindow(){
                 modalW.closeMWindow(".window-registation");
-                openMWindow(".window-registation-step2");
+                modalW.openMWindow(".window-registation-step2");
             }
 
             reg_futher2.addEventListener("click", function(){
@@ -240,7 +240,7 @@ var PORTAL = (function (PORTAL, $) {
             function lastStepRegPartner(){
 
                 modalW.closeMWindow(".window-registation-step2");
-                openMWindow(".window-registation-step3-partner");
+                modalW.openMWindow(".window-registation-step3-partner");
 
                 $.ajax({ // Запрос на добавление всех категорий в селект
                     url: "http://wedding-services.mycloud.by/services/rest.catalog-categories/home/users/wedding/partners.json",
@@ -380,7 +380,7 @@ var PORTAL = (function (PORTAL, $) {
             function lastStepRegUser(){
 
                 modalW.closeMWindow(".window-registation-step2");
-                openMWindow(".window-registation-step3-user");
+                modalW.openMWindow(".window-registation-step3-user");
 
                 $self.find("#btn-registration-finish-user").on("click", function(){
 
