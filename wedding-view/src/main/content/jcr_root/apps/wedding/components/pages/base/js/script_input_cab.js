@@ -89,14 +89,14 @@ var PORTAL = (function (PORTAL, $) {
             }
 
             function enterOfForm(){
-                closeMWindow(".window-entrance");
+                modalW.closeMWindow(".window-entrance");
                 showCabinetSuccess();
             }
 
-            function closeMWindow(query){
+           /* function closeMWindow(query){
                 document.querySelector(query).style.visibility = "hidden";
                 modal.style.visibility = "hidden";
-            }
+            }*/
 
             function openMWindow(query){ //gg
                 modal.style.visibility = "visible";
@@ -215,7 +215,7 @@ var PORTAL = (function (PORTAL, $) {
 
 
             function secondStepRegWindow(){
-                closeMWindow(".window-registation");
+                modalW.closeMWindow(".window-registation");
                 openMWindow(".window-registation-step2");
             }
 
@@ -239,7 +239,7 @@ var PORTAL = (function (PORTAL, $) {
 
             function lastStepRegPartner(){
 
-                closeMWindow(".window-registation-step2");
+                modalW.closeMWindow(".window-registation-step2");
                 openMWindow(".window-registation-step3-partner");
 
                 $.ajax({ // Запрос на добавление всех категорий в селект
@@ -285,7 +285,7 @@ var PORTAL = (function (PORTAL, $) {
 
                     if ( work_sphere  &&  tel &&  city && ($self.find("input[name='consent-part']:checked").val() === 'consent-partner')  /*!= 'null'*/) {
 
-                        closeMWindow(".window-registation-step3-partner");
+                        modalW.closeMWindow(".window-registation-step3-partner");
                         sendPartnerRegInfo("http://wedding-services.mycloud.by/services/rest.partners/create.json", city, work_sphere);
                         console.dir(dataRegistration);
                         showCabinetSuccess();
@@ -379,7 +379,7 @@ var PORTAL = (function (PORTAL, $) {
 
             function lastStepRegUser(){
 
-                closeMWindow(".window-registation-step2");
+                modalW.closeMWindow(".window-registation-step2");
                 openMWindow(".window-registation-step3-user");
 
                 $self.find("#btn-registration-finish-user").on("click", function(){
@@ -400,7 +400,7 @@ var PORTAL = (function (PORTAL, $) {
 
                     if ( tel && city &&  ($self.find("#consent-user-check:checked").val() === 'consent-user')){
 
-                        closeMWindow(".window-registation-step3-user");
+                        modalW.closeMWindow(".window-registation-step3-user");
 
                         sendUserRegInfo('http://wedding-services.mycloud.by/services/rest.users/create.json', dataRegistration.city);
                         showCabinetSuccess();
