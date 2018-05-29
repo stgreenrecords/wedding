@@ -166,12 +166,14 @@ var PORTAL = (function (PORTAL, $) {
 
         cabinetAttrHide.btn_add_comment.on('click', sendComment);
 
-        function sendComment(){
+        function sendComment(){ // узнать что тут надо отправлять !!!
 
             var content = $self.find('.trumbowyg-editor').html();
             $self.find('.trumbowyg-editor').html('');
+
             console.log(content);
-            var commentInfo = [{content:content,authorID:Cookies.get('userId'),authorCity:Cookies.get('city')}];
+
+            var commentInfo = {content:content,authorID:Cookies.get('userId'),authorCity:Cookies.get('city')}; //[]
             sendChangeRequest({comments:commentInfo});
 
         }
