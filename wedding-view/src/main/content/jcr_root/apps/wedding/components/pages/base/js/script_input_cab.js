@@ -53,7 +53,6 @@ var PORTAL = (function (PORTAL, $) {
 
             function showEntranceForm() {
 
-                // openMWindow(".window-entrance");
                 modalW.openMWindow(".window-entrance");
                 if (userEmailFromCookie != 'undefined') {
                     $self.find('#user_email').val(userEmailFromCookie);
@@ -61,7 +60,7 @@ var PORTAL = (function (PORTAL, $) {
             }
 
             function showRegistrationForm() {
-                openMWindow(".window-registation");
+                modalW.openMWindow(".window-registation");
             }
 
             function inputEmailFill(){
@@ -92,19 +91,6 @@ var PORTAL = (function (PORTAL, $) {
                 modalW.closeMWindow(".window-entrance");
                 showCabinetSuccess();
             }
-
-           /* function closeMWindow(query){
-                document.querySelector(query).style.visibility = "hidden";
-                modal.style.visibility = "hidden";
-            }*/
-
-      /*      function openMWindow(query){ //gg
-                modal.style.visibility = "visible";
-                var mwindow3 = document.querySelector(query);
-                mwindow3.style.visibility = "visible";
-                mwindow3.style.left = (document.documentElement.clientWidth - mwindow3.getBoundingClientRect().width)/2 + "px";
-                mwindow3.style.top = (document.documentElement.clientHeight - mwindow3.getBoundingClientRect().height)/3 + "px";
-            }*/
 
             /*---*/
 
