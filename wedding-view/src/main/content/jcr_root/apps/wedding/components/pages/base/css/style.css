@@ -884,6 +884,11 @@ footer > div a, footer > div{
 
 .add_btn{cursor: pointer;}
 
+.prise_start input,
+.prise_end input{
+    width: 20%;
+}
+
 /* ================================ PARTNER off */
 /* ===---    USER start ====----- */
 

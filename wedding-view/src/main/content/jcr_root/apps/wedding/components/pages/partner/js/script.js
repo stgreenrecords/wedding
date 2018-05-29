@@ -80,12 +80,15 @@ var PORTAL = (function (PORTAL, $) {
         cabinetAttrHide.comment_area = $self.find('.comment-inter_area');
         cabinetAttrHide.btn_add_comment = $self.find('#btn_add-comment');
 
+        cabinetAttrVision.btn_add_text =  $self.find('#btn_add-text');
         cabinetAttrVision.upload_form =  $self.find('.upload_form');
         cabinetAttrVision.btn_add_video =  $self.find('#btn_add-video');
         cabinetAttrVision.btn_add_event =  $self.find('#btn_add-event');
+        cabinetAttrVision.edit_avatar_btns =  $self.find('.edit_avatar_btns');
 
         cabinetField.firstName = $self.find('.profil_name');
         cabinetField.lastName = $self.find('.profil_secondname');
+
         cabinetField.priceStart = $self.find('.prise_start');
         cabinetField.priceEnd = $self.find('.prise_end');
         cabinetField.phone = $self.find('.phone_string');
@@ -115,6 +118,9 @@ var PORTAL = (function (PORTAL, $) {
                 cabinetFieldVal[props] = cabinetField[props].html();
                 inputFinishVal[props] = cabinetField[props].html(`<input value=${cabinetFieldVal[props]}>`);
             }
+
+            $self.find('.prise_start input').attr('type', 'number');
+            $self.find('.prise_end input').attr('type', 'number');
 
         }
 
@@ -169,80 +175,30 @@ var PORTAL = (function (PORTAL, $) {
             for (prop in cabinetAttrVision)
                 cabinetAttrVision[prop].removeClass('hidden_full');
 
-        }
-
-        function upLoadImage(){
-
-            var preview = document.querySelector('.preview_upload-text');
-            input_upload.style.opacity = 0;
-
-            input_upload.addEventListener('change', updateImageDisplay);
-
-            function updateImageDisplay() {
-                while(preview.firstChild) {
-                    preview.removeChild(preview.firstChild);
-                }
-
-                var curFiles = input_upload.files;
-
-                if(curFiles.length === 0) {
-                    var para = document.createElement('p');
-                    para.textContent = 'No files currently selected for upload';
-                    preview.appendChild(para);
-                } else {
-                    var list = document.createElement('ol');
-                    preview.appendChild(list);
-                    for(var i = 0; i < curFiles.length; i++) {
-                        var listItem = document.createElement('li');
-                        var para = document.createElement('p');
-                        if(validFileType(curFiles[i])) {
-                            para.textContent = 'File name ' + curFiles[i].name + ', file size ' + returnFileSize(curFiles[i].size) + '.';
-                            var image = document.createElement('img');
-                            image.src = window.URL.createObjectURL(curFiles[i]);
-
-                            listItem.appendChild(image);
-                            listItem.appendChild(para);
-
-                        } else {
-                            para.textContent = 'File name ' + curFiles[i].name + ': Not a valid file type. Update your selection.';
-                            listItem.appendChild(para);
-                        }
-
-                        list.appendChild(listItem);
-                    }
-                }
-            }
-
-            var fileTypes = [
-                'image/jpeg',
-                'image/pjpeg',
-                'image/png'
-            ];
-
-            function validFileType(file) {
-                for(var i = 0; i < fileTypes.length; i++) {
-                    if(file.type === fileTypes[i]) {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
-            function returnFileSize(number) {
-                if(number < 1024) {
-                    return number + 'bytes';
-                } else if(number > 1024 && number < 1048576) {
-                    return (number/1024).toFixed(1) + 'KB';
-                } else if(number > 1048576) {
-                    return (number/1048576).toFixed(1) + 'MB';
-                }
-            }
-
-            btn_upPhoto.on('click', sendPortfolio);
+            cabinetAttrVision.btn_add_text.one('click', showInnerText);
 
         }
-        upLoadImage();
+
+        function showInnerText(){
+            var textAreal = $self.find('.content_about_oneself');
+            var content =  textAreal.html();
+            textAreal.html(`<textarea> ${content} </textarea>`);
+            $self.find('textarea').trumbowyg({  // RichText
+                svgPath: '/etc/clientlibs/wedding/external/icons/richtext/icons.svg',
+                lang: 'ru'
+            });
+            cabinetAttrVision.btn_add_text.one('click', saveInnerText);
+        }
+
+        function saveInnerText(){
+            // var textAreal = ;
+            var content =  $self.find('.content_about_oneself textarea').val();
+            $self.find('.content_about_oneself').html(content);
+            sendChangeRequest({description:content});
+            cabinetAttrVision.btn_add_text.one('click', showInnerText);
+        }
+
+
 
 
         function sendPortfolio(){
@@ -411,6 +367,80 @@ var PORTAL = (function (PORTAL, $) {
             }
 
         }());
+
+
+        function upLoadImage(){
+
+            var preview = document.querySelector('.preview_upload-text');
+            input_upload.style.opacity = 0;
+
+            input_upload.addEventListener('change', updateImageDisplay);
+
+            function updateImageDisplay() {
+                while(preview.firstChild) {
+                    preview.removeChild(preview.firstChild);
+                }
+
+                var curFiles = input_upload.files;
+
+                if(curFiles.length === 0) {
+                    var para = document.createElement('p');
+                    para.textContent = 'No files currently selected for upload';
+                    preview.appendChild(para);
+                } else {
+                    var list = document.createElement('ol');
+                    preview.appendChild(list);
+                    for(var i = 0; i < curFiles.length; i++) {
+                        var listItem = document.createElement('li');
+                        var para = document.createElement('p');
+                        if(validFileType(curFiles[i])) {
+                            para.textContent = 'File name ' + curFiles[i].name + ', file size ' + returnFileSize(curFiles[i].size) + '.';
+                            var image = document.createElement('img');
+                            image.src = window.URL.createObjectURL(curFiles[i]);
+
+                            listItem.appendChild(image);
+                            listItem.appendChild(para);
+
+                        } else {
+                            para.textContent = 'File name ' + curFiles[i].name + ': Not a valid file type. Update your selection.';
+                            listItem.appendChild(para);
+                        }
+
+                        list.appendChild(listItem);
+                    }
+                }
+            }
+
+            var fileTypes = [
+                'image/jpeg',
+                'image/pjpeg',
+                'image/png'
+            ];
+
+            function validFileType(file) {
+                for(var i = 0; i < fileTypes.length; i++) {
+                    if(file.type === fileTypes[i]) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            function returnFileSize(number) {
+                if(number < 1024) {
+                    return number + 'bytes';
+                } else if(number > 1024 && number < 1048576) {
+                    return (number/1024).toFixed(1) + 'KB';
+                } else if(number > 1048576) {
+                    return (number/1048576).toFixed(1) + 'MB';
+                }
+            }
+
+            btn_upPhoto.on('click', sendPortfolio);
+
+        }
+        upLoadImage();
 
     };
 
