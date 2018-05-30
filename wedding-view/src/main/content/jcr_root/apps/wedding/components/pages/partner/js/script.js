@@ -480,6 +480,28 @@ var PORTAL = (function (PORTAL, $) {
         }
         upLoadImage();
 
+        (function() {
+
+            $("#calendar").ionCalendar({
+                lang: "ru",
+                sundayFirst: false,
+                years: "2017-2027",
+                format: "DD.MM.YYYY",
+                hideArrows: false,
+                onClick: function(date){
+                    $("#result-1").html("onClick: " + date);
+                }
+            });
+
+            $("#myDatePicker-1").ionDatePicker({
+                format: "DD.MM.YYYY",
+                lang: "ru",
+                sundayFirst: false,
+                years: "2017-2027"
+            });
+
+        })();
+
     };
 
     return PORTAL;

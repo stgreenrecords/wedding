@@ -760,29 +760,8 @@ footer > div a, footer > div{
 
 /*----------------Calendar*/
 
-
 .calendar_main_fild{
     min-height: 250px;
-}
-
-
-
-#calendar .fc-view-container{
-    /* line-height: 1;*/
-    padding-right: 15px;
-}
-
-#calendar tbody .fc-row .fc-content-skeleton tbody tr td{
-    padding-bottom: 0;
-}
-
-#calendar .fc-header-toolbar{
-    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/arrow_left.png') 10% no-repeat,
-    url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/arrow_right.png') 90% no-repeat;
-}
-
-#calendar .fc-header-toolbar h2{
-    margin-left: 100px;  /*переделать центровку TODOLater*/
 }
 
 #calendar td, #calendar th{
@@ -794,27 +773,17 @@ footer > div a, footer > div{
     url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/part_day_indicator.png') 1% 50px no-repeat;
 }
 
-#calendar .fc-past{
-    color: #9999993b;
-}
-
-
-#calendar .fc-today{
-    color: #1fe855;
-    /*background-color: #a2d9e6;*/
-    border: 1px solid #000;
-}
-
-#calendar .fc-header-toolbar, .calendar_colontitle_fild{
+.calendar_colontitle_fild{
     padding: 15px 12%;
     background-color: #f4f4f4;
 }
+
 /*----------------Calendar FINISH*/
 
 .bgc_div{
     background-color: #f4f4f4;
     width: 100%;
-    /*height: 100%;*/
+    /* height: 100%;*/
 }
 
 #partner-page-pages{  /*   Page */
@@ -903,13 +872,24 @@ footer > div a, footer > div{
     background-color: #fff;
 }
 
+.edit_avatar_btns{
+    background-color: #f4f4f455;
+    text-align: right;
+}
+
+.avatar_upd_icon,
+.avatar_remove_icon{
+    cursor: pointer;
+    padding-right: 10px;
+}
+
 .partner_menu li{
     width: auto;
 }
 
-/*.user_avatar{*/
-    /*background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_13.jpg');*/
-/*}*/
+/*.user_avatar{
+  background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_13.jpg');
+} */
 
 .red_refer{
     color: #dc5e4e;
@@ -924,17 +904,6 @@ footer > div a, footer > div{
     /* background: url('/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/edit.png') 95%  0% no-repeat;*/
     padding: 15px;
     margin: 10px auto;
-}
-
-.edit_avatar_btns{
-    background-color: #f4f4f455;
-    text-align: right;
-}
-
-.avatar_upd_icon,
-.avatar_remove_icon{
-    cursor: pointer;
-    padding-right: 10px;
 }
 
 #user_calc{
@@ -1130,8 +1099,6 @@ footer > div a, footer > div{
     cursor: pointer;
 }
 
-
-
 /*========------- TendeR finish  -=-=-=-=-=-*/
 
 /************** UPloadIMG*********/
@@ -1159,14 +1126,13 @@ footer > div a, footer > div{
     cursor: pointer;
 }
 
-#reit_heart5{   /*relocate late*/
+#reit_heart5{ /*relocate late*/
     background-image: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/grey_heart_reit.png');
 }
 
 .add-video-field input{
     width: 400px;
 }
-
 
 
 
