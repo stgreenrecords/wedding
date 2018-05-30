@@ -778,6 +778,12 @@ footer > div a, footer > div{
     background-color: #f4f4f4;
 }
 
+/*weeckend*/
+#calendar .ic__week-head tr td:nth-child(6),
+#calendar .ic__week-head tr td:nth-child(7){
+    color: #dc5e4e;
+}
+
 /*----------------Calendar FINISH*/
 
 .bgc_div{

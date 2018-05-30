@@ -425,7 +425,7 @@ var PORTAL = (function (PORTAL, $) {
 
 
             function initSocial() {				// Можно тестить
-                // Это старая инициация ВК  - временно роботает, пока не отлажена новая.
+
                 VK.init({
                     apiId: 6428473
                 });
@@ -452,18 +452,17 @@ var PORTAL = (function (PORTAL, $) {
                     document.getElementById("vk_api_transport").appendChild(el);
                 }, 0);*/
 
+                /*   window.fbAsyncInit = function() {
+
+
+                };*/
+
                 FB.init({
                     appId            : '119308788738222',
                     autoLogAppEvents : true,
                     xfbml            : true,
                     version          : 'v2.3'
                 });
-
-
-             /*   window.fbAsyncInit = function() {
-
-
-                };*/
 
                 (function(d, s, id){
                     var js, fjs = d.getElementsByTagName(s)[0];
@@ -472,6 +471,10 @@ var PORTAL = (function (PORTAL, $) {
                     js.src = "https://connect.facebook.net/en_US/sdk.js";
                     fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));
+
+
+
+
 
             }
 

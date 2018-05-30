@@ -27,7 +27,7 @@ var PORTAL = (function (PORTAL, $) {
         //    var getPartnerId =  Cookies.get('userId');
         // }
 
-        var selectedPersonRequest = `http://wedding-services.mycloud.by/services/rest.partners/${getPartnerSpecCity}.json?id=${getPartnerId}`;
+        var selectedPersonRequest = `/services/rest.partners/${getPartnerSpecCity}.json?id=${getPartnerId}`;
 
         console.log(selectedPersonRequest);
 
@@ -147,7 +147,7 @@ var PORTAL = (function (PORTAL, $) {
 
             $.ajax({
 
-                url: 'http://wedding-services.mycloud.by/services/rest.partners/update.json',
+                url: '/services/rest.partners/update.json',
                 type: 'PUT',
                 dataType: 'json',
                 data: dataSend,
@@ -261,7 +261,7 @@ var PORTAL = (function (PORTAL, $) {
 
             $.ajax({
 
-                url: 'http://wedding-services.mycloud.by/services/rest.partners/update.json',
+                url: '/services/rest.partners/update.json',
                 type: 'PUT',
                 dataType: 'json',
                 data: dataSend,
