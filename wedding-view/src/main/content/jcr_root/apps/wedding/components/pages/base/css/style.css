@@ -761,7 +761,7 @@ footer > div a, footer > div{
 /*----------------Calendar*/
 
 .calendar_main_fild{
-    min-height: 250px;
+   min-height: 378px;;
 }
 
 #calendar td, #calendar th{
