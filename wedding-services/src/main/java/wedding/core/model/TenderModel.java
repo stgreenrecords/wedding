@@ -39,7 +39,7 @@ public class TenderModel extends WeddingBaseModel {
 
     @PostConstruct
     public void init() {
-        Optional.ofNullable(SlingModelUtil.getBaseUserModelResourceFromChildResources(getResource()))
+        Optional.ofNullable(getResource())
                 .map(res -> res.getChild(Type.AVATAR.getRelPath()))
                 .map(Resource::listChildren)
                 .filter(Iterator::hasNext)

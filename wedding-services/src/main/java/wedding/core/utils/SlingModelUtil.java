@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import wedding.core.model.WeddingBaseModel;
 import wedding.core.rest.util.ServletMapping;
 
+import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import java.lang.reflect.Field;
@@ -67,11 +68,23 @@ public final class SlingModelUtil {
         Resource resource = "rep:User".equals(resourceType)
                 ? createUser(request, id, path)
                 : createResource(request.getResourceResolver(), path + "/" + id, resourceType);
-        Optional.ofNullable(resource)
-                .map(res -> res.adaptTo(ModifiableValueMap.class))
-                .ifPresent(properties -> properties.put(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID, id));
+        initResourceProperties(resource, id);
         updateModel(resource.adaptTo(aClass));
         return resource;
+    }
+
+    private static void initResourceProperties(Resource resource, String id) {
+        final Optional<Resource> resourceOptional = Optional.ofNullable(resource);
+        resourceOptional.map(res -> res.adaptTo(Node.class))
+                .ifPresent(node -> {
+                    try {
+                        node.addMixin(WeddingResourceUtil.NT_WEDDING_RESOURCE_MIXIN);
+                    } catch (RepositoryException e) {
+                        LOG.error(e.getMessage(), e);
+                    }
+                });
+        resourceOptional.map(res -> res.adaptTo(ModifiableValueMap.class))
+                .ifPresent(properties -> properties.put(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID, id));
     }
 
     public static <T extends WeddingBaseModel> T createModel(SlingHttpServletRequest request, Class<T> modelClass) {
