@@ -245,9 +245,9 @@ var PORTAL = (function (PORTAL, $) {
 
             // if (photoSend.portfolio || photoSend.portfolio.length >= 1){
 
-            // photoSend.photo = input_upload.value;
-            photoSend.portfolio = input_upload.files;
-            // sendChangeReq(photoSend);
+            photoSend.portfolio = input_upload.value;
+            // photoSend.portfolio = input_upload.files;
+
             sendChangeRequest(photoSend);
 
         }
