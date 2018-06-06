@@ -80,8 +80,8 @@ var PORTAL = (function (PORTAL, $) {
 
                 var tenderSend = {};
                 var date = new Date();
-                tenderSend.datePublication = date;
-                tenderSend.deadline = date/* + 3600000000*/;
+                // tenderSend.datePublication = date;
+                // tenderSend.deadline = date/* + 3600000000*/;
                 tenderSend.shortText = 'Z,flf,fleeeee';
                 tenderSend.path = `${selectedPerson.resourcePath}/tenders`;
                 tenderSend.offers = ';kshfaksfh;aksdjfalks;jdhfalskdfbalskdfblaksdnblkajsfdlkasjdfb,.k';
