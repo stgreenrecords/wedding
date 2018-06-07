@@ -518,6 +518,7 @@ var PORTAL = (function (PORTAL, $) {
                             userLoginInfo.authType = "VK";
 
                             console.log('The great success !!!!!  getLoginStatus true ');
+                            console.log(response);
 
                         }
                     });
