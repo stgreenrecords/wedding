@@ -458,7 +458,7 @@ var PORTAL = (function (PORTAL, $) {
                 };*/
 
                 FB.init({
-                    appId            : '119308788738222',
+                    appId            : '2118542795094606',
                     autoLogAppEvents : true,
                     xfbml            : true,
                     version          : 'v2.3'
