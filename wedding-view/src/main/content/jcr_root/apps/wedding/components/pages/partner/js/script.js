@@ -105,7 +105,7 @@ var PORTAL = (function (PORTAL, $) {
 
             btn_change.addClass('hidden_full');
             btn_save.removeClass('hidden_full');
-            btn_save.on('click', saveChangeFields);
+            btn_save.one('click', saveChangeFields);
             onInputFields();
 
         }
@@ -141,7 +141,6 @@ var PORTAL = (function (PORTAL, $) {
 
         function sendChangeRequest(dataSend){
 
-            inputFinishVal = {};
             dataSend.id = selectedPerson.id;
             console.dir(dataSend);
 
