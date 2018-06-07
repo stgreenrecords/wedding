@@ -7,6 +7,7 @@
           /etc/clientlibs/wedding/external/js/auth/vk_auth.js,
           /etc/clientlibs/wedding/external/js/auth/ok.js,
           /etc/clientlibs/wedding/external/js/auth/gmail_auth.js,
+          /etc/clientlibs/wedding/external/js/auth/facebook_auth.js,
           /etc/clientlibs/wedding/external/js/plugins/pluginModalWAV.js,
           /etc/clientlibs/wedding/external/js/plugins/moment_with_locales.min.js,
           /etc/clientlibs/wedding/external/js/plugins/ion.calendar.js]"/>
