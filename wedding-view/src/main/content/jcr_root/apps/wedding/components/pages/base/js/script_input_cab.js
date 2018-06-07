@@ -461,17 +461,17 @@ var PORTAL = (function (PORTAL, $) {
                     appId            : '2118542795094606',
                     autoLogAppEvents : true,
                     xfbml            : true,
-                    version          : 'v2.3'
+                    version          : 'v3.0'
                 });
 
-                (function(d, s, id){
+         /*       (function(d, s, id){
                     var js, fjs = d.getElementsByTagName(s)[0];
                     if (d.getElementById(id)) {return;}
                     js = d.createElement(s); js.id = id;
                     js.src = "https://connect.facebook.net/en_US/sdk.js";
                     fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));
-
+*/
 
 
 
@@ -508,13 +508,27 @@ var PORTAL = (function (PORTAL, $) {
 
                     });
 
+                },
+
+                "status": function () {
+                    VK.Auth.getLoginStatus(function (response) {
+                        if (response.status === "connected") {
+                            authStatus = true;
+                            userLoginInfo.userID = response.session.mid;
+                            userLoginInfo.authType = "VK";
+
+                            console.log('The great success !!!!!  getLoginStatus true ');
+
+                        }
+                    });
                 }
+
             };
 
 
             var FBook = {
 
-                "login": function () {
+               /* "login": function () {
 
                     FB.login(function(response) {
                         if (response.authResponse) {
@@ -528,8 +542,34 @@ var PORTAL = (function (PORTAL, $) {
                         }
                     });
 
+                }*/
+
+                "login": function () {
+
+                    FB.login(function (response) {
+                        console.log(response);
+                    });
+
+                },
+
+                "status": function () {
+                    FB.getLoginStatus(function(response) {
+                        if (response.status === 'connected') {
+                            console.log(response);
+                            // var uid = response.authResponse.userID;
+                            // var accessToken = response.authResponse.accessToken;
+                        } else if (response.status === 'not_authorized') {
+                            console.log(response);
+                            console.log(response.status);
+                        } else {
+                            console.log('EGC UPS');
+                        }
+                    });
                 }
+
             };
+
+
 
 
             $self.find("#vk-reg-btn").click(function () {
@@ -541,6 +581,16 @@ var PORTAL = (function (PORTAL, $) {
             $self.find("#fb-reg-btn").click(function () {
                 authType = "FACEBOOK";
                 FBook.login();
+            });
+
+            $self.find("#vk-login-btn").click(function () {
+                // authType = "FACEBOOK";
+                V_K.status();
+            });
+
+            $self.find("#fb-login-btn").click(function () {
+                // authType = "FACEBOOK";
+                FBook.status();
             });
 
 
