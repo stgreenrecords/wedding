@@ -440,7 +440,7 @@ var PORTAL = (function (PORTAL, $) {
             console.log(`function fillEvent write ${events.length} events`);
             console.dir(events);
             var wrapper = $self.find('.event-wrapper');
-            var eventCard = $self.find('.event_card');
+            var eventCard = $self.find('.event_card-sample');
             var listWrapper = $(document.createElement('div')); // document.add('div');
 
             events.forEach(function(elem, i){
