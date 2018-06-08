@@ -437,8 +437,25 @@ var PORTAL = (function (PORTAL, $) {
         }
 
         function fillEvents(events) {
+            console.log(`function fillEvent write ${events.length} events`);
             console.dir(events);
-            var eventArea = $self.find('.')
+            var wrapper = $self.find('.event-wrapper');
+            var eventCard = $self.find('.event_card');
+            var listWrapper = $(document.createElement('div')); // document.add('div');
+
+            events.forEach(function(elem, i){
+
+                var newItem = eventCard.clone();
+                newItem.find('.event_card-title').text(elem.title);
+                newItem.find('.event_card-event_card-bg').css('backGroundImage', 'url("/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/bgi.jpg")');
+                newItem.find('.event_card-start').text(elem.startDate);
+                newItem.find('.event_card-finish').text(elem.endDate);
+                newItem.find('.event_card-description').text(elem.description);
+                listWrapper.append(newItem);
+            });
+
+            wrapper.append(listWrapper);
+
         }
 
         function fillComments(comments){ // todoc - расширить и переделать , когда доделают запрос
