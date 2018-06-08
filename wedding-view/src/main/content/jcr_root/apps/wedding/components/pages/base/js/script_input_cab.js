@@ -346,7 +346,7 @@ var PORTAL = (function (PORTAL, $) {
                         console.dir(data);
                         Cookies.set('userId', data.id);
                         // Cookies.set('city', data.city);
-                        // }
+
                         // document.location.href = '/content/wedding/catalog.html#'; // TODOC - сделать переход в каталог - когда заполнят всех юзеров
                         document.location.href = `/content/wedding/user.html`;
 

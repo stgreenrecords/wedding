@@ -196,10 +196,97 @@ var PORTAL = (function (PORTAL, $) {
 
             cabinetAttrVision.btn_add_text.one('click', showInnerText);
             cabinetAttrVision.btn_add_video.one('click', showInnerVideo);
-            // cabinetAttrVision.btn_add_event.one('click', showInnerEvent); todoc - подумать как реализовать
+            cabinetAttrVision.btn_add_event.one('click', showInnerEvent); // todoc - подумать как реализовать
             cabinetAttrHide.btn_add_comment.off('click', sendComment);
 
         }
+
+        function showInnerEvent(){
+            //modalWindowsOn();
+            saveInnerEvent();
+
+        }
+
+        function saveInnerEvent(){
+            //modalWindowsOff();
+            createEvent();
+
+        }
+
+        function createEvent(){
+            //modalWindowsOn();
+            console.log('createEvent ON');
+
+            var eventSend = {};
+            var date = new Date();
+            // eventSend.startDate = date;
+            // eventSend.endDate = date/* + 3600000000*/;
+            eventSend.title = 'Super Better EVENT from Nice MEn';
+
+            eventSend.path = `${selectedPerson.resourcePath}/events`;
+            eventSend.resourcePath = `${selectedPerson.resourcePath}/events`;
+
+            eventSend.description = ';kshfaksfh;aksdjfalks;jdhfalskdfbalskdfblaksdnblkajsfdlkasjdfb,.k';
+
+            // eventSend.firstName = selectedPerson.firstName;
+            // eventSend.lastName = selectedPerson.lastName;
+            // eventSend.city = selectedPerson.city;
+            // eventSend.avatar  = selectedPerson.avatar;
+            // eventSend.backGroundImage = selectedPerson.backGroundImage;
+
+            eventSend.id = selectedPerson.id;  // Todoс - убрать, когда будет пересылаться через sendChangeRequest
+
+            console.dir(eventSend);
+            console.log(eventSend.path);
+
+
+/*
+
+            Важно! Запрос посылается методом POST
+            /services/rest.events/create.json
+
+            Надо слать дополнительный параметр (path) - путь куда надо сохранять акцию.
+                Его можно получить использовав переменную resourcePath
+            Полученную при запросе партнёра, на странице которого мы находимся + /events
+
+            Например
+            /home/users/wedding/partners/photographers/minsk/e/7RZCTBneVLiGlL2yMggcq/events
+
+            Доступные поля, их названия и тип:
+
+            String resourcePath; +
+            String id
+
+*/
+
+
+
+            $.ajax({
+
+                url: 'http://wedding-services.mycloud.by/services/rest.events/create.json  ',
+                type: "POST",
+                dataType: "json",
+                data: eventSend,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+                    console.log("beforeSend post !");
+                    console.log();
+                },
+                success: function (data) {
+                    console.log('Ниже должен быть ответ Создания ивента:');
+                    console.dir(data);
+                },
+                error: function (e) {
+                    console.log('Что-то пошло не так :( ');
+                    console.log(e);
+                }
+            });
+
+            //sendChangeRequest(dataSend);
+
+        }
+
+
 
         function showInnerVideo(){
             $self.find('.add-video-field').html(`<input value="Вставьте вместо это текста ссылку на Ваше видео с YouTube">`);
