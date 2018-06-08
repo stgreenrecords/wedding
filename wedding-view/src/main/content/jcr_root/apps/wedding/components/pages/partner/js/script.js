@@ -59,6 +59,9 @@ var PORTAL = (function (PORTAL, $) {
                 if (selectedPerson.videos)
                     fillVidosy(selectedPerson.videos);
 
+                if (selectedPerson.events)
+                    fillEvents(selectedPerson.events);
+
                 if (selectedPerson.comments)
                     fillComments(selectedPerson.comments);
 
@@ -194,9 +197,9 @@ var PORTAL = (function (PORTAL, $) {
             for (prop in cabinetAttrVision)
                 cabinetAttrVision[prop].removeClass('hidden_full');
 
-            cabinetAttrVision.btn_add_text.one('click', showInnerText);
-            cabinetAttrVision.btn_add_video.one('click', showInnerVideo);
-            cabinetAttrVision.btn_add_event.one('click', showInnerEvent); // todoc - подумать как реализовать
+            cabinetAttrVision.btn_add_text.on('click', showInnerText);
+            cabinetAttrVision.btn_add_video.on('click', showInnerVideo);
+            cabinetAttrVision.btn_add_event.on('click', showInnerEvent); // todoc - подумать как реализовать
             cabinetAttrHide.btn_add_comment.off('click', sendComment);
 
         }
@@ -431,6 +434,11 @@ var PORTAL = (function (PORTAL, $) {
 
             });
 
+        }
+
+        function fillEvents(events) {
+            console.dir(events);
+            var eventArea = $self.find('.')
         }
 
         function fillComments(comments){ // todoc - расширить и переделать , когда доделают запрос
