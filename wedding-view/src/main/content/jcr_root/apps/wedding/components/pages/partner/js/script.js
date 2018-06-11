@@ -222,14 +222,14 @@ var PORTAL = (function (PORTAL, $) {
 
             var eventSend = {};
             var date = new Date();
-            // eventSend.startDate = date;
-            // eventSend.endDate = date/* + 3600000000*/;
+             eventSend.startDate = +date;
+             eventSend.endDate = +date + 3600000000;
             eventSend.title = 'Super Better EVENT from Nice MEn';
 
             eventSend.path = `${selectedPerson.resourcePath}/events`;
             eventSend.resourcePath = `${selectedPerson.resourcePath}/events`;
 
-            eventSend.description = ';kshfaksfh;aksdjfalks;jdhfalskdfbalskdfblaksdnblkajsfdlkasjdfb,.k';
+            eventSend.description = ';kshfaksfh;a ksdjf lks;jdhfalskdfba lskdfbl aksdnblk ajsfd lkasjd fb,.k';
 
             // eventSend.firstName = selectedPerson.firstName;
             // eventSend.lastName = selectedPerson.lastName;
@@ -286,6 +286,30 @@ var PORTAL = (function (PORTAL, $) {
             });
 
             //sendChangeRequest(dataSend);
+
+        }
+
+        function fillEvents(events) {
+            console.log(`function fillEvent write ${events.length} events`);
+            console.dir(events);
+            $self.find('.no_event-text').remove();
+            var wrapper = $self.find('.event-wrapper');
+            var eventCard = $self.find('.event_card-sample');
+            var listWrapper = $(document.createElement('div')); // document.add('div');
+
+            events.forEach(function(elem, i){
+
+                var newItem = eventCard.clone().removeClass('event_card-sample');
+                newItem.find('.event_card-title').html(elem.title);
+                newItem.find('.event_card-bg').css('backgroundImage', 'url("/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/bgi.jpg")');
+                newItem.find('.event_card-start').text(elem.startDate);
+                newItem.find('.event_card-finish').text(elem.endDate);
+                elem.description ? newItem.find('.event_card-description_text').text(elem.description) : '';
+                listWrapper.append(newItem);
+
+            });
+
+            wrapper.append(listWrapper);
 
         }
 
@@ -436,27 +460,6 @@ var PORTAL = (function (PORTAL, $) {
 
         }
 
-        function fillEvents(events) {
-            console.log(`function fillEvent write ${events.length} events`);
-            console.dir(events);
-            var wrapper = $self.find('.event-wrapper');
-            var eventCard = $self.find('.event_card-sample');
-            var listWrapper = $(document.createElement('div')); // document.add('div');
-
-            events.forEach(function(elem, i){
-
-                var newItem = eventCard.clone();
-                newItem.find('.event_card-title').text(elem.title);
-                newItem.find('.event_card-event_card-bg').css('backGroundImage', 'url("/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/bgi.jpg")');
-                newItem.find('.event_card-start').text(elem.startDate);
-                newItem.find('.event_card-finish').text(elem.endDate);
-                newItem.find('.event_card-description').text(elem.description);
-                listWrapper.append(newItem);
-            });
-
-            wrapper.append(listWrapper);
-
-        }
 
         function fillComments(comments){ // todoc - расширить и переделать , когда доделают запрос
 
