@@ -18,7 +18,7 @@ var PORTAL = (function (PORTAL, $) {
 
         var dayTimer = function () {
 
-            var date_finish = new Date(2018, 5, 15, 17, 0, 0, 0);
+            var date_finish = new Date(2018, 6, 11, 17, 0, 0, 0);
 
             var Date_remained = function (date_finish, current_date) {
                 this.remained_all = date_finish - current_date;
@@ -54,7 +54,7 @@ var PORTAL = (function (PORTAL, $) {
                     timer_minute.innerHTML = "MY";
                     timer_hour.innerHTML = "OFF";
                     timer_day.innerHTML = "TIME";
-                    return;
+
                 }
             }, 1000);
 
@@ -74,7 +74,7 @@ var PORTAL = (function (PORTAL, $) {
                     mwindow.style.top = (document.documentElement.clientHeight - mwindow.getBoundingClientRect().height)/3 + "px";
                 }
 
-            };
+            }
         })();
 
     };
