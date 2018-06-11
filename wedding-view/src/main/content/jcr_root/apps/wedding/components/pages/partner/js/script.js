@@ -300,11 +300,11 @@ var PORTAL = (function (PORTAL, $) {
             events.forEach(function(elem, i){
 
                 var newItem = eventCard.clone().removeClass('event_card-sample');
-                newItem.find('.event_card-title').html(elem.title);
+                newItem.find('.event_card-title').html(elem.title.substr(0, 12));
                 newItem.find('.event_card-bg').css('backgroundImage', 'url("/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/bgi.jpg")');
-                newItem.find('.event_card-start').text(elem.startDate);
-                newItem.find('.event_card-finish').text(elem.endDate);
-                elem.description ? newItem.find('.event_card-description_text').text(elem.description) : '';
+                newItem.find('.event_card-start').text(formatDate(Number(elem.startDate)));
+                newItem.find('.event_card-finish').text(formatDate(Number(elem.endDate)));
+                elem.description ? newItem.find('.event_card-description_text').text(elem.description.substr(0, 40)) : '';
                 listWrapper.append(newItem);
 
             });
@@ -616,7 +616,17 @@ var PORTAL = (function (PORTAL, $) {
 
         })();
 
-    };
+        function formatDate(datt) {
+            var date = new Date (datt);
+            var dd = date.getDate();
+            if (dd < 10) dd = '0' + dd;
+            var mm = date.getMonth() + 1;
+            if (mm < 10) mm = '0' + mm;
+            var yy = date.getFullYear();
+            return dd + '.' + mm + '.' + yy;
+        }
+
+    };  //--- finish
 
     return PORTAL;
 

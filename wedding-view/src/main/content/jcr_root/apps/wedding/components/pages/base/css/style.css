@@ -840,7 +840,7 @@ footer > div a, footer > div{
 }
 
 .partner_title{
-    margin: 1.5%;
+    margin: 2%;
 }
 
 .photo_unit img{
@@ -857,7 +857,10 @@ footer > div a, footer > div{
     margin: 50px 0 70px;
 }
 
-.add_btn{cursor: pointer;}
+.add_btn{
+    cursor: pointer;
+    margin: 2%;
+}
 
 .prise_start input,
 .prise_end input{
@@ -866,24 +869,43 @@ footer > div a, footer > div{
 
 
 
-
 .event-wrapper > div{
     display: flex;
-    padding: 2%;
     flex-wrap: wrap;
+
 }
 
 .event_card{
     width: 46%;
+    padding: 2%;
 }
 
 .event_card-bg{
     min-height: 250px;
+    color: #fff;
+    position: relative;
+}
+
+.event_card-in_bg{
+    position: absolute;
+    top: 60%;
+    padding-left: 15%;
+    /*background-color: #4a4741b3;*/
+    background: linear-gradient(to bottom, transparent, rgba(22, 22, 22, 0.9));
+    overflow: hidden;
 }
 
 .event_card-title{
-    color: #fff;
+    display: inline-block;
+    border-bottom: 1px solid #fff;
     text-overflow: clip;
+    text-transform: uppercase;
+    padding-bottom: 12px;
+}
+
+.event_card-date{
+    font-size: 12pt;
+    padding-top: 12px;
 }
 
 .event_card-description{
