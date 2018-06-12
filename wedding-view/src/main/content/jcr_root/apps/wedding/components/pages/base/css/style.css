@@ -893,6 +893,7 @@ footer > div a, footer > div{
     /*background-color: #4a4741b3;*/
     background: linear-gradient(to bottom, transparent, rgba(22, 22, 22, 0.9));
     overflow: hidden;
+    margin-left: 1px;
 }
 
 .event_card-title{

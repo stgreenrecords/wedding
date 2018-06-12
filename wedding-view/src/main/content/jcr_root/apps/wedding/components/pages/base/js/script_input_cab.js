@@ -571,19 +571,41 @@ var PORTAL = (function (PORTAL, $) {
 
             };
 
+            var GMAIL = {
 
+                "login": function () {
+
+                    gmail.login(function (response) {
+                        console.log(response);
+                    });
+
+                },
+
+                "status": function () {
+
+                }
+
+
+            };
 
 
             $self.find("#vk-reg-btn").click(function () {
-                authType = "VK";
+                authType = "VK"; //  replace
                 console.log('VK reg ON');
                 V_K.login();
             });
 
             $self.find("#fb-reg-btn").click(function () {
-                authType = "FACEBOOK";
+                authType = "FACEBOOK"; //  replace
                 FBook.login();
             });
+
+            $self.find("#gmail-reg-btn").click(function () {
+                authType = "GMAIL"; //  replace
+                GMAIL.login();
+            });
+
+
 
             $self.find("#vk-login-btn").click(function () {
                 // authType = "FACEBOOK";
