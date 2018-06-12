@@ -1,6 +1,83 @@
-<div id="settings-page-content">
+<main id="settings-page-content">
 
-    <p>    The SETTINGS PAGES // & g-mail api test </p>
+    <section class="partner_menu">
+
+        <ul>
+
+            <li > <span id="btn_settings-common" 	class="user_calc_btn ">  общие настройки	 </span>	</li>
+            <li > <span id="btn_settings-notif"  class="user_tenders_btn user_menu_btn_active"> настройки оповещений	</span>	</li>
+
+        </ul>
+
+    </section>
+
+    <div class="settings-page-wrapper">
+
+        <section id="settings-common" class="settings-page hidden_full">
+
+            <form id="form-settings-page" action="" method="post">
+
+                <p><input id="settings-firstName" class="inp-user-name" type="text" name="user-name" placeholder="Имя">  </p>
+                <p><input id="settings-lastName" class="inp-user-surname" type="text" name="user-surname" placeholder="Фамилия">  </p>
+                <p><input id="settings-email" class="inp-user-email" type="email" name="user-email" placeholder="Введите email" value="crazy@gmail.com">  </p>
+
+                <p><input id="settings-password" class="inp-user-password" type="password" name="user-password" placeholder="Введите пароль" value="Ss123asdf" title="Пароль должен содержать более 8 символов строчных и заглавных букв и min 1 цифру ">  </p>
+
+                <p><input id="settings-password-new" class="inp-user-password-repeat" type="password" name="user-password-repeat" placeholder="Новый пароль">  </p>
+
+                <p><input id="settings-password-repeat" class="inp-user-password-repeat" type="password" name="user-password-repeat" placeholder="Повторите пароль" >  </p>
+
+                <select id="city_settings" name="city_settings">
+                    <option value="title" selected disabled>Город</option>
+                    <option value="minsk">Минск</option>
+                    <option value="brest">Брест</option>
+                    <option value="vitebsk">Витебск</option>
+                    <option value="gomel">Гомель</option>
+                    <option value="grodno">Гродно</option>
+                    <option value="mogilev">Могилев</option>
+                </select>
+
+                <div class="remove-account-cont">
+
+                    <span> Вы можете </span> <span> </span> <span id="remove-account" class="remove-account"> удалить свою страницу </span>
+                </div>
+
+            </form>
+
+            <div class="registation3_errore_message"> </div>
+
+            <div class="">
+                <button  id="button_save-common" class="button_save-settings btn"> <img src="etc/clientlibs/wedding/pages/images/profil_partner/settings/button_save.png" alt="button_save"></button>
+            </div>
+
+        </section>
+
+        <section id="settings-notification" class="settings-page ">
+
+            <div class="check-line">
+                <input type="checkbox" id="new-mail" class="consent-check" name="remember-ident" value="remember-ident-user" checked>
+                <span>Новое личное сообщение на сайте</span>
+            </div>
+
+            <div class="check-line">
+                <input type="checkbox" id="new-answer" class="consent-check" name="remember-ident" value="remember-ident-user" checked>
+                <span>Ответ нового специалиста на Ваш тендер</span>
+            </div>
+
+            <p><input id="email-for_notif" class="inp-user-email" type="email" name="user-email" placeholder="Ваш e-mail для уведомлений" >  </p>
+
+            <div class="settings_errore_message"> </div>
+
+            <div class="">
+                <button  id="button_save-notif" class="button_save-settings btn"> <img src="etc/clientlibs/wedding/pages/images/profil_partner/settings/button_save.png" alt="button_save"></button>
+            </div>
+
+        </section>
+
+    </div>
+
+
+    // ------  temporary
 
     <p>Gmail API Quickstart</p>
 
@@ -122,4 +199,4 @@
 
     </script>
 
-</div>;
+</main>;

@@ -244,6 +244,10 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
   color: red;
 }
 
+.btn{
+    cursor: pointer;
+}
+
 /*=====  main start ======*/
 
 main{
@@ -402,7 +406,7 @@ footer > div a, footer > div{
     padding: 5px;
 }
 
-/*  =========   форма входа and reg */
+/*  ================   форма входа and registr and settings  ============================== ================================ ==*/
 
 #entrance-form {
     position: fixed;
@@ -454,7 +458,7 @@ footer > div a, footer > div{
     justify-content: space-between;
 }
 
-.social-inter img, .btn-enter, .have-account-entrance, .consent-working{
+.social-inter img, .btn-enter, .have-account-entrance, .consent-working, .remove-account{
     cursor: pointer;
 }
 
@@ -491,7 +495,7 @@ footer > div a, footer > div{
     margin: 15px 0 10px;
 }
 
-.mwindow input{
+.mwindow input, .settings-page input{
     height: 30px;
     margin: 10px 0;
     padding: 10px 0 10px 3%;
@@ -500,7 +504,7 @@ footer > div a, footer > div{
     font-size: 15pt;
 }
 
-.mwindow select{
+.mwindow select, .settings-page select{
     box-sizing: border-box;
     height: 50px;
     margin: 10px 0;
@@ -511,7 +515,7 @@ footer > div a, footer > div{
 }
 
 .mwindow input::placeholder, .mwindow select::placeholder,
-.top-bar input::placeholder, .top-bar select::placeholder {
+.top-bar input::placeholder, .top-bar select::placeholder{
     color: #a0a0a0;
 }
 
@@ -523,7 +527,7 @@ footer > div a, footer > div{
     margin: 15px 0;
 }
 
-.have-account-entrance, .consent-working{
+.have-account-entrance, .consent-working, .remove-account{
     text-decoration: underline;
     color: #c3b89e;
 }
@@ -567,7 +571,7 @@ footer > div a, footer > div{
     background-color: #f99;
 }
 
-/*  =========  end  форма входа and reg */
+/*  ====================================================================================  end  форма входа and reg  and settings--- */
 
 /*Experiment*/
 
@@ -645,11 +649,11 @@ footer > div a, footer > div{
   display: inline-block;
   border-bottom: 2px solid #f4f4f4;
 
-}
-
-.partner_menu_btn:hover{
-  color: #afa58e;
 }*/
+
+.partner_menu li:hover{
+  color: #afa58e;
+}
 
 .user_menu_btn_active, .partner_menu_btn_active{
     color: #afa58e;

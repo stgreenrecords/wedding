@@ -1,1 +1,47 @@
+.settings-page-content{
+    background-color: #f4f4f4;
+    margin-bottom: 70px;
+}
 
+.settings-page-wrapper{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.settings-page input::placeholder, .settings-page select::placeholder{
+    color: #a0a0a0;
+}
+
+.settings-page input{
+
+    box-shadow: 5px 5px 10px 0px #a0a0a0;
+}
+
+.settings-page select {
+
+    box-shadow: 5px 5px 10px 0px #a0a0a0;
+}
+
+.remove-account-cont{
+    padding: 20px 5% 10px;
+}
+
+.button_save {
+    margin: 0 auto;
+}
+
+.button_save-settings{
+    margin: 0 auto;
+    text-align: center;
+}
+
+#btn_settings-common{
+    margin-right: 30%;
+}
+
+.check-line input{
+    margin: 20px;
+    width: 17px;
+    height: 17px;
+    box-shadow: none;
+}
