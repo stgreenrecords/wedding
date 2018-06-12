@@ -8,6 +8,12 @@ var PORTAL = (function (PORTAL, $) {
 
         console.log('Component: "Settings"');
 
+        $self.find('#remove-account').on('click', ()=>{
+            var isAdmin = confirm("Вы действительно хотите удалить свою страницу? Это действие необратимо!");
+            if (isAdmin)
+                alert('аккаунт Удались!');
+        });
+
         (function(){  //  функции переключения страниц
             var user_calc  = $self.find('#settings-common');
             var user_tend  = $self.find('#settings-notification');
