@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import wedding.core.model.WeddingBaseModel;
 import wedding.core.rest.util.ServletMapping;
+import wedding.core.services.resolver.ResolverProvider;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -158,13 +159,16 @@ public final class SlingModelUtil {
             if (modelValues.isEmpty()) {
                 return;
             }
-            Optional.ofNullable(resource.adaptTo(ModifiableValueMap.class))
+            final ResourceResolver resolver = ResolverProvider.getResolver();
+            Optional.ofNullable(resolver)
+                    .map(resourceResolver -> resourceResolver.getResource(resource.getPath()))
+                    .map(res -> res.adaptTo(ModifiableValueMap.class))
                     .ifPresent(properties -> {
                         modelValues.forEach((k, v) -> properties.remove(k));
                         properties.putAll(modelValues);
                     });
             try {
-                resource.getResourceResolver().commit();
+                resolver.commit();
             } catch (PersistenceException e) {
                 LOG.error("Error occurred while saving data [{}], for [{}]", modelValues, resource, e);
             }
