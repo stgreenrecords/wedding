@@ -8,6 +8,36 @@ var PORTAL = (function (PORTAL, $) {
 
         console.log('Component: "Sales--\Events"');
 
+        FakeData = [
+            {
+            description:'Отличные скидки сегодня',
+            endDate:'155628937',
+            id:"f888d202-d2ee-4d30-8de8-1dcd839f4189",
+            resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
+            resourceType:'xz',
+            startDate:'155628937',
+            title:'скидки 50%'},
+
+            {
+            description:'Отличные скидки сегодня',
+            endDate:'155628937',
+            id:"f888d202-d2ee-4d30-8de8-1dcd839f4189",
+            resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
+            resourceType:'xz',
+            startDate:'155628937',
+            title:'скидки 50%'},
+
+            {
+            description:'Отличные скидки сегодня',
+            endDate:'155628937',
+            id:"f888d202-d2ee-4d30-8de8-1dcd839f4189",
+            resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
+            resourceType:'xz',
+            startDate:'155628937',
+            title:'скидки 50%'}
+
+        ];
+
 
         $.ajax({
 
@@ -19,7 +49,7 @@ var PORTAL = (function (PORTAL, $) {
                 console.log("success ajax");
                 console.dir(data);
 
-                data ? drawEvent(data) : '';
+                data.length == 0 ? drawEvent(data) : drawEvent(FakeData); // fake
 
             },
             error: function (e) {

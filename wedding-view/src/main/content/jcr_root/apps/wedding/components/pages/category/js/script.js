@@ -63,19 +63,14 @@ var PORTAL = (function (PORTAL, $) {
                     console.log("success");
                     console.dir(data);
 
-                 /*   var pro_div = document.querySelector(".search-pro");
-                    pro_div.style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_5.jpg')";
-                    pro_div.querySelector(".search-usually_content_name").innerHTML = data[0].firstName + " "+ data[0].lastName;
-                    pro_div.querySelector(".search-usually_content_speciality").innerHTML = data[0].speciality;
-                    pro_div.querySelector(".pro_phone").innerHTML = data[0].phone;
-                    pro_div.querySelector(".pro_vk").innerHTML = '<a href='+data[0].vkLink+' target="blank">'+data[0].vkLink+'</a>' ;
+                    if (data.length == 0){  //  todoc - это как временная мера от моветона - удалить когда заполнится каталог
+                        $partner_categ_select.val('rest');
+                        $city_select.val('minsk');
+                        console.log('Пока нет таких специалистов у нас в каталоге - ОТДОХНИ в Минске!');
+                        getSelectedCat();
+                        return;
+                    }
 
-                    var pro_div2 = document.querySelector(".search-pro2");
-                    pro_div2.style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_2.jpg')";
-                    pro_div2.querySelector(".search-usually_content_name").innerHTML = data[1].firstName + " "+ data[1].lastName;
-                    pro_div2.querySelector(".search-usually_content_speciality").innerHTML = data[1].speciality;
-                    pro_div2.querySelector(".pro_phone").innerHTML = data[1].phone;
-                    pro_div2.querySelector(".pro_vk").innerHTML = '<a href='+data[1].vkLink+' target="blank">'+data[1].vkLink+'</a>' ;*/
 
                     var first_div = document.querySelector(".search-usually");
                     var main_container =  document.querySelector("#search-usually-cont");
@@ -86,8 +81,8 @@ var PORTAL = (function (PORTAL, $) {
 
                     for (var i = 0; i<data.length; i++){
                         copy_div = first_div.cloneNode(true);
-                        k= i%9+1;
-                        copy_div.querySelector(".search-usually_img").style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_"+k+".jpg')";
+                        k=(k+1)%21;
+                        copy_div.querySelector(".search-usually_img").style.backgroundImage = `url('/etc/clientlibs/wedding/pages/images/any_img/bgi_${k}_0.jpg')`;
                         copy_div.querySelector(".search-usually_content_name").innerHTML = data[i].firstName + " "+ data[i].lastName;
                         copy_div.querySelector(".search-usually_content_speciality").innerHTML = data[i].speciality;
                         copy_div.querySelector(".partner_card_href").setAttribute("href",`/content/wedding/catalog/category/partner.html?${data[i].id}#${selectItems.$cat_val}&${selectItems.$city_val}`);
@@ -142,3 +137,21 @@ var PORTAL = (function (PORTAL, $) {
     return PORTAL;
 
 })(PORTAL || {}, jQuery);
+
+
+
+
+
+/*   var pro_div = document.querySelector(".search-pro");   //   заполнение про-акков - пока нет концепции
+   pro_div.style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_5.jpg')";
+   pro_div.querySelector(".search-usually_content_name").innerHTML = data[0].firstName + " "+ data[0].lastName;
+   pro_div.querySelector(".search-usually_content_speciality").innerHTML = data[0].speciality;
+   pro_div.querySelector(".pro_phone").innerHTML = data[0].phone;
+   pro_div.querySelector(".pro_vk").innerHTML = '<a href='+data[0].vkLink+' target="blank">'+data[0].vkLink+'</a>' ;
+
+   var pro_div2 = document.querySelector(".search-pro2");
+   pro_div2.style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_2.jpg')";
+   pro_div2.querySelector(".search-usually_content_name").innerHTML = data[1].firstName + " "+ data[1].lastName;
+   pro_div2.querySelector(".search-usually_content_speciality").innerHTML = data[1].speciality;
+   pro_div2.querySelector(".pro_phone").innerHTML = data[1].phone;
+   pro_div2.querySelector(".pro_vk").innerHTML = '<a href='+data[1].vkLink+' target="blank">'+data[1].vkLink+'</a>' ;*/

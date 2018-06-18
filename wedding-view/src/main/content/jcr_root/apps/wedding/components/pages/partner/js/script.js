@@ -300,10 +300,11 @@ var PORTAL = (function (PORTAL, $) {
             events.forEach(function(elem, i){
 
                 var newItem = eventCard.clone().removeClass('event_card-sample');
-                newItem.find('.event_card-title').html(elem.title.substr(0, 12));
-                newItem.find('.event_card-bg').css('backgroundImage', 'url("/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/bgi.jpg")');
-                newItem.find('.event_card-start').text(formatDate(Number(elem.startDate)));
-                newItem.find('.event_card-finish').text(formatDate(Number(elem.endDate)));
+                elem.title ? newItem.find('.event_card-title').html(elem.title.substr(0, 12)): '';
+                elem.background ? newItem.find('.event_card-bg').css('backgroundImage', `url("${elem.background}")`)
+                                : newItem.find('.event_card-bg').css('backgroundImage', 'url("/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/bgi.jpg")');
+                elem.startDate ? newItem.find('.event_card-start').text(formatDate(Number(elem.startDate))) : '';
+                elem.endDate ? newItem.find('.event_card-finish').text(formatDate(Number(elem.endDate))) : '';
                 elem.description ? newItem.find('.event_card-description_text').text(elem.description.substr(0, 40)) : '';
                 listWrapper.append(newItem);
 
