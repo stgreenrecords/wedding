@@ -204,6 +204,10 @@ var PORTAL = (function (PORTAL, $) {
             return dd + '.' + mm + '.' + yy;
         }
 
+
+
+    };  //---------
+
     return PORTAL;
 
-};)(PORTAL || {}, jQuery);
+})(PORTAL || {}, jQuery);
