@@ -1050,6 +1050,7 @@ footer > div a, footer > div{
     margin-top: 15px;
     height: 350px;
     background: url('/etc/clientlibs/wedding/pages/images/any_img/d2_12.jpg') 50% 50% no-repeat;
+    background-size: cover;
     display: flex;
     align-items: flex-end;
 }
@@ -1104,7 +1105,7 @@ footer > div a, footer > div{
 
 #tender-cont .tender_card{
     width: 85%;
-    margin: 5% 7.5% 7%;
+    margin: 5% 7.5% 1%;
 }
 
 #tender-cont .tender_card-line2{
@@ -1164,9 +1165,20 @@ footer > div a, footer > div{
     font-size: 12pt;
 }
 
-#tender-cont .tender_card .add_btn{
+.comment-wrapper{
+    width: 85%;
+    margin: 5% 7.5% 50px;
+}
+.comment-wrapper .trumbowyg-box{
+    width: 85%;
+
+}
+
+.comment-wrapper .add_btn{
     text-align: right;
     cursor: pointer;
+    margin-right: 7.5%;
+    padding-bottom: 90px;
 }
 
 /*========------- TendeR finish  -=-=-=-=-=-*/
