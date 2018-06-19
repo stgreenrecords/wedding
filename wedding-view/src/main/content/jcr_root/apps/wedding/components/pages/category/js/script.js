@@ -68,7 +68,6 @@ var PORTAL = (function (PORTAL, $) {
                         $city_select.val('minsk');
                         console.log('Пока нет таких специалистов у нас в каталоге - ОТДОХНИ в Минске!');
                         getSelectedCat();
-                        return;
                     }
 
 
@@ -117,8 +116,8 @@ var PORTAL = (function (PORTAL, $) {
                     if (data.length > 12){
                         for (var i = 12; i<data.length; i++){
                             var copy_div = first_div.cloneNode(true);
-                            k= i%9+1;
-                            copy_div.querySelector(".search-usually_img").style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_"+k+".jpg')";
+                            k=(k+1)%21;
+                            copy_div.querySelector(".search-usually_img").style.backgroundImage = `url('/etc/clientlibs/wedding/pages/images/any_img/bgi_${k}_0.jpg')`;
                             copy_div.querySelector(".search-usually_content_name").innerHTML = data[i].firstName + " "+ data[i].lastName;
                             copy_div.querySelector(".search-usually_content_speciality").innerHTML = data[i].speciality;
                             copy_div.querySelector(".partner_card_href").setAttribute("href",`/content/wedding/catalog/category/partner.html?${data[i].id}#${selectItems.$cat_val}&${selectItems.$city_val}`);

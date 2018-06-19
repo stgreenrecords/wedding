@@ -70,7 +70,6 @@ var PORTAL = (function (PORTAL, $) {
 
         }
 
-
         function formatDate(datt) {
             var date = new Date (datt);
             var dd = date.getDate();
@@ -80,13 +79,6 @@ var PORTAL = (function (PORTAL, $) {
             var yy = date.getFullYear();
             return dd + '.' + mm + '.' + yy;
         }
-
-
-
-
-
-
-
 
     };
 
