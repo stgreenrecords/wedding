@@ -21,14 +21,15 @@ var PORTAL = (function (PORTAL, $) {
 
             var dataRegistration = {};
             var userLoginInfo = {};
-            var authStatusFromCookie;
-            var authTypeFromCookie;
-            var userEmailFromCookie;
             var authType = 'EMAIL';
 
-            authStatusFromCookie = Cookies.get('authStatus');
-            authTypeFromCookie = Cookies.get('authType');
-            userEmailFromCookie = Cookies.get('userEmail');
+            var authStatusFromCookie = Cookies.get('authStatus');
+            var authTypeFromCookie = Cookies.get('authType');
+            var userEmailFromCookie = Cookies.get('userEmail');
+            var userIdFromCookie  = Cookies.get('userId');
+            var userTypeFromCookie = Cookies.get('userType');
+            var cityFromCookie = Cookies.get('city');
+            var workSphereFromCookie = Cookies.get('workSphere');
 
             $self.find('.mini-menu').on('click', function(){
                 $self.find('.mini-menu-drop').toggleClass('hidden_cl');
@@ -39,7 +40,7 @@ var PORTAL = (function (PORTAL, $) {
             // if(true)
             // $self.find('#mini-menu_my-page a').attr('href', '/content/wedding/catalog/category/partner.html');
 
-            if (authStatusFromCookie === "authorized" && authTypeFromCookie) {
+            if (authStatusFromCookie === "authorized" && authTypeFromCookie ) {
                 //PORTAL.modules.LoginRegistration.AUTH[authType].status();
                 showCabinetSuccess();
             }

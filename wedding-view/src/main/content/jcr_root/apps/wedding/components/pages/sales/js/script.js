@@ -14,7 +14,7 @@ var PORTAL = (function (PORTAL, $) {
                 endDate:'1551289371112',
                 id:"f888d202-d2ee-4d30-8de8-1dcd839f4189",
                 resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
-                resourceType:'xz',
+                resourceType:'FakeData',
                 startDate:'1531289371112',
                 title:'скидки 30%'
             },
@@ -24,7 +24,7 @@ var PORTAL = (function (PORTAL, $) {
                 endDate:'1551289371112',
                 id:"f888d202-d2ee-4d30-8de8-1dcd839f4189",
                 resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
-                resourceType:'xz',
+                resourceType:'FakeData',
                 startDate:'1531289371112',
                 title:'скидки 20%'
             },
@@ -34,7 +34,7 @@ var PORTAL = (function (PORTAL, $) {
                 endDate:'1551289371112',
                 id:"f888d202-d2ee-4d30-8de8-1dcd839f4189",
                 resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
-                resourceType:'xz',
+                resourceType:'FakeData',
                 startDate:'1531289371112',
                 title:'Скидки 50%'
             },
@@ -44,7 +44,7 @@ var PORTAL = (function (PORTAL, $) {
                 endDate:'1551289371112',
                 id:"f888d202-d2ee-4d30-8de8-1dcd839f4189",
                 resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
-                resourceType:'xz',
+                resourceType:'FakeData',
                 startDate:'1531289371112',
                 title:'Бонус 50% на платье'
             }
