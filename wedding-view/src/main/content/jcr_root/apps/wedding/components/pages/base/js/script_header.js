@@ -29,6 +29,8 @@ var PORTAL = (function (PORTAL, $) {
             }
 
         }()); // end -  ---
+
+        console.log(document.location.pahtname);
     };
 
     return PORTAL;
