@@ -8,6 +8,11 @@ var PORTAL = (function (PORTAL, $) {
 
         console.log('Component: "Landing"');
 
+        $("textarea").trumbowyg({
+           lang: 'ru'
+        });
+
+
     };
 
     return PORTAL;

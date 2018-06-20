@@ -1,25 +1,32 @@
 package wedding.core.utils;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.sling.api.resource.ModifiableValueMap;
-import org.apache.sling.api.resource.PersistenceException;
-import org.apache.sling.api.resource.Resource;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.jackrabbit.api.security.user.User;
+import org.apache.jackrabbit.api.security.user.UserManager;
+import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.resource.*;
+import org.apache.sling.jcr.base.util.AccessControlUtil;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.Self;
+import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import wedding.core.model.WeddingBaseModel;
+import wedding.core.rest.util.ServletMapping;
+import wedding.core.services.resolver.ResolverProvider;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.lang.annotation.Annotation;
+import javax.jcr.Node;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class SlingModelUtil {
 
@@ -33,67 +40,151 @@ public final class SlingModelUtil {
         if (!modelClass.isAnnotationPresent(Model.class)) {
             return;
         }
-        final Field[] fields = modelClass.getDeclaredFields();
+        final Field[] fields = aggregateFields(modelClass);
         Arrays.stream(fields)
                 .filter(field -> Resource.class.equals(field.getType()))
-                .filter(isAnnotatedWith(Self.class))
-                .map(getFiledValue(model))
+                .filter(ReflectionUtil.isAnnotatedWith(Self.class))
+                .map(ReflectionUtil.getFiledValue(model))
                 .findFirst()
                 .map(Resource.class::cast)
                 .ifPresent(updateResourceFields(model, fields));
     }
 
-    private static Consumer<Resource> updateResourceFields(Object model, Field[] fields) {
-        return resource -> {
-            Map<String, Object> modelValues = Arrays.stream(fields)
-                    .filter(isNotAnnotatedWith(Self.class))
-                    .filter(isAnnotatedWith(Inject.class))
-                    .filter(field -> getFiledValue(model).apply(field) != null)
-                    .collect(Collectors.toMap(SlingModelUtil::getName, getFiledValue(model), (v1, v2) -> v1));
-            if (modelValues.isEmpty()) {
-                return;
-            }
-            Optional.ofNullable(resource.adaptTo(ModifiableValueMap.class))
-                    .ifPresent(properties -> properties.putAll(modelValues));
-            try {
-                resource.getResourceResolver().commit();
-            } catch (PersistenceException e) {
-                LOG.error("Error occurred while saving data [{}], for [{}]", new Object[] {modelValues, resource, e});
-            }
-        };
+    private static Field[] aggregateFields(Class<?> modelClass) {
+        return aggregateFieldsStream(modelClass).toArray(Field[]::new);
     }
 
-    private static String getName(Field field) {
-        if (isAnnotatedWith(Named.class).test(field)) {
-            return field.getAnnotation(Named.class).value();
+    private static Stream<Field> aggregateFieldsStream(Class<?> modelClass) {
+        final Stream<Field> fieldStream = Stream.of(modelClass.getDeclaredFields());
+        final Class<?> superclass = modelClass.getSuperclass();
+        if (superclass != null) {
+            return Stream.concat(fieldStream, aggregateFieldsStream(superclass));
         }
-        return field.getName();
+        return fieldStream;
     }
 
-    private static Function<Field, Object> getFiledValue(Object object) {
-        return field -> {
+    public static Resource createModelResource(SlingHttpServletRequest request, String path, Class aClass) {
+        final String id = WeddingResourceUtil.generateId();
+        final String resourceType = ServletMapping.getResourceTypeFromRequest(request);
+        Resource resource = "rep:User".equals(resourceType)
+                ? createUser(request, id, path)
+                : createResource(request.getResourceResolver(), path + "/" + id, resourceType);
+        initResourceProperties(resource, id);
+        updateModel(resource.adaptTo(aClass));
+        return resource;
+    }
+
+    private static void initResourceProperties(Resource resource, String id) {
+        final Optional<Resource> resourceOptional = Optional.ofNullable(resource);
+        resourceOptional.map(res -> res.adaptTo(Node.class))
+                .ifPresent(node -> {
+                    try {
+                        node.addMixin(WeddingResourceUtil.NT_WEDDING_RESOURCE_MIXIN);
+                    } catch (RepositoryException e) {
+                        LOG.error(e.getMessage(), e);
+                    }
+                });
+        resourceOptional.map(res -> res.adaptTo(ModifiableValueMap.class))
+                .ifPresent(properties -> properties.put(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_ID, id));
+    }
+
+    public static <T extends WeddingBaseModel> T createModel(SlingHttpServletRequest request, Class<T> modelClass) {
+        final String path = request.getParameter("path");
+        if (StringUtils.isEmpty(path)) {
+            return null;
+        }
+        final String id = WeddingResourceUtil.generateId();
+        final String resourceType = ServletMapping.getResourceTypeFromRequest(request);
+        final Resource resource = "rep:User".equals(resourceType)
+                ? createUser(request, id, path)
+                : createResource(request.getResourceResolver(), path + "/" + id, resourceType);
+
+        final T model = resource.adaptTo(modelClass);
+        updateModel(model);
+        return model;
+    }
+
+    private static Resource createUser(SlingHttpServletRequest request, String id, String path) {
+        final ResourceResolver resolver = request.getResourceResolver();
+
+        return Optional.ofNullable(resolver.adaptTo(Session.class))
+                .map(session -> {
+                    try {
+                        return AccessControlUtil.getUserManager(session);
+                    } catch (RepositoryException e) {
+                        LOG.error(e.getMessage(), e);
+                        return null;
+                    }
+                })
+                .map(getUserResourcePath(id, path))
+                .map(resolver::getResource)
+                .orElse(null);
+    }
+
+    private static Function<UserManager, String> getUserResourcePath(String id, String path) {
+        return userManager -> {
             try {
-                boolean accessible = field.isAccessible();
-                field.setAccessible(true);
-                Object value = field.get(object);
-                field.setAccessible(accessible);
-                return value;
-            } catch (IllegalAccessException e) {
+                final String userPath = path + "/" + StringUtils.substring(id, 0, 2);
+                final User user = userManager.createUser(id, id, () -> id, userPath);
+                return user.getPath();
+            } catch (RepositoryException e) {
+                LOG.error(e.getMessage(), e);
                 return null;
             }
         };
     }
 
-    private static Predicate<Field> isNotAnnotatedWith(Class<? extends Annotation> annotationClass) {
-        return checkAnnotations(annotationClass, ArrayUtils::isEmpty);
+    private static Resource createResource(ResourceResolver resourceResolver, String path, String resourceType) {
+        try {
+            return ResourceUtil.getOrCreateResource(resourceResolver, path, resourceType, null, true);
+        } catch (PersistenceException e) {
+            LOG.error(e.getMessage(), e);
+            return null;
+        }
     }
 
-    private static Predicate<Field> isAnnotatedWith(Class<? extends Annotation> annotationClass) {
-        return checkAnnotations(annotationClass, ArrayUtils::isNotEmpty);
+    public static <M> void updateModel(SlingHttpServletRequest request, Class<M> modelClass, Function<M, M> updateAction) {
+        Optional.ofNullable(request.adaptTo(modelClass))
+                .map(updateAction)
+                .ifPresent(SlingModelUtil::updateModel);
     }
 
-    private static Predicate<Field> checkAnnotations(Class<? extends Annotation> annotationClass,
-                                                     Predicate<Annotation[]> function) {
-        return field -> function.test(field.getDeclaredAnnotationsByType(annotationClass));
+    private static Consumer<Resource> updateResourceFields(Object model, Field[] fields) {
+        return resource -> {
+            Map<String, Object> modelValues = Arrays.stream(fields)
+                    .filter(ReflectionUtil.isNotAnnotatedWith(Self.class))
+                    .filter(ReflectionUtil.isAnnotatedWith(ValueMapValue.class))
+                    .filter(field -> ReflectionUtil.getFiledValue(model).apply(field) != null)
+                    .collect(Collectors.toMap(ReflectionUtil::getNamedValue, ReflectionUtil.getFiledValue(model), (v1, v2) -> v1));
+            if (modelValues.isEmpty()) {
+                return;
+            }
+            final ResourceResolver resolver = ResolverProvider.getResolver();
+            Optional.ofNullable(resolver)
+                    .map(resourceResolver -> resourceResolver.getResource(resource.getPath()))
+                    .map(res -> res.adaptTo(ModifiableValueMap.class))
+                    .ifPresent(properties -> {
+                        modelValues.forEach((k, v) -> properties.remove(k));
+                        properties.putAll(modelValues);
+                    });
+            try {
+                resolver.commit();
+            } catch (PersistenceException e) {
+                LOG.error("Error occurred while saving data [{}], for [{}]", modelValues, resource, e);
+            }
+        };
+    }
+
+    public static Resource getBaseUserModelResourceFromChildResources(Resource childResource) {
+        ValueMap valueMap = childResource.getValueMap();
+        if (valueMap.containsKey(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_TYPE)) {
+            String resourceType = valueMap.get(WeddingResourceUtil.REQUEST_PARAMETER_WEDDING_RESOURCE_TYPE, String.class);
+            if (WeddingResourceUtil.WEDDING_RESOURCE_TYPE_USER.equals(resourceType)) {
+                return childResource;
+            } else {
+                return getBaseUserModelResourceFromChildResources(Objects.requireNonNull(childResource.getParent()));
+            }
+        }
+        return getBaseUserModelResourceFromChildResources(Objects.requireNonNull(childResource.getParent()));
     }
 }

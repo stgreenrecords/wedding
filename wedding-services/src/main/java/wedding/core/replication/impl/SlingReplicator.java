@@ -10,7 +10,9 @@ import wedding.core.replication.model.ServerInfo;
 import javax.jcr.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Component(name = "Sling Replicator", immediate = true)
 @Service

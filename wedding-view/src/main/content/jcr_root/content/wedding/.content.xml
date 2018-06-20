@@ -41,7 +41,4 @@
     <user
             jcr:primaryType="nt:unstructured"
             sling:resourceType="wedding/components/pages/user"/>
-    <sly-test-page
-            jcr:primaryType="nt:unstructured"
-            sling:resourceType="wedding/components/pages/sly-test-page"/>
 </jcr:root>

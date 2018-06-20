@@ -19,7 +19,7 @@ public class CatalogCategories extends AbstractResFieldCore {
     @Override
     public Map<String, String> getObject(SlingHttpServletRequest request) {
         return Optional.of(request.getResourceResolver())
-                .map(resolver -> resolver.getResource(getSuffixPathFromRequest(request)))
+                .map(resolver -> resolver.getResource(WeddingResourceUtil.getSuffixPathFromRequest(request)))
                 .map(Resource::listChildren)
                 .map(WeddingResourceUtil::iteratorToOrderedStream)
                 .orElse(Stream.empty())
@@ -27,21 +27,5 @@ public class CatalogCategories extends AbstractResFieldCore {
                         Resource::getName,
                         r -> WeddingResourceUtil.getStringPropertyFromResource(r, PROPERTY_CATALOG_TITLE)));
     }
-
-    @Override
-    public Object updateObject(SlingHttpServletRequest request) {
-        return null;
-    }
-
-    @Override
-    public Object createObject(SlingHttpServletRequest request) {
-        return null;
-    }
-
-    @Override
-    public Object deleteObject(SlingHttpServletRequest request) {
-        return null;
-    }
-
 
 }

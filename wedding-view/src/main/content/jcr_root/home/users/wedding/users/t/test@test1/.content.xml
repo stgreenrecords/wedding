@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:rep="internal"
-    jcr:mixinTypes="[rep:AccessControllable]"
-    jcr:primaryType="rep:User"
-    jcr:uuid="8c38d6c6-e748-3231-896d-e470af7f95fd"
-    rep:authorizableId="test@test1"
-    rep:password="\{SHA-256}2768aace18db51ce-1000-0da4cdb1313df4d3216d69b47ffd49d4440fdc267d3cb766431669b72cb02a03"
-    rep:principalName="test@test1">
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+          xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:rep="internal"
+          jcr:mixinTypes="[rep:AccessControllable]"
+          jcr:primaryType="rep:User"
+          jcr:uuid="8c38d6c6-e748-3231-896d-e470af7f95fd"
+          rep:authorizableId="test@test1"
+          rep:password="\{SHA-256}2768aace18db51ce-1000-0da4cdb1313df4d3216d69b47ffd49d4440fdc267d3cb766431669b72cb02a03"
+          rep:principalName="test@test1">
     <profile
-        jcr:primaryType="nt:unstructured"
-        sling:resourceType="cq/security/components/profile"/>
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="cq/security/components/profile"/>
 </jcr:root>

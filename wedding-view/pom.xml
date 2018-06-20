@@ -110,7 +110,28 @@
                             <artifactId>wedding-services</artifactId>
                             <target>/apps/wedding/install</target>
                         </embedded>
+                        <embedded>
+                            <groupId>com.wedding</groupId>
+                            <artifactId>restextension</artifactId>
+                            <target>/apps/wedding/install</target>
+                        </embedded>
+
+                        <embedded>
+                            <groupId>org.apache.commons</groupId>
+                            <artifactId>commons-email</artifactId>
+                            <target>/apps/wedding/install</target>
+                        </embedded>
                     </embeddeds>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <inherited>true</inherited>
+                <configuration>
+                    <instructions>
+                        <Sling-Nodetypes>${basedir}/META-INF/vault/wedding.cnd</Sling-Nodetypes>
+                    </instructions>
                 </configuration>
             </plugin>
         </plugins>
@@ -155,7 +176,7 @@
             </build>
         </profile>
         <profile>
-            <id>publish-prodaction</id>
+            <id>publish-production</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -167,11 +188,20 @@
                             <artifactId>content-package-maven-plugin</artifactId>
                             <version>0.0.24</version>
                             <extensions>true</extensions>
+                            <executions>
+                                <execution>
+                                    <id>install-package</id>
+                                    <goals>
+                                        <goal>install</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
                             <configuration>
                                 <failOnError>true</failOnError>
-                                <targetURL>http://${cq.author.host}:${cq.author.port}/bin/cpm/package.service.html</targetURL>
+                                <targetURL>http://${cq.author.host}:${cq.author.port}/bin/cpm/package.service.html
+                                </targetURL>
                                 <userId>admin</userId>
-                                <password>admin</password>
+                                <password>you_can't_match_this_password</password>
                                 <useProxy>false</useProxy>
                                 <failOnMissingEmbed>true</failOnMissingEmbed>
                             </configuration>
@@ -188,13 +218,22 @@
             <artifactId>wedding-services</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.wedding</groupId>
+            <artifactId>restextension</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+        </dependency>
         <!--<dependency>-->
-            <!--<groupId>org.apache.sling</groupId>-->
-            <!--<artifactId>org.apache.sling.scripting.sightly</artifactId>-->
+        <!--<groupId>org.apache.sling</groupId>-->
+        <!--<artifactId>org.apache.sling.scripting.sightly</artifactId>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.apache.sling</groupId>-->
-            <!--<artifactId>org.apache.sling.scripting.sightly.compiler.java</artifactId>-->
+        <!--<groupId>org.apache.sling</groupId>-->
+        <!--<artifactId>org.apache.sling.scripting.sightly.compiler.java</artifactId>-->
         <!--</dependency>-->
     </dependencies>
 

@@ -1,0 +1,279 @@
+<main id="partner-page-content">
+
+    <div class="partner_menu">
+
+        <ul>
+
+            <li><span id="partner_about_btn" class="partner_menu_btn partner_menu_btn_active">  	О себе </span></li>
+            <li><span id="partner_photo_btn" class="partner_menu_btn">	Фото </span></li>
+            <li><span id="partner_video_btn" class="partner_menu_btn">	Видео </span></li>
+            <li><span id="partner_stock_btn" class="partner_menu_btn">	Акции </span></li>
+            <li><span id="partner_comments_btn" class="partner_menu_btn">	Отзывы </span></li>
+
+        </ul>
+
+    </div>
+
+    <div class="partner-page-wrapper">
+
+        <aside id="partner_aside"  class="" >
+
+            <div class="avatar_and_btn">
+
+                <div class="partner_avatar">
+                    <p class="edit_avatar_btns hidden_full">
+                        <img class="avatar_upd_icon" src="/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/upd_photo.png"
+                             title="Изменить аватар" alt="avatar_upd_icon">
+                        <img class="avatar_remove_icon " src="/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/remove_photo.png"
+                             title="Удалить аватар" alt="avatar_remove_icon">
+                    </p>
+                </div>
+
+                <div class="partner_avatar_btn">
+
+                    <div class="partner_avatar_btn_mail">
+                        <img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/wright.png"
+                             alt="avatar_btn_mail" title="Написать сообщение">
+                    </div>
+                    <div class="partner_avatar_btn_likes">
+                        <img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/estimate.png"
+                             alt="avatar_btn_likes" title="Оценить">
+                    </div>
+                    <div class="partner_avatar_btn_calc">
+                        <img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/import_calc.png"
+                             alt="avatar_btn_calc" title="Добавить в калькулятор">
+                    </div>
+                    <div class="avatar_btn_change hidden_full">
+                        <img src="/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/edit_profil.png"
+                             alt="avatar_btn_change" title="Редактировать страницу">
+                    </div>
+                    <div class="btn_change_save_change hidden_full">
+                        <img src="/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/save.png"
+                             alt="save_change" title="Сохранить изменения">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <p class="profil_name"> </p>
+            <p class="profil_secondname"> </p>
+            <p class="partner_speciality"> </p>
+
+            <div class="info_reit_block">
+                <span class="profil_views_icon" title="Показатель общего количества просмотров"> <img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/count_views.png" alt="views_icon" > 42 </span>
+                <span class="profil_likes_icon" title="Показатель общего количества оценок"> <img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/count_mark.png" alt="views_icon" > 15 </span>
+                <div class="profil_reiting_string">
+                    <div id="reit_heart1" class="reit_heart_all"></div>
+                    <div id="reit_heart2" class="reit_heart_all"></div>
+                    <div id="reit_heart3" class="reit_heart_all"></div>
+                    <div id="reit_heart4" class="reit_heart_all"></div>
+                    <div id="reit_heart5" class="reit_heart_all"></div>
+                </div>
+            </div>
+
+            <p class="info_string prise_string"> <span class="prise_start">1</span> - <span class="prise_end">150 </span> рублей</p>
+            <p class="info_string phone_string">+375...</p>
+            <p class="info_string mail_string">mail...</p>
+            <p class="info_string link_string">http://... </p>
+            <p class="info_string vk_string">vk.com/...</p>
+            <p class="info_string fb_string">facebook.com/...</p>
+            <p class="info_string insta_string">instagram.com/...</p>
+
+            <div class="partner_aside_calendar">
+                <div class="calendar_date_fild"> </div>
+
+                <div class="calendar_main_fild">
+                    <div id="calendar"></div>
+                </div>
+                <input class="myInput hidden_full" id="myDatePicker-1">
+            </div>
+
+            <div class="calendar_colontitle_fild">
+                <p class="full_busy">Занят целый день</p>
+                <p class="part_busy">Занят частично</p>
+            </div>
+
+            <div class="bgc_div">
+
+            </div>
+
+
+        </aside>
+
+
+
+        <div id="partner-page-pages">
+
+            <section id="partner_about_oneself">
+
+                <div >
+
+                    <h2 class="partner_title"> О себе </h2>
+
+                    <p class="content content_about_oneself"> Партнер еще не заполнил информацию о себе.</p>
+
+                    <div id="btn_add-text" class="add_btn hidden_full">
+                        <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section id="partner_photo"  class="hidden_full">
+
+                <div>
+
+                    <h2 class="partner_title"> Фото </h2>
+
+                    <div class="partner_photo-wrapper">
+
+                    </div>
+
+
+                    <div  class="upload_form hidden_full">
+
+                        <div>
+                            <label for="image_uploads">Выберите файлы для загрузки (PNG, JPG)</label>
+                            <input class="input_upload" type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple>
+                        </div>
+                        <div class="preview_upload">
+                            <p class="preview_upload-text">  </p>
+                        </div>
+
+
+                        <div id="btn_upPhoto" class="add_btn">
+                            <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+            <section id="partner_video" class="hidden_full">
+
+                <div >
+
+                    <h2 class="partner_title" > Видео </h2>
+
+                    <div class="partner_video-wrapper">
+
+                        <div class="video_field "> <!--  class="hidden_full" -->
+
+                             <iframe class="video_item" src="https://www.youtube.com/embed/QCBtOO1bBKo?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+                        </div>
+
+                    </div>
+
+                    <p class="add-video-field"></p>
+
+                    <div id="btn_add-video" class="add_btn hidden_full">
+                        <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+
+            <section id="partner_stock" class="hidden_full">
+
+                <div >
+
+                    <h2 class="partner_title"> Акции </h2>
+
+                    <div class="event-wrapper">
+
+                        <p class="no_event-text">У партнера в данный момент нет ни одной акции!</p>
+
+                    </div>
+
+                    <div class="hidden_full">
+
+                        <div class="event_card-sample event_card">
+
+                            <!-- <a class="event_card-href" href="/content/wedding/tenders/tender.html?"> -->
+                            <div class="event_card-bg">
+
+                                <div class="event_card-in_bg">
+
+                                    <p class="event_card-title">	</p>
+
+                                    <div class="event_card-date">
+                                        <span class="event_card-start"> </span>
+                                        <span> - </span>
+                                        <span class="event_card-finish"> </span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="event_card-description" title="Подробнее">
+                                <span class="event_card-description_text"> Подробнее </span>
+                                <span class="event_card-description_arrow">
+			     					<img src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/more.png" alt="more">
+			     				</span>
+                            </div>
+                            <!-- </a> -->
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div id="btn_add-event" class="add_btn hidden_full">
+                    <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
+                </div>
+
+            </section>
+
+
+
+            <section id="partner_comments" class="hidden_full">
+
+                <div class="partner_comments-wrapper">
+
+                    <h2 class="partner_title"> Отзывы </h2>
+
+                    <!-- <p class="content content_"> comments </p> -->
+                    <div class="hidden_full">
+                        <div class="comment_field">
+                            <div class="mini-avatar"> </div>
+                            <div class="comment_field-author_name"> Эйчантрис Васильевна </div>
+                            <div class="comment_field-author_category"> vj </div>
+                            <p class="comment_field-text"> Здравствуйте Олеся, меня зовут Мария. Буду рада предложить Вам отыграть свадьбу на все 200.
+                                У нас в арсенале - дерижабль с обезьянами, танцующие пингвины и слон-бормоглот.
+                            </p>
+                            <div class="comment_field-date_fild"> 18.04.2018</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="comment-inter_area">
+                    <textarea class="comment_inter" name="comment_inter" placeholder="Оставьте комментарий" > </textarea>
+                </div>
+
+                <div id="btn_add-comment" class="add_btn">
+                    <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
+                </div>
+
+
+            </section>
+
+        </div>
+
+    </div>
+
+</main>

@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
           jcr:primaryType="sling:OrderedFolder"
-          embed="[wedding/components/pages/base/css/style.css,wedding/components/pages/landing/css/style.css,wedding/components/pages/categories/css/style.css,wedding/components/pages/category/css/style.css,wedding/components/pages/partner/css/style.css,wedding/components/pages/sale/css/style.css,wedding/components/pages/sales/css/style.css,wedding/components/pages/settings/css/style.css,wedding/components/pages/tenders/css/style.css,wedding/components/pages/tender/css/style.css,wedding/components/pages/user/css/style.css,wedding/components/pages/weddings/css/style.css,wedding/components/pages/wedding/css/style.css]"/>
+          embed="[wedding/components/pages/base/css/style.css,
+          wedding/components/pages/landing/css/style.css,
+          wedding/components/pages/landing-partners/css/style.css,
+          wedding/components/pages/categories/css/style.css,
+          wedding/components/pages/category/css/style.css,
+          wedding/components/pages/partner/css/style.css,
+          wedding/components/pages/sale/css/style.css,
+          wedding/components/pages/sales/css/style.css,
+          wedding/components/pages/settings/css/style.css,
+          wedding/components/pages/tenders/css/style.css,
+          wedding/components/pages/tender/css/style.css,
+          wedding/components/pages/user/css/style.css,
+          wedding/components/pages/weddings/css/style.css,
+          wedding/components/pages/wedding/css/style.css,
+          wedding/components/pages/mail/admin/css/style.css,
+          wedding/components/pages/mail/base-mail/css/style.css]"/>

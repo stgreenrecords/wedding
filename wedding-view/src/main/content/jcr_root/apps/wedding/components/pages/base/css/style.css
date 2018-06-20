@@ -1,1 +1,1224 @@
+@font-face {
+    font-family: "Rosa Marena";
+    src: url("/etc/clientlibs/wedding/pages/fonts/ROSA_MARENA.TTF");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GothamPro-Black";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROBLA.OTF");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GothamPro-BlackItalic";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROBLAITA.OTF");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "GothamPro-Bold";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROBOL.OTF");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GothamPro-BoldItalic";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROBOLITA.OTF");
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "GothamPro-Italic";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROITA.OTF");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "GothamPro-Light";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROLIG.OTF");
+    font-weight: 100; /* Проверить */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GothamPro-LightItalic";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROLIGITA.OTF");
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "GothamPro-Medium";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROMED.OTF");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GothamPro-MediumItalic";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROMEDITA.OTF");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "GothamProNarrow-Bold";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPRONARBOL.OTF");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GothamProNarrow-Medium";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPRONARMED.OTF");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Theano Didot";
+    src: url("/etc/clientlibs/wedding/pages/fonts/THEANODIDOT-REGULAR.TTF");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "GothamPro";
+    src: url("/etc/clientlibs/wedding/pages/fonts/GOTHAPROREG.OTF");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
+
+body{
+  /*font-family: 'Theano Didot',  serif;*/
+  font-family: 'Open Sans', sans-serif;
+  /*font-weight: lighter;*/
+  font-size: 20px;
+  line-height: 1.5;
+  background-color: #f4f4f4;
+  color: #222;
+}
+
+img, body, header, footer, nav, aside, article, section, figure, button, p, ul, ol, li, h1, h2, h3,h4,h5,h6, input, *{
+  padding:0;  margin:0;
+}
+
+.head-block{
+  min-height: 225px;
+  display: flex;
+  justify-content:  center;
+  background-color: #fff;
+}
+
+a {  text-decoration: none; color: #222; white-space: nowrap; }
+
+.central-head{
+  align-self: flex-end;
+  padding: 0 7%;
+}
+
+.cabinet-input{
+    position: absolute;
+    right: 5%;
+    top: 40px;
+    font-family: 'GothamPro',  sans-serif;
+    font-size: 18pt;
+    color: #222;
+    z-index: 9;
+}
+
+.central-head--title{
+  font-family: 'Rosa Marena', cursive;
+  font-size: 48px;
+  text-align: center;
+}
+
+.vert-line{
+  font-size: 24px;
+}
+
+.empty{
+	width:170px;
+	padding: 0 5% 0 0;
+}
+
+#entrance-cabinet-btn, #registration-btn, #cabinet_success, #btn-registration-futher2, .inp  {
+    cursor: pointer;
+}
+
+/* entrance success */
+
+#cabinet_success{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#cabinet_success{
+    display: none;
+}
+
+#cabinet_success .mail-count{
+    font-size: 12pt;
+    padding: 15px 0 15px 10px;
+}
+
+.mini-avatar{
+    border-radius: 30px;
+    border: 1px solid black;
+    width: 60px;
+    height: 60px;
+    background:  url("/etc/clientlibs/wedding/pages/images/any_img/d2_6.jpg") center no-repeat;
+    background-size: 150%;
+    margin: 0 15px;
+}
+
+.mini-menu-drop{
+    position: absolute;
+    right: -0.5%;
+    top:  60px;
+    width: 120%;
+    box-shadow:  5px 5px 20px 5px #a0a0a0;
+    background-color: #fff;
+    padding: 20px 30px 20px 0;
+}
+
+.hidden_cl{
+    visibility: hidden;
+}
+
+.hidden_full{
+    display: none;
+}
+
+.mini-menu-drop li{
+    list-style-type: none;
+    text-align: left;
+    width: 100%;
+    padding: 5px 0 5px 30px;
+}
+
+.mini-menu-drop li:hover {
+    background-color: #afa58e;
+    color: #fff;
+}
+
+/* ==== nav ==== */
+
+.main-menu{
+  box-sizing: border-box;
+  text-transform: uppercase; 
+  height: 75px;
+}
+
+.main-menu ul{
+  display: flex;	
+  flex-direction: row;
+}
+
+.main-menu li {
+    list-style-type: none;
+    box-sizing: border-box;
+    font-size: 22px;
+    white-space: nowrap;
+    padding: 20px;
+}
+
+.main_btn:hover{
+    color: #afa58e;
+}
+
+.main-menu a{
+    box-sizing: border-box;
+    padding: 5px 0;
+    text-align: center;
+}
+
+.btn{
+    cursor: pointer;
+}
+
+.events-main_btn {
+    vertical-align: top;
+    padding-bottom: 5px;
+}
+
+/*=====  main start ======*/
+
+main{
+  width: 75%;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+.top-bar{
+    min-height: 150px;
+    background-color: #f4f4f4;
+    text-align: center;
+    margin-top: 2%;
+}
+
+.top-bar input, .top-bar select{
+    height: 40px;
+    margin: 10px 12px;
+    padding: 2px 5px 0 15px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 15pt;
+    box-shadow:  5px 5px 23px -2px #A0A07D;
+
+}
+
+#partner_categories_select{
+    width: 235px;
+}
+
+#city_select{
+    width: 225px;
+}
+
+.num_field{
+    width: 100px;
+}
+
+.num_field_label{
+    padding-left: 9px;
+}
+
+.num_field_label2{
+    padding-right: 20px;
+}
+
+.pro_vk a{
+    color: #fff;
+}
+
+.container-search-pro{
+  min-height: 200px;
+  color: #fff;
+  margin: 20px 2% 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.search-pro_content{
+  padding: 20px 0 25px 3%;
+}
+
+.container-search-usually{
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-usually{
+  width: 29.3333333%;
+  min-height: 350px;
+  margin: 2%;
+  /*  background-color: #cdfbf8;  */
+  cursor: pointer;
+}
+
+.search-usually_img{
+  width: 100%;
+  height: 75%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.search-usually:nth-child(1) .search-usually_img{
+  background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_4.jpg');
+}
+
+.search-usually:nth-child(2) .search-usually_img{
+  background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_1.jpg');
+}
+
+.search-usually:nth-child(3) .search-usually_img{
+  background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_2.jpg');
+}
+
+.search-usually_content_name{
+  line-height: 1;
+  padding-top: 7px;
+  font-weight: bold;
+}
+
+.search-usually_content_hline{
+  line-height: 1;
+  font-size: 15px;
+}
+
+.search-usually_content_speciality{
+  font-size: 12pt;
+}
+
+.btn-up{
+ /* display: none;*/
+  position: fixed;
+  right: 3%;
+  bottom: 7%;
+}
+
+.btn-up a{ padding: 20px;}
+
+/*=====  main finish ======*/
+/*======== Footer =======*/
+
+footer{
+  padding-top: 30px;
+  min-height: 220px;
+  text-align: center;
+  background-color: #f4f4f4;
+}
+
+.foot--title{
+    font-family: 'Rosa Marena', cursive;
+    font-size: 38pt;
+    text-align: center;
+    flex-direction: column;
+    padding-bottom: 15px;
+}
+
+footer > div a, footer > div{
+    color: #5f5f5f;
+    font-family: 'GothamPro',  sans-serif;
+    font-weight: normal;
+    font-size: 14pt;
+}
+
+.phone-div img{
+    vertical-align: middle;
+}
+
+.social-btn-block{
+    padding: 30px 0 30px;
+}
+
+.social-btn-block img{
+    padding: 5px;
+}
+
+/*  ================   форма входа and registr and settings  ============================== ================================ ==*/
+
+#entrance-form {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: rgba(204, 204, 204, 0.6);
+    visibility: hidden;
+}
+
+.window-entrance, .window-registation, .window-registation-step2, .window-registation-step3-partner, .window-registation-step3-user {
+    text-align: center;
+    background-color: #f4f4f4;
+    border: 1px solid #000;
+    position: absolute;
+    z-index: 11;
+    margin: 0;
+    visibility: hidden;
+}
+
+.window-entrance, .window-registation-step2{
+    min-width: 60%;
+    min-height: 50%;
+}
+
+.window-registation, .window-registation-step3-partner, .window-registation-step3-user {
+    min-width: 60%;
+    min-height: 70%;
+}
+
+.container-window-entrance{
+    padding: 5% 0;
+    width: 360px;
+    font-size: 15pt;
+    margin: 0 auto;
+}
+
+.container-window-registation, .container-window-registation-step2, .container-window-registation-step3-user, .container-window-registation-step3-partner{
+    padding: 5% 0;
+    width: 420px;
+    font-size: 15pt;
+    margin: 0 auto;
+}
+
+.social-inter{
+    display: flex;
+    justify-content: space-between;
+}
+
+.social-inter img, .btn-enter, .have-account-entrance, .consent-working, .remove-account{
+    cursor: pointer;
+}
+
+#remember-ident{
+    vertical-align: middle;
+}
+
+.title-inter{
+    font-size: 29pt;
+    margin-bottom: 15px;
+}
+
+.registation3_errore_message{
+    min-height: 25px;
+    background-color: yellow;
+    color: red;
+    z-index: 12;
+    position: absolute;
+    display: none;
+    bottom:  17%;
+    left: 3%;
+}
+
+.registation3_errore_message::before{
+    content:"Вам необходимо принять условия сотрудничества и заполнить все обязательные поля";
+}
+
+.title-inter2 {
+    font-size: 20pt;
+    margin-bottom: 10px;
+}
+
+.mwindow-or{
+    margin: 15px 0 10px;
+}
+
+.mwindow input, .settings-page input{
+    height: 30px;
+    margin: 10px 0;
+    padding: 10px 0 10px 3%;
+    border: none;
+    width: 97%;
+    font-size: 15pt;
+}
+
+.mwindow select, .settings-page select{
+    box-sizing: border-box;
+    height: 50px;
+    margin: 10px 0;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    font-size: 15pt;
+}
+
+.mwindow input::placeholder, .mwindow select::placeholder,
+.top-bar input::placeholder, .top-bar select::placeholder{
+    color: #a0a0a0;
+}
+
+.inp-user-email, .inp-user-password {
+
+}
+
+.have-account{
+    margin: 15px 0;
+}
+
+.have-account-entrance, .consent-working, .remove-account{
+    text-decoration: underline;
+    color: #c3b89e;
+}
+
+.remember-forget{
+    display: flex;
+    justify-content: space-around;
+    margin: 15px -17px 30px;
+}
+
+.btn-enter, .btn-enter-2{
+    border: none;
+}
+
+.btn-enter-2{
+    margin: 15px 0;
+}
+
+.dop-info2{
+    font-size: 12pt;
+}
+
+.consent-user-div{
+    margin: 20px 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.consent-user-div span{
+    padding: 0 7px;
+}
+
+.mwindow .consent-check{
+    height: 18px;
+    width: 18px;
+    margin: 5px;
+}
+
+.inp_red_border{
+    background-color: #f99;
+}
+
+/*  ====================================================================================  end  форма входа and reg  and settings--- */
+
+/*Experiment*/
+
+#vk_auth_div_block{
+    width: 200px;
+    height: 150px;
+    background-color: #337;
+    border: 1px solid red;
+    margin: 0 auto;
+}
+
+/* another pages */
+/* ========================= CATALOG */
+.main-block-catalog{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.catalog_unit{
+    height: 250px;
+    box-sizing: border-box;
+    width: 23%;
+    margin: 1% 1% 2% 1%;
+    font-size: 24pt;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+.catalog_unit p {
+    margin-top: 100px;
+    background-color: rgba(152,115,056, 0.7);
+    overflow:  hidden;
+}
+
+/*  ========================= CATALOG off */
+
+/* ================================ PARTNER  and litle user*/
+
+#partner-page-content{
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f4f4f4;
+}
+
+#partner_photo, #partner_video, #partner_akcii, #partner_otzyvy{
+
+}
+
+.partner_menu{
+    padding: 25px 0 20px;
+}
+
+.partner_menu ul{
+    display: flex;
+    justify-content: center;
+}
+
+.partner_menu li{
+    font-size: 17pt;
+    list-style-type: none;
+    width: 100px;
+    margin-right: 2%;
+    cursor: pointer;
+    padding-bottom: 15px;
+    text-transform: uppercase;
+}
+
+/*.partner_menu_btn{
+  display: inline-block;
+  border-bottom: 2px solid #f4f4f4;
+
+}*/
+
+.partner_menu li:hover{
+  color: #afa58e;
+}
+
+.user_menu_btn_active, .partner_menu_btn_active, .menu_btn_active{
+    color: #afa58e;
+    border-bottom: 2px solid #afa58e;
+}
+
+.partner-page-wrapper{
+
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.partner_title{
+    font-size: 30pt;
+    display: inline-block;
+    border-bottom: 2px solid #000;
+
+}
+
+.h_line{
+    margin-top: -15px;
+    padding: 0 0 15px;
+
+}
+
+.content{
+    padding: 15px 0;
+}
+
+#partner_aside{
+    width: 420px;
+    min-height: 800px;
+    background-color: #fff;
+}
+
+.avatar_and_btn{
+    display: flex;
+}
+
+.partner_avatar, .user_avatar{
+    margin: 35px 0 15px 10%;
+    width: 75%;
+    min-height: 320px;
+    background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_12.jpg');
+    background-size: cover;
+}
+
+.partner_avatar_btn, .user_avatar_btn{
+    width: 15%;
+    align-self: flex-end;
+}
+
+.partner_avatar_btn_mail, .partner_avatar_btn_likes, .partner_avatar_btn_calc, #calendar, .calendar_date_fild, .budget_calc,
+.calc_aside_edit, .user_avatar_btn, .btn_change_save_change, .avatar_btn_change{
+    cursor: pointer;
+}
+
+.profil_reiting_string{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.reit_heart_all{
+    background-image: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/red_heart_reit.png');
+    background-size: cover;
+    height: 14px;
+    width: 17px;
+    margin: 3px 3px 25px;
+}
+
+.info_string{
+
+    padding:  7px 0 7px 20%;
+    font-size: 12pt;
+    min-height: 20px;
+}
+
+.prise_string{
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/wallet.png') 10% no-repeat;
+}
+
+.phone_string{
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/phone.png') 10% no-repeat;
+}
+
+.mail_string{
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/envelope.png') 10% no-repeat;
+}
+
+.link_string{
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/link.png') 10% no-repeat;
+}
+
+.vk_string{
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/vk.png') 10% no-repeat;
+}
+
+.fb_string{
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/facebook.png') 10% no-repeat;
+}
+
+.insta_string{
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/instagram.png') 10% no-repeat;
+    margin-bottom: 40px;
+}
+
+/*----------------Calendar*/
+
+.calendar_main_fild{
+   min-height: 378px;;
+}
+
+#calendar td, #calendar th{
+    border-width: 0;
+}
+
+.calendar_colontitle_fild{
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/full_day_indicator.png') 1% 20px no-repeat,
+    url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/part_day_indicator.png') 1% 50px no-repeat;
+}
+
+.calendar_colontitle_fild{
+    padding: 15px 12%;
+    background-color: #f4f4f4;
+}
+
+/*weeckend*/
+#calendar .ic__week-head tr td:nth-child(6),
+#calendar .ic__week-head tr td:nth-child(7){
+    color: #dc5e4e;
+}
+
+/*----------------Calendar FINISH*/
+
+.bgc_div{
+    background-color: #f4f4f4;
+    width: 100%;
+    /* height: 100%;*/
+}
+
+#partner-page-pages{  /*   Page */
+    width: 65%;
+    min-height: 300px;
+    margin-left: 3%;
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 15px 3%;
+}
+
+.profil_name, .profil_secondname, .partner_speciality, .info_reit_block{
+    text-align: center;
+}
+
+.profil_name, .profil_secondname{
+
+    font-size: 22pt;
+    font-weight: 600;
+    /*text-transform: uppercase;*/
+}
+
+.info_reit_block, .partner_speciality{
+    margin: 7px 0;
+}
+
+.partner_photo-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.photo_unit{
+    position: relative;
+    width: 31.3333%;
+    box-sizing: border-box;
+    padding: 0.5%;
+    margin: 1%;
+    cursor: pointer;
+}
+
+.photo_unit:hover .photo_enhance{
+    position: absolute;
+    background: url('/etc/clientlibs/wedding/pages/images/profil_partner/page/enhance_photo.png') center no-repeat;
+    width: 50%;
+    height:50%;
+    left: 25%;
+    top: 25%;
+}
+
+.partner_title{
+    margin: 2%;
+}
+
+.photo_unit img{
+    width: 100%;
+}
+
+.video_field{
+    margin: 1.9%;
+}
+
+.partner_video-wrapper .video_item{
+    width: 100%;
+    min-height: 350px;
+    margin: 50px 0 70px;
+}
+
+.add_btn{
+    cursor: pointer;
+    margin: 2%;
+}
+
+.prise_start input,
+.prise_end input{
+    width: 20%;
+}
+
+
+
+.event-wrapper > div{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.event_card{
+    width: 46%;
+    padding: 2%;
+}
+
+.event_card-bg{
+    min-height: 250px;
+    color: #fff;
+    position: relative;
+}
+
+.event_card-in_bg{
+    position: absolute;
+    top: 60%;
+    padding-left: 15%;
+    /*background-color: #4a4741b3;*/
+    background: linear-gradient(to bottom, transparent, rgba(22, 22, 22, 0.9));
+    overflow: hidden;
+    margin-left: 1px;
+}
+
+.event_card-title{
+    display: inline-block;
+    border-bottom: 1px solid #fff;
+    text-overflow: clip;
+    text-transform: uppercase;
+    padding-bottom: 12px;
+}
+
+.event_card-date{
+    font-size: 12pt;
+    padding-top: 12px;
+}
+
+.event_card-description{
+
+}
+
+.event_card-description_text{
+    width: 100%;
+    text-overflow: clip;
+}
+
+
+/* ================================ PARTNER off */
+/* ===---    USER start ====----- */
+
+#user-page-content{
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f4f4f4;
+}
+
+#cabinet_aside_sect{
+    width: 420px;
+    min-height: 800px;
+    background-color: #fff;
+}
+
+.edit_avatar_btns{
+    background-color: #f4f4f455;
+    text-align: right;
+}
+
+.avatar_upd_icon,
+.avatar_remove_icon{
+    cursor: pointer;
+    padding-right: 10px;
+}
+
+.partner_menu li{
+    width: auto;
+}
+
+/*.user_avatar{
+  background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_13.jpg');
+} */
+
+.red_refer{
+    color: #dc5e4e;
+    text-decoration: underline;
+}
+
+.red_font{
+    color: #dc5e4e;
+}
+
+.calc_aside  {
+    /* background: url('/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/edit.png') 95%  0% no-repeat;*/
+    padding: 15px;
+    margin: 10px auto;
+}
+
+#user_calc{
+    min-height: 750px;
+}
+
+.calc_aside p{
+    margin: 15px;
+    text-align:  center;
+    background-color: #f4f4f4;
+}
+
+.balance_calc{
+    color: #dc5e4e;
+}
+
+.input-price_budget{
+    width: 80px;
+}
+
+.calc_aside_edit{
+    padding-left: 80%;
+}
+
+.user_tenders-head{
+    position: relative;
+}
+
+.create_tender_icon{
+    position: absolute;
+    right: -22px;
+    cursor: pointer;
+}
+
+.user_tenders-container .tender_card{
+    width: 100%;
+    margin: 50px 0 0 0;
+}
+
+.tender_card_edit{
+    text-align: right;
+    cursor: pointer;
+}
+
+.tender_card_edit img{
+    margin-left: 5px;
+}
+
+/*========------- USER finish  -=-=-=-=-=-*/
+/*========------- tenders  start  -=-=-=-=-=-*/
+
+#tenders-page-content{
+    font-family: 'Open Sans', sans-serif;
+    /* background-color: #f4f4f4;*/
+}
+
+.tender_cards-cont{
+    display: flex;
+    padding: 2%;
+    flex-wrap: wrap;
+}
+
+.tender_card{
+    margin: 5% 5% 0 5%;
+    width: 40%;
+}
+
+.tender_card-author{
+    display: flex;
+    align-items: center;
+}
+
+.tender_card-img{
+    margin-top: 15px;
+    height: 350px;
+    background: url('/etc/clientlibs/wedding/pages/images/any_img/d2_12.jpg') 50% 50% no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: flex-end;
+}
+
+.tender_card-need{
+    width: 100%;
+    color: #fff;
+    padding: 5% 0 5% 7%;
+    background: linear-gradient(to bottom, transparent,  rgba(22, 22, 22, 0.9));
+}
+
+.tender_card-need_cat{
+    font-size: 24pt;
+    text-transform: uppercase;
+}
+
+.tender_card-line1{
+    padding-top: 15px;
+    font-size: 12pt;
+    color: #a0a0a0;
+}
+
+.tender_card-publish{
+    padding-left: 35px;
+    background: url('/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/publishing.png') 1px no-repeat;
+}
+
+.count_proposals{
+    padding-left: 35px;
+    background: url('/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/proposals.png') 10px no-repeat;
+}
+
+.tender_card-line2{
+    padding: 15px 0;
+}
+
+.tender_card-line2 .vert-line, .tender_card-budget{
+    color: #a0a0a0;
+}
+
+.short_text_text{
+    padding-right: 20px;
+    background: url('/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/more.png') 100% no-repeat;
+}
+
+/*========------- tenders finish  -=-=-=-=-=-*/
+/*========------- TendeRRRRRRR -=-=-=-=-=-*/
+
+#tender-cont{
+    margin-top: 70px;
+}
+
+#tender-cont .tender_card{
+    width: 85%;
+    margin: 5% 7.5% 1%;
+}
+
+#tender-cont .tender_card-line2{
+    position: relative;
+}
+
+#tender-cont .tender_card-receive_order{
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+
+#tender-cont .tender_card-img{
+    height: 370px;
+}
+
+.tender_card-full_text{
+    color: #a0a0a0;
+}
+
+.comment-inter_area .trumbowyg-box{
+    min-height: 100px;
+}
+.comment-inter_area .trumbowyg-editor{
+    min-height: 100px;
+}
+
+.tender_comment-cont{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.comment_field{
+    position: relative;
+    padding-left: 80px;
+    margin-top: 30px;
+    color: #a0a0a0;
+}
+
+.comment_field .mini-avatar{
+    position: absolute;
+    left: -15px;
+
+}
+
+.comment_field-author_name{
+    color: #606060;
+}
+
+.comment_field-text{
+    font-size: 12pt;
+    color: #606060;
+}
+
+.comment_field-date_fild{
+    text-align: right;
+    font-size: 12pt;
+}
+
+.comment-wrapper{
+    width: 85%;
+    margin: 5% 7.5% 50px;
+}
+.comment-wrapper .trumbowyg-box{
+    width: 85%;
+
+}
+
+.comment-wrapper .add_btn{
+    text-align: right;
+    cursor: pointer;
+    margin-right: 7.5%;
+    padding-bottom: 90px;
+}
+
+/*========------- TendeR finish  -=-=-=-=-=-*/
+
+/************** UPloadIMG*********/
+
+.upload_form   {
+    margin-top: 30px;
+}
+
+.upload_form li img {
+    height: 64px;
+    order: 1;
+}
+
+.upload_form li{
+    background: #eee;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    list-style-type: none;
+    border: 1px solid black;
+}
+
+.upload_form label{
+    padding-top: 15px;
+    cursor: pointer;
+}
+
+#reit_heart5{ /*relocate late*/
+    background-image: url('/etc/clientlibs/wedding/pages/images/profil_partner/aside/grey_heart_reit.png');
+}
+
+.add-video-field input{
+    width: 400px;
+}
+
+
+
+
+
+
 

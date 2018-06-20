@@ -1,0 +1,44 @@
+<div id="base-mail-page-content">
+
+    <div class="mail-form-container">
+
+        <div class="mail-form">
+
+            <label>Тема: <input type="text" name="subject"></label>
+
+            <label>Отправить всем клиентам <input type="checkbox" name="allUsers"></label>
+
+            <label>Отправить всем партнёрам <input type="checkbox" name="allPartners"></label>
+
+            <div class="recipient-container"
+                 data-mfield-options='{"section": ".group","btnAdd":"#btnAdd-1","btnRemove":".btnRemove"}'>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" id="btnAdd-1" class="btn btn-primary">Добавить получателя</button>
+                    </div>
+                </div>
+                <div class="row group">
+                    <div class="col-md-2">
+                        <label>Получатель: <input class="form-control" type="text"></label>
+
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-danger btnRemove">Удалить</button>
+                    </div>
+                </div>
+            </div>
+
+            <button name="save">Сохранить</button>
+            <button name="save-and-sent">Сохранить и отправить</button>
+
+        </div>
+
+        <div class="richtext">
+            <textarea></textarea>
+        </div>
+
+
+    </div>
+
+
+</div>
