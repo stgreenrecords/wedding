@@ -23,6 +23,11 @@ var PORTAL = (function (PORTAL, $) {
                 console.log( e.target());
             });
 
+            if (document.location.pahtname === '/content/wedding/tenders/tender.html') {
+                $self.find('.tenders-main_btn').addClass('menu_btn_active');
+                console.log('BTN WORK!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+            }
+
         }()); // end -  ---
     };
 

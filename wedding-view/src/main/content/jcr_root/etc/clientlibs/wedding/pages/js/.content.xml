@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
           jcr:primaryType="sling:OrderedFolder"
-          embed="[wedding/components/pages/base/js/script.js,wedding/components/pages/base/js/script_input_cab.js,wedding/components/pages/landing/js/script.js,wedding/components/pages/landing-partners/js/script.js,wedding/components/pages/categories/js/script.js,wedding/components/pages/category/js/script.js,wedding/components/pages/partner/js/script.js,wedding/components/pages/sale/js/script.js,wedding/components/pages/sales/js/script.js,wedding/components/pages/settings/js/script.js,wedding/components/pages/tenders/js/script.js,wedding/components/pages/tender/js/script.js,wedding/components/pages/user/js/script.js,wedding/components/pages/weddings/js/script.js,wedding/components/pages/wedding/js/script.js,wedding/components/pages/mail/admin/js/script.js,wedding/components/pages/mail/base-mail/js/script.js]"/>
+          embed="[wedding/components/pages/base/js/script.js,
+          wedding/components/pages/base/js/script_input_cab.js,
+          wedding/components/pages/base/js/script_header.js,
+          wedding/components/pages/landing/js/script.js,
+          wedding/components/pages/landing-partners/js/script.js,
+          wedding/components/pages/categories/js/script.js,
+          wedding/components/pages/category/js/script.js,
+          wedding/components/pages/partner/js/script.js,
+          wedding/components/pages/sale/js/script.js,
+          wedding/components/pages/sales/js/script.js,
+          wedding/components/pages/settings/js/script.js,
+          wedding/components/pages/tenders/js/script.js,
+          wedding/components/pages/tender/js/script.js,
+          wedding/components/pages/user/js/script.js,
+          wedding/components/pages/weddings/js/script.js,
+          wedding/components/pages/wedding/js/script.js,
+          wedding/components/pages/mail/admin/js/script.js,
+          wedding/components/pages/mail/base-mail/js/script.js]"/>
