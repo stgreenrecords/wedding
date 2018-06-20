@@ -36,26 +36,26 @@ var PORTAL = (function (PORTAL, $) {
 
             switch(document.location.pathname) {
                 case '/content/wedding/catalog.html':
-                    removeCl();
+                    // removeCl();
                     menuObj.catalog.addClass('menu_btn_active');
                     break;
                 case '/content/wedding/tenders.html':
-                    removeCl();
+                    // removeCl();
                     menuObj.tenders.addClass('menu_btn_active');
                     break;
                 case '/content/wedding/sales.html':
-                    removeCl();
+                    // removeCl();
                     menuObj.events.addClass('menu_btn_active');
                     break;
                 case '/content/wedding/real-weddings.html':
-                    removeCl();
+                    // removeCl();
                     menuObj.weddings.addClass('menu_btn_active');
                     break;
             }
 
-            function removeCl() {
-                Object.keys(menuObj).forEach(key=> menuObj[key].removeClass('menu_btn_active'));
-            }
+            // function removeCl() {
+            //     Object.keys(menuObj).forEach(key=> menuObj[key].removeClass('menu_btn_active'));
+            // }
 
 
         }()); // end -  ---
