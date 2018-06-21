@@ -153,6 +153,7 @@ var PORTAL = (function (PORTAL, $) {
         ];
 
 
+//*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-**-*-*-**-*-/*-*-*-*-*-*-/-**-*-*-*-*9-+9-+*+-+9*-9*+-9+-*9+9-+9+9-+9+9+98+98+8+*
 
         $("textarea").trumbowyg({
             svgPath: '/etc/clientlibs/wedding/external/icons/richtext/icons.svg',
@@ -163,7 +164,85 @@ var PORTAL = (function (PORTAL, $) {
         var getTendId = (window.location.search).slice(1);
         var getTendCity = (window.location.hash).slice(1);
         var nameSpeciality = {};
-        console.log(getTendCity+" "+getTendId);
+        var $commentBtn = $self.find('#tender_add_comment');
+
+        Cookies.get('authStatus') != 'authorized' ? noAut() : '';
+        Cookies.get('authStatus') === 'authorized' ? goodAut() : '';
+
+
+        function noAut(){
+            console.log('Войдите или зарегестрируйтесь, чтобы написать комментрарий');
+            $commentBtn.on('click', drawAllert);
+        }
+
+        function goodAut(){
+            $commentBtn.on('click', sendComment);
+        }
+
+        function drawAllert(){
+            alert('Войдите или зарегестрируйтесь, чтобы написать комментрарий');
+            // сделать через popup;
+        }
+
+
+        function sendComment(){
+
+            var content = $self.find('.trumbowyg-editor').html();
+            $self.find('.trumbowyg-editor').html('');
+
+            var commentInfo = {	text:content, authorID:Cookies.get('userId'), authorCity:Cookies.get('city'),  avatar:Cookies.get('avatar'),
+                speciality:Cookies.get('workSphere'), datePublication: +new Date()};
+
+            sendChangeRequest([{proposal:commentInfo}]);
+
+        }
+
+
+        function sendChangeRequest(dataSend){
+
+            console.dir(dataSend);
+
+            $.ajax({
+
+                url: 'http://weddi ng-services.mycloud.by/services/rest.partners/update.json'+getTendId,
+                type: 'PUT',
+                dataType: 'json',
+                data: dataSend,
+                success: function(data){
+                    console.log('CallBack:');
+                    console.log(data);
+                    data.length != 0 ? drawNewComment(data) : drawNewComment(dataSend) ; //!!!!!1**** - Если приходит ответ - он и будет выводиться
+                },
+                error: function (e) {
+                    console.log(e);
+                    drawNewComment(dataSend);
+                }
+
+            });
+
+        }
+
+        function  drawNewComment(data) {
+
+            var comment = document.querySelector('.hidden_full .tender_card .comment_field');
+            var proposals_container = document.querySelector("#tender-cont .tender_card .tender_comment-cont");
+
+            if (data[0].hasOwnProperty('proposal')&&data[0].proposal != null){
+
+                var prop =  data[0].proposal;
+                var commentPoint = comment.cloneNode(true);
+                commentPoint.querySelector('.mini-avatar').style.backgroundImage = prop.avatar ? `url('${prop.avatar}')` :  `url('${FakeDataTender[0].avatar}')`;
+                commentPoint.querySelector('.comment_field-author_name').innerHTML = prop.firstName ? prop.firstName : '.' ;
+                commentPoint.querySelector('.comment_field-author_name').innerHTML += prop.lastName ? ' '+ prop.lastName : ' ';
+                commentPoint.querySelector('.comment_field-author_category').innerHTML = prop.speciality ? specialityTranslate(prop.speciality) : '-';
+                commentPoint.querySelector('.comment_field-text').innerHTML = prop.text ?  prop.text : '...';
+                commentPoint.querySelector('.comment_field-date_fild').innerHTML = prop.datePublication ? formatDate.f(prop.datePublication) : '..:..:..';
+                proposals_container.appendChild(commentPoint);
+
+            }
+
+        }
+
 
         function getSelectTend(){
 
@@ -171,8 +250,6 @@ var PORTAL = (function (PORTAL, $) {
 
             selectItems.url_one = `http://wedding-services.mycloud.by/services/rest.tenders/${getTendCity}.json?id=${getTendId}`;
             console.dir(selectItems);
-
-            // PORTAL.sling.createModel(selectItems, selectItems.url_one);
 
             $.ajax({ // добавление всех категорий
                 url: "http://wedding-services.mycloud.by/services/rest.catalog-categories/home/users/wedding/partners.json",
@@ -193,7 +270,7 @@ var PORTAL = (function (PORTAL, $) {
                         $self.find('#tender-cont > div').detach();
                         console.log(selectItems.url_one);
                         console.dir(data);
-                        data.length == 0 ? drawTender(FakeDataTender2) : drawTender(data);
+                        data.length == 0 ? drawTender(FakeDataTender2) : drawTender(data);     //!!!!!1**** - Если приходит ответ - он и будет выводиться
 
                     }
                 });
@@ -255,7 +332,6 @@ var PORTAL = (function (PORTAL, $) {
                     copy_div.querySelector(".tender_card-proposals").innerHTML ='';
                 }
 
-                // socialUser.userID = responseUser.hasOwnProperty("id") ? responseUser.id : "";
                 if (data[i].hasOwnProperty('required')&&data[i].required != null){
                     data[i].required.forEach( prop =>{
                         var reqPoint = cloneObject.required.cloneNode(true);
@@ -267,11 +343,12 @@ var PORTAL = (function (PORTAL, $) {
                 if (data[i].hasOwnProperty('proposals')&&data[i].proposals != null){
                     data[i].proposals.forEach( prop =>{
                         var commentPoint = cloneObject.comment.cloneNode(true);
-                        commentPoint.querySelector('.mini-avatar').style.backgroundImage = `url('${prop.avatar}')`;
-                        commentPoint.querySelector('.comment_field-author_name').innerHTML = prop.firstName+' '+ prop.lastName;
-                        commentPoint.querySelector('.comment_field-author_category').innerHTML = specialityTranslate(prop.speciality);
-                        commentPoint.querySelector('.comment_field-text').innerHTML = prop.text;
-                        commentPoint.querySelector('.comment_field-date_fild').innerHTML = formatDate.f(prop.datePublication);
+                        commentPoint.querySelector('.mini-avatar').style.backgroundImage = prop.avatar ? `url('${prop.avatar}')` :  `url('${FakeDataTender[0].avatar}')`;
+                        commentPoint.querySelector('.comment_field-author_name').innerHTML = prop.firstName ? prop.firstName : '.' ;
+                        commentPoint.querySelector('.comment_field-author_name').innerHTML += prop.lastName ? ' '+ prop.lastName : '.';
+                        commentPoint.querySelector('.comment_field-author_category').innerHTML = prop.speciality ? specialityTranslate(prop.speciality) : '-';
+                        commentPoint.querySelector('.comment_field-text').innerHTML = prop.text ?  prop.text : '...';
+                        commentPoint.querySelector('.comment_field-date_fild').innerHTML = prop.datePublication ? formatDate.f(prop.datePublication) : '..:..:..';
                         proposals_container.appendChild(commentPoint);
                     });
                 }

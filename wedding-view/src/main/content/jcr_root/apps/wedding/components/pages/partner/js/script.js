@@ -182,8 +182,6 @@ var PORTAL = (function (PORTAL, $) {
 
             sendChangeRequest({comments:content});
 
-
-
         }
 
         function myCabinet(){

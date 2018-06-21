@@ -927,6 +927,9 @@ footer > div a, footer > div{
     text-overflow: clip;
 }
 
+.comment_field-text img{
+    width: 70%;
+}
 
 /* ================================ PARTNER off */
 /* ===---    USER start ====----- */

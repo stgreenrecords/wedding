@@ -1,7 +1,6 @@
 // $(document).ready(function() {
 
-;var formatDate = (function(datt){	
-    console.log('init formatDate');
+;var formatDate = (function(datt){
  	function format(datt) {	     
     	var date = new Date (Number(datt));	
 	  	var dd = date.getDate();
