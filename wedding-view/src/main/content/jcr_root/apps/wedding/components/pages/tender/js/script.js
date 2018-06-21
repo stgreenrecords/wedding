@@ -169,11 +169,6 @@ var PORTAL = (function (PORTAL, $) {
 
             var selectItems = {};
 
-            //  TODOс Убрать, когда города начнуть приходить в ресте // или может и так работать )()
-            // selectItems.url_first = "http://wedding-services.mycloud.by/services/rest.tenders/"/*+selectItems.$cat_val+"/"*/+selectItems.$city_val+".8.json";
-            // selectItems.url_all = "http://wedding-services.mycloud.by/services/rest.tenders/"/*+selectItems.$cat_val+"/"*/+selectItems.$city_val+".json";
-            //selectItems.url_one = 'http://wedding-services.mycloud.by/services/rest.tenders/gomel.1.json';
-
             selectItems.url_one = `http://wedding-services.mycloud.by/services/rest.tenders/${getTendCity}.json?id=${getTendId}`;
             console.dir(selectItems);
 
@@ -196,7 +191,7 @@ var PORTAL = (function (PORTAL, $) {
                     dataType: "json",
                     success: function (data) {
                         $self.find('#tender-cont > div').detach();
-                        console.log("success");
+                        console.log(selectItems.url_one);
                         console.dir(data);
                         data.length == 0 ? drawTender(FakeDataTender2) : drawTender(data);
 
@@ -233,23 +228,17 @@ var PORTAL = (function (PORTAL, $) {
 
             for (var i = 0; i<data.length; i++){
 
-                // data[i].avatar = null;
-                // data[i].moneyLimit = null;
-                // data[i].cityName = null;
-                // // data[i].required = null;
-                // // data[i].proposals = null;
-
                 copy_div.querySelector('.tender_card-author_name').innerHTML = data[i].hasOwnProperty('firstName') && data[i].firstName != null
-                    && data[i].hasOwnProperty('lastName') && data[i].lastName != null
+                && data[i].hasOwnProperty('lastName') && data[i].lastName != null
                     ? data[i].firstName+' ' +data[i].lastName : '';
                 cloneObject.avatar.style.backgroundImage = data[i].hasOwnProperty('avatar')&&data[i].avatar != null
                     ? `url('${data[i].avatar}')` : `url('${FakeDataTender[i].avatar}')` ;
                 cloneObject.bg.style.backgroundImage = data[i].hasOwnProperty('backGroundImage')&&data[i].backGroundImage != null
                     ? `url('${data[i].backGroundImage}')` : `url('${FakeDataTender[i].backGroundImage}')` ;
                 cloneObject.publish_date.innerHTML = data[i].hasOwnProperty('datePublication')&&data[i].datePublication != null
-                    ? formatDate(data[i].datePublication) : formatDate(FakeDataTender[i].datePublication);
+                    ? formatDate.f(data[i].datePublication) : formatDate.f(FakeDataTender[i].datePublication);
                 cloneObject.deadLine.innerHTML = data[i].hasOwnProperty('deadline')&&data[i].deadline != null
-                    ? formatDate(data[i].deadline) : formatDate(FakeDataTender[i].deadline);
+                    ? formatDate.f(data[i].deadline) : formatDate.f(FakeDataTender[i].deadline);
                 cloneObject.category.innerHTML = data[i].hasOwnProperty('speciality')&&data[i].speciality != null
                     ? specialityTranslate(data[i].speciality) : specialityTranslate(FakeDataTender[i].speciality);
                 cloneObject.city.innerHTML = data[i].hasOwnProperty('cityName')&&data[i].cityName != null
@@ -282,7 +271,7 @@ var PORTAL = (function (PORTAL, $) {
                         commentPoint.querySelector('.comment_field-author_name').innerHTML = prop.firstName+' '+ prop.lastName;
                         commentPoint.querySelector('.comment_field-author_category').innerHTML = specialityTranslate(prop.speciality);
                         commentPoint.querySelector('.comment_field-text').innerHTML = prop.text;
-                        commentPoint.querySelector('.comment_field-date_fild').innerHTML = formatDate(prop.datePublication);
+                        commentPoint.querySelector('.comment_field-date_fild').innerHTML = formatDate.f(prop.datePublication);
                         proposals_container.appendChild(commentPoint);
                     });
                 }
@@ -293,26 +282,9 @@ var PORTAL = (function (PORTAL, $) {
             console.dir(FakeDataTender[0]);
         }
 
-
-
         function specialityTranslate(speciality){
-            for (var prop in nameSpeciality){
-                if(prop === speciality){
-                    speciality = nameSpeciality[prop];
-                }
-            }
+            Object.keys(nameSpeciality).forEach( prop =>  prop === speciality ? speciality = nameSpeciality[prop] : '');
             return speciality;
-        }
-
-
-        function formatDate(datt) {
-            var date = new Date (Number(datt));
-            var dd = date.getDate();
-            if (dd < 10) dd = '0' + dd;
-            var mm = date.getMonth() + 1;
-            if (mm < 10) mm = '0' + mm;
-            var yy = date.getFullYear();
-            return dd + '.' + mm + '.' + yy;
         }
 
 

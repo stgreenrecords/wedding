@@ -178,7 +178,7 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
     border: 1px solid black;
     width: 60px;
     height: 60px;
-    background:  url("/etc/clientlibs/wedding/pages/images/any_img/d2_6.jpg") center no-repeat;
+    background:  url("/etc/clientlibs/wedding/pages/images/any_img/d2_6.jpg")  50% 1%  no-repeat;
     background-size: 150%;
     margin: 0 15px;
 }
