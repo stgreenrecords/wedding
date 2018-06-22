@@ -146,6 +146,10 @@
     height: 200px;
 }
 
+.with-us-div:hover .with-us-content{
+    background: linear-gradient(to bottom, transparent,  rgba(22, 22, 22, 1));
+}
+
 .with-us-title{
     background-color: #fff;
     padding: 30px 0 0 0;
