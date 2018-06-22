@@ -256,7 +256,7 @@ a {  text-decoration: none; color: #222; white-space: nowrap; }
 /*=====  main start ======*/
 
 main{
-  width: 75%;
+  width: 90%;
   margin: 0 auto;
   background-color: #fff;
 }
@@ -1181,7 +1181,7 @@ footer > div a, footer > div{
     text-align: right;
     cursor: pointer;
     margin-right: 7.5%;
-    padding-bottom: 90px;
+    margin-bottom: 90px;
 }
 
 /*========------- TendeR finish  -=-=-=-=-=-*/
@@ -1220,10 +1220,35 @@ footer > div a, footer > div{
 }
 
 
-@media screen and (max-width: 1499px) {
+@media screen and (min-width: 1499px) {
     main {
-        width: 90%;
+        width: 75%;
     }
+}
+
+#popup_modal{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    background-color: rgba(204, 204, 204, 0.6);
+    visibility: hidden;
+}
+
+.popup_alert{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+    border: 1px solid #000;
+    position: absolute;
+    z-index: 6;
+    margin: 0;
+    visibility: hidden;
+    min-width: 50%;
+    min-height: 30%;
 }
 
 

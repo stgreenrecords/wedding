@@ -179,11 +179,12 @@ var PORTAL = (function (PORTAL, $) {
             $commentBtn.on('click', sendComment);
         }
 
-        function drawAllert(){
-            alert('Войдите или зарегестрируйтесь, чтобы написать комментрарий');
-            // сделать через popup;
-        }
+        // ДОделать   popup  по стилям;
 
+        function drawAllert(){
+            // alert('Войдите или зарегестрируйтесь, чтобы написать комментарий');
+            modalW.openMWindow(".popup_alert","#popup_modal");
+        }
 
         function sendComment(){
 
@@ -224,8 +225,14 @@ var PORTAL = (function (PORTAL, $) {
 
         function  drawNewComment(data) {
 
-            var comment = document.querySelector('.hidden_full .tender_card .comment_field');
+            var tenderCard = document.querySelector('.hidden_full .tender_card');
+            var comment = tenderCard.querySelector('.comment_field');
             var proposals_container = document.querySelector("#tender-cont .tender_card .tender_comment-cont");
+            var count = document.querySelector("#tender-cont .tender_card .count_proposals");
+            var container = document.querySelector("#tender-cont .tender_card .tender_card-prop-cont");
+            container.classList.contains("hidden_full") ? container.classList.remove("hidden_full"): '';
+            console.log (count.innerHTML);
+            count.innerHTML = Number(count.innerHTML) + 1;
 
             if (data[0].hasOwnProperty('proposal')&&data[0].proposal != null){
 
@@ -328,8 +335,8 @@ var PORTAL = (function (PORTAL, $) {
                 if (data[i].hasOwnProperty('proposals')&& data[i].proposals != null && data[i].proposals.length !== 0 )
                     cloneObject.count.innerHTML =  data[i].proposals.length;
                 else{
-                    cloneObject.count.classList.remove("count_proposals");
-                    copy_div.querySelector(".tender_card-proposals").innerHTML ='';
+                    cloneObject.count.innerHTML = 0;
+                    copy_div.querySelector(".tender_card-prop-cont").classList.add("hidden_full");
                 }
 
                 if (data[i].hasOwnProperty('required')&&data[i].required != null){

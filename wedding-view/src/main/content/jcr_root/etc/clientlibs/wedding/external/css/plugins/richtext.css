@@ -103,7 +103,7 @@
   list-style-type: none;
   line-height: 10px;
   backface-visibility: hidden;
-  z-index: 11;
+  z-index: 1;
 }
 .trumbowyg-button-pane::after {
   content: " ";

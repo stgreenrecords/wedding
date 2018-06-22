@@ -49,19 +49,19 @@ var PORTAL = (function (PORTAL, $) {
                 this.style.color = "#555";
             });
 
-            modalW.modalle("#entrance-form"); //
-            modalW.listenerModal();
+            // modalW.modalle("#entrance-form"); //
+            // modalW.listenerModal();
 
             function showEntranceForm() {
 
-                modalW.openMWindow(".window-entrance");
+                modalW.openMWindow(".window-entrance", "#entrance-form");
                 if (userEmailFromCookie != 'undefined') {
                     $self.find('#user_email').val(userEmailFromCookie);
                 }
             }
 
             function showRegistrationForm() {
-                modalW.openMWindow(".window-registation");
+                modalW.openMWindow(".window-registation", "#entrance-form");
             }
 
             function inputEmailFill(){
@@ -89,7 +89,7 @@ var PORTAL = (function (PORTAL, $) {
             }
 
             function enterOfForm(){
-                modalW.closeMWindow(".window-entrance");
+                modalW.closeMWindow(".window-entrance", "#entrance-form");
                 showCabinetSuccess();
             }
 
@@ -202,8 +202,8 @@ var PORTAL = (function (PORTAL, $) {
 
 
             function secondStepRegWindow(){
-                modalW.closeMWindow(".window-registation");
-                modalW.openMWindow(".window-registation-step2");
+                modalW.closeMWindow(".window-registation", "#entrance-form");
+                modalW.openMWindow(".window-registation-step2", "#entrance-form");
             }
 
             reg_futher2.addEventListener("click", function(){
@@ -226,8 +226,8 @@ var PORTAL = (function (PORTAL, $) {
 
             function lastStepRegPartner(){
 
-                modalW.closeMWindow(".window-registation-step2");
-                modalW.openMWindow(".window-registation-step3-partner");
+                modalW.closeMWindow(".window-registation-step2", "#entrance-form");
+                modalW.openMWindow(".window-registation-step3-partner", "#entrance-form");
 
                 $.ajax({ // Запрос на добавление всех категорий в селект
                     url: "http://wedding-services.mycloud.by/services/rest.catalog-categories/home/users/wedding/partners.json",
@@ -272,7 +272,7 @@ var PORTAL = (function (PORTAL, $) {
 
                     if ( work_sphere  &&  tel &&  city && ($self.find("input[name='consent-part']:checked").val() === 'consent-partner')  /*!= 'null'*/) {
 
-                        modalW.closeMWindow(".window-registation-step3-partner");
+                        modalW.closeMWindow(".window-registation-step3-partner", "#entrance-form");
                         sendPartnerRegInfo("http://wedding-services.mycloud.by/services/rest.partners/create.json", city, work_sphere);
                         console.dir(dataRegistration);
                         showCabinetSuccess();
@@ -366,8 +366,8 @@ var PORTAL = (function (PORTAL, $) {
 
             function lastStepRegUser(){
 
-                modalW.closeMWindow(".window-registation-step2");
-                modalW.openMWindow(".window-registation-step3-user");
+                modalW.closeMWindow(".window-registation-step2", "#entrance-form");
+                modalW.openMWindow(".window-registation-step3-user", "#entrance-form");
 
                 $self.find("#btn-registration-finish-user").on("click", function(){
 
@@ -387,7 +387,7 @@ var PORTAL = (function (PORTAL, $) {
 
                     if ( tel && city &&  ($self.find("#consent-user-check:checked").val() === 'consent-user')){
 
-                        modalW.closeMWindow(".window-registation-step3-user");
+                        modalW.closeMWindow(".window-registation-step3-user", "#entrance-form");
 
                         sendUserRegInfo('http://wedding-services.mycloud.by/services/rest.users/create.json', dataRegistration.city);
                         showCabinetSuccess();

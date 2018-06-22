@@ -130,7 +130,7 @@
 }
 
 .with-us-content{
-    padding: 25px 0 15px;
+    padding: 50px 0 15px;
     background: linear-gradient(to bottom, transparent,  rgba(22, 22, 22, 0.9));
 }
 
@@ -276,11 +276,7 @@
     }
 
     .timer-board figure span {
-        font-family: 'Theano Didot', serif;
-        font-weight: normal;
-        font-size: 36pt;
-        width: 40px;
-        height: 40px;
+        font-size: 46pt;
         padding: 20px 10px 5px;
     }
 
