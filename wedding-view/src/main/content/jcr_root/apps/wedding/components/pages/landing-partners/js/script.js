@@ -11,7 +11,7 @@ var PORTAL = (function (PORTAL, $) {
         var partners_div = document.querySelectorAll(".with-us-div");
 
         for (var i = 0; i < partners_div.length; i++) {
-            partners_div[i].style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/d2_" + (6 - i) + ".jpg')";
+            partners_div[i].style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/bgi_1_"+(4+i)+".jpg')";
         }
 
         document.querySelector("footer").style.backgroundColor = "#fff";

@@ -111,13 +111,13 @@
 }
 
 .with-us-div{
-    min-height: 440px;
+    min-height: 450px;
     width: 29.3333333333%;
     margin: 2%;
     background-color: #f4f4f4;
     background-repeat: no-repeat;
     background-position: center;
-    /*background-size: cover;*/
+    background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -125,9 +125,25 @@
     cursor: pointer;
 }
 
+.with-us-name{
+    font-size: 24px;
+}
+
 .with-us-content{
     padding: 25px 0 15px;
     background: linear-gradient(to bottom, transparent,  rgba(22, 22, 22, 0.9));
+}
+
+.with-us-text{
+    display: none;
+    font-size: 17px;
+    padding: 25px 20px;
+    height: 100px;
+}
+
+.with-us-div:hover .with-us-text{
+    display: flex;
+    height: 200px;
 }
 
 .with-us-title{
@@ -138,7 +154,7 @@
 
 .about-us-container{
     min-height: 780px;
-    background:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/about_us_background.png") center no-repeat / cover;
+    background: url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/about_us_background.png") center no-repeat / cover;
     margin: 90px 2% 70px 2%;
     display: flex;
     flex-direction: column;
@@ -233,4 +249,77 @@
     padding: 15px;
 }
 
+@media screen and (max-width: 898px) {
 
+    .with-us-container{
+        margin: 2%;
+        padding: 0 2% 2% 2%;
+    }
+
+    .with-us-div{
+        /*min-height: 350px;*/
+        width: 92%;
+        margin: 4%;
+    }
+
+    .lend-partners-header {
+        min-height: 742px;
+    }
+
+    .lend-partners-header-title2 {
+        font-size: 48pt;
+        padding-top: 80px;
+    }
+
+    .timer-board figure span {
+        font-family: 'Theano Didot', serif;
+        font-weight: normal;
+        font-size: 36pt;
+        width: 40px;
+        height: 40px;
+        padding: 20px 10px 5px;
+    }
+
+    .timer-board figure {
+        padding: 7px;
+    }
+
+    .btn-up {
+        right: -3%;
+    }
+
+}
+
+@media screen and (min-width: 899px) and (max-width: 1299px) {
+
+    .with-us-container{
+        margin: 2%;
+        padding: 0 2% 2% 2%;
+    }
+
+    .with-us-div{
+        width: 46%;
+        margin: 2%;
+    }
+
+    .lend-partners-header {
+        min-height: 942px;
+    }
+
+    .lend-partners-header-title2 {
+        font-size: 52pt;
+        padding-top: 220px;
+    }
+
+    .btn-up {
+        right: -3%;
+    }
+
+}
+
+@media screen and (max-width: 649px) {
+    .benifits {
+        width: 96%;
+    }
+
+}
