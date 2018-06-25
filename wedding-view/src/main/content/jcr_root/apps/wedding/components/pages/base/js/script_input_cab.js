@@ -275,8 +275,6 @@ var PORTAL = (function (PORTAL, $) {
                         modalW.closeMWindow(".window-registation-step3-partner", "#entrance-form");
                         sendPartnerRegInfo("http://wedding-services.mycloud.by/services/rest.partners/create.json", city, work_sphere);
                         console.dir(dataRegistration);
-                        showCabinetSuccess();
-                        setCookiesAuth('authorized', authType);
 
                     } else /*if ($("input[name='consent']:checked").val() === undefined)*/{
                         $self.find('.registation3_errore_message').css('display','flex');
@@ -298,22 +296,16 @@ var PORTAL = (function (PORTAL, $) {
                     type: "POST",
                     dataType: "json",
                     data: dataRegistration,
-                    beforeSend: function (xhr) {
-                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
-                        console.log("beforeSend post !");
-                        console.dir(dataRegistration);
-                    },
+
+                    // beforeSend: function (xhr) {
+                    //     xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+                    //     console.log("beforeSend post !");
+                    //     console.dir(dataRegistration);
+                    // },
                     success: function (data) {
                          if (data && work_sphere) {
-                             console.log('Ниже должен быть ответ:');
-                             console.dir(data);
-                             console.log('это успех!');
-                             Cookies.set('userId', data.id);
-
-                             Cookies.set('userType', 'partner');
-                             Cookies.set('workSphere', work_sphere);
-                             Cookies.set('city', city);
-                             document.location.href = `/content/wedding/catalog/category/partner.html?${data.id}#${work_sphere}&${city}`;
+                             showCabinetSuccess();
+                             setCookies(data, work_sphere);
                          }
                     },
                     complete: function () {
@@ -327,6 +319,27 @@ var PORTAL = (function (PORTAL, $) {
 
             }
 
+            function setCookies(data, work_sphere=null) {
+
+                setCookiesAuth('authorized', authType);
+                Cookies.set('userId', data.id);
+               if(work_sphere!=null ) {
+                   Cookies.set('userType', 'partner');
+                   Cookies.set('workSphere', work_sphere);
+               }else
+                   Cookies.set('userType', 'user');
+
+                data.city ? Cookies.set('city', data.city): '';
+                data.firstName ? Cookies.set('firstName', data.firstName): '';
+                data.lastName ? Cookies.set('lastName', data.lastName): '';
+
+
+                document.location.href = `/content/wedding/catalog/category/partner.html?${data.id}#${work_sphere}&${city}`;
+
+                // console.log('Ниже должен быть ответ:');
+                // console.dir(data);
+                // console.log('это успех!');
+            }
 
             function sendUserRegInfo(url_link, city){
 
