@@ -324,6 +324,7 @@ var PORTAL = (function (PORTAL, $) {
 
                 setCookiesAuth('authorized', authType);
                 Cookies.set('userId', data.id);
+
                if(work_sphere!=null ) {
                    Cookies.set('userType', 'partner');
                    Cookies.set('workSphere', work_sphere);
@@ -335,7 +336,9 @@ var PORTAL = (function (PORTAL, $) {
                 data.lastName ? Cookies.set('lastName', data.lastName): '';
 
 
-                document.location.href = `/content/wedding/catalog/category/partner.html?${data.id}#${work_sphere}&${city}`;
+                // authType == '' ? document.location.href = `/content/wedding/catalog/category/partner.html?${data.id}#${work_sphere}&${data.city}`
+                //                 :  ;
+
 
                 // console.log('Ниже должен быть ответ:');
                 // console.dir(data);
