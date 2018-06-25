@@ -14,10 +14,10 @@ var PORTAL = (function (PORTAL, $) {
             var entrance = document.getElementById("entrance-cabinet-btn");
             var registration = document.getElementById("registration-btn");
             var entrance2 = document.querySelector(".have-account-entrance");
-            var reg_futher = document.querySelector('#btn-registration-futher');
+            // var reg_futher = document.querySelector('#btn-registration-futher');
             var reg_futher2 = document.querySelector('#btn-registration-futher2');
             var enter = document.getElementById("btn-entrance-form");
-            var modal = document.querySelector("#entrance-form");
+            // var modal = document.querySelector("#entrance-form");
 
             var dataRegistration = {};
             var userLoginInfo = {};
@@ -305,7 +305,7 @@ var PORTAL = (function (PORTAL, $) {
                     success: function (data) {
                          if (data && work_sphere) {
                              showCabinetSuccess();
-                             setCookies(data, work_sphere);
+                             setCookiesAll(data, work_sphere);
                          }
                     },
                     complete: function () {
@@ -314,12 +314,13 @@ var PORTAL = (function (PORTAL, $) {
                     error: function (e) {
                         console.log('Что-то пошло не так (');
                         console.log(e);
+
                     }
                 });
 
             }
 
-            function setCookies(data, work_sphere=null) {
+            function setCookiesAll(data, work_sphere=null) {
 
                 setCookiesAuth('authorized', authType);
                 Cookies.set('userId', data.id);
@@ -370,6 +371,7 @@ var PORTAL = (function (PORTAL, $) {
                     error: function (e) {
                         console.log('Что-то пошло не так :( ');
                         console.log(e);
+                        modalW.openMWindow("#popup_alert-admin", "#entrance-form");
                     }
                 });
 
@@ -421,14 +423,14 @@ var PORTAL = (function (PORTAL, $) {
 
             }
 
-            modal.addEventListener("click", function(evt) {
-                if (evt.target === document.querySelector("#entrance-form")) {
-                    this.style.visibility = "hidden";
-                    Array.from(this.children).forEach(function(elem) {
-                        elem.style.visibility = "hidden";
-                    });
-                }
-            });
+            // modal.addEventListener("click", function(evt) {
+            //     if (evt.target === document.querySelector("#entrance-form")) {
+            //         this.style.visibility = "hidden";
+            //         Array.from(this.children).forEach(function(elem) {
+            //             elem.style.visibility = "hidden";
+            //         });
+            //     }
+            // });
 
 
             /*==============================================================================================================================

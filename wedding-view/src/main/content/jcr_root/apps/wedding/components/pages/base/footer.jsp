@@ -250,6 +250,10 @@
 
         </div>
 
+        <div id="popup_alert-admin" class="popup_alert">
+            <span class="popup_alert-text">  Ваш аккаунт не зарегестрирован. Обратитесь пожалуйста к администраторам.</span>
+        </div>
+
     </div>
 
 
