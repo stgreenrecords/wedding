@@ -297,11 +297,11 @@ var PORTAL = (function (PORTAL, $) {
                     dataType: "json",
                     data: dataRegistration,
 
-                    // beforeSend: function (xhr) {
-                    //     xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
-                    //     console.log("beforeSend post !");
-                    //     console.dir(dataRegistration);
-                    // },
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+                        console.log("beforeSend post !");
+                        console.dir(dataRegistration);
+                    },
                     success: function (data) {
                          if (data && work_sphere) {
                              showCabinetSuccess();
