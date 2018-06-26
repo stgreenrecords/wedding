@@ -288,7 +288,7 @@ var PORTAL = (function (PORTAL, $) {
             }
 
 
-            function sendPartnerRegInfo(url_link, city, work_sphere){
+            function sendPartnerRegInfo(url_link /*, city, work_sphere*/){
 
                 $.ajax({
                     url: url_link,
@@ -303,31 +303,28 @@ var PORTAL = (function (PORTAL, $) {
                         console.dir(dataRegistration);
                     },
                     success: function (data) {
-                         if (data && work_sphere) {
+                         if (data/* && work_sphere*/) {
                              showCabinetSuccess();
-                             setCookiesAll(data, work_sphere);
+                             setCookiesAll(data);
                          }
-                    },
-                    complete: function () {
-
                     },
                     error: function (e) {
                         console.log('Что-то пошло не так (');
                         console.log(e);
-
+                        modalW.openMWindow("#popup_alert-admin", "#entrance-form");
                     }
                 });
 
             }
 
-            function setCookiesAll(data, work_sphere=null) {
+            function setCookiesAll(data) {
 
                 setCookiesAuth('authorized', authType);
                 Cookies.set('userId', data.id);
 
-               if(work_sphere!=null ) {
+               if(data.speciality && data.speciality !=null && data.speciality !='') {
                    Cookies.set('userType', 'partner');
-                   Cookies.set('workSphere', work_sphere);
+                   Cookies.set('workSphere', data.speciality);
                }else
                    Cookies.set('userType', 'user');
 
@@ -336,7 +333,7 @@ var PORTAL = (function (PORTAL, $) {
                 data.lastName ? Cookies.set('lastName', data.lastName): '';
 
 
-                // authType == '' ? document.location.href = `/content/wedding/catalog/category/partner.html?${data.id}#${work_sphere}&${data.city}`
+                // authType == '' ? document.location.href = `/content/wedding/catalog/category/partner.html?${data.id}#${data.speciality}&${data.city}`
                 //                 :  ;
 
 
@@ -362,14 +359,11 @@ var PORTAL = (function (PORTAL, $) {
                         // if (data) {
                         console.log('Ниже должен быть ответ:');
                         console.dir(data);
-                        Cookies.set('userId', data.id);
+                        setCookiesAll(data);
+                        // Cookies.set('userId', data.id);
                         // Cookies.set('city', data.city);
-
                         // document.location.href = '/content/wedding/catalog.html#'; // TODOC - сделать переход в каталог - когда заполнят всех юзеров
-              // document.location.href = `/content/wedding/user.html`;
-
-                    },
-                    complete: function () {
+                        // document.location.href = `/content/wedding/user.html`;
                     },
                     error: function (e) {
                         console.log('Что-то пошло не так :( ');
@@ -409,10 +403,10 @@ var PORTAL = (function (PORTAL, $) {
 
                         sendUserRegInfo('http://wedding-services.mycloud.by/services/rest.users/create.json', dataRegistration.city);
                         showCabinetSuccess();
-                        setCookiesAuth('authorized', authType);
+                        // setCookiesAuth('authorized', authType);
 
-                        Cookies.set('userType', 'user');
-                        Cookies.set('city', city);
+                        // Cookies.set('userType', 'user');
+                        // Cookies.set('city', city);
 
 
 
