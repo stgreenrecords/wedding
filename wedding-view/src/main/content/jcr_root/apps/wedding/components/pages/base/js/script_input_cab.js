@@ -452,59 +452,7 @@ var PORTAL = (function (PORTAL, $) {
 
 
 
-        PORTAL.modules.CabinetInput.AUTH.init = function() {				// Можно тестить
 
-                VK.init({
-                    apiId: 6428473
-                });
-
-/*                window.vkAsyncInit = function() {
-                    VK.init({
-                        apiId: 6428473
-                    });
-                };*/
-
-              /*  setTimeout(function() {
-                    var el = document.createElement("script");
-                    el.type = "text/javascript";
-                    el.src = "https://vk.com/js/api/openapi.js?154";
-                    el.async = true;
-                    document.getElementById("vk_api_transport").appendChild(el);
-                }, 0);*/
-
-                /*   window.fbAsyncInit = function() {
-
-                };*/
-
-                FB.init({
-                    appId            : '2118542795094606',
-                    autoLogAppEvents : true,
-                    xfbml            : true,
-                    version          : 'v2.3'
-                    // version          : 'v3.0'
-                });
-
-         /*       (function(d, s, id){
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) {return;}
-                    js = d.createElement(s); js.id = id;
-                    js.src = "https://connect.facebook.net/en_US/sdk.js";
-                    fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));*/
-
-                handleClientLoad();
-
-
-                if (authStatusFromCookie === "authorized" && authTypeFromCookie ) {
-                    //PORTAL.modules.LoginRegistration.AUTH[authType].status();
-                    // PORTAL.modules.CabinetInput.AUTH[authTypeFromCookie].status();
-                    V_K.status();
-                    // showCabinetSuccess();
-                }
-
-            };
-
-        PORTAL.modules.CabinetInput.AUTH.init();  // Сделать запуск при начале регистрации / входа и если куки совпадают !
 
 
         // PORTAL.modules.CabinetInput.AUTH.
@@ -744,6 +692,60 @@ var PORTAL = (function (PORTAL, $) {
 
 
         };
+
+        PORTAL.modules.CabinetInput.AUTH.init = function() {				// Можно тестить
+
+            VK.init({
+                apiId: 6428473
+            });
+
+            /*                window.vkAsyncInit = function() {
+                                VK.init({
+                                    apiId: 6428473
+                                });
+                            };*/
+
+            /*  setTimeout(function() {
+                  var el = document.createElement("script");
+                  el.type = "text/javascript";
+                  el.src = "https://vk.com/js/api/openapi.js?154";
+                  el.async = true;
+                  document.getElementById("vk_api_transport").appendChild(el);
+              }, 0);*/
+
+            /*   window.fbAsyncInit = function() {
+
+            };*/
+
+            FB.init({
+                appId            : '2118542795094606',
+                autoLogAppEvents : true,
+                xfbml            : true,
+                version          : 'v2.3'
+                // version          : 'v3.0'
+            });
+
+            /*       (function(d, s, id){
+                       var js, fjs = d.getElementsByTagName(s)[0];
+                       if (d.getElementById(id)) {return;}
+                       js = d.createElement(s); js.id = id;
+                       js.src = "https://connect.facebook.net/en_US/sdk.js";
+                       fjs.parentNode.insertBefore(js, fjs);
+                   }(document, 'script', 'facebook-jssdk'));*/
+
+            handleClientLoad();
+
+
+            if (authStatusFromCookie === "authorized" && authTypeFromCookie ) {
+                //PORTAL.modules.LoginRegistration.AUTH[authType].status();
+                // PORTAL.modules.CabinetInput.AUTH[authTypeFromCookie].status();
+                V_K.status();
+                // showCabinetSuccess();
+            }
+
+        };
+
+        PORTAL.modules.CabinetInput.AUTH.init();  // Сделать запуск при начале регистрации / входа и если куки совпадают !
 
 
             $self.find("#vk-reg-btn").click(function () {
