@@ -43,10 +43,15 @@ var PORTAL = (function (PORTAL, $) {
                 this.style.color = "#555";
             });
 
+            if (authStatusFromCookie === "authorized" && authTypeFromCookie)
+                showCabinetSuccess();
+
             function compareUserData(data) {
                 console.log(data);
-                if (data.userId === Cookies.get('userId'))
+                if (data.userId === Cookies.get('userId')) {
                     alert('compareUser_Data userIdFromCookie WORKS');
+                    showCabinetSuccess();
+                }
                 else
                     alert('NO SUCCESS');
             }
@@ -77,7 +82,7 @@ var PORTAL = (function (PORTAL, $) {
             function myPageReloc() {
                 if (Cookies.get('userType')=='partner')
                     document.location.href = `/content/wedding/catalog/category/partner.html?${Cookies.get('userId')}#${Cookies.get('workSphere')}&${Cookies.get('city')}`;
-               else if(Cookies.get('userType')=='user')
+                else if(Cookies.get('userType')=='user')
                     document.location.href = `/content/wedding/user.html?${Cookies.get('userId')}#${Cookies.get('city')}`;
                 else
                     alert ('Войдите или зарегестрируйтесь');
@@ -106,6 +111,7 @@ var PORTAL = (function (PORTAL, $) {
 
             function enterOfForm(){
                 modalW.closeMWindow(".window-entrance", "#entrance-form");
+                authType = 'EMAIL';
                 showCabinetSuccess();
             }
 
@@ -435,15 +441,6 @@ var PORTAL = (function (PORTAL, $) {
 
             }
 
-            // modal.addEventListener("click", function(evt) {
-            //     if (evt.target === document.querySelector("#entrance-form")) {
-            //         this.style.visibility = "hidden";
-            //         Array.from(this.children).forEach(function(elem) {
-            //             elem.style.visibility = "hidden";
-            //         });
-            //     }
-            // });
-
 
             /*==============================================================================================================================
  =========================           ====================================================================================================================================
@@ -452,11 +449,8 @@ var PORTAL = (function (PORTAL, $) {
 
 
 
-
-
-
-        // PORTAL.modules.CabinetInput.AUTH.
-        var V_K = {
+        PORTAL.modules.CabinetInput.AUTH.V_K = {
+        // var V_K = {
 
                 "login": function () {
 
@@ -547,7 +541,7 @@ var PORTAL = (function (PORTAL, $) {
             };
 
 
-
+        {
 
             // <button id="authorize-button" style="display: none;">Authorize</button>
             // <button id="signout-button" style="display: none;">Sign Out</button>
@@ -604,7 +598,7 @@ var PORTAL = (function (PORTAL, $) {
             //     }
             // }
 
-           // Sign in the user upon button click.
+            // Sign in the user upon button click.
 
             function handleAuthClick(event) {
                 gapi.auth2.getAuthInstance().signIn();
@@ -632,12 +626,12 @@ var PORTAL = (function (PORTAL, $) {
             }
 
 
-             // * Print all Labels in the authorized user's inbox. If no labels
-             // * are found an appropriate message is printed.
+            // * Print all Labels in the authorized user's inbox. If no labels
+            // * are found an appropriate message is printed.
             function listLabels() {
                 gapi.client.gmail.users.labels.list({
                     'userId': 'me'
-                }).then(function(response) {
+                }).then(function (response) {
                     var labels = response.result.labels;
                     appendPre('Labels:');
 
@@ -651,7 +645,7 @@ var PORTAL = (function (PORTAL, $) {
                     }
                 });
             }
-
+        }
 
 
         PORTAL.modules.CabinetInput.AUTH.GMAIL = {
@@ -738,10 +732,10 @@ var PORTAL = (function (PORTAL, $) {
 
             handleClientLoad();
 
-            if (authStatusFromCookie === "authorized" && authTypeFromCookie ) {
+            if (authStatusFromCookie !== "authorized" && authTypeFromCookie) {
                 //PORTAL.modules.LoginRegistration.AUTH[authType].status();
-                // PORTAL.modules.CabinetInput.AUTH[authTypeFromCookie].status();
-                V_K.status();
+                PORTAL.modules.CabinetInput.AUTH[authTypeFromCookie].status();
+                // V_K.status();
                 // showCabinetSuccess();
             }
 
