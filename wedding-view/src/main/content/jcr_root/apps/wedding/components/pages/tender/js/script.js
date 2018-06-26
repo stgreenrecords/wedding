@@ -192,7 +192,7 @@ var PORTAL = (function (PORTAL, $) {
             $self.find('.trumbowyg-editor').html('');
 
             var commentInfo = {	text:content, authorID:Cookies.get('userId'), authorCity:Cookies.get('city'),  avatar:Cookies.get('avatar'),
-                speciality:Cookies.get('workSphere'), datePublication: +new Date()};
+                speciality:Cookies.get('workSphere'), firstName:Cookies.get('firstName'), lasName:Cookies.get('lasName'), datePublication: +new Date()};
 
             sendChangeRequest([{proposal:commentInfo}]);
 
