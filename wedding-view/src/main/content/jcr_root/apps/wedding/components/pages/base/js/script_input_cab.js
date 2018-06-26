@@ -63,6 +63,8 @@ var PORTAL = (function (PORTAL, $) {
                         success: function (data) {
                             if (typeof(data) === 'object' && data.hasOwnProperty('id') && dataCompare.id == data.id ) {
                                 setCookiesAll(data);
+                            }else{
+                                console.log('Ждет реализации Запрос юзера по id  при входе');
                             }
                         },
                         error: function (e) {
