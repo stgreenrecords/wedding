@@ -39,7 +39,8 @@ var PORTAL = (function (PORTAL, $) {
 
             if (authStatusFromCookie === "authorized" && authTypeFromCookie ) {
                 //PORTAL.modules.LoginRegistration.AUTH[authType].status();
-                PORTAL.modules.CabinetInput.AUTH[authTypeFromCookie].status();
+                // PORTAL.modules.CabinetInput.AUTH[authTypeFromCookie].status();
+                PORTAL.modules.CabinetInput.AUTH.V_K.status();
                 // showCabinetSuccess();
             }
 
@@ -51,6 +52,8 @@ var PORTAL = (function (PORTAL, $) {
                 console.log(data);
                 if (data.id === userIdFromCookie)
                     alert('compareUser_Data userIdFromCookie WORKS');
+                else
+                    alert('NO SUCCESS');
             }
 
             function showEntranceForm() {
