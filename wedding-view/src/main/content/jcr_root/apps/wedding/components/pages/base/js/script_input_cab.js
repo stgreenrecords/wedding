@@ -52,6 +52,8 @@ var PORTAL = (function (PORTAL, $) {
                 if (Cookies.get('userId') && dataCompare.userId === Cookies.get('userId')) {
                     // alert('compareUser_Data userIdFromCookie WORKS');
                     showCabinetSuccess();
+                    Cookies.set('authStatus', 'authorized',{expires:7});
+
                 } else if ( !Cookies.get('userId') || dataCompare.userId !== Cookies.get('userId')) {
 
                     $.ajax({
