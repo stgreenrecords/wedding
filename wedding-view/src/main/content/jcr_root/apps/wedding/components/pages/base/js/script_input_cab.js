@@ -728,6 +728,8 @@ var PORTAL = (function (PORTAL, $) {
             if (authStatusFromCookie !== "authorized" && authTypeFromCookie) {
                 //PORTAL.modules.LoginRegistration.AUTH[authType].status();
                 PORTAL.modules.CabinetInput.AUTH[authTypeFromCookie].status();
+                console.dir(PORTAL.modules.CabinetInput.AUTH[authTypeFromCookie].status());
+                console.log(authTypeFromCookie);
                 // V_K.status();
                 // showCabinetSuccess();
             }
