@@ -663,12 +663,30 @@ var PORTAL = (function (PORTAL, $) {
 
             };
 
+        PORTAL.modules.CabinetInput.AUTH.OK = {
+
+            "login": function () {
+
+
+                alert('OK LOGIN');
+
+
+            },
+
+            "status": function () {
+
+                alert('OK STAtUSs');
+            }
+
+
+        };
+
         PORTAL.modules.CabinetInput.AUTH.EMAIL = {
 
             "login": function () {
 
 
-
+                alert('EMAIL LOGIN');
 
 
             },
@@ -728,8 +746,6 @@ var PORTAL = (function (PORTAL, $) {
             if (authStatusFromCookie !== "authorized" && authTypeFromCookie) {
                 //PORTAL.modules.LoginRegistration.AUTH[authType].status();
                 PORTAL.modules.CabinetInput.AUTH[authTypeFromCookie].status();
-                console.dir(PORTAL.modules.CabinetInput.AUTH[authTypeFromCookie].status());
-                console.log(authTypeFromCookie);
                 // V_K.status();
                 // showCabinetSuccess();
             }
@@ -747,11 +763,15 @@ var PORTAL = (function (PORTAL, $) {
             });
 
             $self.find("#fb-reg-btn").click(function () {
-                FBOOK.login();
+                PORTAL.modules.CabinetInput.AUTH.FBOOK.login();
             });
 
             $self.find("#gmail-reg-btn").click(function () {
-                GMAIL.login();
+                PORTAL.modules.CabinetInput.AUTH.GMAIL.login();
+            });
+
+            $self.find("#ok-reg-btn").click(function () {
+                PORTAL.modules.CabinetInput.AUTH.OK.login();
             });
 
 
@@ -762,7 +782,15 @@ var PORTAL = (function (PORTAL, $) {
             });
 
             $self.find("#fb-login-btn").click(function () {
-                FBOOK.status();
+                PORTAL.modules.CabinetInput.AUTH.FBOOK.status();
+            });
+
+            $self.find("#gmail-login-btn").click(function () {
+                PORTAL.modules.CabinetInput.AUTH.GMAIL.status();
+            });
+
+            $self.find("#ok-login-btn").click(function () {
+                PORTAL.modules.CabinetInput.AUTH.OK.status();
             });
 
         // }()); // end -  --- с окнами входа и регистрации
