@@ -33,7 +33,7 @@
             <div class="mini-menu">
                 <img src="/etc/clientlibs/wedding/pages/images/on_all_pages/header/drop_arrow_menu.png" alt="drop-down">
                 <ul class="mini-menu-drop hidden_cl">
-                    <li id="mini-menu_my-page"><a href="/content/wedding/user.html"> Моя страница</a>  </li>
+                    <li id="mini-menu_my-page">  Моя страница  </li>
                     <li id="mini-menu_options"><a href="/content/wedding/settings.html"> Настройки </a> </li>
                     <li id="mini-menu_exit"> Выход </li>
                 </ul>

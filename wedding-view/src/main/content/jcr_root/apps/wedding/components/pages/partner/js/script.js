@@ -11,7 +11,6 @@ var PORTAL = (function (PORTAL, $) {
         $("textarea").trumbowyg({  // RichText
             svgPath: '/etc/clientlibs/wedding/external/icons/richtext/icons.svg',
             lang: 'ru'
-
         });
 
         var selectedPerson;
@@ -19,13 +18,13 @@ var PORTAL = (function (PORTAL, $) {
         var getPartnerSpecCity = (window.location.hash).slice(1);
         getPartnerSpecCity = getPartnerSpecCity.replace('&','/');
 
-        if (getPartnerId === Cookies.get('userId') )
-            console.log("WaU - the MY CABINET  !!!!");
-
         // if (!getPartnerSpecCity){  //TODOC  - Подключить после подключения регистрации
-        //    var getPartnerSpecCity = Cookies.get('partnerSpec') + '/'+ Cookies.get('partnerCity');
+        //    var getPartnerSpecCity = Cookies.get('workSphere') + '/'+ Cookies.get('city');
         //    var getPartnerId =  Cookies.get('userId');
         // }
+
+        if (getPartnerId === Cookies.get('userId') )
+            console.log("WaU - the MY CABINET  !!!!");
 
         var selectedPersonRequest = `/services/rest.partners/${getPartnerSpecCity}.json?id=${getPartnerId}`;
 

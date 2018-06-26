@@ -71,10 +71,19 @@ var PORTAL = (function (PORTAL, $) {
             function showCabinetSuccess(){
                 cabinet_login.style.display = "none";
                 cabinet_success.style.display = "flex";
+                $self.find('#mini-menu_my-page').one('click', myPageReloc);
+            }
+
+            function myPageReloc() {
+                if (Cookies.get('userType')=='partner')
+                    document.location.href = `content/wedding/catalog/category/partner.html?${Cookies.get('userId')}#${Cookies.get('worksphere')}&${Cookies.get('city')}`;
+               else if(Cookies.get('userType')=='user')
+                    document.location.href = `/content/wedding/user.html`;
+                else
+                    alert ('Войдите или зарегестрируйтесь');
             }
 
             function hideCabinetSuccess(){
-
                 cabinet_success.style.display = "none";
                 cabinet_login.style.display = "block";
 
@@ -84,7 +93,8 @@ var PORTAL = (function (PORTAL, $) {
                 Cookies.set('firstName', '');
                 Cookies.set('lastName', '');
                 Cookies.set('city', '');
-                Cookies.get('userType')=='partner' ? Cookies.set('workSphere', '') : '';
+                // Cookies.get('userType')=='partner' ? Cookies.set('workSphere', '') : '';
+                Cookies.remove('workSphere');
                 Cookies.set('userType', '');
                 document.location.reload();
             }
@@ -155,7 +165,20 @@ var PORTAL = (function (PORTAL, $) {
 
             enter.addEventListener("click", function(){
 
-                enterOfForm();
+                $.ajax({ // Запрос на добавление всех категорий в селект
+                    url: "http://wedding-services.mycloud.by/services/rest.loginUser.json?id=XXX",
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        setCookiesAll(data);
+                        enterOfForm();
+                    },
+                    error: function (e) { // На случай если запрос не прошел - сферу пишет вручную
+                       console.log(e);
+                    }
+                });
+
+
                 setCookiesAuth('authorized', 'EMAIL');
                 if ($self.find('#remember-ident').val() === 'remember-ident-user'){
                     Cookies.set('userEmail', $self.find('#user_email').val());
@@ -339,7 +362,7 @@ var PORTAL = (function (PORTAL, $) {
                if(data.speciality && data.speciality !=null && data.speciality !='') {
                    Cookies.set('userType', 'partner');
                    Cookies.set('workSphere', data.speciality);
-                   $self.find('#mini-menu_my-page a').attr('href', '/content/wedding/catalog/category/partner.html');
+                   // $self.find('#mini-menu_my-page a').attr('href', '/content/wedding/catalog/category/partner.html');
                }else
                    Cookies.set('userType', 'user');
 
@@ -378,7 +401,6 @@ var PORTAL = (function (PORTAL, $) {
                         modalW.openMWindow("#popup_alert-admin", "#entrance-form");
                     }
                 });
-
 
             }
 
@@ -438,9 +460,9 @@ var PORTAL = (function (PORTAL, $) {
 
 
             /*==============================================================================================================================
+ =========================           ====================================================================================================================================
             ====================================================================================================================================
-            ====================================================================================================================================
-            ====================================================================================================================================*/
+  =============================          ====================================================================================================================================*/
 
 
 
