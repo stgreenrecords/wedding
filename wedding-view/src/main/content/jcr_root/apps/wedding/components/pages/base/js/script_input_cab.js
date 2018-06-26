@@ -35,14 +35,9 @@ var PORTAL = (function (PORTAL, $) {
 
             $self.find('#mini-menu_exit').on('click', hideCabinetSuccess);
 
-            PORTAL.modules.CabinetInput.AUTH = PORTAL.modules.CabinetInput.AUTH || {};
+        PORTAL.modules.CabinetInput.AUTH = PORTAL.modules.CabinetInput.AUTH || {};
 
-            if (authStatusFromCookie === "authorized" && authTypeFromCookie ) {
-                //PORTAL.modules.LoginRegistration.AUTH[authType].status();
-                // PORTAL.modules.CabinetInput.AUTH[authTypeFromCookie].status();
-                PORTAL.modules.CabinetInput.AUTH.V_K.status();
-                // showCabinetSuccess();
-            }
+
 
             entrance.addEventListener("click", function(evt) {
                 this.style.color = "#555";
@@ -457,7 +452,7 @@ var PORTAL = (function (PORTAL, $) {
 
 
 
-            function initSocial() {				// Можно тестить
+        PORTAL.modules.CabinetInput.AUTH.init = function() {				// Можно тестить
 
                 VK.init({
                     apiId: 6428473
@@ -500,12 +495,19 @@ var PORTAL = (function (PORTAL, $) {
                 handleClientLoad();
 
 
-            }
+                if (authStatusFromCookie === "authorized" && authTypeFromCookie ) {
+                    //PORTAL.modules.LoginRegistration.AUTH[authType].status();
+                    // PORTAL.modules.CabinetInput.AUTH[authTypeFromCookie].status();
+                    PORTAL.modules.CabinetInput.AUTH.V_K.status();
+                    // showCabinetSuccess();
+                }
 
-            initSocial();  // Сделать запуск при начале регистрации / входа и если куки совпадают !
+            };
+
+        PORTAL.modules.CabinetInput.AUTH.init();  // Сделать запуск при начале регистрации / входа и если куки совпадают !
 
 
-            PORTAL.modules.CabinetInput.AUTH.V_K = {
+        PORTAL.modules.CabinetInput.AUTH.V_K = {
 
                 "login": function () {
 
@@ -550,7 +552,7 @@ var PORTAL = (function (PORTAL, $) {
             };
 
 
-            PORTAL.modules.CabinetInput.AUTH.FBOOK = {
+        PORTAL.modules.CabinetInput.AUTH.FBOOK = {
 
                /* "login": function () {
 
