@@ -19,7 +19,7 @@ var PORTAL = (function (PORTAL, $) {
 
             var dataRegistration = {};
             var userLoginInfo = {};
-            var authType = 'EMAIL';
+            var authType = '';
 
             var authStatusFromCookie = Cookies.get('authStatus');
             var authTypeFromCookie = Cookies.get('authType');
@@ -474,6 +474,7 @@ var PORTAL = (function (PORTAL, $) {
                             userLoginInfo.email = responseUser.hasOwnProperty("email") ? responseUser.email : "";
                             userLoginInfo.href = responseUser.hasOwnProperty("href") ? responseUser.href : "";
                             userLoginInfo.authType = "V_K";
+                            authType = "V_K";
 
                             dataRegistrationFill();
                             inputFirstStepRegFill();
