@@ -76,7 +76,7 @@ var PORTAL = (function (PORTAL, $) {
 
             function myPageReloc() {
                 if (Cookies.get('userType')=='partner')
-                    document.location.href = `content/wedding/catalog/category/partner.html?${Cookies.get('userId')}#${Cookies.get('workSphere')}&${Cookies.get('city')}`;
+                    document.location.href = `/content/wedding/catalog/category/partner.html?${Cookies.get('userId')}#${Cookies.get('workSphere')}&${Cookies.get('city')}`;
                else if(Cookies.get('userType')=='user')
                     document.location.href = `/content/wedding/user.html`;
                 else

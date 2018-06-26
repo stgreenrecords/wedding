@@ -170,6 +170,8 @@ var PORTAL = (function (PORTAL, $) {
                 lastName.html(`${dataSend.lastName}`);
                 phoneNum.html(`${dataSend.phone}`);
                 vkLink.html(`${dataSend.vkLink}`);
+                vkLink.attr('href',`${dataSend.vkLink}`);
+
 
                 sendChangeRequest(dataSend);
                 console.log(dataSend);
@@ -215,8 +217,10 @@ var PORTAL = (function (PORTAL, $) {
                     $self.find(".user_avatar").css("background-image", `url('${selectedPerson.avatar}')`);
                 if(selectedPerson.email)
                     eMail.text(selectedPerson.email);
-                if(selectedPerson.vkLink)
+                if(selectedPerson.vkLink) {
                     vkLink.text(selectedPerson.vkLink);
+                    vkLink.attr('href',`${dataSend.vkLink}`);
+                }
                 // $self.find('.fb_string').text(selectedPerson.facebookLink);
                 // $self.find('.insta_string').text(selectedPerson.instagramLink);
 
