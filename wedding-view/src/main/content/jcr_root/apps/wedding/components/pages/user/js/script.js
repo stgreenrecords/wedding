@@ -58,7 +58,7 @@ var PORTAL = (function (PORTAL, $) {
             var firstName =  $self.find('.profil_name');
             var lastName = $self.find('.profil_secondname');
             var phoneNum =  $self.find('.phone_string');
-            var eMail = $self.find('.mail_string');
+            var email = $self.find('.mail_string');
             var vkLink = $self.find('.vk_string');
             var create_tender = $self.find('.create_tender_icon');
             var edit_avatar = $self.find('.edit_avatar_btns');
@@ -121,9 +121,6 @@ var PORTAL = (function (PORTAL, $) {
 
             }
 
-
-
-
             function onChangeFields(){
 
                 console.log('Я могу ВСЕ изменить!!!!');
@@ -145,13 +142,10 @@ var PORTAL = (function (PORTAL, $) {
                 lastName.html(`<input value=${changeLastName}>`);
                 phoneNum.html(`<input value=${changePhoneNum}>`);
                 vkLink.html(`<input value=${changeVkLink}>`);
-
+                vkLink.removeAttr('href');
                 console.log(changeName);
 
             }
-
-
-
 
             function saveChangeFields() {
 
@@ -178,8 +172,6 @@ var PORTAL = (function (PORTAL, $) {
 
             }
 
-
-
             function sendChangeRequest(dataSend){
 
                 $.ajax({
@@ -205,8 +197,6 @@ var PORTAL = (function (PORTAL, $) {
 
             }
 
-
-
             function fillStrings(selectedPerson){
 
                 firstName.text(selectedPerson.firstName);
@@ -216,7 +206,7 @@ var PORTAL = (function (PORTAL, $) {
                 if(selectedPerson.avatar)
                     $self.find(".user_avatar").css("background-image", `url('${selectedPerson.avatar}')`);
                 if(selectedPerson.email)
-                    eMail.text(selectedPerson.email);
+                    email.text(selectedPerson.email);
                 if(selectedPerson.vkLink) {
                     vkLink.text(selectedPerson.vkLink);
                     vkLink.attr('href',`${selectedPerson.vkLink}`);
