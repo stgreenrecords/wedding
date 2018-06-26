@@ -219,7 +219,7 @@ var PORTAL = (function (PORTAL, $) {
                     eMail.text(selectedPerson.email);
                 if(selectedPerson.vkLink) {
                     vkLink.text(selectedPerson.vkLink);
-                    vkLink.attr('href',`${dataSend.vkLink}`);
+                    vkLink.attr('href',`${selectedPerson.vkLink}`);
                 }
                 // $self.find('.fb_string').text(selectedPerson.facebookLink);
                 // $self.find('.insta_string').text(selectedPerson.instagramLink);
