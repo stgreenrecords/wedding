@@ -45,7 +45,7 @@ var PORTAL = (function (PORTAL, $) {
 
             function compareUserData(data) {
                 console.log(data);
-                if (data.id === Cookies.get('userId'))
+                if (data.userId === Cookies.get('userId'))
                     alert('compareUser_Data userIdFromCookie WORKS');
                 else
                     alert('NO SUCCESS');
@@ -489,7 +489,7 @@ var PORTAL = (function (PORTAL, $) {
                     VK.Auth.getLoginStatus(function (response) {
                         if (response.status === "connected") {
                             // authStatus = true;
-                            userLoginInfo.userID = response.session.mid;
+                            userLoginInfo.userId = response.session.mid;
                             userLoginInfo.authType = "V_K";
 
                             console.log('The great success !!!!!  getLoginStatus true ');
