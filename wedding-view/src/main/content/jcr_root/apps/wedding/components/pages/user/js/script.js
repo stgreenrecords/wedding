@@ -11,6 +11,7 @@ var PORTAL = (function (PORTAL, $) {
         var selectedPerson;
         var calc_aside =  $self.find('#calc_aside_sect');
         var user_tenders = $self.find('#user_tenders');
+
         var user_id = Cookies.get('userId');
         var user_city = Cookies.get('city');
         console.log(user_city, user_id);

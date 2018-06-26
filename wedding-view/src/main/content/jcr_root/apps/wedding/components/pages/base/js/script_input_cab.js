@@ -9,15 +9,13 @@ var PORTAL = (function (PORTAL, $) {
 
         console.log('Component: "#cabinet-input-block"');
 
-        (function(){ // Работа с окнами входа и регистрации
+        // (function(){ // Работа с окнами входа и регистрации
 
             var entrance = document.getElementById("entrance-cabinet-btn");
             var registration = document.getElementById("registration-btn");
             var entrance2 = document.querySelector(".have-account-entrance");
-            // var reg_futher = document.querySelector('#btn-registration-futher');
             var reg_futher2 = document.querySelector('#btn-registration-futher2');
             var enter = document.getElementById("btn-entrance-form");
-            // var modal = document.querySelector("#entrance-form");
 
             var dataRegistration = {};
             var userLoginInfo = {};
@@ -37,19 +35,23 @@ var PORTAL = (function (PORTAL, $) {
 
             $self.find('#mini-menu_exit').on('click', hideCabinetSuccess);
 
-
+            PORTAL.modules.CabinetInput.AUTH = PORTAL.modules.CabinetInput.AUTH || {};
 
             if (authStatusFromCookie === "authorized" && authTypeFromCookie ) {
                 //PORTAL.modules.LoginRegistration.AUTH[authType].status();
-                showCabinetSuccess();
+                PORTAL.modules.CabinetInput.AUTH[authTypeFromCookie].status();
+                // showCabinetSuccess();
             }
 
             entrance.addEventListener("click", function(evt) {
                 this.style.color = "#555";
             });
 
-            // modalW.modalle("#entrance-form"); //
-            // modalW.listenerModal();
+            function compareUserData(data) {
+                console.log(data);
+                if (data.id === userIdFromCookie)
+                    alert('compareUser_Data userIdFromCookie WORKS');
+            }
 
             function showEntranceForm() {
 
@@ -78,7 +80,7 @@ var PORTAL = (function (PORTAL, $) {
                 if (Cookies.get('userType')=='partner')
                     document.location.href = `/content/wedding/catalog/category/partner.html?${Cookies.get('userId')}#${Cookies.get('workSphere')}&${Cookies.get('city')}`;
                else if(Cookies.get('userType')=='user')
-                    document.location.href = `/content/wedding/user.html`;
+                    document.location.href = `/content/wedding/user.html?${Cookies.get('userId')}#${Cookies.get('city')}`;
                 else
                     alert ('Войдите или зарегестрируйтесь');
             }
@@ -89,14 +91,14 @@ var PORTAL = (function (PORTAL, $) {
 
                 Cookies.set('authStatus', 'NotAuth');
                 Cookies.set('userId', 'null');
-                Cookies.set('authType', '');
-                Cookies.set('firstName', '');
-                Cookies.set('lastName', '');
-                Cookies.set('city', '');
-                // Cookies.get('userType')=='partner' ? Cookies.set('workSphere', '') : '';
-                Cookies.remove('workSphere');
+                // Cookies.set('authType', '');
+                // Cookies.set('firstName', '');
+                // Cookies.remove('workSphere');
+                // Cookies.set('city', '');
+                // Cookies.set('lastName', '');
                 Cookies.set('userType', '');
                 document.location.reload();
+                // Cookies.get('userType')=='partner' ? Cookies.set('workSphere', '') : '';
             }
 
             function setCookiesAuth(authStatusValue, authTypeValue){
@@ -332,17 +334,10 @@ var PORTAL = (function (PORTAL, $) {
                         console.dir(dataRegistration);
                     },
                     success: function (data) {
-                         if (data/* && work_sphere*/) {
+                         if (data != []) {
                              showCabinetSuccess();
                              setCookiesAll(data);
-
-                             // authType == '' ? document.location.href = `/content/wedding/catalog/category/partner.html?${data.id}#${data.speciality}&${data.city}`
-                             //                 :  ;
-
-
-                             // console.log('Ниже должен быть ответ:');
-                             // console.dir(data);
-                             // console.log('это успех!');
+                             document.location.href = `/content/wedding/catalog/category/partner.html?${data.id}#${data.speciality}&${data.city}`;
                          }
                     },
                     error: function (e) {
@@ -390,10 +385,9 @@ var PORTAL = (function (PORTAL, $) {
                         console.log('Ниже должен быть ответ:');
                         console.dir(data);
                         setCookiesAll(data);
-                        // Cookies.set('userId', data.id);
-                        // Cookies.set('city', data.city);
+                        showCabinetSuccess();
                         // document.location.href = '/content/wedding/catalog.html#'; // TODOC - сделать переход в каталог - когда заполнят всех юзеров
-                        // document.location.href = `/content/wedding/user.html`;
+                        document.location.href = `/content/wedding/user.html?${data.id}#${data.city}`;
                     },
                     error: function (e) {
                         console.log('Что-то пошло не так :( ');
@@ -431,12 +425,6 @@ var PORTAL = (function (PORTAL, $) {
                         modalW.closeMWindow(".window-registation-step3-user", "#entrance-form");
 
                         sendUserRegInfo('http://wedding-services.mycloud.by/services/rest.users/create.json', dataRegistration.city);
-                        showCabinetSuccess();
-                        // setCookiesAuth('authorized', authType);
-
-                        // Cookies.set('userType', 'user');
-                        // Cookies.set('city', city);
-
 
 
                     } else /*if ($("input[name='consent']:checked").val() === undefined)*/{
@@ -514,8 +502,7 @@ var PORTAL = (function (PORTAL, $) {
             initSocial();  // Сделать запуск при начале регистрации / входа и если куки совпадают !
 
 
-
-            var V_K = {
+            PORTAL.modules.CabinetInput.AUTH.V_K = {
 
                 "login": function () {
 
@@ -546,13 +533,13 @@ var PORTAL = (function (PORTAL, $) {
                 "status": function () {
                     VK.Auth.getLoginStatus(function (response) {
                         if (response.status === "connected") {
-                            authStatus = true;
+                            // authStatus = true;
                             userLoginInfo.userID = response.session.mid;
-                            userLoginInfo.authType = "VK";
+                            userLoginInfo.authType = "V_K";
 
                             console.log('The great success !!!!!  getLoginStatus true ');
                             console.log(response);
-
+                            compareUserData(userLoginInfo);
                         }
                     });
                 }
@@ -560,7 +547,7 @@ var PORTAL = (function (PORTAL, $) {
             };
 
 
-            var FBook = {
+            PORTAL.modules.CabinetInput.AUTH.FBOOK = {
 
                /* "login": function () {
 
@@ -582,6 +569,7 @@ var PORTAL = (function (PORTAL, $) {
 
                     FB.login(function (response) {
                         console.log(response);
+                        userLoginInfo.authType = "FBOOK";
                     });
 
                 },
@@ -733,18 +721,18 @@ var PORTAL = (function (PORTAL, $) {
 
 
             $self.find("#vk-reg-btn").click(function () {
-                authType = "VK"; //  replace
+                // authType = "V_K"; //  replace
                 console.log('VK reg ON');
                 V_K.login();
             });
 
             $self.find("#fb-reg-btn").click(function () {
-                authType = "FACEBOOK"; //  replace
-                FBook.login();
+                // authType = "FACEBOOK"; //  replace
+                FBOOK.login();
             });
 
             $self.find("#gmail-reg-btn").click(function () {
-                authType = "GMAIL"; //  replace
+                // authType = "GMAIL"; //  replace
                 GMAIL.login();
             });
 
@@ -757,13 +745,13 @@ var PORTAL = (function (PORTAL, $) {
 
             $self.find("#fb-login-btn").click(function () {
                 // authType = "FACEBOOK";
-                FBook.status();
+                FBOOK.status();
             });
 
 
 
 
-        }()); // end -  --- с окнами входа и регистрации
+        // }()); // end -  --- с окнами входа и регистрации
 
     };
 
