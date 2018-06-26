@@ -24,7 +24,7 @@ var PORTAL = (function (PORTAL, $) {
             var authStatusFromCookie = Cookies.get('authStatus');
             var authTypeFromCookie = Cookies.get('authType');
             var userEmailFromCookie = Cookies.get('userEmail');
-            var userIdFromCookie  = Cookies.get('userId');
+            // var userIdFromCookie  = Cookies.get('userId');
             var userTypeFromCookie = Cookies.get('userType');
             var cityFromCookie = Cookies.get('city');
             var workSphereFromCookie = Cookies.get('workSphere');
@@ -45,7 +45,7 @@ var PORTAL = (function (PORTAL, $) {
 
             function compareUserData(data) {
                 console.log(data);
-                if (data.id === userIdFromCookie)
+                if (data.id === Cookies.get('userId'))
                     alert('compareUser_Data userIdFromCookie WORKS');
                 else
                     alert('NO SUCCESS');
@@ -173,13 +173,13 @@ var PORTAL = (function (PORTAL, $) {
                         setCookiesAll(data);
                         enterOfForm();
                     },
-                    error: function (e) { // На случай если запрос не прошел - сферу пишет вручную
+                    error: function (e) {
                        console.log(e);
                     }
                 });
 
 
-                setCookiesAuth('authorized', 'EMAIL');
+                // setCookiesAuth('authorized', 'EMAIL');
                 if ($self.find('#remember-ident').val() === 'remember-ident-user'){
                     Cookies.set('userEmail', $self.find('#user_email').val());
                 }
@@ -473,7 +473,7 @@ var PORTAL = (function (PORTAL, $) {
                             userLoginInfo.nickname = responseUser.hasOwnProperty("nickname") ? responseUser.nickname : "";
                             userLoginInfo.email = responseUser.hasOwnProperty("email") ? responseUser.email : "";
                             userLoginInfo.href = responseUser.hasOwnProperty("href") ? responseUser.href : "";
-                            userLoginInfo.authType = "VK";
+                            userLoginInfo.authType = "V_K";
 
                             dataRegistrationFill();
                             inputFirstStepRegFill();
@@ -693,6 +693,8 @@ var PORTAL = (function (PORTAL, $) {
 
         };
 
+        PORTAL.modules.CabinetInput.AUTH.init();  // Сделать запуск при начале регистрации / входа и если куки совпадают !
+
         PORTAL.modules.CabinetInput.AUTH.init = function() {				// Можно тестить
 
             VK.init({
@@ -735,7 +737,6 @@ var PORTAL = (function (PORTAL, $) {
 
             handleClientLoad();
 
-
             if (authStatusFromCookie === "authorized" && authTypeFromCookie ) {
                 //PORTAL.modules.LoginRegistration.AUTH[authType].status();
                 // PORTAL.modules.CabinetInput.AUTH[authTypeFromCookie].status();
@@ -745,7 +746,7 @@ var PORTAL = (function (PORTAL, $) {
 
         };
 
-        PORTAL.modules.CabinetInput.AUTH.init();  // Сделать запуск при начале регистрации / входа и если куки совпадают !
+
 
 
             $self.find("#vk-reg-btn").click(function () {
@@ -775,9 +776,6 @@ var PORTAL = (function (PORTAL, $) {
                 // authType = "FACEBOOK";
                 FBOOK.status();
             });
-
-
-
 
         // }()); // end -  --- с окнами входа и регистрации
 
