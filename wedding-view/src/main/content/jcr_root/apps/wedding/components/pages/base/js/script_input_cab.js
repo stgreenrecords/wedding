@@ -498,7 +498,7 @@ var PORTAL = (function (PORTAL, $) {
                 if (authStatusFromCookie === "authorized" && authTypeFromCookie ) {
                     //PORTAL.modules.LoginRegistration.AUTH[authType].status();
                     // PORTAL.modules.CabinetInput.AUTH[authTypeFromCookie].status();
-                    PORTAL.modules.CabinetInput.AUTH.V_K.status();
+                    V_K.status();
                     // showCabinetSuccess();
                 }
 
@@ -507,7 +507,8 @@ var PORTAL = (function (PORTAL, $) {
         PORTAL.modules.CabinetInput.AUTH.init();  // Сделать запуск при начале регистрации / входа и если куки совпадают !
 
 
-        PORTAL.modules.CabinetInput.AUTH.V_K = {
+        // PORTAL.modules.CabinetInput.AUTH.
+        var V_K = {
 
                 "login": function () {
 
@@ -704,7 +705,7 @@ var PORTAL = (function (PORTAL, $) {
 
 
 
-            var GMAIL = {
+        PORTAL.modules.CabinetInput.AUTH.GMAIL = {
 
                 "login": function () {
 
@@ -719,10 +720,30 @@ var PORTAL = (function (PORTAL, $) {
 
                 "status": function () {
 
+                    alert('GMAIL STALUSs');
+
                 }
 
 
             };
+
+        PORTAL.modules.CabinetInput.AUTH.EMAIL = {
+
+            "login": function () {
+
+
+
+
+
+            },
+
+            "status": function () {
+
+                alert('EMAIL STAtUSs');
+            }
+
+
+        };
 
 
             $self.find("#vk-reg-btn").click(function () {
