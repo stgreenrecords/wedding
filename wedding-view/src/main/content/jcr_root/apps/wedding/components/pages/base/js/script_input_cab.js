@@ -37,8 +37,7 @@ var PORTAL = (function (PORTAL, $) {
 
             $self.find('#mini-menu_exit').on('click', hideCabinetSuccess);
 
-            // if(true)
-            // $self.find('#mini-menu_my-page a').attr('href', '/content/wedding/catalog/category/partner.html');
+
 
             if (authStatusFromCookie === "authorized" && authTypeFromCookie ) {
                 //PORTAL.modules.LoginRegistration.AUTH[authType].status();
@@ -75,11 +74,18 @@ var PORTAL = (function (PORTAL, $) {
             }
 
             function hideCabinetSuccess(){
+
                 cabinet_success.style.display = "none";
                 cabinet_login.style.display = "block";
+
                 Cookies.set('authStatus', 'NotAuth');
-                //Cookies.set('userId', 'null');  todoc - разкоментить позже
-                // Cookies.set('authType', '');
+                Cookies.set('userId', 'null');
+                Cookies.set('authType', '');
+                Cookies.set('firstName', '');
+                Cookies.set('lastName', '');
+                Cookies.set('city', '');
+                Cookies.get('userType')=='partner' ? Cookies.set('workSphere', '') : '';
+                Cookies.set('userType', '');
                 document.location.reload();
             }
 
@@ -306,6 +312,14 @@ var PORTAL = (function (PORTAL, $) {
                          if (data/* && work_sphere*/) {
                              showCabinetSuccess();
                              setCookiesAll(data);
+
+                             // authType == '' ? document.location.href = `/content/wedding/catalog/category/partner.html?${data.id}#${data.speciality}&${data.city}`
+                             //                 :  ;
+
+
+                             // console.log('Ниже должен быть ответ:');
+                             // console.dir(data);
+                             // console.log('это успех!');
                          }
                     },
                     error: function (e) {
@@ -319,27 +333,20 @@ var PORTAL = (function (PORTAL, $) {
 
             function setCookiesAll(data) {
 
-                setCookiesAuth('authorized', authType);
-                Cookies.set('userId', data.id);
+               setCookiesAuth('authorized', authType);
+               Cookies.set('userId', data.id);
 
                if(data.speciality && data.speciality !=null && data.speciality !='') {
                    Cookies.set('userType', 'partner');
                    Cookies.set('workSphere', data.speciality);
+                   $self.find('#mini-menu_my-page a').attr('href', '/content/wedding/catalog/category/partner.html');
                }else
                    Cookies.set('userType', 'user');
 
-                data.city ? Cookies.set('city', data.city): '';
-                data.firstName ? Cookies.set('firstName', data.firstName): '';
-                data.lastName ? Cookies.set('lastName', data.lastName): '';
+               data.city ? Cookies.set('city', data.city): '';
+               data.firstName ? Cookies.set('firstName', data.firstName): '';
+               data.lastName ? Cookies.set('lastName', data.lastName): '';
 
-
-                // authType == '' ? document.location.href = `/content/wedding/catalog/category/partner.html?${data.id}#${data.speciality}&${data.city}`
-                //                 :  ;
-
-
-                // console.log('Ниже должен быть ответ:');
-                // console.dir(data);
-                // console.log('это успех!');
             }
 
             function sendUserRegInfo(url_link, city){
