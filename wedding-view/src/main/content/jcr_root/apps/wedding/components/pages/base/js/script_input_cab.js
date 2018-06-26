@@ -693,7 +693,7 @@ var PORTAL = (function (PORTAL, $) {
 
         };
 
-        PORTAL.modules.CabinetInput.AUTH.init();  // Сделать запуск при начале регистрации / входа и если куки совпадают !
+
 
         PORTAL.modules.CabinetInput.AUTH.init = function() {				// Можно тестить
 
@@ -745,6 +745,8 @@ var PORTAL = (function (PORTAL, $) {
             }
 
         };
+
+        PORTAL.modules.CabinetInput.AUTH.init();  // Сделать запуск при начале регистрации / входа и если куки совпадают !
 
 
 
