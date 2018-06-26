@@ -24,7 +24,6 @@
 
         function modalGo(evt) {
             if (evt.target === modal) {
-                console.log(this);
                 Array.from(this.children).forEach(function(elem) {elem.style.visibility = "hidden";});
                 this.style.visibility = "hidden";
                 evt.target.removeEventListener("click", modalGo);
