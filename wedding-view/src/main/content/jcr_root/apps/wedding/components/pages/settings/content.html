@@ -21,7 +21,7 @@
                 <p><input id="settings-lastName" class="inp-user-surname" type="text" name="user-surname" placeholder="Фамилия">  </p>
                 <p><input id="settings-email" class="inp-user-email" type="email" name="user-email" placeholder="Введите email" value="crazy@gmail.com">  </p>
 
-                <p><input id="settings-password" class="inp-user-password" type="password" name="user-password" placeholder="Введите пароль" value="Ss123asdf" title="Пароль должен содержать более 8 символов строчных и заглавных букв и min 1 цифру ">  </p>
+                <p><input id="settings-password" class="inp-user-password" type="password" name="user-password" placeholder="Введите текущий пароль"  title="Пароль должен содержать более 8 символов строчных и заглавных букв и min 1 цифру">  </p>
 
                 <p><input id="settings-password-new" class="inp-user-password-repeat" type="password" name="user-password-repeat" placeholder="Новый пароль">  </p>
 
@@ -37,12 +37,13 @@
                     <option value="mogilev">Могилев</option>
                 </select>
 
-                <div class="remove-account-cont">
-
-                    <span> Вы можете </span> <span> </span> <span id="remove-account" class="remove-account"> удалить свою страницу </span>
-                </div>
-
             </form>
+
+            <div class="remove-account-cont">
+
+                <span> Вы можете </span> <span> </span> <span id="remove-account" class="remove-account"> удалить свою страницу </span>
+            </div>
+
 
             <div class="registation3_errore_message"> </div>
 
@@ -57,16 +58,16 @@
         <section id="settings-notification" class="settings-page hidden_full">
 
             <div class="check-line">
-                <input type="checkbox" id="new-mail" class="consent-check" name="remember-ident" value="remember-ident-user" checked>
-                <span>Новое личное сообщение на сайте</span>
+                <input type="checkbox" id="new-mail" value="new-mail">
+                <label for="new-mail">Новое личное сообщение на сайте</label>
             </div>
 
-            <div class="check-line">
-                <input type="checkbox" id="new-answer" class="consent-check" name="remember-ident" value="remember-ident-user" checked>
-                <span>Ответ нового специалиста на Ваш тендер</span>
+            <div class="check-line line-new-answer">
+                <input type="checkbox" id="new-answer" value="new-answer">
+                <label for="new-answer" class="new-answer-label">Ответ нового специалиста на Ваш тендер</label>
             </div>
 
-            <p><input id="email-for_notif" class="inp-user-email" type="email" name="user-email" placeholder="Ваш e-mail для уведомлений" >  </p>
+            <p><input id="email-for_notif" class="inp-user-email" type="email" name="user-email" placeholder="Ваш e-mail для уведомлений"  title="Ваш e-mail для уведомлений">  </p>
 
             <div class="settings_errore_message"> </div>
 

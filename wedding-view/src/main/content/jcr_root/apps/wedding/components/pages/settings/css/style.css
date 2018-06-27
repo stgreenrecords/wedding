@@ -31,7 +31,7 @@
 }
 
 .button_save-settings{
-    margin: 0 auto;
+    margin: 40px auto;
     text-align: center;
 }
 
@@ -44,4 +44,8 @@
     width: 17px;
     height: 17px;
     box-shadow: none;
+}
+
+.check-line input, .check-line label{
+    cursor: pointer;
 }

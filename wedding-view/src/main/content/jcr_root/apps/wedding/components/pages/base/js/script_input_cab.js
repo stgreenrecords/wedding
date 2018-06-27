@@ -97,18 +97,8 @@ var PORTAL = (function (PORTAL, $) {
                 cabinet_login.style.display = "none";
                 cabinet_success.style.display = "flex";
                 $self.find('#mini-menu_my-page').one('click', myPageReloc);
-                $self.find('#mini-menu_options').one('click', settingsReloc);
             }
 
-            function settingsReloc() {
-                var userType = Cookies.get('userType');
-                if (userType =='partner')
-                    document.location.href = `/content/wedding/settings.html?${userType}`;
-                else if(userType =='user')
-                    document.location.href = `/content/wedding/settings.html?${userType}`;
-                else
-                    alert ('Войдите или зарегестрируйтесь');
-            }
 
             function myPageReloc() {
                 if (Cookies.get('userType')=='partner')
