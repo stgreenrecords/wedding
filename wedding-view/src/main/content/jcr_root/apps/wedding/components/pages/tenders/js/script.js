@@ -229,7 +229,7 @@ var PORTAL = (function (PORTAL, $) {
                 resourceType:'FakeData',
                 id:"f888d202-d2ee-4d30-8de8-1dcd839f4189",
                 datePublication:'1531058937112',
-                deadline:'1551289371112',
+                deadline:'1532289371112',
                 moneyLimit:'700',
                 city:'minsk',
                 cityName:'Минск',
@@ -298,7 +298,7 @@ var PORTAL = (function (PORTAL, $) {
                 resourceType:'FakeData',
                 id:"f888d202-d2ee-4d30-8de8-1dcd839f4189",
                 datePublication:'1531358937112',
-                deadline:'1551289371112',
+                deadline:'1531289371112',
                 moneyLimit:'22',
                 city:'minsk',
                 cityName:'Минск',
@@ -321,9 +321,12 @@ var PORTAL = (function (PORTAL, $) {
 
         var $tender_categ_select = $self.find('#tender_categories_select');
         var $city_select = $self.find('#city_select');
+        var $dateField =  $self.find('#date-filtr');
         var nameSpeciality = {};
+        var dataData = {};
         var container =  document.querySelector("#tender_cards-cont");
         $tender_categ_select.on('change', filtrCateg);
+        $dateField.on('change', filtrCateg);
         $city_select.on('change', getFirstTend);
 
         $.ajax({ // добавление всех категорий в селект
@@ -339,15 +342,15 @@ var PORTAL = (function (PORTAL, $) {
 
                 for (var prop in allCategories){
                     // if(getFromCatalogCat !== prop)
-                    if(prop !== 'rest')
-                        $tender_categ_select.append(`<option value="${prop}">${allCategories[prop]}</option>`);
-                    else
-                        $tender_categ_select.append(`<option value="${prop}" selected>${allCategories[prop]}</option>`);
+                    // if(prop !== 'rest')
+                    $tender_categ_select.append(`<option value="${prop}">${allCategories[prop]}</option>`);
+                    // else
+                    //    $tender_categ_select.append(`<option value="${prop}" selected>${allCategories[prop]}</option>`);
                 }
 
-                getFirstTend();
+                $tender_categ_select.prepend(`<option value="all_categories" selected> Показать все </option>`); // В случае если не надо показывать всех тут закомментить - чуть выше раскомментить
 
-                filtrCateg();
+                getFirstTend();
 
             },
             error: function (e) {
@@ -356,11 +359,17 @@ var PORTAL = (function (PORTAL, $) {
 
         });
 
-        function filtrCateg(){
-            var $cat_val = $tender_categ_select.val();
-            console.log($cat_val);
-            // container.innerHTML = '';
+        function fn(){
+            var dt = new Date(+new Date() + 3600000000);
+            $dateField.val(`${dt.getFullYear()}-${dt.getMonth()+1<10?'0'+(dt.getMonth()+1):dt.getMonth()+1}-${dt.getDate()<10?'0'+dt.getDate():dt.getDate()}`/* '2018-08-25'*/ /*formatDate.f(dt)*/);
+        }
+        // fn();
 
+        function filtrCateg(){
+            console.log($tender_categ_select.val());
+            console.log($city_select.val());
+            container.innerHTML = '';
+            drawTender(dataData, $city_select.val());
         }
 
         function getFirstTend(){
@@ -382,8 +391,9 @@ var PORTAL = (function (PORTAL, $) {
                     console.log( selectItems.url_first);
                     console.dir(data);
                     container.innerHTML = '';
-                    data.length == 0 ? drawTender(FakeDataTender2, selectItems) : drawTender(data, selectItems);
-                    /*data.length*/ 6 == 6 ? getAllTend(selectItems) : '' ;
+                    data.length == 0 ? dataData = FakeDataTender2 : dataData = data ;
+                    data.length == 0 ? drawTender(FakeDataTender2, selectItems.$city_val) : drawTender(data, selectItems.$city_val);
+                    /*data.length > 6*/ 6 == 6 ? getAllTend(selectItems) : '' ;
 
                 }
             });
@@ -398,14 +408,23 @@ var PORTAL = (function (PORTAL, $) {
                 dataType: "json",
                 success: function (data) {
                     console.log("success All_Tend");
-                    console.dir(data);
-                    data.length > 6 ? drawTender(data, selectItems, 6) : drawTender(FakeDataTender2, selectItems) /*''*/ ; //TODO - заменить на ''
+                    data.length > 6 ? dataData = data : '';
+                    data.length > 6 ? drawTender(data, selectItems.$city_val, 6) : drawTender(FakeDataTender2, selectItems.$city_val) /*''*/ ; //TODO - заменить на ''
                 }
             });
 
         }
 
-        function drawTender(data, selectItems, label=0){
+        function drawTender(dataAll, city, label=0){
+
+            var $cat_val = $tender_categ_select.val();
+            var data;
+            var dateFiltr = +new Date($dateField.val());
+            var accuracy = 2000000000;
+
+            dateFiltr ? data = dataAll.filter(item => {return Math.round(item.deadline/accuracy) == Math.round(dateFiltr/accuracy) })  : data = dataAll ;
+            $tender_categ_select.val() !== 'all_categories' ? data = data.filter( item => { return item.speciality == $cat_val}) : data ;
+            data.length === 0 ? container.innerHTML = '<p class="alert-null"> Для успешного поиска измените параметры поиска </p>' : '';
 
             var first_div = document.querySelector(".hidden_full .tender_card");
             var wrapper_div = document.createElement('div');
@@ -448,7 +467,7 @@ var PORTAL = (function (PORTAL, $) {
                 data[i].hasOwnProperty('moneyLimit')&&data[i].offers ? cloneObject.offers.innerHTML = data[i].offers : '';
 
                 copy_div.querySelector(".tender_card_href").
-                setAttribute("href",`/content/wedding/tenders/tender.html?${data[i].id}#${selectItems.$city_val}`);
+                setAttribute("href",`/content/wedding/tenders/tender.html?${data[i].id}#${city}`);
 
                 // elem.description ? newItem.find('.event_card-description_text').text(elem.description.substr(0, 40)) : '';
 
@@ -462,7 +481,7 @@ var PORTAL = (function (PORTAL, $) {
                 // wrapper_div.appendChild(copy_div);
                 main_container.appendChild(copy_div);
             }
-            // main_container.appendChild(wrapper_div);
+
             console.dir(data);
         }
 

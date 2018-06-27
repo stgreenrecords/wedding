@@ -28,7 +28,7 @@
             <div class="for-mail-icon">
                 <img src="/etc/clientlibs/wedding/pages/images/on_all_pages/header/messages_icon.png" alt="mail_icon">
             </div>
-            <div class="mail-count"> Сообщения (12) </div>
+            <div class="mail-count"> Сообщения  </div>
             <div class="mini-avatar"> </div>
             <div class="mini-menu">
                 <img src="/etc/clientlibs/wedding/pages/images/on_all_pages/header/drop_arrow_menu.png" alt="drop-down">

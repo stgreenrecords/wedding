@@ -259,6 +259,7 @@ main{
   width: 90%;
   margin: 0 auto;
   background-color: #fff;
+  min-height: 500px;
 }
 
 .top-bar{
@@ -1251,9 +1252,15 @@ footer > div a, footer > div{
     min-height: 30%;
 }
 
-.vk_string{
+.info_string{
     display: block;
 }
+
+.alert-null{
+    margin: 125px auto;
+    color: #dc5e4e;
+}
+
 
 
 
