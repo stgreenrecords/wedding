@@ -34,6 +34,7 @@ var PORTAL = (function (PORTAL, $) {
             });
 
             $self.find('#mini-menu_exit').on('click', hideCabinetSuccess);
+            $self.find('#mini-menu_exit').on('click', clearCookies);
 
         PORTAL.modules.CabinetInput.AUTH = PORTAL.modules.CabinetInput.AUTH || {};
 
@@ -112,7 +113,9 @@ var PORTAL = (function (PORTAL, $) {
             function hideCabinetSuccess(){
                 cabinet_success.style.display = "none";
                 cabinet_login.style.display = "block";
+            }
 
+            function clearCookies(){
                 Cookies.set('authStatus', 'NotAuth');
                 Cookies.set('userId', 'null');
                 Cookies.set('authType', '');
@@ -122,13 +125,7 @@ var PORTAL = (function (PORTAL, $) {
                 Cookies.set('lastName', '');
                 Cookies.set('userType', '');
                 document.location.reload();
-                // Cookies.get('userType')=='partner' ? Cookies.set('workSphere', '') : '';
             }
-
-            // function setCookiesAuth(authStatusValue, authTypeValue){
-            //     Cookies.set('authStatus', authStatusValue,{expires:7});
-            //     Cookies.set('authType', authTypeValue);
-            // }
 
             function enterOfForm(){
                 modalW.closeMWindow(".window-entrance", "#entrance-form");

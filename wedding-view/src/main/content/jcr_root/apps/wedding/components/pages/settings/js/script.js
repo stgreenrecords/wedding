@@ -149,6 +149,7 @@ var PORTAL = (function (PORTAL, $) {
                     dataType: "json",
                     success: function (data) {
                         alert('Ваш аккаунт успешно удален!');
+                        function clearCookies()
                         document.location.href = '/content/wedding/catalog.html';
                     },
                     error: function (e) {
@@ -158,6 +159,17 @@ var PORTAL = (function (PORTAL, $) {
                 });
             }
         });
+
+        function clearCookies(){
+            Cookies.set('authStatus', 'NotAuth');
+            Cookies.set('userId', 'null');
+            Cookies.set('authType', '');
+            Cookies.set('firstName', '');
+            Cookies.remove('workSphere');
+            Cookies.set('city', '');
+            Cookies.set('lastName', '');
+            Cookies.set('userType', '');
+        }
 
 
         function saveSettings(){
