@@ -149,7 +149,7 @@ var PORTAL = (function (PORTAL, $) {
                     dataType: "json",
                     success: function (data) {
                         alert('Ваш аккаунт успешно удален!');
-                        function clearCookies()
+                        clearCookies();
                         document.location.href = '/content/wedding/catalog.html';
                     },
                     error: function (e) {

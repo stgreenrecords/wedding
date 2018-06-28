@@ -58,7 +58,7 @@ var PORTAL = (function (PORTAL, $) {
                 } else if ( !Cookies.get('userId') || dataCompare.userId !== Cookies.get('userId')) {
 
                     $.ajax({
-                        url: "http://wedding-services.mycloud.by/services/rest.loginUser.json?id=XXX", // Запрос юзера по id  при входе
+                        url: `http://wedding-services.mycloud.by/services/rest.loginUser.json?id=${dataCompare.userId}`, // Запрос юзера по id  при входе
                         type: "GET",
                         dataType: "json",
                         success: function (data) {
