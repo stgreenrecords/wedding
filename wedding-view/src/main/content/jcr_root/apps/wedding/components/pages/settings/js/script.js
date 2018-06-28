@@ -43,11 +43,25 @@ var PORTAL = (function (PORTAL, $) {
         var newCommentField;
         var dataData = {};
         var userType = Cookies.get('userType');
+        var userId = Cookies.get('userId');
+        var userCity = Cookies.get('city');
+        var speciality = '';
+        var userUrl = '';
+
+        if (userType === 'user')
+            userUrl = `http://wedding-services.mycloud.by/services/rest.users/${userCity}.json?id=${userId}`;
+        else if (userType === 'partner'){
+            speciality = Cookies.get('workSphere');
+            userUrl = `/services/rest.partners/${speciality}/${userCity}.json?id=${userId}`;
+        }else {
+            alert ('Войдите или зарегестрируйтесь');
+            document.location.href = `/content/wedding/catalog.html`;
+        }
 
         $.ajax({ // получение настроек
-
-            url: `/services/rest.getSettings.json?id=${Cookies.get('userId')}`,
-            type: 'POST',
+            // url: `/services/rest.getSettings.json?id=${userId}`,  // если вдруг изменят запрос
+            url: userUrl,
+            type: 'GET',
             dataType: "json",
             success: function (data) {
 
@@ -58,9 +72,7 @@ var PORTAL = (function (PORTAL, $) {
                 console.log(e);
                 fillSettings(FakeDataSettings);   // TODO удалить когда создадут запросы.
             }
-
         });
-
 
         function fillSettings(data){
 
@@ -69,7 +81,7 @@ var PORTAL = (function (PORTAL, $) {
             emailField.val(data[0].email);
             cityField.val(data[0].city);
 
-            data[0].newMail && data[0].newMail == true ? newEmailField.attr('checked', true) : '';
+            data[0].newMail && data[0].newMail == true ? newEmailField.attr('checked', true) : data[0].newMail && data[0].newMail == false ? '' : newEmailField.attr('checked', true); // tod
             data[0].newAnswer && data[0].newAnswer == true ? newAnswerField.attr('checked', true) : '';
             eForNotif.val(data[0].email);
 
@@ -82,7 +94,7 @@ var PORTAL = (function (PORTAL, $) {
 											 			<label for="new-comment"> Новый отзыв на Вашей странице</label>
 												 	</div>`);
                 newCommentField = $self.find('#new-comment');
-                data[0].newComment && data[0].newComment == true ? newCommentField.attr('checked', true) : '';
+                data[0].newComment && data[0].newComment == true ? newCommentField.attr('checked', true) :  data[0].newComment && data[0].newComment == false ? '' : newEmailField.attr('checked', true); //tod
             }
             else if(userType !=='user'){
                 alert ('Войдите или зарегестрируйтесь');
@@ -91,16 +103,8 @@ var PORTAL = (function (PORTAL, $) {
 
         }
 
-
-
-
-
         function createPartnerFields(spec){
-
-            // formSettings.append(' ');
-
             $.ajax({ // добавление всех категорий в селект
-
                 url: "http://wedding-services.mycloud.by/services/rest.catalog-categories/home/users/wedding/partners.json",
                 type: "GET",
                 dataType: "json",
@@ -109,35 +113,22 @@ var PORTAL = (function (PORTAL, $) {
                     var sel = $(document.createElement('select'));
                     sel.addClass('speciality_setting');
                     console.dir(allCategories);
-
-                    // nameSpeciality = allCategories;
-                    // Object.keys(allCategories)
-
                     for (var prop in allCategories){
-                        // if(prop !== 'rest')
                         if(spec !== prop)
                             sel.append(`<option value="${prop}">${allCategories[prop]}</option>`);
                         else
                             sel.append(`<option value="${prop}" selected>${allCategories[prop]}</option>`);
                     }
-
                     formSettings.append(sel);
-
-                    // getFirstTend();
 
                 },
                 error: function (e) {
                     console.log(e);
                 }
-
             });
-
         }
 
-
-
         $self.find('.button_save-settings').on('click', saveSettings);
-
 
         $self.find('#remove-account').on('click', ()=>{
             var remove_acc = confirm("Вы действительно хотите удалить свою страницу? Это действие необратимо!");
@@ -171,11 +162,8 @@ var PORTAL = (function (PORTAL, $) {
             Cookies.set('userType', '');
         }
 
-
         function saveSettings(){
-
             $.ajax({
-
                 url: `/services/rest.setSettings.json?id=${Cookies.get('userId')}`,
                 type: 'POST',
                 dataType: "json",
@@ -186,12 +174,8 @@ var PORTAL = (function (PORTAL, $) {
                     console.log(e);
                     alert('Данные не удалось сохранить');
                 }
-
             });
-
         }
-
-
 
         (function(){  //  функции переключения страниц
             var user_calc  = $self.find('#settings-common');

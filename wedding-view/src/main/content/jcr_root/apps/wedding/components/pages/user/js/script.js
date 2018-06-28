@@ -337,6 +337,7 @@ var PORTAL = (function (PORTAL, $) {
 
         }else{
             alert('Войдите или зарегестрируйтесь');
+            document.location.href = '/content/wedding/catalog.html';
         }
 
     };

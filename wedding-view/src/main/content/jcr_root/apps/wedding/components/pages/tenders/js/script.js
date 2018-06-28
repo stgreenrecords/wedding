@@ -420,7 +420,7 @@ var PORTAL = (function (PORTAL, $) {
             var $cat_val = $tender_categ_select.val();
             var data;
             var dateFiltr = +new Date($dateField.val());
-            var accuracy = 2000000000;
+            var accuracy = 1500000000;
 
             dateFiltr ? data = dataAll.filter(item => {return Math.round(item.deadline/accuracy) == Math.round(dateFiltr/accuracy) })  : data = dataAll ;
             $tender_categ_select.val() !== 'all_categories' ? data = data.filter( item => { return item.speciality == $cat_val}) : data ;
