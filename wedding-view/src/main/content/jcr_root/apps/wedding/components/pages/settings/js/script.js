@@ -48,6 +48,7 @@ var PORTAL = (function (PORTAL, $) {
         var speciality = '';
         var userUrl = '';
         var userUrlSave = '';
+        dataSend.id = userId;
 
         if (userType === 'user') {
             userUrl = `http://wedding-services.mycloud.by/services/rest.users/${userCity}.json?id=${userId}`;
@@ -180,7 +181,7 @@ var PORTAL = (function (PORTAL, $) {
             // dataSend.notifAnswer =
             // dataSend.notifComment =
             // dataSend.emailForNotif = !!!
-
+            console.log(dataSend);
             putSettings();
         }
 
