@@ -69,7 +69,7 @@ var PORTAL = (function (PORTAL, $) {
             type: 'GET',
             dataType: "json",
             success: function (data) {
-
+                console.dir(data);
                 data && data.length ? fillSettings(data) : fillSettings(FakeDataSettings);
 
             },
@@ -89,8 +89,6 @@ var PORTAL = (function (PORTAL, $) {
             data[0].newMail && data[0].newMail == true ? newEmailField.attr('checked', true) : data[0].newMail && data[0].newMail == false ? '' : newEmailField.attr('checked', true); // tod
             data[0].newAnswer && data[0].newAnswer == true ? newAnswerField.attr('checked', true) : '';
             eForNotif.val(data[0].email);
-
-            dataSend.id = data.id;
 
             if (userType =='partner'){
                 createPartnerFields(data[0].speciality ? data[0].speciality : 'rest');
