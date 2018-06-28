@@ -41,18 +41,22 @@ var PORTAL = (function (PORTAL, $) {
 
         var specialityField;
         var newCommentField;
-        var dataData = {};
+        var dataSend = {};
         var userType = Cookies.get('userType');
         var userId = Cookies.get('userId');
         var userCity = Cookies.get('city');
         var speciality = '';
         var userUrl = '';
+        var userUrlSave = '';
 
-        if (userType === 'user')
+        if (userType === 'user') {
             userUrl = `http://wedding-services.mycloud.by/services/rest.users/${userCity}.json?id=${userId}`;
+            userUrlSave = '/services/rest.users/update.json';
+        }
         else if (userType === 'partner'){
             speciality = Cookies.get('workSphere');
             userUrl = `/services/rest.partners/${speciality}/${userCity}.json?id=${userId}`;
+            userUrlSave = '/services/rest.partners/update.json';
         }else {
             alert ('Войдите или зарегестрируйтесь');
             document.location.href = `/content/wedding/catalog.html`;
@@ -84,6 +88,8 @@ var PORTAL = (function (PORTAL, $) {
             data[0].newMail && data[0].newMail == true ? newEmailField.attr('checked', true) : data[0].newMail && data[0].newMail == false ? '' : newEmailField.attr('checked', true); // tod
             data[0].newAnswer && data[0].newAnswer == true ? newAnswerField.attr('checked', true) : '';
             eForNotif.val(data[0].email);
+
+            dataSend.id = data.id;
 
             if (userType =='partner'){
                 createPartnerFields(data[0].speciality ? data[0].speciality : 'rest');
@@ -128,7 +134,7 @@ var PORTAL = (function (PORTAL, $) {
             });
         }
 
-        $self.find('.button_save-settings').on('click', saveSettings);
+        $self.find('.button_save-settings').on('click', getSettings);
 
         $self.find('#remove-account').on('click', ()=>{
             var remove_acc = confirm("Вы действительно хотите удалить свою страницу? Это действие необратимо!");
@@ -162,12 +168,33 @@ var PORTAL = (function (PORTAL, $) {
             Cookies.set('userType', '');
         }
 
-        function saveSettings(){
+        function getSettings() {  // попробовать не в лоб собрать дата
+            dataSend.firstName = nameField.val();
+            dataSend.lastName = nameLastField.val();
+            dataSend.email = emailField.val();
+            dataSend.city = cityField.val();
+            userType === 'partner' ? dataSend.speciality = speciality.val() : '';
+
+            //dataSend.psw =  passwordField.val(); ну вот надо разобраться с паролями. и уведомлениями - что бы они отправлялись / принимались.
+            // dataSend.notifMail =
+            // dataSend.notifAnswer =
+            // dataSend.notifComment =
+            // dataSend.emailForNotif = !!!
+
+            putSettings();
+        }
+
+        function putSettings(){
+
             $.ajax({
-                url: `/services/rest.setSettings.json?id=${Cookies.get('userId')}`,
-                type: 'POST',
+                // url: `/services/rest.setSettings.json?id=${Cookies.get('userId')}`,
+                url: userUrlSave,
+                type: 'PUT',
                 dataType: "json",
+                data: dataSend,
                 success: function (data) {
+                    console.log('Answer save:');
+                    console.dir(data);
                     alert('Данные успешно сохранены');
                 },
                 error: function (e) {
