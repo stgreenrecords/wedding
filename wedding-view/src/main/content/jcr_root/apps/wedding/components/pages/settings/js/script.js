@@ -171,8 +171,8 @@ var PORTAL = (function (PORTAL, $) {
             dataSend.firstName = nameField.val();
             dataSend.lastName = nameLastField.val();
             dataSend.email = emailField.val();
-            dataSend.city = cityField.val();
-            userType === 'partner' ? dataSend.speciality = specialityField.val() : '';
+            // dataSend.city = cityField.val();  // TODO разкоментить когда Бэк доделает поиск по городу и категории  в соответствии с этими изменениями
+            // userType === 'partner' ? dataSend.speciality = specialityField.val() : '';  // TODO разкоментить когда Бэк доделает поиск по городу и категории   в соответствии с этими изменениями
 
             //dataSend.psw =  passwordField.val(); ну вот надо разобраться с паролями. и уведомлениями - что бы они отправлялись / принимались КАК и через что это будет реализовано.
             // dataSend.notifMail =
@@ -206,10 +206,10 @@ var PORTAL = (function (PORTAL, $) {
         }
 
         function compareCookies(data) {
-            data.city  !== userCity  ?  Cookies.set('city', data.city):'';
             data.firstName !== Cookies.get('firstName') ?  Cookies.set('firstName', data.firstName):'';
             data.lastName !== Cookies.get('lastName') ?  Cookies.set('lastName', data.lastName):'';
-            userType === 'partner' ? data.speciality !== Cookies.get('workSphere') ?  Cookies.set('workSphere', data.speciality):'':'';
+            // data.city  !== userCity  ?  Cookies.set('city', data.city):'';   // TODO разкоментить когда Бэк доделает поиск по городу и категории
+            // userType === 'partner' ? data.speciality !== Cookies.get('workSphere') ?  Cookies.set('workSphere', data.speciality):'':''; // TODO разкоментить когда Бэк доделает поиск по городу и категории
         }
 
 
