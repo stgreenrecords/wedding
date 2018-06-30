@@ -25,7 +25,11 @@
 .card-speciality{
     font-size: 16px;
     color: #606060;
+}
 
+.event_card-bg{
+    background-color: #afa58e;
+    background-size: cover;
 }
 
 
