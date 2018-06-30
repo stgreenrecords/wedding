@@ -1,1 +1,9 @@
+.event_card{
+    width: 80%;
+    padding: 10%;
+    min-height: 400px;
+}
 
+.event_card-bg{
+    min-height: 400px;
+}

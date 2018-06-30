@@ -59,8 +59,8 @@ var PORTAL = (function (PORTAL, $) {
                 elem.title ? newItem.find('.event_card-title').html(elem.title.substr(0, 12)): '';
                 elem.background ? newItem.find('.event_card-bg').css('backgroundImage', `url("${elem.background}")`)
                     : newItem.find('.event_card-bg').css('backgroundImage', 'url("/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/bgi.jpg")');
-                elem.startDate ? newItem.find('.event_card-start').text(formatDate(Number(elem.startDate))) : '';
-                elem.endDate ? newItem.find('.event_card-finish').text(formatDate(Number(elem.endDate))) : '';
+                elem.startDate ? newItem.find('.event_card-start').text(formatDate.f(elem.startDate)) : '';
+                elem.endDate ? newItem.find('.event_card-finish').text(formatDate.f(elem.endDate)) : '';
                 elem.description ? newItem.find('.event_card-description_text').text(elem.description.substr(0, 40)) : '';
                 listWrapper.append(newItem);
 
@@ -70,15 +70,7 @@ var PORTAL = (function (PORTAL, $) {
 
         }
 
-        function formatDate(datt) {
-            var date = new Date (datt);
-            var dd = date.getDate();
-            if (dd < 10) dd = '0' + dd;
-            var mm = date.getMonth() + 1;
-            if (mm < 10) mm = '0' + mm;
-            var yy = date.getFullYear();
-            return dd + '.' + mm + '.' + yy;
-        }
+
 
     };
 

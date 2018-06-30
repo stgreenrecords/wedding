@@ -1,1 +1,47 @@
+.event-wrapper{
+    padding: 2% 4%;
+}
 
+.event_card{
+    width: 29.33333%;
+    padding: 2%;
+}
+
+.event_card-bg{
+    min-height: 300px;
+}
+
+.mini-avatar{
+    margin: 15px 15px 5px 3px;
+    display: inline-block;
+}
+
+.name_spec-wrapp{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 18px;
+}
+
+.card-speciality{
+    font-size: 16px;
+    color: #606060;
+
+}
+
+
+
+
+
+@media screen and (max-width: 1299px) {
+    .event_card{
+        width: 46%;
+        padding: 2%;
+    }
+}
+
+@media screen and (max-width: 855px) {
+    .event_card{
+        width: 96%;
+        padding: 2%;
+    }
+}

@@ -882,10 +882,9 @@ footer > div a, footer > div{
 .event-wrapper > div{
     display: flex;
     flex-wrap: wrap;
-
 }
 
-.event_card{
+#partner_stock .event_card{
     width: 46%;
     padding: 2%;
 }
