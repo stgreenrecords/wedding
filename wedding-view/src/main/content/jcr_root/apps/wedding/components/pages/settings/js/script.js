@@ -69,7 +69,7 @@ var PORTAL = (function (PORTAL, $) {
             type: 'GET',
             dataType: "json",
             success: function (data) {
-                console.dir(data);
+
                 data && data.length ? fillSettings(data) : fillSettings(FakeDataSettings);
 
             },
@@ -172,14 +172,14 @@ var PORTAL = (function (PORTAL, $) {
             dataSend.lastName = nameLastField.val();
             dataSend.email = emailField.val();
             dataSend.city = cityField.val();
-            userType === 'partner' ? dataSend.speciality = speciality.val() : '';
+            userType === 'partner' ? dataSend.speciality = specialityField.val() : '';
 
-            //dataSend.psw =  passwordField.val(); ну вот надо разобраться с паролями. и уведомлениями - что бы они отправлялись / принимались.
+            //dataSend.psw =  passwordField.val(); ну вот надо разобраться с паролями. и уведомлениями - что бы они отправлялись / принимались КАК и через что это будет реализовано.
             // dataSend.notifMail =
             // dataSend.notifAnswer =
             // dataSend.notifComment =
             // dataSend.emailForNotif = !!!
-            console.log(dataSend);
+
             putSettings();
         }
 
@@ -195,13 +195,23 @@ var PORTAL = (function (PORTAL, $) {
                     console.log('Answer save:');
                     console.dir(data);
                     alert('Данные успешно сохранены');
+                    compareCookies(data);
                 },
                 error: function (e) {
                     console.log(e);
                     alert('Данные не удалось сохранить');
+
                 }
             });
         }
+
+        function compareCookies(data) {
+            data.city  !== userCity  ?  Cookies.set('city', data.city):'';
+            data.firstName !== Cookies.get('firstName') ?  Cookies.set('firstName', data.firstName):'';
+            data.lastName !== Cookies.get('lastName') ?  Cookies.set('lastName', data.lastName):'';
+            userType === 'partner' ? data.speciality !== Cookies.get('workSphere') ?  Cookies.set('workSphere', data.speciality):'':'';
+        }
+
 
         (function(){  //  функции переключения страниц
             var user_calc  = $self.find('#settings-common');
