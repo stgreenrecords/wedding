@@ -1,4 +1,3 @@
-
 var PORTAL = (function (PORTAL, $) {
 
     PORTAL.modules.CabinetInput = {};
@@ -98,7 +97,7 @@ var PORTAL = (function (PORTAL, $) {
                 cabinet_login.style.display = "none";
                 cabinet_success.style.display = "flex";
                 $self.find('#mini-menu_my-page').one('click', myPageReloc);
-                $self.find('#cabinet_success .mini-avatar').css('backgroundImage', `url:"${Cookies.get('avatar')}"`);
+                $self.find('#cabinet_success .mini-avatar').css('backgroundImage', `url("${Cookies.get('avatar')}")`);
             }
 
 
@@ -125,6 +124,7 @@ var PORTAL = (function (PORTAL, $) {
                 Cookies.set('city', '');
                 Cookies.set('lastName', '');
                 Cookies.set('userType', '');
+                Cookies.set('avatar', '');
                 document.location.reload();
             }
 
