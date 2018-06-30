@@ -98,6 +98,7 @@ var PORTAL = (function (PORTAL, $) {
                 cabinet_login.style.display = "none";
                 cabinet_success.style.display = "flex";
                 $self.find('#mini-menu_my-page').one('click', myPageReloc);
+                $self.find('#cabinet_success .mini-avatar').css('backgroundImage', `url:"${Cookies.get('avatar')}"`);
             }
 
 
@@ -349,17 +350,17 @@ var PORTAL = (function (PORTAL, $) {
                Cookies.set('authType', authType);
                Cookies.set('userId', data.id);
 
-               if(data.speciality && data.speciality !=null && data.speciality !='') {
+               if(data.speciality && data.speciality !=null && data.speciality != '') {
                    Cookies.set('userType', 'partner');
                    Cookies.set('workSphere', data.speciality);
                    // $self.find('#mini-menu_my-page a').attr('href', '/content/wedding/catalog/category/partner.html');
                }else
                    Cookies.set('userType', 'user');
 
-               data.city ? Cookies.set('city', data.city): '';
-               data.firstName ? Cookies.set('firstName', data.firstName): '';
-               data.lastName ? Cookies.set('lastName', data.lastName): '';
-
+               data.city ? Cookies.set('city', data.city) : '';
+               data.firstName ? Cookies.set('firstName', data.firstName) : '';
+               data.lastName ? Cookies.set('lastName', data.lastName) : '';
+               data.avatar ? Cookies.set('avatar', data.avatar)  : Cookies.set('avatar', '/etc/clientlibs/wedding/pages/images/any_img/default_avatar.jpg');
             }
 
             function sendUserRegInfo(url_link, city){

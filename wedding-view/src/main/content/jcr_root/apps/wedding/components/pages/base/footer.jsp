@@ -11,6 +11,8 @@
 
 <div class="btn-up"> <a href="#"> <img src="/etc/clientlibs/wedding/pages/images/on_all_pages/btn_up.png"> </a> </div>
 
+
+
 <section id="cabinet-input-block" >
 
     <div id="vk_api_transport"></div>
@@ -148,8 +150,6 @@
 
                 <form id="form-reg-step3-user" action="" method="post">
 
-                    <!-- 	<p><input id="city_finish-user" type="text" name="city" placeholder="Город"  value="Менск">  </p> -->
-
                     <select id="city_finish-user" name="city_finish-user">
                         <option value="minsk" selected>Минск</option>
                         <option value="brest">Брест</option>
@@ -202,12 +202,8 @@
 
                     <select id="work-sphere" name="work-sphere">
                         <option value="title"  disabled>Сфера деятельности</option>
-                        <!-- <option value="photo">Фотограф</option>
-                        <option value="aminer">Ведущий</option>
-                        <option value="style" selected>Стилист</option> -->
                     </select>
 
-                    <!-- <p><input id="city_finish-partner"  type="text" name="user-name" placeholder="Город, Страна? (может разбить?)" value="Менск">  </p> -->
                     <select id="city_finish-partner" name="city_finish-user">
                         <option value="minsk" selected>Минск</option>
                         <option value="brest">Брест</option>
