@@ -216,7 +216,6 @@ var PORTAL = (function (PORTAL, $) {
 
             dateFiltr ? data = dataAll.filter(item => {return  item.endDate+acc >= dateFiltr && dateFiltr >= item.startDate-acc })  : data = dataAll ;  /* Math.round(item.endDate/accuracy) > Math.round(dateFiltr/accuracy) >*/
             $categ_select.val() !== 'all_categories' ? data = data.filter( item => { return item.speciality == $cat_val}) : data ;
-            data.length === 0 ? wrapper.innerHTML = '<p class="alert-null"> Для успешного поиска измените параметры поиска </p>' : '';
 
             data.forEach(function(elem, i){
 
@@ -240,7 +239,7 @@ var PORTAL = (function (PORTAL, $) {
             });
 
             wrapper.append(listWrapper);
-
+            data.length === 0 ? wrapper.html('<p class="alert-null"> Для успешного поиска измените параметры поиска </p>') : '';
         }
 
         function specialityTranslate(speciality){
