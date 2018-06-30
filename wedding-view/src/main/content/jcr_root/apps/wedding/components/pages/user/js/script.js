@@ -134,8 +134,8 @@ var PORTAL = (function (PORTAL, $) {
             function  exitWithoutSave(e) {
                 if (e.keyCode === 27) { //esc
                     fillStrings(selectedPerson);
-                    console.log(e );
                     btn_save.addClass('hidden_full');
+                    btn_save.off('click', saveChangeFields);
                     edit_avatar.addClass('hidden_full');
                     btn_change.removeClass('hidden_full');
                     document.removeEventListener('keyup', exitWithoutSave);
@@ -173,7 +173,7 @@ var PORTAL = (function (PORTAL, $) {
                 phoneNum.html(`${dataSend.phone}`);
                 vkLink.html(`${dataSend.vkLink}`);
                 vkLink.attr('href',`${dataSend.vkLink}`);
-                document.removeEventListener('keypress', exitWithoutSave);
+                document.removeEventListener('keyup', exitWithoutSave);
 
                 sendChangeRequest(dataSend);
                 console.log(dataSend);
