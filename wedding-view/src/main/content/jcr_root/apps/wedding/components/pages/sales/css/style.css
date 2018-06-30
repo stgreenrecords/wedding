@@ -11,7 +11,7 @@
     min-height: 300px;
 }
 
-.mini-avatar{
+.event_card .mini-avatar{
     margin: 15px 15px 5px 3px;
     display: inline-block;
 }

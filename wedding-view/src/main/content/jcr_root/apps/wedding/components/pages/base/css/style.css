@@ -893,16 +893,18 @@ footer > div a, footer > div{
     min-height: 250px;
     color: #fff;
     position: relative;
+    display: flex;
+    align-items: flex-end;
 }
 
 .event_card-in_bg{
-    position: absolute;
-    top: 60%;
-    padding-left: 15%;
-    /*background-color: #4a4741b3;*/
+    width: 100%;
+    padding: 10% 15%;
+    background-color: #4a4741b3;
     background: linear-gradient(to bottom, transparent, rgba(22, 22, 22, 0.9));
     overflow: hidden;
     margin-left: 1px;
+    vertical-align: bottom;
 }
 
 .event_card-title{

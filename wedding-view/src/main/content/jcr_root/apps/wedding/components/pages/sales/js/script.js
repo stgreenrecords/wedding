@@ -22,7 +22,8 @@ var PORTAL = (function (PORTAL, $) {
                 resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
                 resourceType:'FakeData',
                 startDate:'1531289371112',
-                title:'скидки 30%'
+                title:'скидки 30%',
+                background: '/etc/clientlibs/wedding/pages/images/any_img/bgi_5_0.jpg'
             },
             {
                 firstName:'Самсон',
@@ -37,7 +38,8 @@ var PORTAL = (function (PORTAL, $) {
                 resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
                 resourceType:'FakeData',
                 startDate:'1531399371112',
-                title:'скидки 20%'
+                title:'скидки 20%',
+                background: '/etc/clientlibs/wedding/pages/images/any_img/bgi_5_1.jpg'
             },
             {
                 firstName:'Гюльчитай',
@@ -45,14 +47,15 @@ var PORTAL = (function (PORTAL, $) {
                 avatar:'/etc/clientlibs/wedding/pages/images/any_img/bgi_1_7.jpg',
                 city:'minsk',
                 cityName:'Минск',
-                speciality:'exclusive',
+                speciality:'cars',
                 description:'Отличные скидки на всю зиму',
                 endDate:'1551289371112',
                 id:"f888d202-d2ee-4d30-8de8-1dcd839f4189",
                 resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
                 resourceType:'FakeData',
                 startDate:'1531479371112',
-                title:'Скидки 50%'
+                title:'Скидки 50%',
+                background: '/etc/clientlibs/wedding/pages/images/any_img/bgi_8_1.jpg'
             },
             {
                 firstName:'Марк',
@@ -67,7 +70,8 @@ var PORTAL = (function (PORTAL, $) {
                 resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
                 resourceType:'FakeData',
                 startDate:'1531769371112',
-                title:'Бонус 50% на платье'
+                title:'Бонус 50% на платье',
+                background: '/etc/clientlibs/wedding/pages/images/any_img/bgi_12_0.jpg'
             },
             {
                 firstName:'Самсон',
@@ -82,7 +86,8 @@ var PORTAL = (function (PORTAL, $) {
                 resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
                 resourceType:'FakeData',
                 startDate:'1531399371112',
-                title:'скидки 20%'
+                title:'скидки 20%',
+                background: '/etc/clientlibs/wedding/pages/images/any_img/bgi_1_3.jpg'
             },
             {
                 firstName:'Гюльчитай',
@@ -97,7 +102,8 @@ var PORTAL = (function (PORTAL, $) {
                 resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
                 resourceType:'FakeData',
                 startDate:'1531479371112',
-                title:'Скидки 50%'
+                title:'Скидки 50%',
+                background: '/etc/clientlibs/wedding/pages/images/any_img/bgi_16_0.jpg'
             },
             {
                 firstName:'Гюльчитай',
@@ -112,7 +118,8 @@ var PORTAL = (function (PORTAL, $) {
                 resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
                 resourceType:'FakeData',
                 startDate:'1531479371112',
-                title:'Скидки 50%'
+                title:'Скидки 50%',
+                background: '/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/bgi.jpg'
             }
 
 
