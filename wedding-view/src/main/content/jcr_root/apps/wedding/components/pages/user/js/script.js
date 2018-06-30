@@ -123,17 +123,26 @@ var PORTAL = (function (PORTAL, $) {
             }
 
             function onChangeFields(){
-
-                console.log('Я могу ВСЕ изменить!!!!');
                 btn_change.addClass('hidden_full');
                 btn_save.removeClass('hidden_full');
                 edit_avatar.removeClass('hidden_full');
                 onInputFields();
                 btn_save.one('click', saveChangeFields);
+                document.addEventListener('keyup', exitWithoutSave);
+            }
+
+            function  exitWithoutSave(e) {
+                if (e.keyCode === 27) { //esc
+                    fillStrings(selectedPerson);
+                    console.log(e );
+                    btn_save.addClass('hidden_full');
+                    edit_avatar.addClass('hidden_full');
+                    btn_change.removeClass('hidden_full');
+                    document.removeEventListener('keyup', exitWithoutSave);
+                }
             }
 
             function onInputFields(){
-
                 var changeName = firstName.html();
                 var changeLastName = lastName.html();
                 var changePhoneNum = phoneNum.html();
@@ -145,11 +154,9 @@ var PORTAL = (function (PORTAL, $) {
                 vkLink.html(`<input value=${changeVkLink}>`);
                 vkLink.removeAttr('href');
                 console.log(changeName);
-
             }
 
             function saveChangeFields() {
-
                 var dataSend = {};
                 btn_save.addClass('hidden_full');
                 edit_avatar.addClass('hidden_full');
@@ -166,11 +173,10 @@ var PORTAL = (function (PORTAL, $) {
                 phoneNum.html(`${dataSend.phone}`);
                 vkLink.html(`${dataSend.vkLink}`);
                 vkLink.attr('href',`${dataSend.vkLink}`);
-
+                document.removeEventListener('keypress', exitWithoutSave);
 
                 sendChangeRequest(dataSend);
                 console.log(dataSend);
-
             }
 
             function sendChangeRequest(dataSend){
