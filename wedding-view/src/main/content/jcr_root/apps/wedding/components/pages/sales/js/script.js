@@ -95,7 +95,7 @@ var PORTAL = (function (PORTAL, $) {
                 avatar:'/etc/clientlibs/wedding/pages/images/any_img/bgi_1_7.jpg',
                 city:'minsk',
                 cityName:'Минск',
-                speciality:'exclusive',
+                speciality:'organizers',
                 description:'Отличные скидки на всю зиму',
                 endDate:'1551289371112',
                 id:"f888d202-d2ee-4d30-8de8-1dcd839f4189",

@@ -1,8 +1,8 @@
 .event-wrapper{
-    padding: 2% 4%;
+    padding: 40px 4%;
 }
 
-.event_card{
+#sales-page-content .event_card{
     width: 29.33333%;
     padding: 2%;
 }
@@ -37,14 +37,14 @@
 
 
 @media screen and (max-width: 1299px) {
-    .event_card{
+    #sales-page-content .event_card{
         width: 46%;
         padding: 2%;
     }
 }
 
 @media screen and (max-width: 855px) {
-    .event_card{
+    #sales-page-content .event_card{
         width: 96%;
         padding: 2%;
     }
