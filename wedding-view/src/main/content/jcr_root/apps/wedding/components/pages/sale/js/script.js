@@ -36,11 +36,16 @@ var PORTAL = (function (PORTAL, $) {
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
+        $("textarea").trumbowyg({  // RichText
+            svgPath: '/etc/clientlibs/wedding/external/icons/richtext/icons.svg',
+            lang: 'ru'
+        });
 
         var getId = (window.location.search).slice(1);
         var getSpecCity = (window.location.hash).slice(1);
         getSpecCity = getSpecCity.replace('&','/');
         var nameSpeciality = {};
+        var dataSend = {};
 
         function getSelectEvent(){
 
@@ -66,6 +71,7 @@ var PORTAL = (function (PORTAL, $) {
                         console.log(url_one);
                         console.dir(data);
                         data.length == 0 ? drawEvent(FakeData) : drawEvent(data);     //!!!!!1**** - Если приходит ответ - он и будет выводиться
+                        eventMailBtn();
                     },
                     error: function (e) {
                         console.log('Error from ajax');
@@ -110,6 +116,8 @@ var PORTAL = (function (PORTAL, $) {
                         .attr('title','Перейти на страницу партнера');
                 }
 
+                dataSend.id = elem.authorId;
+
                 listWrapper.append(newItem);
 
             });
@@ -118,11 +126,61 @@ var PORTAL = (function (PORTAL, $) {
 
         }
 
+        function eventMailBtn(){
+
+            $self.find('#event-mail-btn').on('click', ()=>{
+                modalW.openMWindow("#popup_mail_event", "#modal_mail_event");
+            });
+
+            $self.find('#close_btn_event').on('click', ()=>{
+
+                modalW.closeMWindow("#popup_mail_event", "#modal_mail_event");
+
+            });
+
+            $self.find('#btn_send_event').on('click', ()=>{
+
+                dataSend.authorId = Cookies.get('userId');
+                var text = $self.find('.trumbowyg-editor').html();
+                console.log(text);
+
+                if (text && text !== " "){
+                    dataSend.text = text;
+                    $self.find('.trumbowyg-editor').html('');
+                    modalW.closeMWindow("#popup_mail_event", "#modal_mail_event");
+                    modalW.openMWindow(".mail_success", "#modal_mail_event");
+                    $self.find('.mail_success').css('color', '#a0a0a0'); //#afa58e #dc5e4e
+                    setTimeout(()=>{modalW.closeMWindow(".mail_success", "#modal_mail_event")}, 900);
+                    sendMail(dataSend);
+                }
+
+            });
+
+        }
+
+        function sendMail(dataSend){
+
+            console.dir(dataSend);
+
+            $.ajax({
+
+                url: 'http://wedding-services.mycloud.by/services/rest.partner/mail.json',  // вероятный запрос на отправку мыла
+                type: 'PUT',
+                dataType: 'json',
+                data: dataSend,
+                success: function(data){
+                    console.log('What you send for me?');
+                    console.log(data);
+                }
+
+            });
+
+        }
+
         function specialityTranslate(speciality){
             Object.keys(nameSpeciality).forEach( prop =>  prop === speciality ? speciality = nameSpeciality[prop] : '');
             return speciality;
         }
-
 
     };
 
