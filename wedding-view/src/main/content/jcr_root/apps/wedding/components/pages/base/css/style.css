@@ -520,7 +520,8 @@ footer > div a, footer > div{
 }
 
 .mwindow input::placeholder, .mwindow select::placeholder,
-.top-bar input::placeholder, .top-bar select::placeholder{
+.top-bar input::placeholder, .top-bar select::placeholder,
+.popup_alert input::placeholder, .popup_alert select::placeholder{
     color: #a0a0a0;
 }
 
@@ -1055,7 +1056,7 @@ footer > div a, footer > div{
 .tender_card-img{
     margin-top: 15px;
     height: 350px;
-    background: url('/etc/clientlibs/wedding/pages/images/any_img/d2_12.jpg') 50% 50% no-repeat;
+    background: url('/etc/clientlibs/wedding/pages/images/any_img/bgi_12_0.jpg') 50% 50% no-repeat;
     background-size: cover;
     display: flex;
     align-items: flex-end;
@@ -1222,20 +1223,178 @@ footer > div a, footer > div{
     width: 400px;
 }
 
+nav input[type="checkbox"] {
+    width: 100%;
+    display: none;
+}
+
+label.head-menu {
+    margin-bottom: 5px;
+    display: none;
+}
+
+@media screen and (max-width: 666px) {
+
+    .head-block {
+        min-height: 185px;
+    }
+
+    .central-head--title{
+        font-size: 48px;
+    }
+
+    .head-block .main-menu{
+        position: absolute;
+        right: 10px;
+        top: 100px;
+        width: 80%;
+    }
+
+    label.head-menu {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 100%;
+        margin: 15px 0 15px 0;
+    }
+
+    .head-menu img{
+        display: block;
+        float: right;
+        padding: 20px;
+        height: 80px;
+        box-sizing: border-box;
+    }
+
+    .head-menu .menu-cross--hidden{display: none;}
+    nav.main-menu .main-menu_btn {display: none;}
+    nav input[type="checkbox"]:checked ~ .main-menu_btn {display: block;}
+    nav input[type="checkbox"]:checked ~ .head-menu .menu-cross--hidden {display: block;}
+    nav input[type="checkbox"]:checked ~ .head-menu .menu-burger--hidden {display: none;}
+
+}
+
+
 
 @media screen and (min-width: 1499px) {
+
     main {
         width: 75%;
     }
+
 }
 
-#popup_modal{
+@media screen and (max-width: 799px) {
+
+    .popup-create{
+        display: flex;
+        flex-direction: column;
+    }
+
+}
+
+@media screen and (max-width: 933px) {
+
+    .partner-page-wrapper{
+        flex-direction: column;
+    }
+
+    #user_aside{
+        width: 100%;
+    }
+
+    #cabinet_aside_sect{
+        width: 100%;
+        min-height: 300px;
+        margin-bottom: 30px;
+    }
+
+    #partner-page-pages{
+        width: 100%;
+        margin-left: 0;
+    }
+
+    #partner_aside{
+        width: 100%;
+    }
+
+    .tender_card{
+        width: 80%;
+        margin: 5% 10%;
+    }
+
+    .catalog_unit{
+        width: 48%;
+    }
+
+    .search-usually {
+        width: 46%;
+    }
+
+}
+
+@media screen and (min-width: 666px) and (max-width: 933px) {
+    .partner_avatar, .user_avatar {
+        width: 92%;
+        margin: 2%;
+    }
+
+    .partner_avatar_btn, .user_avatar_btn {
+        width: 5%;
+    }
+
+    #cabinet_aside_sect > p {
+        display: inline-block;
+
+    }
+
+    .avatar_and_btn{
+        display: inline-flex;
+        width: 54%;
+    }
+
+    .profile_data{
+        display: inline-block;
+        width: 45%;
+        margin-top: 20px;
+        vertical-align: top;
+    }
+}
+
+@media screen and (max-width: 666px) {
+
+    .main-menu ul{
+        flex-direction: column;
+        position: relative;
+        background-color: #a0a0a0; /* #afa58e;*/
+        z-index: 7;
+    }
+
+    .main-menu ul li{
+        text-align: right;
+        border-bottom: 1px solid #606060;
+    }
+
+    .central-head {
+        padding: 0;
+    }
+
+    .catalog_unit{
+        width: 98%;
+    }
+
+    .search-usually {
+        width: 96%;
+    }
+
+}
+
+#popup_modal, .popup_modal{
     position: fixed;
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 5;
+    z-index: 10;
     background-color: rgba(204, 204, 204, 0.6);
     visibility: hidden;
 }
@@ -1247,7 +1406,7 @@ footer > div a, footer > div{
     background-color: #f4f4f4;
     border: 1px solid #000;
     position: absolute;
-    z-index: 6;
+    z-index: 11;
     margin: 0;
     visibility: hidden;
     min-width: 50%;
@@ -1264,7 +1423,49 @@ footer > div a, footer > div{
     color: #dc5e4e;
 }
 
+/*-*-*-*-*-*-*-*-*-*-*-*- -*-*- --* перенести к юзеру*/
 
+.create-text_area{
+    position: relative;
+    padding: 30px;
+}
 
+.create-text-text_area{
+    padding-top: 30px;
+}
 
+.close_btn{
+    position: absolute;
+    right: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
 
+.popup_alert input, .popup_alert select{
+    height: 40px;
+    margin: 20px 25px;
+    padding: 2px 5px 0 15px;
+    box-sizing: border-box;
+    border: none;
+    font-size: 15pt;
+    box-shadow:  5px 5px 23px -2px #A0A07D;
+    width: 235px;
+}
+
+.window-create-input{
+    text-align: center;
+}
+
+.create-city_select, .create-date-inp, .create-categories_select{
+    display: block;
+}
+
+.create-text_area{
+    width: 430px;
+    min-height: 200px;
+}
+
+.popup_alert .create-budget{
+    width: 100px;
+    margin: 10px 5px;
+}

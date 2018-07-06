@@ -37,12 +37,10 @@ var PORTAL = (function (PORTAL, $) {
                     if (data)
                         fillStrings(selectedPerson);
 
-
                     if (Cookies.get('userId') === selectedPerson.id) {
                         console.log("It's REALY MY **** USER ***** CABINET  !!!!");
                         myCabinet();
                     }
-
 
                     if (selectedPerson.tenders)
                         fillTenders(selectedPerson.tenders);
@@ -55,7 +53,6 @@ var PORTAL = (function (PORTAL, $) {
             var btn_change = $self.find('.avatar_btn_change');
             var btn_save = $self.find('.btn_change_save_change');
 
-
             var firstName =  $self.find('.profil_name');
             var lastName = $self.find('.profil_secondname');
             var phoneNum =  $self.find('.phone_string');
@@ -63,6 +60,8 @@ var PORTAL = (function (PORTAL, $) {
             var vkLink = $self.find('.vk_string');
             var create_tender = $self.find('.create_tender_icon');
             var edit_avatar = $self.find('.edit_avatar_btns');
+            var categ_select = $self.find('#create_categories_select');
+
 
 
             function myCabinet(){
@@ -71,32 +70,62 @@ var PORTAL = (function (PORTAL, $) {
                 create_tender.removeClass('hidden_full');
                 btn_change.on('click', onChangeFields);
                 $self.find('.user_avatar_btn_mail').addClass('hidden_full');
-                create_tender.on('click', createTender);
+                create_tender.on('click', openCreateForm);
+                $self.find('#btn-create_save').on('click', createTender);
 
             }
 
+            function openCreateForm(){
+                console.log('openCreateForm ON');
+                modalW.openMWindow('#popup-create_tender', '#modal-create_tender');
+                $self.find('#close_btn-create_tender').one('click', ()=>{modalW.closeMWindow('#popup-create_tender', '#modal-create_tender')});
+                console.dir(allCategories);
+            }
+
+
+
+            var allCategories = {};
+
+            $.ajax({ // добавление всех категорий
+                url: "http://wedding-services.mycloud.by/services/rest.catalog-categories/home/users/wedding/partners.json",
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    allCategories = data;
+                    console.dir(allCategories);
+                    Object.keys(data).forEach( prop => prop !== 'leading' ?  categ_select.append(`<option value="${prop}">${data[prop]}</option>`)
+                        : categ_select.append(`<option value="${prop}" selected>${data[prop]}</option>`));
+                }
+            });
+
+            function specialityTranslate(speciality){
+                Object.keys(allCategories).forEach( prop =>  prop === speciality ? speciality = allCategories[prop] : '');
+                return speciality;
+            }
+
+
+            var offers = $self.find('.trumbowyg-editor');
+            var moneyLimit = $self.find('#create-budget');
+            var deadline = $self.find('#create-date');
+            var city = $self.find('.create-city_select');
+
             function createTender(){
-                //modalWindowsOn();
-                console.log('createTender ON');
 
                 var tenderSend = {};
-                var date = new Date();
-                // tenderSend.datePublication = date;
-                // tenderSend.deadline = date/* + 3600000000*/;
-                tenderSend.shortText = 'Z,flf,fleeeee';
+                tenderSend.id = selectedPerson.id;
+                tenderSend.shortText = $self.find('.trumbowyg-editor').text().slice(0 , 30);
+                tenderSend.offers = $self.find('.trumbowyg-editor').html();
+                // tenderSend.datePublication = new Date();
+                // tenderSend.deadline = +new Date(deadline.val());
+                tenderSend.moneyLimit = moneyLimit.val();
                 tenderSend.path = `${selectedPerson.resourcePath}/tenders`;
-                tenderSend.offers = ';kshfaksfh;aksdjfalks;jdhfalskdfbalskdfblaksdnblkajsfdlkasjdfb,.k';
-                tenderSend.moneyLimit = '500';
                 tenderSend.firstName = selectedPerson.firstName;
                 tenderSend.lastName = selectedPerson.lastName;
-                tenderSend.city = selectedPerson.city;
-                tenderSend.avatar  = selectedPerson.avatar;
-                tenderSend.backGroundImage = selectedPerson.backGroundImage;
-                tenderSend.id = selectedPerson.id;
+                tenderSend.city = city.val(); //selectedPerson.city;
+                tenderSend.avatar  = selectedPerson.avatar ? selectedPerson.avatar : Cookies.get('avatar') ? Cookies.get('avatar') : `/etc/clientlibs/wedding/pages/images/any_img/default_avatar.jpg`;
+                tenderSend.backGroundImage = `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`;
 
                 console.dir(tenderSend);
-                console.log(tenderSend.path);
-
 
 
                 $.ajax({
@@ -105,13 +134,13 @@ var PORTAL = (function (PORTAL, $) {
                     type: "POST",
                     dataType: "json",
                     data: tenderSend,
-                      beforeSend: function (xhr) {
-                          xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
-                          console.log("beforeSend post !");
-                          console.log();
-                      },
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+                        console.log("beforeSend post !");
+                        console.log();
+                    },
                     success: function (data) {
-                        console.log('Ниже должен быть ответ? наверное:');
+                        console.log(tenderSend.path);
                         console.dir(data);
                     },
                     error: function (e) {
@@ -231,13 +260,11 @@ var PORTAL = (function (PORTAL, $) {
                 var copy_div = first_div.cloneNode(true);
 
                 for (var i = 0; i<tenders.length; i++){
-                    var publDate = new Date(tenders[i].datePublication);
-                    var deadLine = new Date(tenders[i].deadline);
                     copy_div = first_div.cloneNode(true);
                     copy_div.querySelector(".tender_card_href").setAttribute("href",`/content/wedding/tenders/tender.html?${tenders[i].id}#${tenders[i].city}`);
-                    copy_div.querySelector(".publish_date").innerHTML = `${publDate.getDate()}.${publDate.getMonth()+1}.${publDate.getFullYear()}`;
-                    copy_div.querySelector(".tender_card-city").innerHTML = `г. ${tenders[i].city}`;
-                    copy_div.querySelector(".tender_card-dead_line").innerHTML = `${deadLine.getDate()}.${deadLine.getMonth()+1}.${deadLine.getFullYear()}`;
+                    copy_div.querySelector(".tender_card-city").innerHTML = `г. ${specialityTranslate(tenders[i].city)}`;
+                    copy_div.querySelector(".publish_date").innerHTML =  formatDate.f(tenders[i].datePublication);
+                    copy_div.querySelector(".tender_card-dead_line").innerHTML = formatDate.f(tenders[i].deadline);
                     copy_div.querySelector(".tender_card-budget_count").innerHTML = tenders[i].moneyLimit;
                     copy_div.querySelector(".short_text_text").innerHTML = tenders[i].shortText;
                     main_container.appendChild(copy_div);
@@ -247,14 +274,46 @@ var PORTAL = (function (PORTAL, $) {
 
             }
 
-            function removeTender(){
+            function removeTender(e){
 
                 var isAdmin = confirm("Вы действительно хотите удалить тендер?");
+
                 if (isAdmin){
-                    alert('Тендер Удались!');
+
+                    $.ajax({
+
+                        url: `http://wedding-services.mycloud.by/services/rest.tenders/remove.json?id=${selectedPerson.id}`,
+                        type: "POST",
+                        dataType: "json",
+                        data: {part:`${selectedPerson.resourcePath}/tenders`},
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+                            console.log("beforeSend post !");
+                            console.log();
+                        },
+                        success: function (data) {
+                            console.log(tenderSend.path);
+                            console.dir(data);
+                        },
+                        error: function (e) {
+                            console.log('Что-то пошло не так :( ');
+                            console.log(e);
+                        }
+                    });
+
+                    $(e.target).parents('.tender_card').css('display','none');
+
                 }
 
+
+                console.log(e);
+
             }
+
+            $("textarea").trumbowyg({  // RichText
+                svgPath: '/etc/clientlibs/wedding/external/icons/richtext/icons.svg',
+                lang: 'ru'
+            });
 
             (function(){  //  функции переключения страниц
 
