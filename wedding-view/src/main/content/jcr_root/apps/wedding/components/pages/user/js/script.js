@@ -42,8 +42,10 @@ var PORTAL = (function (PORTAL, $) {
                         myCabinet();
                     }
 
-                    if (selectedPerson.tenders)
+                    if (selectedPerson.tenders){
+                        $self.find('.user_tenders-container > div').detach();
                         fillTenders(selectedPerson.tenders);
+                    }
 
                 }
 
@@ -115,7 +117,8 @@ var PORTAL = (function (PORTAL, $) {
                 tenderSend.id = selectedPerson.id;
                 tenderSend.shortText = $self.find('.trumbowyg-editor').text().slice(0 , 30);
                 tenderSend.offers = $self.find('.trumbowyg-editor').html();
-                // tenderSend.datePublication = new Date();  - Вылетает ошибка на сервере при отправке тендера с датами
+                tenderSend.speciality = $self.find('#create_categories_select').val();
+                // tenderSend.datePublication = +new Date();  - Вылетает ошибка на сервере при отправке тендера с датами
                 // tenderSend.deadline = +new Date(deadline.val()); - Вылетает ошибка на сервере при отправке тендера с датами
                 tenderSend.moneyLimit = moneyLimit.val();
                 tenderSend.path = `${selectedPerson.resourcePath}/tenders`;
@@ -123,7 +126,7 @@ var PORTAL = (function (PORTAL, $) {
                 tenderSend.lastName = selectedPerson.lastName;
                 tenderSend.city = city.val(); //selectedPerson.city;
                 tenderSend.avatar  = selectedPerson.avatar ? selectedPerson.avatar : Cookies.get('avatar') ? Cookies.get('avatar') : `/etc/clientlibs/wedding/pages/images/any_img/default_avatar.jpg`;
-                tenderSend.backGroundImage = `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`;
+                tenderSend.backGroundImage = `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`; // - не сохраняет
                 $self.find('.trumbowyg-editor').html('');
                 modalW.closeMWindow('#popup-create_tender', '#modal-create_tender');
                 console.dir(tenderSend);
@@ -143,10 +146,12 @@ var PORTAL = (function (PORTAL, $) {
                     success: function (data) {
                         console.log(tenderSend.path);
                         console.dir(data);
+                        data ? fillTenders(data) : fillTenders([tenderSend]);
                     },
                     error: function (e) {
                         console.log('Что-то пошло не так :( ');
                         console.log(e);
+                        fillTenders([tenderSend]);
                     }
                 });
 
@@ -255,7 +260,6 @@ var PORTAL = (function (PORTAL, $) {
 
             function fillTenders(tenders){
 
-                $self.find('.user_tenders-container > div').detach();
                 var first_div = document.querySelector(".hidden_full .tender_card");
                 var main_container =  document.querySelector(".user_tenders-container");
                 var copy_div = first_div.cloneNode(true);
@@ -263,16 +267,37 @@ var PORTAL = (function (PORTAL, $) {
                 for (var i = 0; i<tenders.length; i++){
                     copy_div = first_div.cloneNode(true);
                     copy_div.querySelector(".tender_card_href").setAttribute("href",`/content/wedding/tenders/tender.html?${tenders[i].id}#${tenders[i].city}`);
-                    copy_div.querySelector(".tender_card-city").innerHTML = `г. ${specialityTranslate(tenders[i].city)}`;
-                    copy_div.querySelector(".publish_date").innerHTML =  formatDate.f(tenders[i].datePublication);
-                    copy_div.querySelector(".tender_card-dead_line").innerHTML = formatDate.f(tenders[i].deadline);
-                    copy_div.querySelector(".tender_card-budget_count").innerHTML = tenders[i].moneyLimit;
-                    copy_div.querySelector(".short_text_text").innerHTML = tenders[i].shortText;
+                    copy_div.querySelector(".tender_card-city").innerHTML = tenders[i].cityName ?  tenders[i].cityName :
+                        tenders[i].city && tenders[i].city != null ? `г. ${сityTranslate(tenders[i].city)}` : 'г. Минск';
+                    copy_div.querySelector(".tender_card-need_cat").innerHTML = tenders[i].hasOwnProperty('speciality')&&tenders[i].speciality != null
+                        ? specialityTranslate(tenders[i].speciality) : 'ФОТОГРАФ';
+                    copy_div.querySelector(".publish_date").innerHTML =  tenders[i].datePublication && tenders[i].datePublication != null
+                        ?formatDate.f(tenders[i].datePublication) : formatDate.f(+new Date());
+                    copy_div.querySelector(".tender_card-dead_line").innerHTML = tenders[i].deadline && tenders[i].deadline != null
+                        ? formatDate.f(tenders[i].deadline) : formatDate.f(+new Date()+10e8*(Math.round(Math.random()*20))) ;
+                    copy_div.querySelector(".tender_card-budget_count").innerHTML = tenders[i].moneyLimit && tenders[i].moneyLimit != null ? tenders[i].moneyLimit : '5';
+                    tenders[i].shortText && tenders[i].shortText != null ? copy_div.querySelector(".short_text_text").innerHTML = tenders[i].shortText : '';
+                    copy_div.querySelector(".tender_card-img").style.backgroundImage = tenders[i].backGroundImage ? `url("${tenders[i].backGroundImage}")`
+                        : `url("/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg")`;
+
+                    if (tenders[i].hasOwnProperty('proposals') && tenders[i].proposals != null && tenders[i].proposals.length !== 0 )
+                        copy_div.querySelector(".count_proposals").innerHTML =  tenders[i].proposals.length;
+                    else{
+                        copy_div.querySelector(".count_proposals").classList.add("hidden_full");
+                        copy_div.querySelector(".tender_card-proposals").innerHTML ='';
+                    }
+
                     main_container.appendChild(copy_div);
                 }
 
                 user_tenders.find('.tender_card-remove_icon').on('click', removeTender);
 
+            }
+
+            function сityTranslate(city){
+                var objNameCity = {minsk:'Минск',grodno:'Гродно',brest:'Брест',vitebsk:'Витебск',mogilev:'Могилев',gomel:'Гомель'};
+                Object.keys(objNameCity).forEach( prop =>  prop === city ? city = objNameCity[prop] : '');
+                return city;
             }
 
             function removeTender(e){
