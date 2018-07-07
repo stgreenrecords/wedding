@@ -287,11 +287,23 @@ var PORTAL = (function (PORTAL, $) {
                         copy_div.querySelector(".tender_card-proposals").innerHTML ='';
                     }
 
-                    main_container.appendChild(copy_div);
+                    copy_div.querySelector('.tender_card-remove_icon').addEventListener('click', removeTender);
+                    copy_div.querySelector('.tender_card-edit_icon').addEventListener('click', changeTender);
+                    main_container.prepend(copy_div);
                 }
 
-                user_tenders.find('.tender_card-remove_icon').on('click', removeTender);
+            }
 
+            function changeTender(event){
+                // var tenderId = $(e.target).parents('.tender_card').attr('tenderId');
+                // req with tenderId
+                // openCreateForm();
+                // fillCreateForm(tenderId);
+
+            }
+
+            function fillCreateForm(tenderId){
+                // createTender(tenderId);
             }
 
             function сityTranslate(city){
@@ -330,9 +342,6 @@ var PORTAL = (function (PORTAL, $) {
                     $(e.target).parents('.tender_card').css('display','none');
 
                 }
-
-
-                console.log(e);
 
             }
 
