@@ -116,7 +116,7 @@ var PORTAL = (function (PORTAL, $) {
                 tenderSend.shortText = $self.find('.trumbowyg-editor').text().slice(0 , 30);
                 tenderSend.offers = $self.find('.trumbowyg-editor').html();
                 // tenderSend.datePublication = new Date();
-                // tenderSend.deadline = +new Date(deadline.val());
+                tenderSend.deadline = +new Date(deadline.val());
                 tenderSend.moneyLimit = moneyLimit.val();
                 tenderSend.path = `${selectedPerson.resourcePath}/tenders`;
                 tenderSend.firstName = selectedPerson.firstName;
@@ -124,7 +124,8 @@ var PORTAL = (function (PORTAL, $) {
                 tenderSend.city = city.val(); //selectedPerson.city;
                 tenderSend.avatar  = selectedPerson.avatar ? selectedPerson.avatar : Cookies.get('avatar') ? Cookies.get('avatar') : `/etc/clientlibs/wedding/pages/images/any_img/default_avatar.jpg`;
                 tenderSend.backGroundImage = `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`;
-
+                $self.find('.trumbowyg-editor').html('');
+                modalW.closeMWindow('#popup-create_tender', '#modal-create_tender');
                 console.dir(tenderSend);
 
 
