@@ -276,4 +276,58 @@
 
     </div>
 
+    <section id="modal-create_event" class="popup_modal">
+
+        <div id="popup-create_event" class="popup_alert popup-create">
+
+            <div class="window-create-input">
+
+                <select id="create_categories_select" class="create-categories_select" name="categories_select">
+
+                </select>
+
+                <input id="create-date" class="create-date-inp" type="date" >
+
+
+                <select class="create-city_select" name="City">
+
+                    <option value="minsk" disabled> Город </option>
+                    <option value="minsk" selected> Минск </option>
+                    <option value="brest"> Брест </option>
+                    <option value="vitebsk"> Витебск </option>
+                    <option value="gomel" > Гомель </option>
+                    <option value="grodno"> Гродно </option>
+                    <option value="mogilev"> Могилев </option>
+
+                </select>
+
+                <p> Бюджет  <input id="create-budget" class="create-budget" type="number"> руб. </p>
+
+            </div>
+
+            <div class="create-text_area">
+                <img id="close_btn-create_event" class="close_btn btn" src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/close_btn.png" alt="close_btn">
+                <div class="create-text-text_area">
+                    <textarea  name="comment_inter" placeholder="Введите описание"> </textarea>
+                </div>
+                <img id="btn-create_save" class="btn_send btn" src="/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/save_btn.png" alt="btn_send">
+            </div>
+
+            <div>
+
+
+            </div>
+
+        </div>
+
+        <div class="mail_success popup_alert">
+
+            <p>
+                Сообщение отправлено
+            </p>
+
+        </div>
+
+    </section>
+
 </main>
