@@ -14,6 +14,7 @@ var PORTAL = (function (PORTAL, $) {
         });
 
         var selectedPerson;
+        var allCategories = {};
         var getPartnerId = (window.location.search).slice(1);
         var getPartnerSpecCity = (window.location.hash).slice(1);
         getPartnerSpecCity = getPartnerSpecCity.replace('&','/');
@@ -26,7 +27,8 @@ var PORTAL = (function (PORTAL, $) {
         if (getPartnerId === Cookies.get('userId') )
             console.log("WaU - the MY CABINET  !!!!");
 
-        var selectedPersonRequest = `/services/rest.partners/${getPartnerSpecCity}.json?id=${getPartnerId}`;
+        var selectedPersonRequest = `http://wedding-services.mycloud.by/services/rest.partners/${getPartnerSpecCity}.json?id=${getPartnerId}`;
+        var categ_select = $self.find('#create_categories_select');
 
         console.log(selectedPersonRequest);
 
@@ -45,7 +47,20 @@ var PORTAL = (function (PORTAL, $) {
                 console.log('INFO:');
                 console.dir(selectedPerson);
 
-                fillStrings(selectedPerson);
+                $.ajax({ // добавление всех категорий
+                    url: "http://wedding-services.mycloud.by/services/rest.catalog-categories/home/users/wedding/partners.json",
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        allCategories = data;
+                        console.dir(allCategories);
+                        fillStrings(selectedPerson);
+                        Object.keys(data).forEach( prop => prop !== 'leading' ?  categ_select.append(`<option value="${prop}">${data[prop]}</option>`)
+                            : categ_select.append(`<option value="${prop}" selected>${data[prop]}</option>`));
+                    }
+                });
+
+
 
                 if (Cookies.get('userId') === selectedPerson.id ) {
                     console.log("It's REALY MY CABINET  of Partner  !!!!");
@@ -109,7 +124,19 @@ var PORTAL = (function (PORTAL, $) {
             btn_save.removeClass('hidden_full');
             btn_save.one('click', saveChangeFields);
             onInputFields();
+            document.addEventListener('keyup', exitWithoutSave);
 
+        }
+
+        function  exitWithoutSave(e) {
+            if (e.keyCode === 27) { //esc
+                fillStrings(selectedPerson);
+                btn_save.addClass('hidden_full');
+                btn_save.off('click', saveChangeFields);
+                // edit_avatar.addClass('hidden_full');
+                btn_change.removeClass('hidden_full');
+                document.removeEventListener('keyup', exitWithoutSave);
+            }
         }
 
         function onInputFields(){
@@ -148,7 +175,7 @@ var PORTAL = (function (PORTAL, $) {
 
             $.ajax({
 
-                url: '/services/rest.partners/update.json',
+                url: 'http://wedding-services.mycloud.by/services/rest.partners/update.json',
                 type: 'PUT',
                 dataType: 'json',
                 data: dataSend,
@@ -176,7 +203,7 @@ var PORTAL = (function (PORTAL, $) {
 
             var commentInfo = [{content:content,authorID:Cookies.get('userId'),authorCity:Cookies.get('city')}];
             sendChangeRequest({comments:commentInfo});
-             commentInfo = {content:content,authorID:Cookies.get('userId'),authorCity:Cookies.get('city')}; //[]
+            commentInfo = {content:content,authorID:Cookies.get('userId'),authorCity:Cookies.get('city')}; //[]
             sendChangeRequest({comments:commentInfo});
 
             sendChangeRequest({comments:content});
@@ -197,69 +224,62 @@ var PORTAL = (function (PORTAL, $) {
             cabinetAttrVision.btn_add_text.on('click', showInnerText);
             cabinetAttrVision.btn_add_video.on('click', showInnerVideo);
             cabinetAttrVision.btn_add_event.on('click', showInnerEvent); // todoc - подумать как реализовать
+            $self.find('#btn-create_save').on('click', createEvent);
             cabinetAttrHide.btn_add_comment.off('click', sendComment);
 
         }
 
         function showInnerEvent(){
-            //modalWindowsOn();
-            saveInnerEvent();
 
-        }
-
-        function saveInnerEvent(){
-            //modalWindowsOff();
-            createEvent();
+            console.log('openCreate_Form ON');
+            modalW.openMWindow('#popup-create_event', '#modal-create_event');
+            $self.find('#close_btn-create_event').one('click', ()=>{modalW.closeMWindow('#popup-create_event', '#modal-create_event')});
+            console.dir(allCategories);
 
         }
 
         function createEvent(){
-            //modalWindowsOn();
-            console.log('createEvent ON');
+
+            var moneyLimit = $self.find('#create-budget');
+            var startDate = $self.find('#create-startDate'); //  TODO доверстать форму event create.
+            var deadline = $self.find('#create-date');
+            var city = $self.find('.create-city_select');
+
+            // tenderSend.id = selectedPerson.id;
+            // tenderSend.shortText = $self.find('.trumbowyg-editor').text().slice(0 , 30);
+            // tenderSend.offers = $self.find('.trumbowyg-editor').html();
+            // tenderSend.speciality = $self.find('#create_categories_select').val();
+            // tenderSend.datePublication = +new Date();
+            // tenderSend.deadline = +new Date(deadline.val());
+            // tenderSend.moneyLimit = moneyLimit.val();
+
 
             var eventSend = {};
             var date = new Date();
-             eventSend.startDate = +date;
-             eventSend.endDate = +date + 3600000000;
+            eventSend.startDate = +date; //+new Date(startDate.val());
+            eventSend.endDate = +new Date(deadline.val());
             eventSend.title = 'Super Better EVENT from Nice MEn';
+            eventSend.description = $self.find('.popup_modal .trumbowyg-editor').html();
 
             eventSend.path = `${selectedPerson.resourcePath}/events`;
             eventSend.resourcePath = `${selectedPerson.resourcePath}/events`;
+            eventSend.firstName = selectedPerson.firstName;
+            eventSend.lastName = selectedPerson.lastName;
+            eventSend.city = city.val() ? city.val() : selectedPerson.city;
+            eventSend.avatar  = selectedPerson.avatar ? selectedPerson.avatar : Cookies.get('avatar') ? Cookies.get('avatar')
+                : `/etc/clientlibs/wedding/pages/images/any_img/default_avatar.jpg`;
+            eventSend.background = selectedPerson.background ? selectedPerson.background
+                : `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`;
+            eventSend.background1 =  `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`;
+            eventSend.background2 = `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`;
+            eventSend.background3 = `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`;
 
-            eventSend.description = ';kshfaksfh;a ksdjf lks;jdhfalskdfba lskdfbl aksdnblk ajsfd lkasjd fb,.k';
-
-            // eventSend.firstName = selectedPerson.firstName;
-            // eventSend.lastName = selectedPerson.lastName;
-            // eventSend.city = selectedPerson.city;
-            // eventSend.avatar  = selectedPerson.avatar;
-            // eventSend.backGroundImage = selectedPerson.backGroundImage;
-
+            $self.find('.popup_modal .trumbowyg-editor').html('');
             eventSend.id = selectedPerson.id;  // Todoс - убрать, когда будет пересылаться через sendChangeRequest
 
+            modalW.closeMWindow('#popup-create_event', '#modal-create_event');
             console.dir(eventSend);
             console.log(eventSend.path);
-
-
-/*
-
-            Важно! Запрос посылается методом POST
-            /services/rest.events/create.json
-
-            Надо слать дополнительный параметр (path) - путь куда надо сохранять акцию.
-                Его можно получить использовав переменную resourcePath
-            Полученную при запросе партнёра, на странице которого мы находимся + /events
-
-            Например
-            /home/users/wedding/partners/photographers/minsk/e/7RZCTBneVLiGlL2yMggcq/events
-
-            Доступные поля, их названия и тип:
-
-            String resourcePath; +
-            String id
-
-*/
-
-
 
             $.ajax({
 
@@ -270,19 +290,18 @@ var PORTAL = (function (PORTAL, $) {
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
                     console.log("beforeSend post !");
-                    console.log();
                 },
                 success: function (data) {
-                    console.log('Ниже должен быть ответ Создания ивента:');
+                    console.log(eventSend.path);
                     console.dir(data);
+                    data ? fillEvents(data) : fillEvents([eventSend]);
                 },
                 error: function (e) {
                     console.log('Что-то пошло не так :( ');
                     console.log(e);
+                    fillEvents([eventSend]);
                 }
             });
-
-            //sendChangeRequest(dataSend);
 
         }
 
@@ -299,10 +318,13 @@ var PORTAL = (function (PORTAL, $) {
                 var newItem = eventCard.clone().removeClass('event_card-sample');
                 elem.title ? newItem.find('.event_card-title').html(elem.title.substr(0, 12)): '';
                 elem.background ? newItem.find('.event_card-bg').css('backgroundImage', `url("${elem.background}")`)
-                                : newItem.find('.event_card-bg').css('backgroundImage', 'url("/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/bgi.jpg")');
-                elem.startDate ? newItem.find('.event_card-start').text(formatDate(Number(elem.startDate))) : '';
-                elem.endDate ? newItem.find('.event_card-finish').text(formatDate(Number(elem.endDate))) : '';
+                    : newItem.find('.event_card-bg').css('backgroundImage', 'url("/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/bgi.jpg")');
+                elem.startDate ? newItem.find('.event_card-start').text(formatDate.f(elem.startDate)) : '';
+                elem.endDate ? newItem.find('.event_card-finish').text(formatDate.f(elem.endDate)) : '';
                 elem.description ? newItem.find('.event_card-description_text').text(elem.description.substr(0, 40)) : '';
+                elem.id && elem.speciality && elem.city
+                    ? newItem.find('.event_card-href').attr('href',`/content/wedding/sales/sale.html?${elem.id}#${elem.speciality}&${elem.city}`)
+                    : '';
                 listWrapper.append(newItem);
 
             });
@@ -311,10 +333,30 @@ var PORTAL = (function (PORTAL, $) {
 
         }
 
+        /*
+
+Важно! Запрос посылается методом POST
+/services/rest.events/create.json
+
+Надо слать дополнительный параметр (path) - путь куда надо сохранять акцию.
+    Его можно получить использовав переменную resourcePath
+Полученную при запросе партнёра, на странице которого мы находимся + /events
+
+Например
+/home/users/wedding/partners/photographers/minsk/e/7RZCTBneVLiGlL2yMggcq/events
+
+Доступные поля, их названия и тип:
+
+String resourcePath; +
+String id
+
+*/
+
+        //sendChangeRequest(dataSend);
 
 
         function showInnerVideo(){
-            $self.find('.add-video-field').html(`<input value="Вставьте вместо это текста ссылку на Ваше видео с YouTube">`);
+            $self.find('.add-video-field').html(`<input placeholder="Вставьте ссылку на Ваше видео с YouTube">`);
             cabinetAttrVision.btn_add_video.one('click', saveInnerVideo);
         }
 
@@ -372,7 +414,7 @@ var PORTAL = (function (PORTAL, $) {
 
             $.ajax({
 
-                url: '/services/rest.partners/update.json',
+                url: 'http://wedding-services.mycloud.by/services/rest.partners/update.json',
                 type: 'PUT',
                 dataType: 'json',
                 data: dataSend,
@@ -395,12 +437,16 @@ var PORTAL = (function (PORTAL, $) {
 
         }
 
+        function specialityTranslate(speciality){
+            Object.keys(allCategories).forEach( prop =>  prop === speciality ? speciality = allCategories[prop] : '');
+            return speciality;
+        }
 
         function fillStrings(selectedPerson) {
 
             $self.find('.profil_name').text(selectedPerson.firstName);
             $self.find('.profil_secondname').text(selectedPerson.lastName);
-            $self.find('.partner_speciality').text(selectedPerson.speciality);
+            $self.find('.partner_speciality').text(specialityTranslate(selectedPerson.speciality));
 
             if (selectedPerson.priceStart)
                 $self.find('.prise_start').text(selectedPerson.priceStart);
@@ -614,15 +660,42 @@ var PORTAL = (function (PORTAL, $) {
 
         })();
 
-        function formatDate(datt) {
-            var date = new Date (datt);
-            var dd = date.getDate();
-            if (dd < 10) dd = '0' + dd;
-            var mm = date.getMonth() + 1;
-            if (mm < 10) mm = '0' + mm;
-            var yy = date.getFullYear();
-            return dd + '.' + mm + '.' + yy;
-        }
+        //--   fake data ***************
+
+        var FakeDataEvent = [
+            {
+                description:'Отличные скидки сегодня',
+                endDate:'1551289371112',
+                id:"f888d202-d2ee-4d30-8de8-1dcd839f4189",
+                resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
+                resourceType:'xz',
+                startDate:'1531289371112',
+                title:'скидки 50%'
+            },
+
+            {
+                description:'',
+                endDate:'1551289371112',
+                id:"f888d202-d2ee-4d30-8de8-1dcd839f4189",
+                resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
+                resourceType:'xz',
+                startDate:'1531289371112',
+                title:'скидки 50%'
+            },
+
+            {
+                description:'Отличные скидки сегодня',
+                endDate:'1551289371112',
+                id:"f888d202-d2ee-4d30-8de8-1dcd839f4189",
+                resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
+                resourceType:'xz',
+                startDate:'1531289371112',
+                title:'скидки 50%'
+            }
+
+        ];
+
+
 
     };  //--- finish
 
