@@ -378,23 +378,6 @@ String id
             cabinetAttrVision.btn_add_text.one('click', showInnerText);
         }
 
-
-
-
-        function sendPortfolio(){
-
-            var photoSend = {};
-
-            // if (photoSend.portfolio || photoSend.portfolio.length >= 1){
-
-            photoSend.portfolio = input_upload.value;
-            // photoSend.portfolio = input_upload.files;
-
-            sendChangeRequest(photoSend);
-
-        }
-
-
         function sendChangeReq(dataSend){
 
             console.dir(dataSend);
@@ -554,6 +537,7 @@ String id
         }());
 
 
+
         function upLoadImage(){
 
             var preview = document.querySelector('.preview_upload-text');
@@ -627,6 +611,130 @@ String id
         }
         upLoadImage();
 
+
+
+        function sendPortfolio(){
+
+            var photoSend = {};
+
+            var data = new FormData();
+
+            console.log(data);
+
+            $.each( files, function( key, value ){
+                data.append( key, value );
+            });
+
+            // if (photoSend.portfolio || photoSend.portfolio.length >= 1){
+
+            // photoSend.portfolio = input_upload.value;
+            // photoSend.portfolio = input_upload.files;
+
+            // sendChangeRequest(photoSend);
+
+            $.ajax({
+                url: 'http://wedding-services.mycloud.by/services/rest.partners/update.json',
+                type: 'put',
+                data: data,
+                cache: false,
+                dataType: 'json',
+                processData: false, // Не обрабатываем файлы (Don't process the files)
+                contentType: false, // Так jQuery скажет серверу что это строковой запрос
+                success: function( respond, textStatus, jqXHR ){
+
+                    // Если все ОК
+
+                    if( typeof respond.error === 'undefined' ){
+                        // Файлы успешно загружены, делаем что нибудь здесь
+
+                        // выведем пути к загруженным файлам в блок '.ajax-respond'
+
+                        var files_path = respond.files;
+                        var html = '';
+                        $.each( files_path, function( key, val ){ html += val +'<br>'; } );
+                        $('.ajax-respond').html( html );
+                    }
+                    else{
+                        console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error );
+                    }
+                },
+                error: function( jqXHR, textStatus, errorThrown ){
+                    console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+                }
+            });
+
+        }
+
+
+
+        // Переменная куда будут располагаться данные файлов
+
+        var files;
+
+        // Вешаем функцию на событие
+        // Получим данные файлов и добавим их в переменную
+
+        $('#file_upl').change(function(){   //input[type=file]
+            files = this.files;
+            console.log(files);
+        });
+
+        $('.submit.button').click(function( event ){
+            event.stopPropagation(); // Остановка происходящего
+            event.preventDefault();  // Полная остановка происходящего
+
+            // Создадим данные формы и добавим в них данные файлов из files
+
+            var data = new FormData();
+
+            console.log(data);
+
+            $.each( files, function( key, value ){
+                data.append( key, value );
+            });
+
+            console.log(data);
+            // Отправляем запрос
+
+            $.ajax({
+                url: 'http://wedding-services.mycloud.by/services/rest.partners/update.json',
+                type: 'put',
+                data: data,
+                cache: false,
+                dataType: 'json',
+                processData: false, // Не обрабатываем файлы (Don't process the files)
+                contentType: false, // Так jQuery скажет серверу что это строковой запрос
+                success: function( respond, textStatus, jqXHR ){
+
+                    // Если все ОК
+
+                    if( typeof respond.error === 'undefined' ){
+                        // Файлы успешно загружены, делаем что нибудь здесь
+
+                        // выведем пути к загруженным файлам в блок '.ajax-respond'
+
+                        var files_path = respond.files;
+                        var html = '';
+                        $.each( files_path, function( key, val ){ html += val +'<br>'; } );
+                        $('.ajax-respond').html( html );
+                    }
+                    else{
+                        console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error );
+                    }
+                },
+                error: function( jqXHR, textStatus, errorThrown ){
+                    console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+                }
+            });
+
+        });
+
+
+
+
+
+
+
         (function() {
 
             $("#calendar").ionCalendar({
@@ -648,6 +756,7 @@ String id
             });
 
         })();
+
 
         //--   fake data ***************
 
