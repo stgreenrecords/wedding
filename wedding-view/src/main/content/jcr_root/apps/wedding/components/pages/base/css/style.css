@@ -877,9 +877,7 @@ footer > div a, footer > div{
     width: 20%;
 }
 
-
-
-.event-wrapper > div{
+.event-wrapper > div, .events-wrapper{
     display: flex;
     flex-wrap: wrap;
 }

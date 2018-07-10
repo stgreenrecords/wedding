@@ -191,7 +191,7 @@
 
                     <h2 class="partner_title"> Акции </h2>
 
-                    <div class="event-wrapper">
+                    <div class="events-wrapper">
 
                         <p class="no_event-text">У партнера в данный момент нет ни одной акции!</p>
 
@@ -202,28 +202,28 @@
                         <div class="event_card-sample event_card">
 
                             <a class="event_card-href" href="/content/wedding/sales/sale.html?">
-                            <div class="event_card-bg">
+                                <div class="event_card-bg">
 
-                                <div class="event_card-in_bg">
+                                    <div class="event_card-in_bg">
 
-                                    <p class="event_card-title">	</p>
+                                        <p class="event_card-title">	</p>
 
-                                    <div class="event_card-date">
-                                        <span class="event_card-start"> </span>
-                                        <span> - </span>
-                                        <span class="event_card-finish"> </span>
+                                        <div class="event_card-date">
+                                            <span class="event_card-start"> </span>
+                                            <span> - </span>
+                                            <span class="event_card-finish"> </span>
+                                        </div>
+
                                     </div>
 
                                 </div>
 
-                            </div>
-
-                            <div class="event_card-description" title="Подробнее">
-                                <span class="event_card-description_text"> Подробнее </span>
-                                <span class="event_card-description_arrow">
+                                <div class="event_card-description" title="Подробнее">
+                                    <span class="event_card-description_text"> Подробнее </span>
+                                    <span class="event_card-description_arrow">
 			     					<img src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/more.png" alt="more">
 			     				</span>
-                            </div>
+                                </div>
                             </a>
 
                         </div>
@@ -281,17 +281,17 @@
         <div id="popup-create_event" class="popup_alert popup-create">
 
             <div class="window-create-input">
-
-                <select id="create_categories_select" class="create-categories_select" name="categories_select">
-
-                </select>
-
+                <!-- 	<select id="create_categories_select" class="create-categories_select" name="categories_select">  </select> -->
+                <input id="create-title" type="text" name="title" placeholder="Название 20 символов МАХ">
+                <p> Дата начала акции:</p>
+                <input id="create-startDate" class="create-date-inp" type="date" >
+                <p> Дата завершения акции:</p>
                 <input id="create-date" class="create-date-inp" type="date" >
 
 
                 <select class="create-city_select" name="City">
 
-                    <option value="minsk" disabled> Город </option>
+                    <option value="city" disabled> Город </option>
                     <option value="minsk" selected> Минск </option>
                     <option value="brest"> Брест </option>
                     <option value="vitebsk"> Витебск </option>
@@ -301,7 +301,7 @@
 
                 </select>
 
-                <p> Бюджет  <input id="create-budget" class="create-budget" type="number"> руб. </p>
+                <!-- <p> Бюджет  <input id="create-budget" class="create-budget" type="number"> руб. </p> -->
 
             </div>
 
@@ -319,7 +319,6 @@
             </div>
 
         </div>
-
 
         <div class="mail_success popup_alert">
 

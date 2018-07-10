@@ -240,32 +240,24 @@ var PORTAL = (function (PORTAL, $) {
 
         function createEvent(){
 
-            var moneyLimit = $self.find('#create-budget');
-            var startDate = $self.find('#create-startDate'); //  TODO доверстать форму event create.
+            var title = $self.find('#create-title');
+            var startDate = $self.find('#create-startDate');
             var deadline = $self.find('#create-date');
             var city = $self.find('.create-city_select');
 
-            // tenderSend.id = selectedPerson.id;
-            // tenderSend.shortText = $self.find('.trumbowyg-editor').text().slice(0 , 30);
-            // tenderSend.offers = $self.find('.trumbowyg-editor').html();
-            // tenderSend.speciality = $self.find('#create_categories_select').val();
-            // tenderSend.datePublication = +new Date();
-            // tenderSend.deadline = +new Date(deadline.val());
-            // tenderSend.moneyLimit = moneyLimit.val();
-
-
             var eventSend = {};
-            var date = new Date();
-            eventSend.startDate = +date; //+new Date(startDate.val());
+            city.val(selectedPerson.city);
+            eventSend.startDate =  +new Date(startDate.val());
             eventSend.endDate = +new Date(deadline.val());
-            eventSend.title = 'Super Better EVENT from Nice MEn';
-            eventSend.description = $self.find('.popup_modal .trumbowyg-editor').html();
-
+            eventSend.title = title.val().slice(0 , 20);            //    'Super Better EVENT from Nice MEn';
+            eventSend.description = $self.find('.popup-create .trumbowyg-editor').html();
+            eventSend.shortText = $self.find('.popup-create .trumbowyg-editor').text().slice(0 , 30);
             eventSend.path = `${selectedPerson.resourcePath}/events`;
             eventSend.resourcePath = `${selectedPerson.resourcePath}/events`;
             eventSend.firstName = selectedPerson.firstName;
             eventSend.lastName = selectedPerson.lastName;
-            eventSend.city = city.val() ? city.val() : selectedPerson.city;
+            eventSend.speciality= selectedPerson.speciality;
+            eventSend.city =  city.val() && city.val() !== 'city' ? city.val() : selectedPerson.city;
             eventSend.avatar  = selectedPerson.avatar ? selectedPerson.avatar : Cookies.get('avatar') ? Cookies.get('avatar')
                 : `/etc/clientlibs/wedding/pages/images/any_img/default_avatar.jpg`;
             eventSend.background = selectedPerson.background ? selectedPerson.background
@@ -274,8 +266,8 @@ var PORTAL = (function (PORTAL, $) {
             eventSend.background2 = `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`;
             eventSend.background3 = `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`;
 
-            $self.find('.popup_modal .trumbowyg-editor').html('');
-            eventSend.id = selectedPerson.id;  // Todoс - убрать, когда будет пересылаться через sendChangeRequest
+            $self.find('.popup-create .trumbowyg-editor').html('');
+            eventSend.id = selectedPerson.id;  // - убрать, когда будет пересылаться через sendChangeRequest
 
             modalW.closeMWindow('#popup-create_event', '#modal-create_event');
             console.dir(eventSend);
@@ -283,7 +275,7 @@ var PORTAL = (function (PORTAL, $) {
 
             $.ajax({
 
-                url: 'http://wedding-services.mycloud.by/services/rest.events/create.json  ',
+                url: 'http://wedding-services.mycloud.by/services/rest.events/create.json',
                 type: "POST",
                 dataType: "json",
                 data: eventSend,
@@ -309,9 +301,8 @@ var PORTAL = (function (PORTAL, $) {
             console.log(`function fillEvent write ${events.length} events`);
             console.dir(events);
             $self.find('.no_event-text').remove();
-            var wrapper = $self.find('.event-wrapper');
+            var wrapper = $self.find('.events-wrapper');
             var eventCard = $self.find('.event_card-sample');
-            var listWrapper = $(document.createElement('div')); // document.add('div');
 
             events.forEach(function(elem, i){
 
@@ -325,11 +316,9 @@ var PORTAL = (function (PORTAL, $) {
                 elem.id && elem.speciality && elem.city
                     ? newItem.find('.event_card-href').attr('href',`/content/wedding/sales/sale.html?${elem.id}#${elem.speciality}&${elem.city}`)
                     : '';
-                listWrapper.append(newItem);
+                wrapper.append(newItem);
 
             });
-
-            wrapper.append(listWrapper);
 
         }
 
