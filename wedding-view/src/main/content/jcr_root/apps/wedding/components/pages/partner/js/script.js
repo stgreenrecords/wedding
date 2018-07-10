@@ -54,7 +54,6 @@ var PORTAL = (function (PORTAL, $) {
                     success: function (data) {
                         allCategories = data;
                         console.dir(allCategories);
-                        fillStrings(selectedPerson);
                         Object.keys(data).forEach( prop => prop !== 'leading' ?  categ_select.append(`<option value="${prop}">${data[prop]}</option>`)
                             : categ_select.append(`<option value="${prop}" selected>${data[prop]}</option>`));
                     }
@@ -66,6 +65,12 @@ var PORTAL = (function (PORTAL, $) {
                     console.log("It's REALY MY CABINET  of Partner  !!!!");
                     myCabinet();
                 }
+
+                if (Cookies.get('authStatus') === 'authorized' && Cookies.get('authType') && Cookies.get('userId') !== selectedPerson.id)
+                    authorizedUser();
+                else
+                    notAuthorized();
+
 
                 if (selectedPerson.portfolio)
                     fillPhoto(selectedPerson.portfolio);
@@ -117,6 +122,69 @@ var PORTAL = (function (PORTAL, $) {
         var btn_upPhoto = $self.find('#btn_upPhoto');
         var input_upload = document.querySelector('.input_upload');
         var inputFinishVal = {};
+
+        function authorizedUser(){
+            console.log("Добро пожаловать!");
+            fillStrings(selectedPerson);
+            cabinetAttrHide.btn_add_comment.on('click', sendComment);
+            cabinetAttrHide.btn_likes.on('click',  () => console.log('hi'));
+            cabinetAttrHide.btn_calc.on('click', showAlertSorry);
+            cabinetAttrHide.btn_mail.on('click', () => modalW.openMWindow("#popup_mail_event", "#modal-create_event"));
+            $self.find('#close_btn_event').on('click', () => modalW.closeMWindow("#popup_mail_event", "#modal-create_event"));
+            $self.find('#btn_send_event').on('click', infoForMail);
+        }
+
+        function infoForMail(){
+            var dataSend = {};
+            dataSend.authorId = Cookies.get('userId');
+            var text = $self.find('#popup_mail_event .trumbowyg-editor').html();
+
+            if (text && text !== " "){
+                dataSend.text = text;
+                $self.find('#popup_mail_event .trumbowyg-editor').html('');
+                modalW.closeMWindow("#popup_mail_event", "#modal-create_event");
+                modalW.openMWindow(".mail_success", "#modal-create_event");
+                $self.find('.mail_success').css('color', '#a0a0a0'); //#afa58e #dc5e4e
+                setTimeout(()=>{modalW.closeMWindow(".mail_success", "#modal-create_event")}, 900);
+                sendMail(dataSend);
+            }
+        }
+
+        function sendMail(dataSend){
+            console.dir(dataSend);
+            $.ajax({
+                url: 'http://wedding-services.mycloud.by/services/rest.partner/mail.json',  // вероятный запрос на отправку мыла
+                type: 'PUT',
+                dataType: 'json',
+                data: dataSend,
+                success: function(data){
+                    console.log('What you send for me?');
+                    console.log(data);
+                }
+            });
+        }
+
+        function notAuthorized(){
+            console.log("Авторизируйтесь пожалуйста!");
+            fillThreeStrings(selectedPerson);
+            cabinetAttrHide.btn_mail.on('click', showAlertAuthorized);
+            cabinetAttrHide.btn_likes.on('click', showAlertAuthorized);
+            cabinetAttrHide.btn_calc.on('click', showAlertAuthorized);
+            cabinetAttrHide.btn_add_comment.on('click', showAlertAuthorized);
+
+        }
+
+        function showAlertAuthorized(){
+            modalW.openMWindow(".aut_please", "#modal-create_event");
+            $self.find('.aut_please').css('color', '#a0a0a0'); //#afa58e #dc5e4e
+            setTimeout(()=>{modalW.closeMWindow(".aut_please", "#modal-create_event")}, 900);
+        }
+
+        function showAlertSorry(){
+            modalW.openMWindow(".dont_work", "#modal-create_event");
+            $self.find('.dont_work').css('color', '#a0a0a0'); //#afa58e #dc5e4e
+            setTimeout(()=>{modalW.closeMWindow(".dont_work", "#modal-create_event")}, 1200);
+        }
 
         function onChangeFields(){
 
@@ -192,8 +260,6 @@ var PORTAL = (function (PORTAL, $) {
 
         }
 
-        cabinetAttrHide.btn_add_comment.on('click', sendComment);
-
         function sendComment(){ // узнать что тут надо отправлять !!!
 
             var content = $self.find('.trumbowyg-editor').html();
@@ -223,7 +289,7 @@ var PORTAL = (function (PORTAL, $) {
 
             cabinetAttrVision.btn_add_text.on('click', showInnerText);
             cabinetAttrVision.btn_add_video.on('click', showInnerVideo);
-            cabinetAttrVision.btn_add_event.on('click', showInnerEvent); // todoc - подумать как реализовать
+            cabinetAttrVision.btn_add_event.on('click', showInnerEvent);
             $self.find('#btn-create_save').on('click', createEvent);
             cabinetAttrHide.btn_add_comment.off('click', sendComment);
 

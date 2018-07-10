@@ -1467,3 +1467,20 @@ label.head-menu {
     width: 100px;
     margin: 10px 5px;
 }
+
+/*for mail popup*/
+.mail-text_area{
+    position: relative;
+    padding: 30px;
+}
+
+.mail-text-text_area{
+    padding-top: 30px;
+}
+
+.close_btn{
+    position: absolute;
+    right: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
