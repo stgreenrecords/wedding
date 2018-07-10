@@ -286,7 +286,7 @@ var PORTAL = (function (PORTAL, $) {
                 success: function (data) {
                     console.log(eventSend.path);
                     console.dir(data);
-                    data ? fillEvents(data) : fillEvents([eventSend]);
+                    data ? fillEvents([data]) : fillEvents([eventSend]);
                 },
                 error: function (e) {
                     console.log('Что-то пошло не так :( ');
