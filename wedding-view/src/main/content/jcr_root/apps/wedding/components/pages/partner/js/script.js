@@ -309,7 +309,7 @@ var PORTAL = (function (PORTAL, $) {
                 var newItem = eventCard.clone().removeClass('event_card-sample');
                 elem.title ? newItem.find('.event_card-title').html(elem.title.substr(0, 12)): '';
                 elem.background ? newItem.find('.event_card-bg').css('backgroundImage', `url("${elem.background}")`)
-                    : newItem.find('.event_card-bg').css('backgroundImage', 'url("/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/bgi.jpg")');
+                    : newItem.find('.event_card-bg').css('backgroundImage', `url("/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg")`);
                 elem.startDate ? newItem.find('.event_card-start').text(formatDate.f(elem.startDate)) : '';
                 elem.endDate ? newItem.find('.event_card-finish').text(formatDate.f(elem.endDate)) : '';
                 elem.description ? newItem.find('.event_card-description_text').text(elem.description.substr(0, 40)) : '';
