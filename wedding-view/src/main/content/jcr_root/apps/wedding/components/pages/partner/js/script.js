@@ -54,35 +54,20 @@ var PORTAL = (function (PORTAL, $) {
                     success: function (data) {
                         allCategories = data;
                         console.dir(allCategories);
-                        Object.keys(data).forEach( prop => prop !== 'leading' ?  categ_select.append(`<option value="${prop}">${data[prop]}</option>`)
-                            : categ_select.append(`<option value="${prop}" selected>${data[prop]}</option>`));
+                        // Object.keys(data).forEach( prop => prop !== 'leading' ?  categ_select.append(`<option value="${prop}">${data[prop]}</option>`)
+                        //         : categ_select.append(`<option value="${prop}" selected>${data[prop]}</option>`));
+
+
+                        Cookies.get('authStatus') === 'authorized' && Cookies.get('authType') && Cookies.get('userId') === selectedPerson.id ? myCabinet() : '';
+                        Cookies.get('authStatus') === 'authorized' && Cookies.get('authType')  ? authorizedUser() : notAuthorized();
+
+                        selectedPerson.events ? fillEvents(selectedPerson.events) : '';
+                        selectedPerson.portfolio ? fillPhoto(selectedPerson.portfolio) : '';
+                        selectedPerson.videos ? fillVidosy(selectedPerson.videos) : '';
+                        selectedPerson.comments ? fillComments(selectedPerson.comments) : '';
+
                     }
                 });
-
-
-
-                if (Cookies.get('userId') === selectedPerson.id ) {
-                    console.log("It's REALY MY CABINET  of Partner  !!!!");
-                    myCabinet();
-                }
-
-                if (Cookies.get('authStatus') === 'authorized' && Cookies.get('authType') && Cookies.get('userId') !== selectedPerson.id)
-                    authorizedUser();
-                else
-                    notAuthorized();
-
-
-                if (selectedPerson.portfolio)
-                    fillPhoto(selectedPerson.portfolio);
-
-                if (selectedPerson.videos)
-                    fillVidosy(selectedPerson.videos);
-
-                if (selectedPerson.events)
-                    fillEvents(selectedPerson.events);
-
-                if (selectedPerson.comments)
-                    fillComments(selectedPerson.comments);
 
             }
 
@@ -107,6 +92,7 @@ var PORTAL = (function (PORTAL, $) {
         cabinetAttrVision.btn_add_video =  $self.find('#btn_add-video');
         cabinetAttrVision.btn_add_event =  $self.find('#btn_add-event');
         cabinetAttrVision.edit_avatar_btns =  $self.find('.edit_avatar_btns');
+        cabinetAttrVision.remove_icon =  $self.find('.event_card-remove_icon');
 
         cabinetField.firstName = $self.find('.profil_name');
         cabinetField.lastName = $self.find('.profil_secondname');
@@ -122,16 +108,171 @@ var PORTAL = (function (PORTAL, $) {
         var btn_upPhoto = $self.find('#btn_upPhoto');
         var input_upload = document.querySelector('.input_upload');
         var inputFinishVal = {};
+        var reitVal = 'k';
+        var heart_block = $self.find('.heart-block');
+
+        function notAuthorized(){
+            console.log("Авторизируйтесь пожалуйста!");
+            fillThreeStrings(selectedPerson);
+            cabinetAttrHide.btn_mail.on('click', showAlertAuthorized);
+            cabinetAttrHide.btn_likes.on('click', showAlertAuthorized);
+            cabinetAttrHide.btn_calc.on('click', showAlertAuthorized);
+            cabinetAttrHide.btn_add_comment.on('click', showAlertAuthorized);
+        }
+
+        function showAlertAuthorized(){
+            modalW.openMWindow(".aut_please", "#modal-create_event");
+            $self.find('.aut_please').css('color', '#a0a0a0'); //#afa58e #dc5e4e
+            setTimeout(()=>{modalW.closeMWindow(".aut_please", "#modal-create_event")}, 900);
+        }
+
+        function showAlertSorry(){
+            modalW.openMWindow(".dont_work", "#modal-create_event");
+            $self.find('.dont_work').css('color', '#a0a0a0'); //#afa58e #dc5e4e
+            setTimeout(()=>{modalW.closeMWindow(".dont_work", "#modal-create_event")}, 1200);
+        }
 
         function authorizedUser(){
             console.log("Добро пожаловать!");
             fillStrings(selectedPerson);
             cabinetAttrHide.btn_add_comment.on('click', sendComment);
-            cabinetAttrHide.btn_likes.on('click',  () => console.log('hi'));
             cabinetAttrHide.btn_calc.on('click', showAlertSorry);
+            $self.find('#close_btn_estimate').on('click', () => modalW.closeMWindow("#popup_estimate", "#modal-create_event"));
+            cabinetAttrHide.btn_likes.on('click',  () => modalW.openMWindow("#popup_estimate", "#modal-create_event"));
+
             cabinetAttrHide.btn_mail.on('click', () => modalW.openMWindow("#popup_mail_event", "#modal-create_event"));
             $self.find('#close_btn_event').on('click', () => modalW.closeMWindow("#popup_mail_event", "#modal-create_event"));
             $self.find('#btn_send_event').on('click', infoForMail);
+            $self.find('#btn_estimate').on('click', infoForEstimate);
+            heart_block.on('click', estimateVal);
+        }
+
+
+
+        function estimateVal(ev){
+            reitVal = event.target.classList[0].slice(10);
+            for (var i = 1 ; i <= 5 ; i++)
+                heart_block.find(`.heart-reit${i}`).removeClass('red-heart');
+            for (var i = 1; i <= reitVal; i++)
+                heart_block.find(`.heart-reit${i}`).addClass('red-heart');
+        }
+
+        function infoForEstimate(){
+
+            var dataSend = {};
+            dataSend.authorId = Cookies.get('userId');
+            var text = $self.find('#popup_estimate .trumbowyg-editor').html();
+            console.log(typeof(+reitVal));
+
+            if (text && text !== " " /*&& typeof(reitVal) === 'number'*/){
+                dataSend.reitVal = reitVal;
+                dataSend.content = text;
+                dataSend.authorFirstName = Cookies.get('firstName') ? Cookies.get('firstName') : '';
+                dataSend.authorLastName =  Cookies.get('lastName') ? Cookies.get('lastName') : '';
+                dataSend.authorAvatar  =  Cookies.get('avatar') ? Cookies.get('avatar')
+                    : `/etc/clientlibs/wedding/pages/images/any_img/default_avatar.jpg`;
+                dataSend.authorSpeciality = Cookies.get('workSphere') ? Cookies.get('workSphere') : 'Клиент' ;
+                dataSend.dateSent = +new Date();
+                $self.find('#popup_estimate .trumbowyg-editor').html('');
+                modalW.closeMWindow("#popup_estimate", "#modal-create_event");
+                modalW.openMWindow(".estimate_success", "#modal-create_event");
+                $self.find('.estimate_success').css('color', '#a0a0a0'); //#afa58e #dc5e4e
+                setTimeout(()=>{modalW.closeMWindow(".estimate_success", "#modal-create_event")}, 900);
+                // sendEstimate(dataSend);
+                sendChangeRequest(dataSend);
+                fillAltComments([dataSend]);
+            }
+
+        }
+
+        function sendEstimate(dataSend){
+            console.dir(dataSend);
+            $.ajax({
+                url: 'http://wedding-services.mycloud.by/services/rest.partner/mail.json',  // вероятный запрос на отправку мыла
+                type: 'PUT',
+                dataType: 'json',
+                data: dataSend,
+                success: (data) => {
+                    console.log('What you send for me?');
+                    console.log(data);
+                },
+                error: (e) =>{
+                    console.log(e);
+                }
+            });
+        }
+
+        function fillComments(comments){ //   - Первый вариант по приходящему сейчас ответу
+
+            var comm = $self.find('.comment_field');
+            var wrapper = $self.find('.partner_comments-wrapper');
+
+            comments.forEach(function(elem, i, arr){
+
+                var newItem = comm.clone();
+                newItem.find('.comment_field-text').html(elem);
+                wrapper.append(newItem);
+
+            });
+        }
+
+        function fillAltComments(comments){ // Вариант как в дизайне.
+
+            console.dir(comments);
+            var comm = $self.find('.hidden_full .comment_field');
+            var wrapper = $self.find('.partner_comments-wrapper');
+
+            comments.forEach(function(elem, i, arr){
+
+                var newItem = comm.clone();
+
+                elem.authorAvatar ? newItem.find('.mini-avatar').css('backgroundImage',`url('${elem.authorAvatar}')`) : '';
+                elem.authorFirstName ? newItem.find('.comment_field-author_name').html(elem.authorFirstName) : '';
+                elem.authorLastName ? newItem.find('.comment_field-author_name').html(newItem.find('.comment_field-author_name').html()+' '+elem.authorLastName) : '';
+                elem.authorSpeciality ? newItem.find('.comment_field-author_category').html(specialityTranslate(elem.authorSpeciality)) : '';
+
+                newItem.find('.comment_field-text').html(elem.content);
+                newItem.find('.comment_field-date_fild').text(formatDate.f(elem.dateSent));
+
+                newItem.find('.comment_field-date_fild').text(formatDate.f(elem.dateSent));
+                wrapper.append(newItem);
+
+            });
+
+        }
+
+        function sendComment(){ // узнать что тут надо отправлять !!!
+
+            var content = $self.find('#partner_comments .trumbowyg-editor').html();
+
+            if (content && content !== " " /*&& typeof(reitVal) === 'number'*/){
+
+
+                $self.find('#partner_comments .trumbowyg-editor').html('');
+
+                console.log(content);
+
+                var commentInfo = [{content:content,authorId:Cookies.get('userId'),authorCity:Cookies.get('city')}];
+                sendChangeRequest({comments:commentInfo});
+
+                var commentInfo2 = {content: content,
+                    reitVal: reitVal,
+                    authorId: Cookies.get('userId'),
+                    authorCity: Cookies.get('city'),
+                    authorFirstName: Cookies.get('firstName'),
+                    authorLastName: Cookies.get('lastName'),
+                    authorAvatar: Cookies.get('avatar'),
+                    authorSpeciality: Cookies.get('workSphere') ? Cookies.get('workSphere') : 'Клиент',
+                    dateSent: +new Date()
+                };
+
+                sendChangeRequest({comments:commentInfo2});
+                sendChangeRequest({comments:content});
+
+                fillAltComments([commentInfo2]);
+
+            }
+
         }
 
         function infoForMail(){
@@ -151,7 +292,7 @@ var PORTAL = (function (PORTAL, $) {
         }
 
         function sendMail(dataSend){
-            console.dir(dataSend);
+
             $.ajax({
                 url: 'http://wedding-services.mycloud.by/services/rest.partner/mail.json',  // вероятный запрос на отправку мыла
                 type: 'PUT',
@@ -164,28 +305,6 @@ var PORTAL = (function (PORTAL, $) {
             });
         }
 
-        function notAuthorized(){
-            console.log("Авторизируйтесь пожалуйста!");
-            fillThreeStrings(selectedPerson);
-            cabinetAttrHide.btn_mail.on('click', showAlertAuthorized);
-            cabinetAttrHide.btn_likes.on('click', showAlertAuthorized);
-            cabinetAttrHide.btn_calc.on('click', showAlertAuthorized);
-            cabinetAttrHide.btn_add_comment.on('click', showAlertAuthorized);
-
-        }
-
-        function showAlertAuthorized(){
-            modalW.openMWindow(".aut_please", "#modal-create_event");
-            $self.find('.aut_please').css('color', '#a0a0a0'); //#afa58e #dc5e4e
-            setTimeout(()=>{modalW.closeMWindow(".aut_please", "#modal-create_event")}, 900);
-        }
-
-        function showAlertSorry(){
-            modalW.openMWindow(".dont_work", "#modal-create_event");
-            $self.find('.dont_work').css('color', '#a0a0a0'); //#afa58e #dc5e4e
-            setTimeout(()=>{modalW.closeMWindow(".dont_work", "#modal-create_event")}, 1200);
-        }
-
         function onChangeFields(){
 
             btn_change.addClass('hidden_full');
@@ -196,7 +315,7 @@ var PORTAL = (function (PORTAL, $) {
 
         }
 
-        function  exitWithoutSave(e) {
+        function exitWithoutSave(e) {
             if (e.keyCode === 27) { //esc
                 fillStrings(selectedPerson);
                 btn_save.addClass('hidden_full');
@@ -226,6 +345,23 @@ var PORTAL = (function (PORTAL, $) {
             btn_save.addClass('hidden_full');
             btn_change.removeClass('hidden_full');
             var dataSend = {};
+            var start_prise = inputFinishVal.priceStart.find('input').val();
+            var end_prise = inputFinishVal.priceEnd.find('input').val();
+
+            if ( start_prise < 0){
+                start_prise = 0 - start_prise;
+                inputFinishVal.priceStart.find('input').val( start_prise );
+            }
+
+            if ( end_prise < 0){
+                end_prise = 0 - end_prise;
+                inputFinishVal.priceEnd.find('input').val( end_prise );
+            }
+
+            if ( start_prise > end_prise ){
+                inputFinishVal.priceEnd.find('input').val(start_prise);
+                inputFinishVal.priceStart.find('input').val(end_prise);
+            }
 
             for (props in cabinetField){
                 dataSend[props] = inputFinishVal[props].find('input').val();
@@ -260,24 +396,8 @@ var PORTAL = (function (PORTAL, $) {
 
         }
 
-        function sendComment(){ // узнать что тут надо отправлять !!!
-
-            var content = $self.find('.trumbowyg-editor').html();
-            $self.find('.trumbowyg-editor').html('');
-
-            console.log(content);
-
-            var commentInfo = [{content:content,authorID:Cookies.get('userId'),authorCity:Cookies.get('city')}];
-            sendChangeRequest({comments:commentInfo});
-            commentInfo = {content:content,authorID:Cookies.get('userId'),authorCity:Cookies.get('city')}; //[]
-            sendChangeRequest({comments:commentInfo});
-
-            sendChangeRequest({comments:content});
-
-        }
-
         function myCabinet(){
-
+            console.log("It's REALY MY CABINET  of Partner  !!!!");
             btn_change.removeClass('hidden_full');
             btn_change.on('click', onChangeFields);
 
@@ -333,7 +453,7 @@ var PORTAL = (function (PORTAL, $) {
             eventSend.background3 = `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`;
 
             $self.find('.popup-create .trumbowyg-editor').html('');
-            eventSend.id = selectedPerson.id;  // - убрать, когда будет пересылаться через sendChangeRequest
+            eventSend.id = selectedPerson.id;
 
             modalW.closeMWindow('#popup-create_event', '#modal-create_event');
             console.dir(eventSend);
@@ -364,7 +484,7 @@ var PORTAL = (function (PORTAL, $) {
         }
 
         function fillEvents(events) {
-            console.log(`function fillEvent write ${events.length} events`);
+
             console.dir(events);
             $self.find('.no_event-text').remove();
             var wrapper = $self.find('.events-wrapper');
@@ -382,9 +502,36 @@ var PORTAL = (function (PORTAL, $) {
                 elem.id && elem.speciality && elem.city
                     ? newItem.find('.event_card-href').attr('href',`/content/wedding/sales/sale.html?${elem.id}#${elem.speciality}&${elem.city}`)
                     : '';
+                newItem.find('.event_card-remove_icon').on('click', removeEvent);
                 wrapper.append(newItem);
 
             });
+
+        }
+
+        function removeEvent(e){
+
+            $.ajax({
+                url: `http://wedding-services.mycloud.by/services/rest.events/remove.json?id=${selectedPerson.id}`,
+                type: "POST",
+                dataType: "json",
+                data: {part:`${selectedPerson.resourcePath}/tenders`},
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+                    console.log("beforeSend post !");
+                    console.log();
+                },
+                success: function (data) {
+                    console.log(tenderSend.path);
+                    console.dir(data);
+                },
+                error: function (e) {
+                    console.log('Что-то пошло не так :( ');
+                    console.log(e);
+                }
+            });
+
+            $(e.target).parents('.event_card').css('display','none');
 
         }
 
@@ -480,30 +627,44 @@ String id
             return speciality;
         }
 
-        function fillStrings(selectedPerson) {
-
+        function fillThreeStrings(selectedPerson) {
             $self.find('.profil_name').text(selectedPerson.firstName);
             $self.find('.profil_secondname').text(selectedPerson.lastName);
             $self.find('.partner_speciality').text(specialityTranslate(selectedPerson.speciality));
+        }
 
-            if (selectedPerson.priceStart)
-                $self.find('.prise_start').text(selectedPerson.priceStart);
-            if (selectedPerson.priceEnd)
-                $self.find('.prise_end').text(selectedPerson.priceEnd);
-            if (selectedPerson.phone)
-                $self.find('.phone_string').text(selectedPerson.phone);
-            if (selectedPerson.email)
-                $self.find('.mail_string').text(selectedPerson.email);
-            if (selectedPerson.siteLink)
-                $self.find('.link_string').text(selectedPerson.siteLink);
-            if (selectedPerson.vkLink )
-                $self.find('.vk_string').text(selectedPerson.vkLink);
-            if (selectedPerson.facebookLink )
-                $self.find('.fb_string').text(selectedPerson.facebookLink);
-            if (selectedPerson.instagramLink )
-                $self.find('.insta_string').text(selectedPerson.instagramLink);
+
+        function fillStrings(selectedPerson) {
+
+            var $partnerCard = $self.find('.profile_data');
+            var reiting_string =  $partnerCard.find('.profil_reiting_string');
+
+            $partnerCard.find('.profil_name').text(selectedPerson.firstName);
+            $partnerCard.find('.profil_secondname').text(selectedPerson.lastName);
+            $partnerCard.find('.partner_speciality').text(specialityTranslate(selectedPerson.speciality));
+
+            var z = Math.round(Math.random()*999); // Убрать когда начнет приходить в запросе
+            selectedPerson.viewsCount ? $partnerCard.find('.profil_views_count').text(selectedPerson.viewsCount)
+                : $self.find('.profil_views_count').text(z);
+            selectedPerson.likeCount ? $partnerCard.find('.profil_likes_count').text(selectedPerson.likeCount) : $self.find('.profil_likes_count').text(Math.round(z/(Math.random()*3+4)));
+            selectedPerson.reiting ? setReiting(selectedPerson.reiting) : setReiting('4');
+
+            selectedPerson.priceStart ? $partnerCard.find('.prise_start').text(selectedPerson.priceStart) : '';
+            selectedPerson.priceEnd ? $partnerCard.find('.prise_end').text(selectedPerson.priceEnd) : '';
+            selectedPerson.phone ? $partnerCard.find('.phone_string').text(selectedPerson.phone) : '';
+            selectedPerson.email ? $partnerCard.find('.mail_string').text(selectedPerson.email) : '';
+            selectedPerson.siteLink ? $partnerCard.find('.link_string').text(selectedPerson.siteLink) : '';
+            selectedPerson.vkLink ? $partnerCard.find('.vk_string').text(selectedPerson.vkLink) : '';
+            selectedPerson.facebookLink ? $partnerCard.find('.fb_string').text(selectedPerson.facebookLink) : '';
+            selectedPerson.instagramLink ? $partnerCard.find('.insta_string').text(selectedPerson.instagramLink) : '';
+
+            function setReiting(val){
+                for (var i = 1; i <= val; i++)
+                    reiting_string.find(`#reit_heart${i}`).addClass('red-heart');
+            }
 
         }
+
 
 
         function fillPhoto(photo){
@@ -541,22 +702,6 @@ String id
             });
 
         }
-
-
-        function fillComments(comments){ // todoc - расширить и переделать , когда доделают запрос
-
-            var comm = $self.find('.comment_field');
-            var wrapper = $self.find('.partner_comments-wrapper');
-
-            comments.forEach(function(elem, i, arr){
-
-                var newItem = comm.clone();
-                newItem.find('.comment_field-text').html(elem);
-                wrapper.append(newItem);
-
-            });
-        }
-
 
         (function(){  //  функция переключения страниц
 

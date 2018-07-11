@@ -146,7 +146,7 @@ var PORTAL = (function (PORTAL, $) {
                     success: function (data) {
                         console.log(tenderSend.path);
                         console.dir(data);
-                        data ? fillTenders(data) : fillTenders([tenderSend]);
+                        data ? fillTenders([data]) : fillTenders([tenderSend]);
                     },
                     error: function (e) {
                         console.log('Что-то пошло не так :( ');

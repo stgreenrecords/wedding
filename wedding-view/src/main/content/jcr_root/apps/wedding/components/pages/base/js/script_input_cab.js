@@ -27,10 +27,21 @@ var PORTAL = (function (PORTAL, $) {
             var userTypeFromCookie = Cookies.get('userType');
             var cityFromCookie = Cookies.get('city');
             var workSphereFromCookie = Cookies.get('workSphere');
+            var mini_menu = $self.find('.mini-menu');
+            var mini_menu_drop = $self.find('.mini-menu-drop');
 
-            $self.find('.mini-menu').on('click', function(){
-                $self.find('.mini-menu-drop').toggleClass('hidden_cl');
+            mini_menu.on('click', function(event){
+                mini_menu_drop.toggleClass('hidden_cl');
+                document.addEventListener('keyup', exitMenu);
+                // document.addEventListener('click', exitMenu2, true);
             });
+
+            function  exitMenu(e) {
+                if (e.keyCode === 27) { //esc
+                    mini_menu_drop.toggleClass('hidden_cl');
+                    document.removeEventListener('keyup', exitMenu);
+                }
+            }
 
             $self.find('#mini-menu_exit').on('click', hideCabinetSuccess);
             $self.find('#mini-menu_exit').on('click', clearCookies);
@@ -38,8 +49,7 @@ var PORTAL = (function (PORTAL, $) {
         PORTAL.modules.CabinetInput.AUTH = PORTAL.modules.CabinetInput.AUTH || {};
 
 
-
-            entrance.addEventListener("click", function(evt) {
+        entrance.addEventListener("click", function(evt) {
                 this.style.color = "#555";
             });
 
@@ -97,7 +107,7 @@ var PORTAL = (function (PORTAL, $) {
                 cabinet_login.style.display = "none";
                 cabinet_success.style.display = "flex";
                 $self.find('#mini-menu_my-page').one('click', myPageReloc);
-                $self.find('#cabinet_success .mini-avatar').css('backgroundImage', `url("${Cookies.get('avatar')}")`);
+                $self.find('#cabinet_success .mini-avatar').css('backgroundImage', `url("${Cookies.get('avatar')}")`).one('click', myPageReloc);
             }
 
 

@@ -284,10 +284,6 @@
         padding: 7px;
     }
 
-    .btn-up {
-        right: -3%;
-    }
-
 }
 
 @media screen and (min-width: 899px) and (max-width: 1299px) {
@@ -309,10 +305,6 @@
     .lend-partners-header-title2 {
         font-size: 52pt;
         padding-top: 220px;
-    }
-
-    .btn-up {
-        right: -3%;
     }
 
 }

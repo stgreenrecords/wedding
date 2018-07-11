@@ -55,30 +55,34 @@
                 </div>
 
             </div>
+            <div class="profile_data">
 
-            <p class="profil_name"> </p>
-            <p class="profil_secondname"> </p>
-            <p class="partner_speciality"> </p>
+                <p class="profil_name"> </p>
+                <p class="profil_secondname"> </p>
+                <p class="partner_speciality"> </p>
 
-            <div class="info_reit_block">
-                <span class="profil_views_icon" title="Показатель общего количества просмотров"> <img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/count_views.png" alt="views_icon" > 42 </span>
-                <span class="profil_likes_icon" title="Показатель общего количества оценок"> <img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/count_mark.png" alt="views_icon" > 15 </span>
-                <div class="profil_reiting_string">
-                    <div id="reit_heart1" class="reit_heart_all"></div>
-                    <div id="reit_heart2" class="reit_heart_all"></div>
-                    <div id="reit_heart3" class="reit_heart_all"></div>
-                    <div id="reit_heart4" class="reit_heart_all"></div>
-                    <div id="reit_heart5" class="reit_heart_all"></div>
+                <div class="info_reit_block">
+                    <span class="profil_views_icon" title="Показатель общего количества просмотров"> <img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/count_views.png" alt="views_icon" > <span class="profil_views_count"> 42 </span></span>
+                    <span class="profil_likes_icon" title="Показатель общего количества оценок"> <img src="/etc/clientlibs/wedding/pages/images/profil_partner/aside/count_mark.png" alt="views_icon" >  <span class="profil_likes_count"> 15 </span></span>
+                    <div class="profil_reiting_string">
+                        <div id="reit_heart1" class="reit_heart_all"></div>
+                        <div id="reit_heart2" class="reit_heart_all"></div>
+                        <div id="reit_heart3" class="reit_heart_all"></div>
+                        <div id="reit_heart4" class="reit_heart_all"></div>
+                        <div id="reit_heart5" class="reit_heart_all"></div>
+                    </div>
                 </div>
-            </div>
 
-            <p class="info_string prise_string"> <span class="prise_start">1</span> - <span class="prise_end">150 </span> рублей</p>
-            <p class="info_string phone_string">+375...</p>
-            <p class="info_string mail_string">mail...</p>
-            <p class="info_string link_string">http://... </p>
-            <p class="info_string vk_string">vk.com/...</p>
-            <p class="info_string fb_string">facebook.com/...</p>
-            <p class="info_string insta_string">instagram.com/...</p>
+
+                <p class="info_string prise_string"> <span class="prise_start">1</span> - <span class="prise_end">150 </span> рублей</p>
+                <p class="info_string phone_string">+375.(..</p>
+                <p class="info_string mail_string">mail...</p>
+                <p class="info_string link_string">http://... </p>
+                <p class="info_string vk_string">vk.com/...</p>
+                <p class="info_string fb_string">facebook.com/...</p>
+                <p class="info_string insta_string">instagram.com/...</p>
+
+            </div>
 
             <div class="partner_aside_calendar">
                 <div class="calendar_date_fild"> </div>
@@ -205,6 +209,15 @@
 
                         <div class="event_card-sample event_card">
 
+                            <div class="tender_card_edit">
+                                <img class="tender_card-edit_icon hidden_full"
+                                     src='/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/edit.png'
+                                     alt="edit_icon" title="Редактировать">
+                                <img class="event_card-remove_icon"
+                                     src='/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/remove_tender.png'
+                                     alt="remove_tender" title="Удалить">
+                            </div>
+
                             <a class="event_card-href" href="/content/wedding/sales/sale.html?">
                                 <div class="event_card-bg">
 
@@ -244,7 +257,7 @@
 
 
 
-            <section id="partner_comments" class="hidden_full">
+            <section id="partner_comments" class="hidden_full"> <!--  -->
 
                 <div class="partner_comments-wrapper">
 
@@ -255,7 +268,7 @@
                         <div class="comment_field">
                             <div class="mini-avatar"> </div>
                             <div class="comment_field-author_name"> Эйчантрис Васильевна </div>
-                            <div class="comment_field-author_category"> vj </div>
+                            <div class="comment_field-author_category"> Клиент </div>
                             <p class="comment_field-text"> Здравствуйте Олеся, меня зовут Мария. Буду рада предложить Вам отыграть свадьбу на все 200.
                                 У нас в арсенале - дерижабль с обезьянами, танцующие пингвины и слон-бормоглот.
                             </p>
@@ -266,6 +279,19 @@
                 </div>
 
                 <div class="comment-inter_area">
+
+                    <div class="estimate-block">
+                        <span class="estimate-block-title">Оценить:</span>
+
+                        <div class="heart-block">
+                            <div class="heart-reit5 heart-reit">  </div>
+                            <div class="heart-reit4 heart-reit">  </div>
+                            <div class="heart-reit3 heart-reit">  </div>
+                            <div class="heart-reit2 heart-reit">  </div>
+                            <div class="heart-reit1 heart-reit">  </div>
+                        </div>
+                    </div>
+
                     <textarea class="comment_inter" name="comment_inter" placeholder="Оставьте комментарий" > </textarea>
                 </div>
 
@@ -337,6 +363,41 @@
             <div>
 
             </div>
+
+        </div>
+
+        <div id="popup_estimate" class="popup_alert popup_estimate">
+
+            <div class="mail-text_area">
+                <img id="close_btn_estimate" class="close_btn btn" src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/close_btn.png" alt="close_btn">
+                <div class="mail-text-text_area">
+
+                    <div class="estimate-block">
+                        <span class="estimate-block-title">Оценить:</span>
+
+                        <div class="heart-block">
+                            <div class="heart-reit5 heart-reit">  </div>
+                            <div class="heart-reit4 heart-reit">  </div>
+                            <div class="heart-reit3 heart-reit">  </div>
+                            <div class="heart-reit2 heart-reit">  </div>
+                            <div class="heart-reit1 heart-reit">  </div>
+                        </div>
+                    </div>
+
+                    <textarea  name="comment_inter" placeholder="Напишите письмо"> </textarea>
+                </div>
+                <img id="btn_estimate" class="btn_send btn" src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/send_btn.png" alt="btn_send">
+            </div>
+
+            <div>
+
+            </div>
+
+        </div>
+
+        <div class="estimate_success popup_alert">
+
+            <p> Оценка отправлена </p>
 
         </div>
 

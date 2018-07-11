@@ -1,0 +1,38 @@
+.estimate-block {
+    color: #606060;
+}
+
+.heart-block{
+    display:  inline-flex;
+    flex-direction: row-reverse;
+}
+
+.heart-reit{
+    width: 17px;
+    height: 14px;
+    margin: 3px;
+    background-image: url("/etc/clientlibs/wedding/pages/images/profil_partner/aside/grey_heart_reit.png");
+}
+
+.heart-reit{
+    position: relative;
+    cursor: pointer;
+}
+
+.heart-reit1:hover, .heart-reit2:hover, .heart-reit3:hover, .heart-reit4:hover, .heart-reit5:hover{
+    background-image: url("/etc/clientlibs/wedding/pages/images/profil_partner/aside/red_heart_reit.png");
+}
+
+.heart-reit2:hover ~ .heart-reit1, .heart-reit3:hover ~ .heart-reit2, .heart-reit3:hover ~ .heart-reit1,
+.heart-reit4:hover ~ .heart-reit3, .heart-reit4:hover ~ .heart-reit2, .heart-reit4:hover ~ .heart-reit1,
+.heart-reit5:hover ~ .heart-reit3, .heart-reit5:hover ~ .heart-reit2, .heart-reit5:hover ~ .heart-reit1, .heart-reit5:hover ~ .heart-reit4{
+    background-image: url("/etc/clientlibs/wedding/pages/images/profil_partner/aside/red_heart_reit.png");
+}
+
+.red-heart{
+    background-image: url("/etc/clientlibs/wedding/pages/images/profil_partner/aside/red_heart_reit.png");
+}
+
+.comment_field-text{
+    margin-top: 20px;
+}
