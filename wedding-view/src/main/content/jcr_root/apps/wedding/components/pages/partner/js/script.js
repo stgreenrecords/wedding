@@ -522,7 +522,6 @@ var PORTAL = (function (PORTAL, $) {
                     console.log();
                 },
                 success: function (data) {
-                    console.log(tenderSend.path);
                     console.dir(data);
                 },
                 error: function (e) {
