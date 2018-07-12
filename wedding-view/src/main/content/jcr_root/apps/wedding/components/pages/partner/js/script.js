@@ -101,7 +101,7 @@ var PORTAL = (function (PORTAL, $) {
                         selectedPerson.description ? fillDescription(selectedPerson.description) : '';
                         selectedPerson.events ? fillEvents(selectedPerson.events) : '';
                         selectedPerson.comments ? fillComments(selectedPerson.comments) : '';
-                        selectedPerson.portfolio ? fillPhoto(selectedPerson.portfolio) : '';
+                        selectedPerson.portfolio && selectedPerson.portfolio.length > 0 ? fillPhoto(selectedPerson.portfolio) : fillPhoto(FakePartner.portfolio);
                         selectedPerson.videos ? fillVidosy(selectedPerson.videos) : fillVidosy(FakePartner.videos);
 
                     }
@@ -757,20 +757,12 @@ String id
 
         }
 
-
-
         function fillPhoto(photo){
 
             var wrapper = $self.find('.partner_photo-wrapper');
-            // todoc -сделать функцию отображения фоток по 12 шт. - когда сделают полный колбек.
             photo.forEach(function(elem){
 
                 console.log(elem);
-                wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
-                wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
-                wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
-                wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
-                wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
                 wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
                 wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
 

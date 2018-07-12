@@ -37,11 +37,28 @@
     margin:2%;
 }
 
+@media screen and (max-width: 666px) {
+
+    .photo_unit{
+        width: 48%;
+    }
+
+    #partner_stock .event_card {
+        width: 96%;
+        padding: 2%;
+    }
+
+}
+
 @media screen and (min-width: 933px) and (max-width: 1200px) {
 
     #partner_stock .event_card {
         width: 96%;
         padding: 2%;
+    }
+
+    .photo_unit{
+        width: 48%;
     }
 
 }
