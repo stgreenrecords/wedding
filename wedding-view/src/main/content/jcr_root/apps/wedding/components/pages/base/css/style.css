@@ -933,7 +933,7 @@ footer > div a, footer > div{
     width: 70%;
 }
 
-.red-heart{
+div.red-heart{
     background-image: url("/etc/clientlibs/wedding/pages/images/profil_partner/aside/red_heart_reit.png");
 }
 
@@ -1221,10 +1221,6 @@ footer > div a, footer > div{
     cursor: pointer;
 }
 
-.add-video-field input{
-    width: 400px;
-}
-
 nav input[type="checkbox"] {
     width: 100%;
     display: none;
@@ -1486,4 +1482,12 @@ label.head-menu {
     right: 20px;
     padding: 10px;
     margin-bottom: 20px;
+}
+
+.input_Inner{
+    height: 30px;
+    margin: 10px 2%;
+    padding: 10px 0 10px 3%;
+    width: 92%;
+    font-size: 15px;
 }

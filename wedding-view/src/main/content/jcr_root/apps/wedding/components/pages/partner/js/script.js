@@ -8,6 +8,43 @@ var PORTAL = (function (PORTAL, $) {
 
         console.log('Component: "Partner"');
 
+        var FakePartner = {
+            authType:"EMAIL",
+            avatar:null,
+            bookedDates:null,
+            city:"minsk",
+            comments:["Супер костюмчик."],
+            description:"<p>Лучшие костюмы города Минска в ассортименте.</p><p><br></p>",
+            email:"funny@gmail.com",
+            events:[{}],
+            facebookLink:"facebook.com/...",
+            firstName:"Коля",
+            id:"70ebf6a8-8720-4149-af51-a201ebc44ff3",
+            instagramLink:"instagram.com/...",
+            lastName:"Герасимов",
+            name:null,
+            phone:"+375(29)3222232",
+            portfolio:[`/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`,
+                `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`,
+                `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`,
+                `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`],
+            priceEnd:"152",
+            priceStart:"3",
+            resourcePath:"/home/users/wedding/partners/costumes/minsk/70/6koggXteAh47KquWyMCf9",
+            resourceType:'FakeType',
+            siteLink:"http://...",
+            speciality:"costumes",
+            videos:[/*'QCBtOO1bBKo',*/
+                'TO3FGZnqgu4',
+                'eV6u-_WwEqE'
+            ],
+            vip:false,
+            vipStatus:false,
+            vkLink:"vk.com/..."
+        };
+
+        console.dir(FakePartner);
+
         $("textarea").trumbowyg({  // RichText
             svgPath: '/etc/clientlibs/wedding/external/icons/richtext/icons.svg',
             lang: 'ru'
@@ -63,9 +100,9 @@ var PORTAL = (function (PORTAL, $) {
 
                         selectedPerson.description ? fillDescription(selectedPerson.description) : '';
                         selectedPerson.events ? fillEvents(selectedPerson.events) : '';
-                        selectedPerson.portfolio ? fillPhoto(selectedPerson.portfolio) : '';
-                        selectedPerson.videos ? fillVidosy(selectedPerson.videos) : '';
                         selectedPerson.comments ? fillComments(selectedPerson.comments) : '';
+                        selectedPerson.portfolio ? fillPhoto(selectedPerson.portfolio) : '';
+                        selectedPerson.videos ? fillVidosy(selectedPerson.videos) : fillVidosy(FakePartner.videos);
 
                     }
                 });
@@ -94,6 +131,7 @@ var PORTAL = (function (PORTAL, $) {
         cabinetAttrVision.btn_add_event =  $self.find('#btn_add-event');
         cabinetAttrVision.edit_avatar_btns =  $self.find('.edit_avatar_btns');
         cabinetAttrVision.remove_icon =  $self.find('.event_card-remove_icon');
+        cabinetAttrVision.remove_icon_vid =  $self.find('.video-remove_icon');
 
         cabinetField.firstName = $self.find('.profil_name');
         cabinetField.lastName = $self.find('.profil_secondname');
@@ -409,7 +447,7 @@ var PORTAL = (function (PORTAL, $) {
                 cabinetAttrVision[prop].removeClass('hidden_full');
 
             cabinetAttrVision.btn_add_text.one('click', showInnerText);
-            cabinetAttrVision.btn_add_video.on('click', showInnerVideo);
+            cabinetAttrVision.btn_add_video.one('click', showInnerVideo);
             cabinetAttrVision.btn_add_event.on('click', showInnerEvent);
             $self.find('#btn-create_save').on('click', createEvent);
             cabinetAttrHide.btn_add_comment.off('click', sendComment);
@@ -557,17 +595,55 @@ String id
         //sendChangeRequest(dataSend);
 
 
+        function fillVidosy(video){
+
+            var wrapper = $self.find('.partner_video-wrapper');
+            var vid = $(document.querySelector('.video_field'));  // $self.find('.video_field');
+
+            video.forEach( elem => {
+                var newItem = vid.clone();
+                // newItem.find('.video_item').attr('src', ''); 0WuU1NU0WCs
+                newItem.find('.video_item').attr('src', `https://www.youtube.com/embed/${elem}`);
+                console.log(elem);
+                newItem.find('.video-remove_icon').on('click', removeVideo);
+                wrapper.append(newItem);
+            });
+
+        }
+
         function showInnerVideo(){
-            $self.find('.add-video-field').html(`<input placeholder="Вставьте ссылку на Ваше видео с YouTube">`);
+            $self.find('.add-video-field').html(`<input class="input_Inner" placeholder="Вставьте  код видео = '/sdfkjh' (Знаки вконце ссылки) ">`);
             cabinetAttrVision.btn_add_video.one('click', saveInnerVideo);
         }
 
         function saveInnerVideo(){
             var link = $self.find('.add-video-field input').val();
             $self.find('.add-video-field').html('');
+            fillVidosy([link]);
             sendChangeRequest({videos:link}); // todoc - слать надо массив - в случае подтверждения изменить !!!
             cabinetAttrVision.btn_add_video.one('click', showInnerVideo);
         }
+
+        function removeVideo(e){
+
+            $.ajax({
+                url: `http://wedding-services.mycloud.by/services/rest.video/remove.json?id=${selectedPerson.id}`,
+                type: "POST",
+                dataType: "json",
+                data: {part:`${selectedPerson.resourcePath}/video`},
+                success: function (data) {
+                    console.dir(data);
+                },
+                error: function (e) {
+                    console.log('Что-то пошло не так :( ');
+                    console.log(e);
+                }
+            });
+
+            $(e.target).parents('.video_field').css('display','none');
+
+        }
+
 
 
         function fillDescription(text){
@@ -632,9 +708,21 @@ String id
         }
 
         function fillThreeStrings(selectedPerson) {
-            $self.find('.profil_name').text(selectedPerson.firstName);
-            $self.find('.profil_secondname').text(selectedPerson.lastName);
-            $self.find('.partner_speciality').text(specialityTranslate(selectedPerson.speciality));
+            var $partnerCard = $self.find('.profile_data');
+            var reiting_string =  $partnerCard.find('.profil_reiting_string');
+            $partnerCard.find('.profil_name').text(selectedPerson.firstName);
+            $partnerCard.find('.profil_secondname').text(selectedPerson.lastName);
+            $partnerCard.find('.partner_speciality').text(specialityTranslate(selectedPerson.speciality));
+            var z = Math.round(Math.random()*999); // Убрать когда начнет приходить в запросе
+            selectedPerson.viewsCount ? $partnerCard.find('.profil_views_count').text(selectedPerson.viewsCount)
+                : $self.find('.profil_views_count').text(z);
+            selectedPerson.likeCount ? $partnerCard.find('.profil_likes_count').text(selectedPerson.likeCount) : $self.find('.profil_likes_count').text(Math.round(z/(Math.random()*3+4)));
+            selectedPerson.reiting ? setReiting(selectedPerson.reiting) : setReiting('4');
+
+            function setReiting(val){
+                for (var i = 1; i <= val; i++)
+                    reiting_string.find(`#reit_heart${i}`).addClass('red-heart');
+            }
         }
 
 
@@ -685,23 +773,6 @@ String id
                 wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
                 wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
                 wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
-
-            });
-
-        }
-
-
-        function fillVidosy(video){
-
-            var vid = $self.find('.video_field');
-            var wrapper = $self.find('.partner_video-wrapper');
-
-            video.forEach(function(elem, i, arr){
-
-                var newItem = vid.clone();
-                newItem.find('.video_item').attr('src', elem);
-                console.log(elem);
-                wrapper.append(newItem);
 
             });
 
