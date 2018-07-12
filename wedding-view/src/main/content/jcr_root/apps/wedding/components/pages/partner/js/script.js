@@ -618,9 +618,13 @@ String id
 
         function saveInnerVideo(){
             var link = $self.find('.add-video-field input').val();
+            reg = /.*\//ig;  //  https://youtu.be/TO3FGZnqgu4  https://youtu.be/0WuU1NU0WCs?t=6s  https://youtu.be/E9Pit_z_stI
+            reg2 = /[\?\&\#\*].*/ig;
+            link = link.replace(reg,'').replace(reg2,'');
+            console.log(link);
             $self.find('.add-video-field').html('');
             fillVidosy([link]);
-            sendChangeRequest({videos:link}); // todoc - слать надо массив - в случае подтверждения изменить !!!
+            sendChangeRequest({videos:link});
             cabinetAttrVision.btn_add_video.one('click', showInnerVideo);
         }
 
