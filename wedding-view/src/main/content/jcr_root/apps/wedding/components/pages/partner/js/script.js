@@ -598,13 +598,11 @@ String id
         function fillVidosy(video){
 
             var wrapper = $self.find('.partner_video-wrapper');
-            var vid = $(document.querySelector('.video_field'));  // $self.find('.video_field');
+            var vid = $(document.querySelector('.video_field'));  //  0WuU1NU0WCs
 
             video.forEach( elem => {
                 var newItem = vid.clone();
-                // newItem.find('.video_item').attr('src', ''); 0WuU1NU0WCs
                 newItem.find('.video_item').attr('src', `https://www.youtube.com/embed/${elem}`);
-                console.log(elem);
                 newItem.find('.video-remove_icon').on('click', removeVideo);
                 wrapper.append(newItem);
             });
@@ -612,13 +610,14 @@ String id
         }
 
         function showInnerVideo(){
-            $self.find('.add-video-field').html(`<input class="input_Inner" placeholder="Вставьте  код видео = '/sdfkjh' (Знаки вконце ссылки) ">`);
+            $self.find('.add-video-field').html(`<input class="input_Inner" placeholder="Вставьте ссылку на Ваше видео с YouTube">`);
+            document.addEventListener('keyup', exitWithoutSaveVideo);
             cabinetAttrVision.btn_add_video.one('click', saveInnerVideo);
         }
 
         function saveInnerVideo(){
             var link = $self.find('.add-video-field input').val();
-            reg = /.*\//ig;  //  https://youtu.be/TO3FGZnqgu4  https://youtu.be/0WuU1NU0WCs?t=6s  https://youtu.be/E9Pit_z_stI
+            reg = /.*\//ig;  //     https://youtu.be/0WuU1NU0WCs?t=6s
             reg2 = /[\?\&\#\*].*/ig;
             link = link.replace(reg,'').replace(reg2,'');
             console.log(link);
@@ -626,6 +625,15 @@ String id
             fillVidosy([link]);
             sendChangeRequest({videos:link});
             cabinetAttrVision.btn_add_video.one('click', showInnerVideo);
+        }
+
+        function exitWithoutSaveVideo(e) {
+            if (e.keyCode === 27) { //esc
+                $self.find('.add-video-field').html('');
+                cabinetAttrVision.btn_add_video.off('click', saveInnerVideo);
+                cabinetAttrVision.btn_add_video.one('click', showInnerVideo);
+                document.removeEventListener('keyup', exitWithoutSaveVideo);
+            }
         }
 
         function removeVideo(e){
