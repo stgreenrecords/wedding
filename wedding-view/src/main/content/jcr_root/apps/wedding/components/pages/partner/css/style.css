@@ -29,10 +29,10 @@
     background-image: url("/etc/clientlibs/wedding/pages/images/profil_partner/aside/red_heart_reit.png");
 }
 
-.red-heart{
-    background-image: url("/etc/clientlibs/wedding/pages/images/profil_partner/aside/red_heart_reit.png");
-}
-
 .comment_field-text{
     margin-top: 20px;
+}
+
+.content_about_oneself{
+    margin:2%;
 }

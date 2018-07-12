@@ -933,6 +933,10 @@ footer > div a, footer > div{
     width: 70%;
 }
 
+.red-heart{
+    background-image: url("/etc/clientlibs/wedding/pages/images/profil_partner/aside/red_heart_reit.png");
+}
+
 /* ================================ PARTNER off */
 /* ===---    USER start ====----- */
 

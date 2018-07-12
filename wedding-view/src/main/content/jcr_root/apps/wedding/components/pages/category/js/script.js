@@ -77,18 +77,25 @@ var PORTAL = (function (PORTAL, $) {
                     var copy_div = first_div.cloneNode(true);
 
                     $self.find('#search-usually-cont div').detach();
+                    var reiting_string;
 
                     for (var i = 0; i<data.length; i++){
                         copy_div = first_div.cloneNode(true);
-                        k=(k+1)%21;
-                        copy_div.querySelector(".search-usually_img").style.backgroundImage = `url('/etc/clientlibs/wedding/pages/images/any_img/bgi_${k}_0.jpg')`;
+                        k=(k+1)%20;
+                        copy_div.querySelector(".search-usually_img").style.backgroundImage = "url('/etc/clientlibs/wedding/pages/images/any_img/bgi_"+k+"_0.jpg')";
                         copy_div.querySelector(".search-usually_content_name").innerHTML = data[i].firstName + " "+ data[i].lastName;
                         copy_div.querySelector(".search-usually_content_speciality").innerHTML = data[i].speciality;
-                        copy_div.querySelector(".partner_card_href").setAttribute("href",`/content/wedding/catalog/category/partner.html?${data[i].id}#${selectItems.$cat_val}&${selectItems.$city_val}`);
+                        copy_div.querySelector(".partner_card_href").setAttribute("href",`/content/wedding/catalog/category/partner.html?${data[i].id}#${selectItems.$cat_val}&${selectItems.$city_val}`);//TODO - ${data[i].city} - сделать когда исправят РЕСТ
                         copy_div.setAttribute('data_userId', data[i].id);
+                        reiting_string = copy_div.querySelector(".profil_reiting_string");
+                        data.reiting ? setReiting(data.reiting) : setReiting(Math.floor(Math.random()*2+4));
                         main_container.appendChild(copy_div);
                     }
 
+                    function setReiting(val){
+                        for (var i = 1; i <= val; i++)
+                            reiting_string.querySelector(`#reit_heart${i}`).classList.add('red-heart');
+                    }
                     getAllPersonInCat (selectItems);
 
                 }
@@ -109,20 +116,31 @@ var PORTAL = (function (PORTAL, $) {
 
                     console.dir(data);
                     console.log(selectItems.url_all);
-                    var all_div = document.querySelectorAll(".search-usually");
-                    var first_div = document.querySelector(".search-usually");
-                    var main_container =  document.querySelector("#search-usually-cont");
-                    var k=0;
+
                     if (data.length > 12){
+
+                        var all_div = document.querySelectorAll(".search-usually");
+                        var first_div = document.querySelector(".search-usually");
+                        var main_container =  document.querySelector("#search-usually-cont");
+                        var k=0;
+                        var reiting_string;
+
                         for (var i = 12; i<data.length; i++){
                             var copy_div = first_div.cloneNode(true);
                             k=(k+1)%21;
                             copy_div.querySelector(".search-usually_img").style.backgroundImage = `url('/etc/clientlibs/wedding/pages/images/any_img/bgi_${k}_0.jpg')`;
                             copy_div.querySelector(".search-usually_content_name").innerHTML = data[i].firstName + " "+ data[i].lastName;
                             copy_div.querySelector(".search-usually_content_speciality").innerHTML = data[i].speciality;
-                            copy_div.querySelector(".partner_card_href").setAttribute("href",`/content/wedding/catalog/category/partner.html?${data[i].id}#${selectItems.$cat_val}&${selectItems.$city_val}`);
+                            copy_div.querySelector(".partner_card_href").setAttribute("href",`/content/wedding/catalog/category/partner.html?${data[i].id}#${selectItems.$cat_val}&${selectItems.$city_val}`);//TODOс  - ??? /*&${data[i].speciality}*/ - ${data[i].city} - сделать когда исправят РЕСТ
                             copy_div.setAttribute('data_userId', data[i].id);
+                            reiting_string = copy_div.querySelector(".profil_reiting_string");
+                            data.reiting ? setReiting(data.reiting) : setReiting(Math.floor(Math.random()*3+3));
                             main_container.appendChild(copy_div);
+                        }
+
+                        function setReiting(val){
+                            for (var i = 1; i <= val; i++)
+                                reiting_string.querySelector(`#reit_heart${i}`).classList.add('red-heart');
                         }
                     }
                 }
