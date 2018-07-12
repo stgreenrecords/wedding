@@ -1138,6 +1138,10 @@ footer > div a, footer > div{
     min-height: 100px;
 }
 
+.comment-inter_area textarea{
+    opacity: 0;
+}
+
 .tender_comment-cont{
     margin-top: 50px;
     margin-bottom: 50px;

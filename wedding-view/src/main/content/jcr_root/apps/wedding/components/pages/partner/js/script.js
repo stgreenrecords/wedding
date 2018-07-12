@@ -61,6 +61,7 @@ var PORTAL = (function (PORTAL, $) {
                         Cookies.get('authStatus') === 'authorized' && Cookies.get('authType') && Cookies.get('userId') === selectedPerson.id ? myCabinet() : '';
                         Cookies.get('authStatus') === 'authorized' && Cookies.get('authType')  ? authorizedUser() : notAuthorized();
 
+                        selectedPerson.description ? fillDescription(selectedPerson.description) : '';
                         selectedPerson.events ? fillEvents(selectedPerson.events) : '';
                         selectedPerson.portfolio ? fillPhoto(selectedPerson.portfolio) : '';
                         selectedPerson.videos ? fillVidosy(selectedPerson.videos) : '';
@@ -348,17 +349,17 @@ var PORTAL = (function (PORTAL, $) {
             var start_prise = inputFinishVal.priceStart.find('input').val();
             var end_prise = inputFinishVal.priceEnd.find('input').val();
 
-            if ( start_prise < 0){
+            if ( +start_prise < 0){
                 start_prise = 0 - start_prise;
                 inputFinishVal.priceStart.find('input').val( start_prise );
             }
 
-            if ( end_prise < 0){
+            if (+end_prise < 0){
                 end_prise = 0 - end_prise;
                 inputFinishVal.priceEnd.find('input').val( end_prise );
             }
 
-            if ( start_prise > end_prise ){
+            if ( +start_prise > +end_prise ){
                 inputFinishVal.priceEnd.find('input').val(start_prise);
                 inputFinishVal.priceStart.find('input').val(end_prise);
             }
@@ -407,7 +408,7 @@ var PORTAL = (function (PORTAL, $) {
             for (prop in cabinetAttrVision)
                 cabinetAttrVision[prop].removeClass('hidden_full');
 
-            cabinetAttrVision.btn_add_text.on('click', showInnerText);
+            cabinetAttrVision.btn_add_text.one('click', showInnerText);
             cabinetAttrVision.btn_add_video.on('click', showInnerVideo);
             cabinetAttrVision.btn_add_event.on('click', showInnerEvent);
             $self.find('#btn-create_save').on('click', createEvent);
@@ -562,30 +563,34 @@ String id
         }
 
         function saveInnerVideo(){
-            var link =  $self.find('.add-video-field input').val();
+            var link = $self.find('.add-video-field input').val();
             $self.find('.add-video-field').html('');
             sendChangeRequest({videos:link}); // todoc - слать надо массив - в случае подтверждения изменить !!!
             cabinetAttrVision.btn_add_video.one('click', showInnerVideo);
         }
 
 
-
+        function fillDescription(text){
+            $self.find('.content_about_oneself').html(text);
+        }
 
         function showInnerText(){
-            var textAreal = $self.find('.content_about_oneself');
-            var content =  textAreal.html();
-            textAreal.html(`<textarea> ${content} </textarea>`);
-            $self.find('textarea').trumbowyg({  // RichText
-                svgPath: '/etc/clientlibs/wedding/external/icons/richtext/icons.svg',
-                lang: 'ru'
-            });
+            var textP = $self.find('.content_about_oneself');
+            var content =  textP.html();
+            textP.addClass('hidden_full');
+            var textAreal =  $self.find('.partner_about_oneself--edit');
+            textAreal.removeClass('hidden_full');
+            textAreal.find('.trumbowyg-editor').html(content);
             cabinetAttrVision.btn_add_text.one('click', saveInnerText);
         }
 
         function saveInnerText(){
-            // var textAreal = ;
-            var content =  $self.find('.content_about_oneself textarea').val();
-            $self.find('.content_about_oneself').html(content);
+            var textAreal =  $self.find('.partner_about_oneself--edit');
+            var content =  textAreal.find('.trumbowyg-editor').html();
+            textAreal.addClass('hidden_full');
+            var textP = $self.find('.content_about_oneself'); //
+            textP.removeClass('hidden_full');
+            textP.html(content);
             sendChangeRequest({description:content});
             cabinetAttrVision.btn_add_text.one('click', showInnerText);
         }

@@ -117,15 +117,17 @@
 
                     <p class="content content_about_oneself"> Партнер еще не заполнил информацию о себе.</p>
 
+                    <div class="partner_about_oneself--edit hidden_full">
+                        <textarea></textarea>
+                    </div>
+
                     <div id="btn_add-text" class="add_btn hidden_full">
                         <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
                     </div>
 
                 </div>
 
-                <input id="file_upl" type="file" multiple="multiple" accept=".txt,image/*">
-                <button class="submit button">Загрузить файлы </button>
-                <div class="ajax-respond"> </div>
+
 
             </section>
 
@@ -155,7 +157,9 @@
                             <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
                         </div>
 
-
+                        <input id="file_upl" type="file" multiple="multiple" accept=".txt,image/*">
+                        <button class="submit button">Загрузить файлы </button>
+                        <div class="ajax-respond"> </div>
 
                     </div>
 
@@ -210,10 +214,10 @@
                         <div class="event_card-sample event_card">
 
                             <div class="tender_card_edit">
-                                <img class="tender_card-edit_icon hidden_full"
+                                <img class="event_card-edit_icon hidden_full"
                                      src='/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/edit.png'
                                      alt="edit_icon" title="Редактировать">
-                                <img class="event_card-remove_icon"
+                                <img class="event_card-remove_icon hidden_full"
                                      src='/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/remove_tender.png'
                                      alt="remove_tender" title="Удалить">
                             </div>
