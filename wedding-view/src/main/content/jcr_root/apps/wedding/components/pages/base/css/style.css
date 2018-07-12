@@ -1237,6 +1237,39 @@ label.head-menu {
 
 @media screen and (max-width: 666px) {
 
+    .main-menu ul{
+        flex-direction: column;
+        position: relative;
+        background-color: #a0a0a0; /* #afa58e;*/
+        z-index: 7;
+    }
+
+    .main-menu ul li{
+        text-align: right;
+        border-bottom: 1px solid #606060;
+    }
+
+    .central-head {
+        padding: 0;
+    }
+
+    .catalog_unit{
+        width: 98%;
+    }
+
+    #partner_stock .event_card {
+        width: 96%;
+        padding: 2%;
+    }
+
+    .search-usually {
+        width: 96%;
+    }
+
+    .menu-cross--hidden, .menu-burger--hidden{
+        cursor: pointer;
+    }
+
     .head-block {
         min-height: 185px;
     }
@@ -1274,8 +1307,6 @@ label.head-menu {
     nav input[type="checkbox"]:checked ~ .head-menu .menu-burger--hidden {display: none;}
 
 }
-
-
 
 @media screen and (min-width: 1499px) {
 
@@ -1356,39 +1387,6 @@ label.head-menu {
         margin-top: 20px;
         vertical-align: top;
     }
-}
-
-@media screen and (max-width: 666px) {
-
-    .main-menu ul{
-        flex-direction: column;
-        position: relative;
-        background-color: #a0a0a0; /* #afa58e;*/
-        z-index: 7;
-    }
-
-    .main-menu ul li{
-        text-align: right;
-        border-bottom: 1px solid #606060;
-    }
-
-    .central-head {
-        padding: 0;
-    }
-
-    .catalog_unit{
-        width: 98%;
-    }
-
-    #partner_stock .event_card {
-        width: 96%;
-        padding: 2%;
-    }
-
-    .search-usually {
-        width: 96%;
-    }
-
 }
 
 #popup_modal, .popup_modal{
