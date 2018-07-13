@@ -22,11 +22,12 @@
 
                 <div class="partner_avatar">
                     <p class="edit_avatar_btns hidden_full">
-                        <img class="avatar_upd_icon" src="/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/upd_photo.png"
-                             title="Изменить аватар" alt="avatar_upd_icon">
+                        <label for="avatar_uploads"> <img class="avatar_upd_icon" src="/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/upd_photo.png" title="Изменить аватар" alt="avatar_upd_icon"> </label>
                         <img class="avatar_remove_icon " src="/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/remove_photo.png"
                              title="Удалить аватар" alt="avatar_remove_icon">
                     </p>
+                    <input class="input_upload_avatar hidden_full" type="file" id="avatar_uploads" name="image_uploads" accept=".jpg, .jpeg, .png">
+                    <img id="save_avatar" class="save_avatar btn hidden_full" src="/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/save_btn.png" alt="SAVE">
                 </div>
 
                 <div class="partner_avatar_btn">
@@ -102,7 +103,6 @@
 
             </div>
 
-
         </aside>
 
 
@@ -127,11 +127,9 @@
 
                 </div>
 
-
-
             </section>
 
-            <section id="partner_photo"  class="hidden_full">
+            <section id="partner_photo" class="hidden_full" >  <!--  -->
 
                 <div>
 
@@ -141,28 +139,40 @@
 
                     </div>
 
+                    <div class="photo_sample hidden_full">
+
+                        <div class="photo_unit">
+                            <div class="tender_card_edit">
+                                <img class="photo-remove_icon hidden_full" src='/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/remove_tender.png' alt="remove_photo" title="Удалить">
+                            </div>
+                            <img class="photo_img" src="" alt="photo-unit">
+                            <div class="photo_enhance"> </div>
+                        </div>
+
+                    </div>
 
                     <div  class="upload_form hidden_full">
 
                         <div>
-                            <label for="image_uploads">Выберите файлы для загрузки (PNG, JPG)</label>
-                            <input class="input_upload" type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple>
+                            <label for="image_uploads"> <img id="btn_addPhoto" src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn"> </label>
+                            <input class="input_upload hidden_full" type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple>
                         </div>
+
                         <div class="preview_upload">
                             <p class="preview_upload-text">  </p>
                         </div>
 
 
-                        <div id="btn_upPhoto" class="add_btn">
-                            <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
+                        <div id="btn_upPhoto" class="add_btn hidden_full">
+                            <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/settings/button_save.png" alt="up-btn">
                         </div>
 
-                        <input id="file_upl" type="file" multiple="multiple" accept=".txt,image/*">
-                        <button class="submit button">Загрузить файлы </button>
-                        <div class="ajax-respond"> </div>
-
+                        <!--
+                            <input id="file_upl" type="file" multiple="multiple" accept=".txt,image/*">
+                           <button class="submit button">Загрузить файлы </button>
+                           <div class="ajax-respond"> </div>
+    -->
                     </div>
-
 
                 </div>
 
@@ -200,7 +210,6 @@
                     <div id="btn_add-video" class="add_btn hidden_full">
                         <img  src="/etc/clientlibs/wedding/pages/images/profil_partner/common_profil/add.png" alt="add-btn">
                     </div>
-
 
                 </div>
 
@@ -267,8 +276,6 @@
                 </div>
 
             </section>
-
-
 
             <section id="partner_comments" class="hidden_full"> <!--  -->
 

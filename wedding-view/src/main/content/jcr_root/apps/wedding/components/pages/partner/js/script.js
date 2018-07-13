@@ -10,7 +10,9 @@ var PORTAL = (function (PORTAL, $) {
 
         var FakePartner = {
             authType:"EMAIL",
-            avatar:null,
+            avatar: `/etc/clientlibs/wedding/pages/images/any_img/bgi_1_4.jpg`,
+            avatar1: `/etc/clientlibs/wedding/pages/images/any_img/bgi_1_7.jpg`,
+            // avatar: `/etc/clientlibs/wedding/pages/images/any_img/bgi_1_${Math.round(Math.random()*9)}.jpg`,
             bookedDates:null,
             city:"minsk",
             comments:["Супер костюмчик."],
@@ -25,6 +27,9 @@ var PORTAL = (function (PORTAL, $) {
             name:null,
             phone:"+375(29)3222232",
             portfolio:[`/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`,
+                `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`,
+                `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`,
+                `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`,
                 `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`,
                 `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`,
                 `/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg`],
@@ -55,12 +60,10 @@ var PORTAL = (function (PORTAL, $) {
         var getPartnerId = (window.location.search).slice(1);
         var getPartnerSpecCity = (window.location.hash).slice(1);
         getPartnerSpecCity = getPartnerSpecCity.replace('&','/');
-
         // if (!getPartnerSpecCity){  //TODOC  - Подключить после подключения регистрации
         //    var getPartnerSpecCity = Cookies.get('workSphere') + '/'+ Cookies.get('city');
         //    var getPartnerId =  Cookies.get('userId');
         // }
-
         if (getPartnerId === Cookies.get('userId') )
             console.log("WaU - the MY CABINET  !!!!");
 
@@ -93,7 +96,6 @@ var PORTAL = (function (PORTAL, $) {
                         console.dir(allCategories);
                         // Object.keys(data).forEach( prop => prop !== 'leading' ?  categ_select.append(`<option value="${prop}">${data[prop]}</option>`)
                         //         : categ_select.append(`<option value="${prop}" selected>${data[prop]}</option>`));
-
 
                         Cookies.get('authStatus') === 'authorized' && Cookies.get('authType') && Cookies.get('userId') === selectedPerson.id ? myCabinet() : '';
                         Cookies.get('authStatus') === 'authorized' && Cookies.get('authType')  ? authorizedUser() : notAuthorized();
@@ -132,6 +134,7 @@ var PORTAL = (function (PORTAL, $) {
         cabinetAttrVision.edit_avatar_btns =  $self.find('.edit_avatar_btns');
         cabinetAttrVision.remove_icon =  $self.find('.event_card-remove_icon');
         cabinetAttrVision.remove_icon_vid =  $self.find('.video-remove_icon');
+        cabinetAttrVision.remove_icon_photo =  $self.find('.photo-remove_icon');
 
         cabinetField.firstName = $self.find('.profil_name');
         cabinetField.lastName = $self.find('.profil_secondname');
@@ -145,7 +148,7 @@ var PORTAL = (function (PORTAL, $) {
         cabinetField.instagramLink = $self.find('.insta_string');
 
         var btn_upPhoto = $self.find('#btn_upPhoto');
-        var input_upload = document.querySelector('.input_upload');
+        var input_upload = document.querySelector('#image_uploads');
         var inputFinishVal = {};
         var reitVal = 'k';
         var heart_block = $self.find('.heart-block');
@@ -436,7 +439,15 @@ var PORTAL = (function (PORTAL, $) {
         }
 
         function myCabinet(){
+
             console.log("It's REALY MY CABINET  of Partner  !!!!");
+            var cookieAva = Cookies.get('avatar');
+
+            if (!selectedPerson.avatar && selectedPerson.avatar !== cookieAva && FakePartner.avatar !== cookieAva){
+                selectedPerson.avatar ? Cookies.set('avatar', selectedPerson.avatar) : Cookies.set('avatar', FakePartner.avatar);
+                window.location.reload();
+            }
+
             btn_change.removeClass('hidden_full');
             btn_change.on('click', onChangeFields);
 
@@ -572,28 +583,19 @@ var PORTAL = (function (PORTAL, $) {
             $(e.target).parents('.event_card').css('display','none');
 
         }
-
         /*
-
-Важно! Запрос посылается методом POST
-/services/rest.events/create.json
-
-Надо слать дополнительный параметр (path) - путь куда надо сохранять акцию.
-    Его можно получить использовав переменную resourcePath
-Полученную при запросе партнёра, на странице которого мы находимся + /events
-
-Например
-/home/users/wedding/partners/photographers/minsk/e/7RZCTBneVLiGlL2yMggcq/events
-
-Доступные поля, их названия и тип:
-
-String resourcePath; +
-String id
-
-*/
-
+                    Важно! Запрос посылается методом POST
+                    /services/rest.events/create.json
+                    Надо слать дополнительный параметр (path) - путь куда надо сохранять акцию.
+                        Его можно получить использовав переменную resourcePath
+                    Полученную при запросе партнёра, на странице которого мы находимся + /events
+                    Например
+                    /home/users/wedding/partners/photographers/minsk/e/7RZCTBneVLiGlL2yMggcq/events
+                    Доступные поля, их названия и тип:
+                    String resourcePath; +
+                    String id
+        */
         //sendChangeRequest(dataSend);
-
 
         function fillVidosy(video){
 
@@ -655,8 +657,6 @@ String id
             $(e.target).parents('.video_field').css('display','none');
 
         }
-
-
 
         function fillDescription(text){
             $self.find('.content_about_oneself').html(text);
@@ -725,6 +725,9 @@ String id
             $partnerCard.find('.profil_name').text(selectedPerson.firstName);
             $partnerCard.find('.profil_secondname').text(selectedPerson.lastName);
             $partnerCard.find('.partner_speciality').text(specialityTranslate(selectedPerson.speciality));
+            selectedPerson.avatar ? $self.find('.partner_avatar').css('backgroundImage',`url('${selectedPerson.avatar}')`)
+                : $self.find('.partner_avatar').css('backgroundImage',`url('${FakePartner.avatar}')`);
+
             var z = Math.round(Math.random()*999); // Убрать когда начнет приходить в запросе
             selectedPerson.viewsCount ? $partnerCard.find('.profil_views_count').text(selectedPerson.viewsCount)
                 : $self.find('.profil_views_count').text(z);
@@ -737,12 +740,13 @@ String id
             }
         }
 
-
         function fillStrings(selectedPerson) {
 
             var $partnerCard = $self.find('.profile_data');
             var reiting_string =  $partnerCard.find('.profil_reiting_string');
 
+            selectedPerson.avatar ? $self.find('.partner_avatar').css('backgroundImage',`url('${selectedPerson.avatar}')`)
+                : $self.find('.partner_avatar').css('backgroundImage',`url('${FakePartner.avatar}')`);
             $partnerCard.find('.profil_name').text(selectedPerson.firstName);
             $partnerCard.find('.profil_secondname').text(selectedPerson.lastName);
             $partnerCard.find('.partner_speciality').text(specialityTranslate(selectedPerson.speciality));
@@ -757,7 +761,7 @@ String id
             selectedPerson.priceEnd ? $partnerCard.find('.prise_end').text(selectedPerson.priceEnd) : '';
             selectedPerson.phone ? $partnerCard.find('.phone_string').text(selectedPerson.phone) : '';
             selectedPerson.email ? $partnerCard.find('.mail_string').text(selectedPerson.email) : '';
-            selectedPerson.siteLink ? $partnerCard.find('.link_string').text(selectedPerson.siteLink) : '';
+            selectedPerson.siteLink ? $partnerCard.find('.link_string').text(selectedPerson.siteLink) : '';  //selectedPerson.siteLink.slice(0 , 35)
             selectedPerson.vkLink ? $partnerCard.find('.vk_string').text(selectedPerson.vkLink) : '';
             selectedPerson.facebookLink ? $partnerCard.find('.fb_string').text(selectedPerson.facebookLink) : '';
             selectedPerson.instagramLink ? $partnerCard.find('.insta_string').text(selectedPerson.instagramLink) : '';
@@ -769,17 +773,269 @@ String id
 
         }
 
-        function fillPhoto(photo){
+        var upl_img_src;
+
+        function fillPhoto(photoArr){
 
             var wrapper = $self.find('.partner_photo-wrapper');
-            photo.forEach(function(elem){
+            var photo = $self.find('.photo_sample .photo_unit');
 
+            photoArr.forEach( elem => {
+                var newItem = photo.clone();
+                newItem.find('.photo_img').attr('src', elem);
                 console.log(elem);
-                wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
-                wrapper.append(`<div class="photo_unit"> <img src="http://wedding-services.mycloud.by${elem}" alt="photo-unit"> <div class="photo_enhance"> </div> </div>`);
-
+                wrapper.append(newItem);
             });
 
+            wrapper.on('click', removePhoto);
+
+        }
+
+        function removePhoto(e){
+
+            var dataSend = {};
+            dataSend.part = `${selectedPerson.resourcePath}`;
+            dataSend.id = `${selectedPerson.id}`;
+
+            if (e.target.className === 'photo-remove_icon'){
+
+                var unit = $(e.target).parents('.photo_unit');
+                unit.css('display','none');
+                dataSend.unit = unit.find('.photo_img').attr('src');
+                console.log(dataSend);
+
+                $.ajax({
+                    url: `http://wedding-services.mycloud.by/services/rest.photo/remove.json?id=${selectedPerson.id}`,
+                    type: "POST",
+                    dataType: "json",
+                    data: dataSend,
+                    success: function (data) {
+                        console.dir(data);
+                    },
+                    error: function (e) {
+                        console.log('Что-то пошло не так :( ');
+                        console.log(e);
+                    }
+                });
+
+            }
+
+            console.dir(e.target.className);
+        }
+
+        function preLoadAvatar(){
+
+            var avatar_window = $self.find('.partner_avatar');
+            var avatar_upload = document.querySelector('#avatar_uploads');
+            var save_avatar_btn = avatar_window.find('#save_avatar');
+            var dataSend = {};
+
+            avatar_upload.addEventListener('change', updateImageDisplay);
+            $self.find('.avatar_remove_icon').on('click', removeAvatar);
+
+
+            function updateImageDisplay(){
+
+                var curFiles = avatar_upload.files;
+
+                // upl_img_src = window.URL.createObjectURL(curFiles[0]);
+                // avatar_window.css('backgroundImage',`url('${upl_img_src}')`);
+                // listItem.appendChild(image);
+
+                if(curFiles.length === 1 && validFileType(curFiles[0])) {
+
+                    var image = document.createElement('img');
+                    // image.src = window.URL.createObjectURL(curFiles[0]);
+                    upl_img_src = window.URL.createObjectURL(curFiles[0]);
+                    // upl_img_src = image.src;
+                    console.log(upl_img_src);
+                    avatar_window.css('backgroundImage',`url('${upl_img_src}')`);
+                    save_avatar_btn.removeClass('hidden_full');
+                    save_avatar_btn.one('click', updAvatar);
+                    dataSend.avatarChange = upl_img_src;
+                    // dataSend.avatarChange = curFiles[0];
+                    document.addEventListener('keyup', exitWithoutUpdAvatar);
+                }
+
+            }
+
+            function removeAvatar(){
+                $self.find('.partner_avatar').css('backgroundImage',`url('/etc/clientlibs/wedding/pages/images/any_img/defaultPhoto.png')`);
+                save_avatar_btn.removeClass('hidden_full');
+                save_avatar_btn.one('click', updAvatar);
+                document.addEventListener('keyup', exitWithoutUpdAvatar);
+                dataSend.avatarChange = '/etc/clientlibs/wedding/pages/images/any_img/defaultPhoto.png';
+            }
+
+            function exitWithoutUpdAvatar(e){
+                if (e.keyCode === 27) { // esc
+                    save_avatar_btn.addClass('hidden_full');
+                    save_avatar_btn.off('click', updAvatar);
+                    selectedPerson.avatar ? avatar_window.css('backgroundImage',`url('${selectedPerson.avatar}')`)
+                        : $self.find('.partner_avatar').css('backgroundImage',`url('${FakePartner.avatar}')`);
+                    document.removeEventListener('keyup', exitWithoutUpdAvatar);
+                }
+            }
+
+            function updAvatar(){
+
+                save_avatar_btn.addClass('hidden_full');
+                dataSend.id = selectedPerson.id;
+                console.dir(dataSend);
+                $.ajax({
+                    // url: 'http://wedding-services.mycloud.by/services/rest.partners/changeAvatar.json',
+                    url: 'http://wedding-services.mycloud.by/services/rest.partners/update.json',
+                    type: 'PUT',
+                    dataType: 'json',
+                    data: dataSend,
+                    success: function(data){
+                        console.log('success');
+                        data.avatar ? Cookies.set('avatar', data.avatar) : '';
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                });
+
+                document.removeEventListener('keyup', exitWithoutUpdAvatar);
+            }
+
+        }
+
+        preLoadAvatar();
+
+
+        function upLoadImage(){
+
+            var btn_addPhoto = $self.find('#btn_addPhoto');
+            var preview = document.querySelector('.preview_upload-text');
+            // input_upload.style.opacity = 0;
+            var photoList = [];
+            var photoLink = [];
+
+            input_upload.addEventListener('change', updateImageDisplay);
+            btn_upPhoto.on('click', sendPortfolio);
+
+            function updateImageDisplay() {
+                btn_addPhoto.addClass('hidden_full');
+                btn_upPhoto.removeClass('hidden_full');
+                photoLink = [];
+                photoList = [];
+
+                while(preview.firstChild) {
+                    preview.removeChild(preview.firstChild);
+                }
+
+                var curFiles = input_upload.files;
+                console.log(curFiles);
+                if(curFiles.length === 0) {
+                    var para = document.createElement('p');
+                    para.textContent = 'No files currently selected for upload';
+                    preview.appendChild(para);
+                } else {
+                    var list = document.createElement('ol');
+                    preview.appendChild(list);
+                    for(var i = 0; i < curFiles.length; i++) {
+                        var listItem = document.createElement('li');
+                        var para = document.createElement('p');
+                        if(validFileType(curFiles[i])) {
+                            photoList.push(curFiles[i]);
+                            para.textContent = 'File name ' + curFiles[i].name + ', file size ' + returnFileSize(curFiles[i].size) + '.';
+                            var image = document.createElement('img');
+                            image.src = window.URL.createObjectURL(curFiles[i]);
+                            photoLink.push(image.src);
+                            listItem.appendChild(image);
+                            listItem.appendChild(para);
+
+                        } else {
+                            para.textContent = 'File name ' + curFiles[i].name + ': Not a valid file type. Update your selection.';
+                            listItem.appendChild(para);
+                        }
+
+                        list.appendChild(listItem);
+                    }
+                }
+            }
+
+            function sendPortfolio(){
+
+                console.log('sendPor_tfolio');
+
+                btn_addPhoto.removeClass('hidden_full');
+                btn_upPhoto.addClass('hidden_full');
+                preview.innerHTML = '';
+
+                console.dir(photoList);
+
+                // var data = new FormData();
+                // $.each(files, function( key, value ){
+                //     data.append( key, value );
+                // });
+
+                var dataSend = {};
+                dataSend.part = `${selectedPerson.resourcePath}`;
+                dataSend.id = `${selectedPerson.id}`;
+                dataSend.data = photoList;
+
+                console.dir(dataSend);
+
+                $.ajax({
+                    url: 'http://wedding-services.mycloud.by/services/rest.partners/update.json',
+                    type: 'put',
+                    data: dataSend,
+                    cache: false,
+                    dataType: 'json',
+                    processData: false, // Не обрабатываем файлы (Don't process the files)
+                    contentType: false, // Так jQuery скажет серверу что это строковой запрос
+                    success: function( respond, textStatus, jqXHR ){
+                        // Если все ОК
+                        if( typeof respond.error === 'undefined' ){
+                            // выведем пути к загруженным файлам в блок '.ajax-respond'
+                            var files_path = respond.files;
+                            var html = '';
+                            $.each( files_path, function( key, val ){ html += val +'<br>'; } );
+                            $('.ajax-respond').html( html );
+                        }
+                        else{
+                            console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error );
+                        }
+                    },
+                    error: function( jqXHR, textStatus, errorThrown ){
+                        console.log('ОШИБКИ AJAX запроса: ' + textStatus );
+                        fillPhoto(photoLink);
+
+                    }
+                });
+
+            }
+
+        }
+
+        upLoadImage();
+
+        function returnFileSize(number) {
+            if(number < 1024) {
+                return number + 'bytes';
+            } else if(number > 1024 && number < 1048576) {
+                return (number/1024).toFixed(1) + 'KB';
+            } else if(number > 1048576) {
+                return (number/1048576).toFixed(1) + 'MB';
+            }
+        }
+
+        var fileTypes = [
+            'image/jpeg',
+            'image/pjpeg',
+            'image/png'
+        ];
+
+        function validFileType(file) {
+            for(var i = 0; i < fileTypes.length; i++) {
+                if(file.type === fileTypes[i]) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         (function(){  //  функция переключения страниц
@@ -826,205 +1082,6 @@ String id
 
         }());
 
-
-
-        function upLoadImage(){
-
-            var preview = document.querySelector('.preview_upload-text');
-            input_upload.style.opacity = 0;
-
-            input_upload.addEventListener('change', updateImageDisplay);
-
-            function updateImageDisplay() {
-                while(preview.firstChild) {
-                    preview.removeChild(preview.firstChild);
-                }
-
-                var curFiles = input_upload.files;
-
-                if(curFiles.length === 0) {
-                    var para = document.createElement('p');
-                    para.textContent = 'No files currently selected for upload';
-                    preview.appendChild(para);
-                } else {
-                    var list = document.createElement('ol');
-                    preview.appendChild(list);
-                    for(var i = 0; i < curFiles.length; i++) {
-                        var listItem = document.createElement('li');
-                        var para = document.createElement('p');
-                        if(validFileType(curFiles[i])) {
-                            para.textContent = 'File name ' + curFiles[i].name + ', file size ' + returnFileSize(curFiles[i].size) + '.';
-                            var image = document.createElement('img');
-                            image.src = window.URL.createObjectURL(curFiles[i]);
-
-                            listItem.appendChild(image);
-                            listItem.appendChild(para);
-
-                        } else {
-                            para.textContent = 'File name ' + curFiles[i].name + ': Not a valid file type. Update your selection.';
-                            listItem.appendChild(para);
-                        }
-
-                        list.appendChild(listItem);
-                    }
-                }
-            }
-
-            var fileTypes = [
-                'image/jpeg',
-                'image/pjpeg',
-                'image/png'
-            ];
-
-            function validFileType(file) {
-                for(var i = 0; i < fileTypes.length; i++) {
-                    if(file.type === fileTypes[i]) {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
-            function returnFileSize(number) {
-                if(number < 1024) {
-                    return number + 'bytes';
-                } else if(number > 1024 && number < 1048576) {
-                    return (number/1024).toFixed(1) + 'KB';
-                } else if(number > 1048576) {
-                    return (number/1048576).toFixed(1) + 'MB';
-                }
-            }
-
-            btn_upPhoto.on('click', sendPortfolio);
-
-        }
-        upLoadImage();
-
-
-
-        function sendPortfolio(){
-
-            var photoSend = {};
-
-            var data = new FormData();
-
-            console.log(data);
-
-            $.each( files, function( key, value ){
-                data.append( key, value );
-            });
-
-            // if (photoSend.portfolio || photoSend.portfolio.length >= 1){
-
-            // photoSend.portfolio = input_upload.value;
-            // photoSend.portfolio = input_upload.files;
-
-            // sendChangeRequest(photoSend);
-
-            $.ajax({
-                url: 'http://wedding-services.mycloud.by/services/rest.partners/update.json',
-                type: 'put',
-                data: data,
-                cache: false,
-                dataType: 'json',
-                processData: false, // Не обрабатываем файлы (Don't process the files)
-                contentType: false, // Так jQuery скажет серверу что это строковой запрос
-                success: function( respond, textStatus, jqXHR ){
-
-                    // Если все ОК
-
-                    if( typeof respond.error === 'undefined' ){
-                        // Файлы успешно загружены, делаем что нибудь здесь
-
-                        // выведем пути к загруженным файлам в блок '.ajax-respond'
-
-                        var files_path = respond.files;
-                        var html = '';
-                        $.each( files_path, function( key, val ){ html += val +'<br>'; } );
-                        $('.ajax-respond').html( html );
-                    }
-                    else{
-                        console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error );
-                    }
-                },
-                error: function( jqXHR, textStatus, errorThrown ){
-                    console.log('ОШИБКИ AJAX запроса: ' + textStatus );
-                }
-            });
-
-        }
-
-
-
-        // Переменная куда будут располагаться данные файлов
-
-        var files;
-
-        // Вешаем функцию на событие
-        // Получим данные файлов и добавим их в переменную
-
-        $('#file_upl').change(function(){   //input[type=file]
-            files = this.files;
-            console.log(files);
-        });
-
-        $('.submit.button').click(function( event ){
-            event.stopPropagation(); // Остановка происходящего
-            event.preventDefault();  // Полная остановка происходящего
-
-            // Создадим данные формы и добавим в них данные файлов из files
-
-            var data = new FormData();
-
-            console.log(data);
-
-            $.each( files, function( key, value ){
-                data.append( key, value );
-            });
-
-            console.log(data);
-            // Отправляем запрос
-
-            $.ajax({
-                url: 'http://wedding-services.mycloud.by/services/rest.partners/update.json',
-                type: 'put',
-                data: data,
-                cache: false,
-                dataType: 'json',
-                processData: false, // Не обрабатываем файлы (Don't process the files)
-                contentType: false, // Так jQuery скажет серверу что это строковой запрос
-                success: function( respond, textStatus, jqXHR ){
-
-                    // Если все ОК
-
-                    if( typeof respond.error === 'undefined' ){
-                        // Файлы успешно загружены, делаем что нибудь здесь
-
-                        // выведем пути к загруженным файлам в блок '.ajax-respond'
-
-                        var files_path = respond.files;
-                        var html = '';
-                        $.each( files_path, function( key, val ){ html += val +'<br>'; } );
-                        $('.ajax-respond').html( html );
-                    }
-                    else{
-                        console.log('ОШИБКИ ОТВЕТА сервера: ' + respond.error );
-                    }
-                },
-                error: function( jqXHR, textStatus, errorThrown ){
-                    console.log('ОШИБКИ AJAX запроса: ' + textStatus );
-                }
-            });
-
-        });
-
-
-
-
-
-
-
         (function() {
 
             $("#calendar").ionCalendar({
@@ -1046,44 +1103,6 @@ String id
             });
 
         })();
-
-
-        //--   fake data ***************
-
-        var FakeDataEvent = [
-            {
-                description:'Отличные скидки сегодня',
-                endDate:'1551289371112',
-                id:"f888d202-d2ee-4d30-8de8-1dcd839f4189",
-                resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
-                resourceType:'xz',
-                startDate:'1531289371112',
-                title:'скидки 50%'
-            },
-
-            {
-                description:'',
-                endDate:'1551289371112',
-                id:"f888d202-d2ee-4d30-8de8-1dcd839f4189",
-                resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
-                resourceType:'xz',
-                startDate:'1531289371112',
-                title:'скидки 50%'
-            },
-
-            {
-                description:'Отличные скидки сегодня',
-                endDate:'1551289371112',
-                id:"f888d202-d2ee-4d30-8de8-1dcd839f4189",
-                resourcePath:"/home/users/wedding/partners/rest/minsk/ae/uQ3Wtg-Gmbv_9I6q8C1B2/events/50263a88-e97a-43c6-95ef-c2bb7ef97c76",
-                resourceType:'xz',
-                startDate:'1531289371112',
-                title:'скидки 50%'
-            }
-
-        ];
-
-
 
     };  //--- finish
 

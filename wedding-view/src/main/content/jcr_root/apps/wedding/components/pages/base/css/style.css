@@ -704,8 +704,17 @@ footer > div a, footer > div{
     margin: 35px 0 15px 10%;
     width: 75%;
     min-height: 320px;
-    background-image: url('/etc/clientlibs/wedding/pages/images/any_img/d2_12.jpg');
+    background: url('/etc/clientlibs/wedding/pages/images/any_img/defaultPhoto.png') no-repeat center center;
     background-size: cover;
+    position: relative;
+}
+
+.save_avatar{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -61px;
+    margin-bottom: 20px;
 }
 
 .partner_avatar_btn, .user_avatar_btn{
@@ -853,8 +862,9 @@ footer > div a, footer > div{
     margin: 2%;
 }
 
-.photo_unit img{
+.photo_unit .photo_img{
     width: 100%;
+    height: 250px;
 }
 
 .video_field{
@@ -1229,6 +1239,10 @@ nav input[type="checkbox"] {
 label.head-menu {
     margin-bottom: 5px;
     display: none;
+}
+
+.profile_data{
+    overflow: hidden;
 }
 
 @media screen and (max-width: 666px) {
