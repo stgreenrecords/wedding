@@ -988,7 +988,7 @@ var PORTAL = (function (PORTAL, $) {
                     processData: false, // Не обрабатываем файлы (Don't process the files)
                     contentType: false, // Так jQuery скажет серверу что это строковой запрос
                     success: function( respond, textStatus, jqXHR ){
-                        // Если все ОК
+                        fillPhoto(photoLink);
                         if( typeof respond.error === 'undefined' ){
                             // выведем пути к загруженным файлам в блок '.ajax-respond'
                             var files_path = respond.files;
