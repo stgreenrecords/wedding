@@ -665,7 +665,7 @@ var PORTAL = (function (PORTAL, $) {
                 "status": function () {
 
                     alert('GMAIL STALUSs');
-
+                    googleStatus(GoogleAuth.isSignedIn.get());
                 }
 
 
