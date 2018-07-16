@@ -554,7 +554,7 @@ var PORTAL = (function (PORTAL, $) {
             var SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
 
             // var authorizeButton = document.getElementById('authorize-button');
-            var authorizeButton = document.getElementById('gmail-login-btn');
+            // var authorizeButton = document.getElementById('gmail-login-btn');
             var signoutButton = document.getElementById('signout-button');
 
             /**  On load, called to load the auth2 library and API client library. */
@@ -577,7 +577,7 @@ var PORTAL = (function (PORTAL, $) {
 
                     // Handle the initial sign-in state.
                     updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-                    authorizeButton.onclick = handleAuthClick;
+                    // authorizeButton.onclick = handleAuthClick;
                     signoutButton.onclick = handleSignoutClick;
                 });
             }
