@@ -654,7 +654,7 @@ var PORTAL = (function (PORTAL, $) {
                 "login": function () {
                     GoogleAuth.signIn();
                    // handleAuthClick();
-
+                   console.log(socialUser);
 
                     // gmail.login(function (response) {
                     //     console.log(response);
@@ -723,6 +723,8 @@ var PORTAL = (function (PORTAL, $) {
                 // checkIfUserExist(socialUser, authType);
                 // PORTAL.utils.set_cookie("authType", authType, expires);
                 // PORTAL.utils.set_cookie("authStatus", "authorized", expires);
+                console.log('googleStatus OK:');
+                console.log(responce);
             }
         };
 
