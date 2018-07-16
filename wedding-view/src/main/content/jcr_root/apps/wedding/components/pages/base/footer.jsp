@@ -121,21 +121,14 @@
                 </div>
 
                 <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-
 
                 <!--  temporary-->
 
                 <p>Gmail API Quickstart</p>
 
                 <!--Add buttons to initiate auth sequence and sign out-->
-                <button id="authorize-button" style="display: none;">Authorize</button>
-                <button id="signout-button" style="display: none;">Sign Out</button>
+                <button id="authorize-button" >Authorize</button>
+                <button id="signout-button"  >Sign Out</button>
 
                 <pre id="content"></pre>
 
@@ -284,16 +277,14 @@
     // Array of API discovery doc URLs for APIs used by the quickstart
     var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"];
 
-    // Authorization scopes required by the API; multiple scopes can be
-    // included, separated by spaces.
+    // Authorization scopes required by the API; multiple scopes can be included, separated by spaces.
     var SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
 
-    var authorizeButton = document.getElementById('authorize-button');
+    // var authorizeButton = document.getElementById('authorize-button');
+    var authorizeButton = document.getElementById('gmail-login-btn');
     var signoutButton = document.getElementById('signout-button');
 
-    /**
-     *  On load, called to load the auth2 library and API client library.
-     */
+    /**  On load, called to load the auth2 library and API client library. */
     function handleClientLoad() {
         gapi.load('client:auth2', initClient);
     }
@@ -324,12 +315,12 @@
      */
     function updateSigninStatus(isSignedIn) {
         if (isSignedIn) {
-            authorizeButton.style.display = 'none';
-            signoutButton.style.display = 'block';
+            // authorizeButton.style.display = 'none';
+            // signoutButton.style.display = 'block';
             listLabels();
         } else {
-            authorizeButton.style.display = 'block';
-            signoutButton.style.display = 'none';
+            // authorizeButton.style.display = 'block';
+            // signoutButton.style.display = 'none';
         }
     }
 
