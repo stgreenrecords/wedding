@@ -545,26 +545,20 @@ var PORTAL = (function (PORTAL, $) {
 
         {
 
-            // <button id="authorize-button" style="display: none;">Authorize</button>
-            // <button id="signout-button" style="display: none;">Sign Out</button>
-            //
-            // <pre id="content"></pre>
-
             // Client ID and API key from the Developer Console
             var CLIENT_ID = '405790064850-9mrm6fnma5tghhucol6k3squjlupdj4o.apps.googleusercontent.com';
+
             // Array of API discovery doc URLs for APIs used by the quickstart
             var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"];
 
-            // Authorization scopes required by the API; multiple scopes can be
-            // included, separated by spaces.
+            // Authorization scopes required by the API; multiple scopes can be included, separated by spaces.
             var SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
 
-            var authorizeButton = document.getElementById('authorize-button');
+            // var authorizeButton = document.getElementById('authorize-button');
+            var authorizeButton = document.getElementById('gmail-login-btn');
             var signoutButton = document.getElementById('signout-button');
 
-            /**
-             *  On load, called to load the auth2 library and API client library.
-             */
+            /**  On load, called to load the auth2 library and API client library. */
             function handleClientLoad() {
                 gapi.load('client:auth2', initClient);
             }
@@ -584,24 +578,29 @@ var PORTAL = (function (PORTAL, $) {
 
                     // Handle the initial sign-in state.
                     updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-                    // authorizeButton.onclick = handleAuthClick;
-                    // signoutButton.onclick = handleSignoutClick;
+                    authorizeButton.onclick = handleAuthClick;
+                    signoutButton.onclick = handleSignoutClick;
                 });
             }
 
-            // function updateSigninStatus(isSignedIn) {
-            //     if (isSignedIn) {
-            //         authorizeButton.style.display = 'none';
-            //         signoutButton.style.display = 'block';
-            //         listLabels();
-            //     } else {
-            //         authorizeButton.style.display = 'block';
-            //         signoutButton.style.display = 'none';
-            //     }
-            // }
+            /**
+             *  Called when the signed in status changes, to update the UI
+             *  appropriately. After a sign-in, the API is called.
+             */
+            function updateSigninStatus(isSignedIn) {
+                if (isSignedIn) {
+                    // authorizeButton.style.display = 'none';
+                    // signoutButton.style.display = 'block';
+                    listLabels();
+                } else {
+                    // authorizeButton.style.display = 'block';
+                    // signoutButton.style.display = 'none';
+                }
+            }
 
-            // Sign in the user upon button click.
-
+            /**
+             *  Sign in the user upon button click.
+             */
             function handleAuthClick(event) {
                 gapi.auth2.getAuthInstance().signIn();
             }
@@ -619,21 +618,20 @@ var PORTAL = (function (PORTAL, $) {
              *
              * @param {string} message Text to be placed in pre element.
              */
-
             function appendPre(message) {
-                // var pre = document.getElementById('content');
-                // var textContent = document.createTextNode(message + '\n');
-                // pre.appendChild(textContent);
-                console.log(message);
+                var pre = document.getElementById('content');
+                var textContent = document.createTextNode(message + '\n');
+                pre.appendChild(textContent);
             }
 
-
-            // * Print all Labels in the authorized user's inbox. If no labels
-            // * are found an appropriate message is printed.
+            /**
+             * Print all Labels in the authorized user's inbox. If no labels
+             * are found an appropriate message is printed.
+             */
             function listLabels() {
                 gapi.client.gmail.users.labels.list({
                     'userId': 'me'
-                }).then(function (response) {
+                }).then(function(response) {
                     var labels = response.result.labels;
                     appendPre('Labels:');
 
@@ -647,6 +645,7 @@ var PORTAL = (function (PORTAL, $) {
                     }
                 });
             }
+
         }
 
 
