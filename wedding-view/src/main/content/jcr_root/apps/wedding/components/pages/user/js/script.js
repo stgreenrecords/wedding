@@ -43,7 +43,7 @@ var PORTAL = (function (PORTAL, $) {
                     }
 
                     if (selectedPerson.tenders){
-                        $self.find('.text_no_tend').detach();
+                        fillTenders(selectedPerson.tenders);
                     }
 
                 }
