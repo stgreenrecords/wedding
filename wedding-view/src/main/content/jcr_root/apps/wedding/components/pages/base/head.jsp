@@ -5,3 +5,4 @@
 <meta charset="UTF-8">
 <title>Title of the page</title>
 <meta name="viewport" content="width=device-width">
+<link href="/etc/clientlibs/wedding/pages/favicon.png" rel="shortcut icon" type="image/x-icon" >
