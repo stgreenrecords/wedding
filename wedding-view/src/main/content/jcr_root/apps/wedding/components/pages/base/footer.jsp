@@ -120,21 +120,7 @@
                     <button id="btn-registration-futher" class="btn-enter"> <img src="/etc/clientlibs/wedding/pages/images/social_media_icons_buttons/further.png" alt="ДАЛЕЕ">  </button>
                 </div>
 
-                <br>
-
-                <!--  temporary-->
-
-                <p> Gmail API Quickstart</p>
-
-                <!--Add buttons to initiate auth sequence and sign out-->
-                <button id="authorize-button" >Authorize</button>
-                <button id="signout-button"  >Sign Out</button>
-
-                <pre id="content"></pre>
-
-
-
-            </div>
+             </div>
 
         </div>
 
@@ -268,11 +254,6 @@
 
 </section>
 
-
-<%--<script type="text/javascript">--%>
-
-<%--</script>--%>
-
 <script src="/etc/clientlibs/wedding/external/js/jquery/jquery-3.3.1.js"></script>
 
 <script async defer src="https://apis.google.com/js/api.js"
@@ -280,10 +261,23 @@ onload="this.onload=function(){};/*handleClientLoad()*/"
 onreadystatechange="if (this.readyState === 'complete') this.onload()">
 </script>
 
-
 <cpn:clientlib type="js" path="/etc/clientlibs/wedding/external" />
 <cpn:clientlib type="js" path="/etc/clientlibs/wedding/pages" />
 
- 
+
+//<br>
+//
+//<!--  temporary-->
+//
+//<p> Gmail API Quickstart</p>
+//
+//<!--Add buttons to initiate auth sequence and sign out-->
+//<button id="authorize-button" >Authorize</button>
+//<button id="signout-button"  >Sign Out</button>
+//
+//<pre id="content"></pre>
+//
+
+
 
 	 

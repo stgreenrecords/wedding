@@ -570,7 +570,7 @@ var PORTAL = (function (PORTAL, $) {
 
                 $.ajax({
                     url:  `https://connect.ok.ru/oauth/authorize?client_id={1264974848}&scope={VALUABLE_ACCESS;GET_EMAIL}&response_type={{CBANPGGMEBABABABA}}
-                    &redirect_uri={https://oauth.mycdn.me/blank.html}`, /*&layout={m} &state={state}*/
+                    &redirect_uri={http://wedding-services.mycloud.by}`, /*&layout={m} &state={state}*/
                     type: 'get',
                     dataType: 'json',
                     success: (data)=>{
