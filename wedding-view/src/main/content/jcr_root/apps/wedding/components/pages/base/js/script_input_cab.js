@@ -581,20 +581,21 @@ var PORTAL = (function (PORTAL, $) {
                 //         console.log('OK Error');
                 //         console.log(e);
                 //     }
-                };);;
+                // });
 
 
 
             },
 
-            "status";: function () {
+            "status": function () {
 
                 alert('OK STAtUSs');
             }
 
 
-}
-PORTAL.modules.CabinetInput.AUTH.EMAIL = {
+        };
+
+        PORTAL.modules.CabinetInput.AUTH.EMAIL = {
 
             "login": function () {
 
@@ -745,8 +746,9 @@ PORTAL.modules.CabinetInput.AUTH.EMAIL = {
 
         // }()); // end -  --- с окнами входа и регистрации
 
-}
-return PORTAL;
+    };
+
+    return PORTAL;
 
 })(PORTAL || {}, jQuery);
 
