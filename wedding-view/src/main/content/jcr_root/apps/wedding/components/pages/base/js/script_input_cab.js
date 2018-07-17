@@ -564,51 +564,9 @@ var PORTAL = (function (PORTAL, $) {
 
             };
 
-        var config = {
-            app_id: 1264974848,      // <-- insert APP ID here
-            app_key: 'CBANPGGMEBABABABA'     // <-- insert APP PUBLIC KEY here
-        };
 
-        document.addEventListener('DOMContentLoaded', function () {
-            config.oauth = {};
-            config.oauth.url = location.origin + location.pathname; // setup callback url to our script
-            if (window.location.hash) {// we are in popup and have OAUTH response data - send it back to the opener
-                var hash = OKSDK.Util.getRequestParameters(window.location.hash);
-                window.opener.postMessage(JSON.stringify({
-                    'type': 'oauth',
-                    'access_token': hash['access_token'],
-                    'session_secret_key': hash['session_secret_key']
-                }), "*");
-                window.close();
-                return;
-            }
-            var args = OKSDK.Util.getRequestParameters(window.location.search);
-            if (args['run_oauth']) {// we are in popup and requested to proceed with OAUTH login
-                OKSDK.init(config, function () {
-                }, function (error) {
-                    alert('OKSDK error while requesting access_token ' + OKSDK.Util.toString(error));
-                });
-            }
-        });
 
-        window.addEventListener('message', function (event) {
-            var data = JSON.parse(event.data || "");
-            if (data.type == 'oauth') {// we are in original page, emulate hash response from OAUTH and proceed to initialization
-                config.location_hash = '#access_token=' + data['access_token'] + '&session_secret_key=' + data['session_secret_key'];
-                OKSDK.init(config, function () {
-                    // document.getElementById('oauth_login').style.display = 'none';
-                    OKSDK.REST.call('users.getCurrentUser', null, function (status, data, error) {
-                        if (status == 'ok') {
-                            document.getElementById('content').innerHTML = 'Hello World and hi, ' + data.name + '.';
-                        } else {
-                            alert('Unable to retrieve current user ' + OKSDK.Util.toString(error));
-                        }
-                    });
-                }, function (error) {
-                    alert('OKSDK error while accepting access_token ' + OKSDK.Util.toString(error));
-                });
-            }
-        }, false);
+
 
 
 
@@ -632,12 +590,59 @@ var PORTAL = (function (PORTAL, $) {
                 //     }
                 // });
 
-                startOAuthLogin();
+                var config = {
+                    app_id: 1264974848,      // <-- insert APP ID here
+                    app_key: 'CBANPGGMEBABABABA'     // <-- insert APP PUBLIC KEY here
+                };
 
+
+
+                document.addEventListener('DOMContentLoaded', function () {
+                    config.oauth = {};
+                    config.oauth.url = location.origin + location.pathname; // setup callback url to our script
+                    if (window.location.hash) {// we are in popup and have OAUTH response data - send it back to the opener
+                        var hash = OKSDK.Util.getRequestParameters(window.location.hash);
+                        window.opener.postMessage(JSON.stringify({
+                            'type': 'oauth',
+                            'access_token': hash['access_token'],
+                            'session_secret_key': hash['session_secret_key']
+                        }), "*");
+                        window.close();
+                        return;
+                    }
+                    var args = OKSDK.Util.getRequestParameters(window.location.search);
+                    if (args['run_oauth']) {// we are in popup and requested to proceed with OAUTH login
+                        OKSDK.init(config, function () {
+                        }, function (error) {
+                            alert('OKSDK error while requesting access_token ' + OKSDK.Util.toString(error));
+                        });
+                    }
+                });
 
                 function startOAuthLogin() {// open a popup window with same html as we are, with an argument to proceed with OAUTH
                     window.open(location.origin + location.pathname + '?run_oauth=true');
                 }
+
+                startOAuthLogin();
+
+                window.addEventListener('message', function (event) {
+                    var data = JSON.parse(event.data || "");
+                    if (data.type == 'oauth') {// we are in original page, emulate hash response from OAUTH and proceed to initialization
+                        config.location_hash = '#access_token=' + data['access_token'] + '&session_secret_key=' + data['session_secret_key'];
+                        OKSDK.init(config, function () {
+                            // document.getElementById('oauth_login').style.display = 'none';
+                            OKSDK.REST.call('users.getCurrentUser', null, function (status, data, error) {
+                                if (status == 'ok') {
+                                    document.getElementById('content').innerHTML = 'Hello World and hi, ' + data.name + '.';
+                                } else {
+                                    alert('Unable to retrieve current user ' + OKSDK.Util.toString(error));
+                                }
+                            });
+                        }, function (error) {
+                            alert('OKSDK error while accepting access_token ' + OKSDK.Util.toString(error));
+                        });
+                    }
+                }, false);
 
             },
 
@@ -747,6 +752,8 @@ var PORTAL = (function (PORTAL, $) {
             }
 
 //            handleClientLoad();
+
+
 
             if (authStatusFromCookie !== "authorized" && authTypeFromCookie) {
                 //PORTAL.modules.LoginRegistration.AUTH[authType].status();

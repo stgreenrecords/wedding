@@ -256,13 +256,14 @@
 
 <script src="/etc/clientlibs/wedding/external/js/jquery/jquery-3.3.1.js"></script>
 
-<cpn:clientlib type="js" path="/etc/clientlibs/wedding/external" />
-<cpn:clientlib type="js" path="/etc/clientlibs/wedding/pages" />
-
 <script async defer src="https://apis.google.com/js/api.js"
         onload="this.onload=function(){};/*handleClientLoad()*/"
         onreadystatechange="if (this.readyState === 'complete') this.onload()">
 </script>
+
+<cpn:clientlib type="js" path="/etc/clientlibs/wedding/external" />
+<cpn:clientlib type="js" path="/etc/clientlibs/wedding/pages" />
+
 
 <%--//<br>--%>
 <%--//--%>
