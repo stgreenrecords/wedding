@@ -43,8 +43,7 @@ var PORTAL = (function (PORTAL, $) {
                     }
 
                     if (selectedPerson.tenders){
-                        $self.find('.user_tenders-container > div').detach();
-                        fillTenders(selectedPerson.tenders);
+                        $self.find('.text_no_tend').detach();
                     }
 
                 }
@@ -260,6 +259,7 @@ var PORTAL = (function (PORTAL, $) {
 
             function fillTenders(tenders){
 
+                $self.find('.text_no_tend').detach();
                 var first_div = document.querySelector(".hidden_full .tender_card");
                 var main_container =  document.querySelector(".user_tenders-container");
                 var copy_div = first_div.cloneNode(true);
