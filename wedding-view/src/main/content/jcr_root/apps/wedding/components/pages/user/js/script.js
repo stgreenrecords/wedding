@@ -314,9 +314,9 @@ var PORTAL = (function (PORTAL, $) {
 
             function removeTender(e){
 
-                var isAdmin = confirm("Вы действительно хотите удалить тендер?");
+                // var isAdmin = confirm("Вы действительно хотите удалить тендер?");
 
-                if (isAdmin){
+                // if (isAdmin){
 
                     $.ajax({
 
@@ -341,7 +341,7 @@ var PORTAL = (function (PORTAL, $) {
 
                     $(e.target).parents('.tender_card').css('display','none');
 
-                }
+                // }
 
             }
 
