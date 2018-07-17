@@ -5,6 +5,7 @@
           /etc/clientlibs/wedding/external/js/plugins/pluginModalWAV.js,
           /etc/clientlibs/wedding/external/js/plugins/pluginFormatDate.js,
           /etc/clientlibs/wedding/external/js/plugins/richtext.js,
+          /etc/clientlibs/wedding/external/js/plugins/jquery.colorbox.js,
           /etc/clientlibs/wedding/external/js/plugins/cookiesPlugin.js,
           /etc/clientlibs/wedding/external/js/auth/vk_auth.js,
           /etc/clientlibs/wedding/external/js/auth/ok.js,

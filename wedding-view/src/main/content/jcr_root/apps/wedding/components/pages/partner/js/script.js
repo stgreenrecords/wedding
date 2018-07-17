@@ -783,10 +783,12 @@ var PORTAL = (function (PORTAL, $) {
             photoArr.forEach( elem => {
                 var newItem = photo.clone();
                 newItem.find('.photo_img').attr('src', elem);
+                newItem.find('.gallery').attr('href', elem);
                 console.log(elem);
                 wrapper.append(newItem);
             });
 
+            jQuery('a.gallery').colorbox({rel:'gal', maxWidth: '80%', maxHeight: '90%'});
             wrapper.on('click', removePhoto);
 
         }
@@ -802,7 +804,6 @@ var PORTAL = (function (PORTAL, $) {
                 var unit = $(e.target).parents('.photo_unit');
                 unit.css('display','none');
                 dataSend.unit = unit.find('.photo_img').attr('src');
-                console.log(dataSend);
 
                 $.ajax({
                     url: `http://wedding-services.mycloud.by/services/rest.photo/remove.json?id=${selectedPerson.id}`,
