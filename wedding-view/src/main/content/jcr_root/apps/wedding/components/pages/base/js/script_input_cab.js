@@ -575,21 +575,6 @@ var PORTAL = (function (PORTAL, $) {
 
             "login": function () {
 
-                // $.ajax({
-                //     url:  `https://connect.ok.ru/oauth/authorize?client_id={1264974848}&scope={VALUABLE_ACCESS;GET_EMAIL}&response_type={{CBANPGGMEBABABABA}}
-                //     &redirect_uri={http://wedding-services.mycloud.by}&layout={m}`, /* &state={state}*/
-                //     type: 'get',
-                //     dataType: 'json',
-                //     success: (data)=>{
-                //         console.log('OK LOGIN');
-                //         console.log(data);
-                //     },
-                //     error(e){
-                //         console.log('OK Error');
-                //         console.log(e);
-                //     }
-                // });
-
                 var config = {
                     app_id: 1264974848,      // <-- insert APP ID here
                     app_key: 'CBANPGGMEBABABABA'     // <-- insert APP PUBLIC KEY here
@@ -611,14 +596,9 @@ var PORTAL = (function (PORTAL, $) {
                     alert('OKSDK error' + OKSDK.Util.toString(error));
                 })
 
-
-
-
-
             },
 
             "status": function () {
-
                 alert('OK STAtUSs');
             }
 
@@ -628,15 +608,10 @@ var PORTAL = (function (PORTAL, $) {
         PORTAL.modules.CabinetInput.AUTH.EMAIL = {
 
             "login": function () {
-
-
                 alert('EMAIL LOGIN');
-
-
             },
 
             "status": function () {
-
                 alert('EMAIL STAtUSs');
             }
 
@@ -705,8 +680,6 @@ var PORTAL = (function (PORTAL, $) {
                    }(document, 'script', 'facebook-jssdk'));*/
 
 
-
-
             gapi.load('client:auth2', initClient);
 
             function initClient() {
@@ -724,8 +697,6 @@ var PORTAL = (function (PORTAL, $) {
 
 //            handleClientLoad();
 
-
-
             if (authStatusFromCookie !== "authorized" && authTypeFromCookie) {
                 //PORTAL.modules.LoginRegistration.AUTH[authType].status();
                 PORTAL.modules.CabinetInput.AUTH[authTypeFromCookie].status();
@@ -736,8 +707,6 @@ var PORTAL = (function (PORTAL, $) {
         };
 
         PORTAL.modules.CabinetInput.AUTH.init();  // Сделать запуск при начале регистрации / входа и если куки совпадают !
-
-
 
 
             $self.find("#vk-reg-btn").click(function () {
