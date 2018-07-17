@@ -569,7 +569,8 @@ var PORTAL = (function (PORTAL, $) {
             "login": function () {
 
                 $.ajax({
-                    url:  'https://connect.ok.ru/oauth/authorize?client_id={clientId}&scope={scope}&response_type={{response_type}}&redirect_uri={redirectUri}&layout={layout}&state={state}',
+                    url:  `https://connect.ok.ru/oauth/authorize?client_id={1264974848}&scope={VALUABLE_ACCESS;GET_EMAIL}&response_type={{CBANPGGMEBABABABA}}
+                    &redirect_uri={https://oauth.mycdn.me/blank.html}`, /*&layout={m} &state={state}*/
                     type: 'get',
                     dataType: 'json',
                     success: (data)=>{
