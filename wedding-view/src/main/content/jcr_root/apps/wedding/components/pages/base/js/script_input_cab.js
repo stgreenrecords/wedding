@@ -568,34 +568,33 @@ var PORTAL = (function (PORTAL, $) {
 
             "login": function () {
 
-                $.ajax({
-                    url:  `https://connect.ok.ru/oauth/authorize?client_id={1264974848}&scope={VALUABLE_ACCESS;GET_EMAIL}&response_type={{CBANPGGMEBABABABA}}
-                    &redirect_uri={http://wedding-services.mycloud.by}`, /*&layout={m} &state={state}*/
-                    type: 'get',
-                    dataType: 'json',
-                    success: (data)=>{
-                        console.log('OK LOGIN');
-                        console.log(data);
-                    },
-                    error(e){
-                        console.log('OK Error');
-                        console.log(e);
-                    }
-                });
+                // $.ajax({
+                //     url:  `https://connect.ok.ru/oauth/authorize?client_id={1264974848}&scope={VALUABLE_ACCESS;GET_EMAIL}&response_type={{CBANPGGMEBABABABA}}
+                //     &redirect_uri={http://wedding-services.mycloud.by}&layout={m}`, /* &state={state}*/
+                //     type: 'get',
+                //     dataType: 'json',
+                //     success: (data)=>{
+                //         console.log('OK LOGIN');
+                //         console.log(data);
+                //     },
+                //     error(e){
+                //         console.log('OK Error');
+                //         console.log(e);
+                //     }
+                };);;
 
 
 
             },
 
-            "status": function () {
+            "status";: function () {
 
                 alert('OK STAtUSs');
             }
 
 
-        };
-
-        PORTAL.modules.CabinetInput.AUTH.EMAIL = {
+}
+PORTAL.modules.CabinetInput.AUTH.EMAIL = {
 
             "login": function () {
 
@@ -746,9 +745,8 @@ var PORTAL = (function (PORTAL, $) {
 
         // }()); // end -  --- с окнами входа и регистрации
 
-    };
-
-    return PORTAL;
+}
+return PORTAL;
 
 })(PORTAL || {}, jQuery);
 
