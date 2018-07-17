@@ -8,6 +8,9 @@ var PORTAL = (function (PORTAL, $) {
 
         console.log('Component: "User"');
 
+        var FakeUser = {};
+        FakeUser.avatar =  `/etc/clientlibs/wedding/pages/images/any_img/bgi_1_7.jpg`;
+
         var selectedPerson;
         var calc_aside =  $self.find('#calc_aside_sect');
         var user_tenders = $self.find('#user_tenders');
@@ -69,6 +72,7 @@ var PORTAL = (function (PORTAL, $) {
 
                 btn_change.removeClass('hidden_full');
                 create_tender.removeClass('hidden_full');
+                edit_avatar.removeClass('hidden_full');
                 btn_change.on('click', onChangeFields);
                 $self.find('.user_avatar_btn_mail').addClass('hidden_full');
                 create_tender.on('click', openCreateForm);
@@ -159,7 +163,6 @@ var PORTAL = (function (PORTAL, $) {
             function onChangeFields(){
                 btn_change.addClass('hidden_full');
                 btn_save.removeClass('hidden_full');
-                edit_avatar.removeClass('hidden_full');
                 onInputFields();
                 btn_save.one('click', saveChangeFields);
                 document.addEventListener('keyup', exitWithoutSave);
@@ -170,7 +173,6 @@ var PORTAL = (function (PORTAL, $) {
                     fillStrings(selectedPerson);
                     btn_save.addClass('hidden_full');
                     btn_save.off('click', saveChangeFields);
-                    edit_avatar.addClass('hidden_full');
                     btn_change.removeClass('hidden_full');
                     document.removeEventListener('keyup', exitWithoutSave);
                 }
@@ -193,7 +195,6 @@ var PORTAL = (function (PORTAL, $) {
             function saveChangeFields() {
                 var dataSend = {};
                 btn_save.addClass('hidden_full');
-                edit_avatar.addClass('hidden_full');
                 btn_change.removeClass('hidden_full');
 
                 dataSend.id = selectedPerson.id;
@@ -224,7 +225,6 @@ var PORTAL = (function (PORTAL, $) {
                     success: function(data){
                         console.log('What you send for me?');
                         console.log(data);
-
                     }
 
                 });
@@ -276,7 +276,7 @@ var PORTAL = (function (PORTAL, $) {
                     copy_div.querySelector(".tender_card-dead_line").innerHTML = tenders[i].deadline && tenders[i].deadline != null
                         ? formatDate.f(tenders[i].deadline) : formatDate.f(+new Date()+10e8*(Math.round(Math.random()*20))) ;
                     copy_div.querySelector(".tender_card-budget_count").innerHTML = tenders[i].moneyLimit && tenders[i].moneyLimit != null ? tenders[i].moneyLimit : '5';
-                    tenders[i].shortText && tenders[i].shortText != null ? copy_div.querySelector(".short_text_text").innerHTML = tenders[i].shortText : '';
+                    tenders[i].shortText && tenders[i].shortText != null && tenders[i].shortText != ' ' ? copy_div.querySelector(".short_text_text").innerHTML = tenders[i].shortText : '';
                     copy_div.querySelector(".tender_card-img").style.backgroundImage = tenders[i].backGroundImage ? `url("${tenders[i].backGroundImage}")`
                         : `url("/etc/clientlibs/wedding/pages/images/any_img/bgi_${Math.round(Math.random()*20)}_0.jpg")`;
 
@@ -318,28 +318,28 @@ var PORTAL = (function (PORTAL, $) {
 
                 // if (isAdmin){
 
-                    $.ajax({
+                $.ajax({
 
-                        url: `http://wedding-services.mycloud.by/services/rest.tenders/remove.json?id=${selectedPerson.id}`,
-                        type: "POST",
-                        dataType: "json",
-                        data: {part:`${selectedPerson.resourcePath}/tenders`},
-                        beforeSend: function (xhr) {
-                            xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
-                            console.log("beforeSend post !");
-                            console.log();
-                        },
-                        success: function (data) {
-                            console.log(tenderSend.path);
-                            console.dir(data);
-                        },
-                        error: function (e) {
-                            console.log('Что-то пошло не так :( ');
-                            console.log(e);
-                        }
-                    });
+                    url: `http://wedding-services.mycloud.by/services/rest.tenders/remove.json?id=${selectedPerson.id}`,
+                    type: "POST",
+                    dataType: "json",
+                    data: {part:`${selectedPerson.resourcePath}/tenders`},
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Basic " + btoa("admin:you_can't_match_this_password"));
+                        console.log("beforeSend post !");
+                        console.log();
+                    },
+                    success: function (data) {
+                        console.log(tenderSend.path);
+                        console.dir(data);
+                    },
+                    error: function (e) {
+                        console.log('Что-то пошло не так :( ');
+                        console.log(e);
+                    }
+                });
 
-                    $(e.target).parents('.tender_card').css('display','none');
+                $(e.target).parents('.tender_card').css('display','none');
 
                 // }
 
@@ -349,6 +349,116 @@ var PORTAL = (function (PORTAL, $) {
                 svgPath: '/etc/clientlibs/wedding/external/icons/richtext/icons.svg',
                 lang: 'ru'
             });
+
+
+
+            function preLoadAvatar(){
+
+                var avatar_window = $self.find('.user_avatar');
+                var avatar_upload = document.querySelector('#avatar_uploads');
+                var save_avatar_btn = avatar_window.find('#save_avatar');
+                var dataSend = {};
+
+                avatar_upload.addEventListener('change', updateImageDisplay);
+                $self.find('.avatar_remove_icon').on('click', removeAvatar);
+
+
+                function updateImageDisplay(){
+
+                    var curFiles = avatar_upload.files;
+
+                    // upl_img_src = window.URL.createObjectURL(curFiles[0]);
+                    // avatar_window.css('backgroundImage',`url('${upl_img_src}')`);
+                    // listItem.appendChild(image);
+
+                    if(curFiles.length === 1 && validFileType(curFiles[0])) {
+
+                        var image = document.createElement('img');
+                        // image.src = window.URL.createObjectURL(curFiles[0]);
+                        upl_img_src = window.URL.createObjectURL(curFiles[0]);
+                        // upl_img_src = image.src;
+                        console.log(upl_img_src);
+                        avatar_window.css('backgroundImage',`url('${upl_img_src}')`);
+                        save_avatar_btn.removeClass('hidden_full');
+                        save_avatar_btn.one('click', updAvatar);
+                        dataSend.avatarChange = upl_img_src;
+                        // dataSend.avatarChange = curFiles[0];
+                        document.addEventListener('keyup', exitWithoutUpdAvatar);
+                    }
+
+                }
+
+                function removeAvatar(){
+                    $self.find('.user_avatar').css('backgroundImage',`url('/etc/clientlibs/wedding/pages/images/any_img/defaultPhoto.png')`);
+                    save_avatar_btn.removeClass('hidden_full');
+                    save_avatar_btn.one('click', updAvatar);
+                    document.addEventListener('keyup', exitWithoutUpdAvatar);
+                    dataSend.avatarChange = '/etc/clientlibs/wedding/pages/images/any_img/defaultPhoto.png';
+                }
+
+                function exitWithoutUpdAvatar(e){
+                    if (e.keyCode === 27) { // esc
+                        save_avatar_btn.addClass('hidden_full');
+                        save_avatar_btn.off('click', updAvatar);
+                        selectedPerson.avatar ? avatar_window.css('backgroundImage',`url('${selectedPerson.avatar}')`)
+                            : $self.find('.user_avatar').css('backgroundImage',`url('${FakeUser.avatar}')`);
+                        document.removeEventListener('keyup', exitWithoutUpdAvatar);
+                    }
+                }
+
+                function updAvatar(){
+
+                    save_avatar_btn.addClass('hidden_full');
+                    dataSend.id = selectedPerson.id;
+                    console.dir(dataSend);
+                    $.ajax({
+                        // url: 'http://wedding-services.mycloud.by/services/rest.partners/changeAvatar.json',
+                        url: 'http://wedding-services.mycloud.by/services/rest.user/update.json',
+                        type: 'PUT',
+                        dataType: 'json',
+                        data: dataSend,
+                        success: function(data){
+                            console.log('success');
+                            data.avatar ? Cookies.set('avatar', data.avatar) : '';
+                        },
+                        error: function (e) {
+                            console.log(e);
+                        }
+                    });
+
+                    document.removeEventListener('keyup', exitWithoutUpdAvatar);
+                }
+
+            }
+
+            preLoadAvatar();
+
+            // function returnFileSize(number) {
+            //     if(number < 1024) {
+            //         return number + 'bytes';
+            //     } else if(number > 1024 && number < 1048576) {
+            //         return (number/1024).toFixed(1) + 'KB';
+            //     } else if(number > 1048576) {
+            //         return (number/1048576).toFixed(1) + 'MB';
+            //     }
+            // }
+
+            var fileTypes = [
+                'image/jpeg',
+                'image/pjpeg',
+                'image/png'
+            ];
+
+            function validFileType(file) {
+                for(var i = 0; i < fileTypes.length; i++) {
+                    if(file.type === fileTypes[i]) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+
 
             (function(){  //  функции переключения страниц
 

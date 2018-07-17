@@ -6,7 +6,7 @@
 <div class="phone-div"> <a href="tel:+375445560667"> <img src="/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/Main_Page_Social_Media_Icons_operators/mts.png" alt="МТС"> + 375 44 5560 667 </a> </div>
 <div class="phone-div"> <a href="tel:+375447560967"> <img src="/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/Main_Page_Social_Media_Icons_operators/velcom.png" alt="Велком">  + 375 44 7560 967 </a> </div>
 <div class="mail-div"> <a href="mailto:info@tvoyasvadba.by"> info@tvoyasvadba.by </a> </div>
-<div class="footer-line-div">	_____________________________	</div>
+<div class="footer-line-div"> ________________________ </div>
 <div class="social-btn-block"> <a href=" "> <img src="/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/Main_Page_Social_Media_Icons_operators/vk.png" alt="Вконтакте"> </a> <a href=" "> <img src="/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/Main_Page_Social_Media_Icons_operators/facebook.png" alt="ВФейсбуке"> </a> <a href=" "> <img src="/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/Main_Page_Social_Media_Icons_operators/insta.png" alt="ВИнстаграме"> </a> </div>
 
 <div class="btn-up"> <a href="#"> <img src="/etc/clientlibs/wedding/pages/images/on_all_pages/btn_up.png"> </a> </div>

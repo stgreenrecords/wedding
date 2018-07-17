@@ -21,11 +21,13 @@
 
                     <div class="user_avatar">
                         <p class="edit_avatar_btns hidden_full">
-                            <img class="avatar_upd_icon" src='/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/upd_photo.png' alt="avatar_upd_icon">
-                            <img class="avatar_remove_icon " src='/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/remove_photo.png' alt="avatar_remove_icon">
+                            <label for="avatar_uploads"> <img class="avatar_upd_icon" src="/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/upd_photo.png" title="Изменить аватар" alt="avatar_upd_icon"> </label>
+                            <img class="avatar_remove_icon " src="/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/remove_photo.png"
+                                 title="Удалить аватар" alt="avatar_remove_icon">
                         </p>
+                        <input class="input_upload_avatar hidden_full" type="file" id="avatar_uploads" name="image_uploads" accept=".jpg, .jpeg, .png">
+                        <img id="save_avatar" class="save_avatar btn hidden_full" src="/etc/clientlibs/wedding/pages/images/profil_user/profil_and_tenders/save_btn.png" alt="SAVE">
                     </div>
-
 
                     <div class="user_avatar_btn">
 
@@ -100,7 +102,6 @@
                          alt="create_tender_icon" title="Создать тендер">
 
                 </div>
-
 
                 <div class="user_tenders-container">
                     <div class="text_no_tend">
