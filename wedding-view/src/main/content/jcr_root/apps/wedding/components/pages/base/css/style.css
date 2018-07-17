@@ -1500,3 +1500,11 @@ label.head-menu {
     width: 92%;
     font-size: 15px;
 }
+
+.fake_avatar{
+    position: absolute;
+    right: 5%;
+    top: 40px;
+    margin-right: 26px;
+    z-index: 10;
+}

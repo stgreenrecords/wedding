@@ -358,6 +358,7 @@ var PORTAL = (function (PORTAL, $) {
                 var avatar_upload = document.querySelector('#avatar_uploads');
                 var save_avatar_btn = avatar_window.find('#save_avatar');
                 var dataSend = {};
+                var upl_img_src;
 
                 avatar_upload.addEventListener('change', updateImageDisplay);
                 $self.find('.avatar_remove_icon').on('click', removeAvatar);
@@ -408,6 +409,9 @@ var PORTAL = (function (PORTAL, $) {
 
                 function updAvatar(){
 
+                    $self.find('.fake_avatar').detach();
+                    $self.find('.partner-page-wrapper').append($('<div class="fake_avatar mini-avatar"> </div>'));
+                    $self.find('.fake_avatar').css('backgroundImage', `url('${upl_img_src}')`);
                     save_avatar_btn.addClass('hidden_full');
                     dataSend.id = selectedPerson.id;
                     console.dir(dataSend);
