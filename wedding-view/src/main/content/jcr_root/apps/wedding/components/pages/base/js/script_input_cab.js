@@ -573,41 +573,56 @@ var PORTAL = (function (PORTAL, $) {
                 }
             };
 
+        var configOk = {
+            app_id: 1264974848,      // <-- insert APP ID here
+            app_key: 'CBANPGGMEBABABABA'     // <-- insert APP PUBLIC KEY here
+        };
 
         PORTAL.modules.CabinetInput.AUTH.OK = {
 
             "login": function () {
-                okRequest();
+
+                OKSDK.init(configOk, function() {
+                    OKSDK.Widgets.getBackButtonHtml(function(html) {
+                        console.log(html);
+                    });
+                    OKSDK.REST.call('users.getCurrentUser', null, function(status, data, error) {
+                        if (status == 'ok') {
+                            console.log('Hello World and hi, ' + data.name + '.');
+                            console.dir(data);
+                        } else {
+                            alert('Unable to retrieve current user ' + OKSDK.Util.toString(error));
+                        }
+                    });
+                }, function(error) {
+                    alert('OKSDK error' + OKSDK.Util.toString(error));
+                })
             },
 
             "status": function () {
+
+                OKSDK.init(configOk, function() {
+                    OKSDK.Widgets.getBackButtonHtml(function(html) {
+                        console.log(html);
+                    });
+                    OKSDK.REST.call('users.getCurrentUser', null, function(status, data, error) {
+                        if (status == 'ok') {
+                            console.log('Hello World and hi, ' + data.name + '.');
+                            console.dir(data);
+                        } else {
+                            alert('Unable to retrieve current user ' + OKSDK.Util.toString(error));
+                        }
+                    });
+                }, function(error) {
+                    alert('OKSDK error' + OKSDK.Util.toString(error));
+                });
+
                 okRequest();
                 //compareUserData();
             }
         };
 
-        function okRequest(){
-            var config = {
-                app_id: 1264974848,      // <-- insert APP ID here
-                app_key: 'CBANPGGMEBABABABA'     // <-- insert APP PUBLIC KEY here
-            };
 
-            OKSDK.init(config, function() {
-                OKSDK.Widgets.getBackButtonHtml(function(html) {
-                    console.log(html);
-                });
-                OKSDK.REST.call('users.getCurrentUser', null, function(status, data, error) {
-                    if (status == 'ok') {
-                        console.log('Hello World and hi, ' + data.name + '.');
-                        console.dir(data);
-                    } else {
-                        alert('Unable to retrieve current user ' + OKSDK.Util.toString(error));
-                    }
-                });
-            }, function(error) {
-                alert('OKSDK error' + OKSDK.Util.toString(error));
-            })
-        }
 
         PORTAL.modules.CabinetInput.AUTH.EMAIL = {
 
