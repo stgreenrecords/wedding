@@ -18,7 +18,7 @@ var PORTAL = (function (PORTAL, $) {
 
             var dataRegistration = {};
             var userLoginInfo = {};
-            var authType = 'EMAIL';
+            var authType = '';
 
             var authStatusFromCookie = Cookies.get('authStatus');
             var authTypeFromCookie = Cookies.get('authType');
@@ -73,6 +73,7 @@ var PORTAL = (function (PORTAL, $) {
                         success: function (data) {
                             if (typeof(data) === 'object' && data.hasOwnProperty('id') && dataCompare.id == data.id ) {
                                 setCookiesAll(data);
+                                enterOfForm();
                             }else{
                                 console.log('Ждет реализации Запрос юзера по id  при входе');
                             }
@@ -140,19 +141,31 @@ var PORTAL = (function (PORTAL, $) {
 
             function enterOfForm(){
                 modalW.closeMWindow(".window-entrance", "#entrance-form");
-                authType = 'EMAIL';
                 showCabinetSuccess();
             }
 
             /*---*/
 
-            function sendLoginRequest(){
+            function sendLoginRequest(userId){
 
-            }
+                $.ajax({
+                    url: `/services/rest.loginUser.json?id=userId`, // Запрос юзера по id / и / или email  при входе
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        if (typeof(data) === 'object' && data.hasOwnProperty('id') && dataCompare.id == data.id ) {
+                            setCookiesAll(data);
+                            enterOfForm();
+                            authType = 'EMAIL';
+                        }else{
+                            console.log('Ждет реализации Запрос юзера по id  при входе');
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                });
 
-            function showCabinetPage(data){
-                console.log(' ============ showCabinet - in the studia ) ============ ');
-                console.dir(data);
             }
 
             function inputFirstStepRegFill(){
@@ -184,8 +197,8 @@ var PORTAL = (function (PORTAL, $) {
 
             enter.addEventListener("click", function(){
 
-                // sendLoginRequest();
-                enterOfForm();
+                 sendLoginRequest('email_Id');
+                // enterOfForm();
                 // setCookiesAuth('authorized', 'EMAIL');
                 if ($self.find('#remember-ident').val() === 'remember-ident-user'){
                     Cookies.set('userEmail', $self.find('#user_email').val());
@@ -531,6 +544,7 @@ var PORTAL = (function (PORTAL, $) {
                             console.log(response);
                             // var uid = response.authResponse.userID;
                             // var accessToken = response.authResponse.accessToken;
+                            compareUserData(response);
                         } else if (response.status === 'not_authorized') {
                             console.log(response);
                             console.log(response.status);
@@ -548,62 +562,52 @@ var PORTAL = (function (PORTAL, $) {
                     GoogleAuth.signIn();
                    // handleAuthClick();
                    console.log(socialUser);
-
                     // gmail.login(function (response) {
                     //     console.log(response);
                     // });
-
                 },
 
                 "status": function () {
-
-                    alert('GMAIL STALUSs');
                     googleStatus(GoogleAuth.isSignedIn.get());
+                    //compareUserData();
                 }
-
-
             };
-
-
-
-
-
-
 
 
         PORTAL.modules.CabinetInput.AUTH.OK = {
 
             "login": function () {
-
-                var config = {
-                    app_id: 1264974848,      // <-- insert APP ID here
-                    app_key: 'CBANPGGMEBABABABA'     // <-- insert APP PUBLIC KEY here
-                };
-
-                OKSDK.init(config, function() {
-                    OKSDK.Widgets.getBackButtonHtml(function(html) {
-                        console.log(html);
-                    });
-                    OKSDK.REST.call('users.getCurrentUser', null, function(status, data, error) {
-                        if (status == 'ok') {
-                           console.log('Hello World and hi, ' + data.name + '.');
-                           console.dir(data);
-                        } else {
-                            alert('Unable to retrieve current user ' + OKSDK.Util.toString(error));
-                        }
-                    });
-                }, function(error) {
-                    alert('OKSDK error' + OKSDK.Util.toString(error));
-                })
-
+                okRequest();
             },
 
             "status": function () {
-                alert('OK STAtUSs');
+                okRequest();
+                //compareUserData();
             }
-
-
         };
+
+        function okRequest(){
+            var config = {
+                app_id: 1264974848,      // <-- insert APP ID here
+                app_key: 'CBANPGGMEBABABABA'     // <-- insert APP PUBLIC KEY here
+            };
+
+            OKSDK.init(config, function() {
+                OKSDK.Widgets.getBackButtonHtml(function(html) {
+                    console.log(html);
+                });
+                OKSDK.REST.call('users.getCurrentUser', null, function(status, data, error) {
+                    if (status == 'ok') {
+                        console.log('Hello World and hi, ' + data.name + '.');
+                        console.dir(data);
+                    } else {
+                        alert('Unable to retrieve current user ' + OKSDK.Util.toString(error));
+                    }
+                });
+            }, function(error) {
+                alert('OKSDK error' + OKSDK.Util.toString(error));
+            })
+        }
 
         PORTAL.modules.CabinetInput.AUTH.EMAIL = {
 
@@ -694,7 +698,6 @@ var PORTAL = (function (PORTAL, $) {
                     // }
                 });
             }
-
 //            handleClientLoad();
 
             if (authStatusFromCookie !== "authorized" && authTypeFromCookie) {
