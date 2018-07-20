@@ -573,14 +573,14 @@ var PORTAL = (function (PORTAL, $) {
                 }
             };
 
-        var configOk = {
-            app_id: 1264974848,      // <-- insert APP ID here
-            app_key: 'CBANPGGMEBABABABA'     // <-- insert APP PUBLIC KEY here
-        };
-
         PORTAL.modules.CabinetInput.AUTH.OK = {
 
             "login": function () {
+
+                var configOk = {
+                    app_id: 1264974848,      // <-- insert APP ID here
+                    app_key: 'CBANPGGMEBABABABA'     // <-- insert APP PUBLIC KEY here
+                };
 
                 OKSDK.init(configOk, function() {
                     OKSDK.Widgets.getBackButtonHtml(function(html) {
