@@ -1244,224 +1244,6 @@ label.head-menu {
     overflow: hidden;
 }
 
-@media screen and (max-width: 666px) {
-
-    .main-menu ul{
-        flex-direction: column;
-        position: relative;
-        background-color: #a0a0a0; /* #afa58e;*/
-        z-index: 7;
-    }
-
-    .main-menu ul li{
-        text-align: right;
-        border-bottom: 1px solid #606060;
-    }
-
-    .central-head {
-        padding: 0;
-    }
-
-    .catalog_unit{
-        width: 98%;
-    }
-
-    .search-usually {
-        width: 96%;
-    }
-
-    .menu-cross--hidden, .menu-burger--hidden{
-        cursor: pointer;
-    }
-
-    .head-block {
-        min-height: 185px;
-    }
-
-    .central-head--title{
-        font-size: 48px;
-    }
-
-    .head-block .main-menu{
-        position: absolute;
-        right: 10px;
-        top: 100px;
-        width: 80%;
-    }
-
-    label.head-menu {
-        display: inline-block;
-        box-sizing: border-box;
-        width: 100%;
-        margin: 15px 0 15px 0;
-    }
-
-    .head-menu img{
-        display: block;
-        float: right;
-        padding: 20px;
-        height: 80px;
-        box-sizing: border-box;
-    }
-
-    .head-menu .menu-cross--hidden{display: none;}
-    nav.main-menu .main-menu_btn {display: none;}
-    nav input[type="checkbox"]:checked ~ .main-menu_btn {display: block;}
-    nav input[type="checkbox"]:checked ~ .head-menu .menu-cross--hidden {display: block;}
-    nav input[type="checkbox"]:checked ~ .head-menu .menu-burger--hidden {display: none;}
-
-    /* - - - - - - - - - */
-
-    .mwindow input, .settings-page input {
-        height: 15px;
-        margin: 5px 0;
-        padding: 5px 0 5px 1%;
-        border: none;
-        width: 97%;
-        font-size: 15px;
-    }
-
-    .container-window-registation, .container-window-registation-step2,
-    .container-window-registation-step3-user, .container-window-registation-step3-partner {
-        padding: 5% 0;
-        width: 220px;
-        font-size: 15px;
-    }
-
-    .social-inter img{
-        width: 40px;
-        height: 40px;
-    }
-
-    .title-inter, .title-inter2 {
-        font-size: 18px;
-    }
-
-    .container-window-entrance {
-        width: 220px;
-    }
-
-    .remember-forget{
-        font-size: 12px;
-    }
-
-    .btn-enter{
-        width: 220px;
-    }
-
-    .btn-enter img{
-        max-width: 220px;
-    }
-
-    .partner_menu ul {
-        flex-wrap: wrap;
-    }
-
-}
-
-@media screen and (min-width: 1499px) {
-
-    main {
-        width: 75%;
-    }
-
-}
-
-@media screen and (max-width: 799px) {
-
-    .popup-create{
-        display: flex;
-        flex-direction: column;
-    }
-
-}
-
-@media screen and (max-width: 933px) {
-
-    .partner-page-wrapper{
-        flex-direction: column;
-    }
-
-    #user_aside{
-        width: 100%;
-    }
-
-    #cabinet_aside_sect{
-        width: 100%;
-        min-height: 300px;
-        margin-bottom: 30px;
-    }
-
-    #partner-page-pages{
-        width: 100%;
-        margin-left: 0;
-    }
-
-    #partner_aside{
-        width: 100%;
-    }
-
-    .tender_card{
-        width: 80%;
-        margin: 5% 10%;
-    }
-
-}
-
-@media screen and (min-width: 666px) and (max-width: 933px) {
-    .partner_avatar, .user_avatar {
-        width: 92%;
-        margin: 2%;
-    }
-
-    #cabinet_aside_sect > p {
-        display: inline-block;
-
-    }
-
-    .avatar_and_btn{
-        display: inline-flex;
-        width: 50%;
-    }
-
-    .profile_data{
-        display: inline-block;
-        width: 45%;
-        margin-top: 20px;
-        vertical-align: top;
-    }
-
-    .catalog_unit{
-        width: 48%;
-    }
-
-    .search-usually {
-        width: 46%;
-    }
-
-}
-
-@media screen and (min-width: 420px) {
-
-    main {
-        width: 90%;
-    }
-
-}
-
-@media screen and (max-width: 420px) {
-
-    body {
-        font-size: 14px;
-    }
-
-    .central-head {
-        align-self: center;
-        margin-top: 40px;
-    }
-
-}
-
 #popup_modal, .popup_modal{
     position: fixed;
     height: 100%;
@@ -1575,4 +1357,245 @@ label.head-menu {
     top: 40px;
     margin-right: 26px;
     z-index: 10;
+}
+
+@media screen and (max-width: 666px) {
+
+    .consent-user-div span {
+        padding: 4px 7px;
+    }
+
+    .forget-password{
+        padding: 5px;
+    }
+
+    .popup_alert{
+        padding: 5%;
+    }
+    .main-menu ul{
+        flex-direction: column;
+        position: relative;
+        background-color: #a0a0a0; /* #afa58e;*/
+        z-index: 7;
+    }
+
+    .main-menu ul li{
+        text-align: right;
+        border-bottom: 1px solid #606060;
+    }
+
+    .central-head {
+        padding: 0;
+    }
+
+    .catalog_unit{
+        width: 98%;
+    }
+
+    .search-usually {
+        width: 96%;
+    }
+
+    .menu-cross--hidden, .menu-burger--hidden{
+        cursor: pointer;
+    }
+
+    .head-block {
+        min-height: 185px;
+    }
+
+    .central-head--title{
+        font-size: 48px;
+    }
+
+    .head-block .main-menu{
+        position: absolute;
+        right: 10px;
+        top: 100px;
+        width: 80%;
+    }
+
+    label.head-menu {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 100%;
+        margin: 15px 0 15px 0;
+    }
+
+    .head-menu img{
+        display: block;
+        float: right;
+        padding: 20px;
+        height: 80px;
+        box-sizing: border-box;
+    }
+
+    .head-menu .menu-cross--hidden{display: none;}
+    nav.main-menu .main-menu_btn {display: none;}
+    nav input[type="checkbox"]:checked ~ .main-menu_btn {display: block;}
+    nav input[type="checkbox"]:checked ~ .head-menu .menu-cross--hidden {display: block;}
+    nav input[type="checkbox"]:checked ~ .head-menu .menu-burger--hidden {display: none;}
+
+    /* - - - - - - - - - */
+
+    .mwindow input, .settings-page input, .popup_alert input, .popup_alert select  {
+        /*height: 15px;*/
+        height: 30px;
+        margin: 5px 0;
+        padding: 5px 0 5px 1%;
+        border: none;
+        width: 97%;
+        font-size: 15px;
+    }
+
+    .container-window-registation, .container-window-registation-step2,
+    .container-window-registation-step3-user, .container-window-registation-step3-partner {
+        padding: 5%;
+        width: 220px;
+        font-size: 15px;
+    }
+
+    .social-inter img{
+        width: 40px;
+        height: 40px;
+    }
+
+    .title-inter, .title-inter2 {
+        font-size: 18px;
+    }
+
+    .container-window-entrance {
+        padding: 5%;
+        width: 220px;
+    }
+
+    .remember-forget{
+        font-size: 12px;
+    }
+
+    .btn-enter{
+        width: 220px;
+    }
+
+    .btn-enter img{
+        max-width: 220px;
+    }
+
+    .partner_menu ul {
+        flex-wrap: wrap;
+    }
+
+    .create-text_area {
+        width: 280px;
+        height: 410px;
+        padding: 2px;
+    }
+
+    .create-text_area .trumbowyg-editor {
+        min-height: 120px;
+    }
+
+}
+
+@media screen and (min-width: 1499px) {
+
+    main {
+        width: 75%;
+    }
+
+}
+
+@media screen and (max-width: 799px) {
+
+    .popup-create{
+        display: flex;
+        flex-direction: column;
+    }
+
+}
+
+@media screen and (max-width: 933px) {
+
+    .partner-page-wrapper{
+        flex-direction: column;
+    }
+
+    #user_aside{
+        width: 100%;
+    }
+
+    #cabinet_aside_sect{
+        width: 100%;
+        min-height: 300px;
+        margin-bottom: 30px;
+    }
+
+    #partner-page-pages{
+        width: 100%;
+        margin-left: 0;
+    }
+
+    #partner_aside{
+        width: 100%;
+    }
+
+    .tender_card{
+        width: 80%;
+        margin: 5% 10%;
+    }
+
+}
+
+@media screen and (min-width: 666px) and (max-width: 933px) {
+    .partner_avatar, .user_avatar {
+        width: 92%;
+        margin: 2%;
+    }
+
+    #cabinet_aside_sect > p {
+        display: inline-block;
+
+    }
+
+    .avatar_and_btn{
+        display: inline-flex;
+        width: 50%;
+    }
+
+    .profile_data{
+        display: inline-block;
+        width: 45%;
+        margin-top: 20px;
+        vertical-align: top;
+    }
+
+    .catalog_unit{
+        width: 48%;
+    }
+
+    .search-usually {
+        width: 46%;
+    }
+
+}
+
+@media screen and (min-width: 420px) {
+
+    main {
+        width: 90%;
+    }
+
+}
+
+@media screen and (max-width: 420px) {
+
+    body {
+        font-size: 14px;
+    }
+
+    .central-head {
+        align-self: center;
+        margin-top: 40px;
+    }
+
 }
