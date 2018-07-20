@@ -153,6 +153,7 @@
 .about-us-container{
     min-height: 780px;
     background: url("/etc/clientlibs/wedding/pages/images/landing_parthner/Phone/About.jpg") center no-repeat;
+    background-size: cover;
     margin: 90px 2% 70px 2%;
     display: flex;
     flex-direction: column;
@@ -203,6 +204,7 @@
     width: 300px;
     height: 80px;
     background:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/become_partner/Partner_Button_2.png") center no-repeat;
+    background-size: cover;
     border: none;
     cursor: pointer;
 }
