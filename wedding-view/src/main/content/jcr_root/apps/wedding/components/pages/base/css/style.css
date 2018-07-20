@@ -1459,6 +1459,11 @@ label.head-menu {
 
     .popup_alert input, .popup_alert select{
         height: 30px;
+        margin: 5px 0;
+        padding: 5px 0 5px 1%;
+        border: none;
+        width: 97%;
+        font-size: 15px;
     }
 
     .container-window-registation, .container-window-registation-step2,
