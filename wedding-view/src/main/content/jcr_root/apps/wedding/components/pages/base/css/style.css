@@ -1438,14 +1438,27 @@ label.head-menu {
 
     /* - - - - - - - - - */
 
-    .mwindow input, .settings-page input, .popup_alert input, .popup_alert select  {
-        /*height: 15px;*/
-        height: 30px;
+    .mwindow input, .settings-page input  {
         margin: 5px 0;
         padding: 5px 0 5px 1%;
         border: none;
         width: 97%;
         font-size: 15px;
+    }
+
+    .mwindow input, .settings-page input{
+        height: 15px;
+    }
+
+    .mwindow select, .settings-page select{
+        height: 30px;
+        padding: 4px;
+        margin: 5px 0;
+        font-size: 15px;
+    }
+
+    .popup_alert input, .popup_alert select{
+        height: 30px;
     }
 
     .container-window-registation, .container-window-registation-step2,
