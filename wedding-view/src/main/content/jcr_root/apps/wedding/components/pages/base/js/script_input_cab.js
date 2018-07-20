@@ -326,9 +326,11 @@ var PORTAL = (function (PORTAL, $) {
                         console.dir(dataRegistration);
 
                     } else /*if ($("input[name='consent']:checked").val() === undefined)*/{
-                        $self.find('.registation3_errore_message').css('display','flex');
+                        var errMess = $self.find('.registation3_errore_message');
+                        errMess.css('display','flex');
+                        setTimeout(()=>{errMess.css('display','none')}, 1900);
                         $self.find(".window-registation-step3-partner input").one('focus', function(){
-                            $self.find('.registation3_errore_message').css('display','none');
+                            errMess.css('display','none');
                         });
                     }
 
@@ -447,9 +449,11 @@ var PORTAL = (function (PORTAL, $) {
 
 
                     } else /*if ($("input[name='consent']:checked").val() === undefined)*/{
-                        $self.find('.registation3_errore_message').css('display','flex');
+                        var errMess = $self.find('.registation3_errore_message');
+                        errMess.css('display','flex');
+                        setTimeout(()=>{errMess.css('display','none')}, 1900);
                         $self.find(".window-registation-step3-user input").one('focus', function(){
-                            $self.find('.registation3_errore_message').css('display','none');
+                            errMess.css('display','none');
                         });
                     }
                 });

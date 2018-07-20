@@ -120,10 +120,9 @@ img, body, header, footer, nav, aside, article, section, figure, button, p, ul, 
 }
 
 a {text-decoration: none; color: #222; }
-/*white-space: nowrap; */
+
 .central-head{
   align-self: flex-end;
-  padding: 0 7%;
 }
 
 .cabinet-input{
@@ -1311,6 +1310,53 @@ label.head-menu {
     nav input[type="checkbox"]:checked ~ .head-menu .menu-cross--hidden {display: block;}
     nav input[type="checkbox"]:checked ~ .head-menu .menu-burger--hidden {display: none;}
 
+    /* - - - - - - - - - */
+
+    .mwindow input, .settings-page input {
+        height: 15px;
+        margin: 5px 0;
+        padding: 5px 0 5px 1%;
+        border: none;
+        width: 97%;
+        font-size: 15px;
+    }
+
+    .container-window-registation, .container-window-registation-step2,
+    .container-window-registation-step3-user, .container-window-registation-step3-partner {
+        padding: 5% 0;
+        width: 220px;
+        font-size: 15px;
+    }
+
+    .social-inter img{
+        width: 40px;
+        height: 40px;
+    }
+
+    .title-inter, .title-inter2 {
+        font-size: 18px;
+    }
+
+    .container-window-entrance {
+        width: 220px;
+    }
+
+    .remember-forget{
+        font-size: 12px;
+    }
+
+    .btn-enter{
+        width: 220px;
+    }
+
+    .btn-enter img{
+        max-width: 220px;
+    }
+
+    .partner_menu ul {
+        flex-wrap: wrap;
+    }
+
 }
 
 @media screen and (min-width: 1499px) {
@@ -1360,14 +1406,6 @@ label.head-menu {
         margin: 5% 10%;
     }
 
-    .catalog_unit{
-        width: 48%;
-    }
-
-    .search-usually {
-        width: 46%;
-    }
-
 }
 
 @media screen and (min-width: 666px) and (max-width: 933px) {
@@ -1392,6 +1430,36 @@ label.head-menu {
         margin-top: 20px;
         vertical-align: top;
     }
+
+    .catalog_unit{
+        width: 48%;
+    }
+
+    .search-usually {
+        width: 46%;
+    }
+
+}
+
+@media screen and (min-width: 420px) {
+
+    main {
+        width: 90%;
+    }
+
+}
+
+@media screen and (max-width: 420px) {
+
+    body {
+        font-size: 14px;
+    }
+
+    .central-head {
+        align-self: center;
+        margin-top: 40px;
+    }
+
 }
 
 #popup_modal, .popup_modal{
