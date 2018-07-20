@@ -6,8 +6,8 @@
     min-height: 1142px;
     color: #fff;
     z-index: 5;
-    background-color: #ffe;
-    background:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/cover_photo.jpg") center no-repeat;
+    background-color: #f4f4f4;
+    background:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Phone/Main_Photo.jpg") center no-repeat;
     background-size: cover;
 }
 
@@ -47,16 +47,10 @@
     background-image:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/become_partner/Partner_Button_2.png");
 }
 
-.btn-become-partner:focus {
+.btn-become-partner:focus{
     border: none;
     background-image:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/become_partner/Partner_Button_2.png");
 }
-
-/*#entrance-cabinet-btn-land, #registration-btn-land {
-    cursor: pointer;
-}*/
-
-/*  ======   --- -----  */
 
 .lend-partners-main{
     background-color: #f4f4f4;
@@ -112,7 +106,7 @@
 
 .with-us-div{
     min-height: 450px;
-    width: 29.3333333333%;
+    width: 96%;
     margin: 2%;
     background-color: #f4f4f4;
     background-repeat: no-repeat;
@@ -158,7 +152,7 @@
 
 .about-us-container{
     min-height: 780px;
-    background: url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/about_us_background.png") center no-repeat / cover;
+    background: url("/etc/clientlibs/wedding/pages/images/landing_parthner/Phone/About.jpg") center no-repeat;
     margin: 90px 2% 70px 2%;
     display: flex;
     flex-direction: column;
@@ -168,7 +162,6 @@
     margin: 140px auto 0;
     background-color: #fff;
     padding: 0 0 50px 0;
-    width: 70%;
 }
 
 .about-us-title{
@@ -209,7 +202,7 @@
     margin-bottom: 60px;
     width: 300px;
     height: 80px;
-    background:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/become_partner/Partner_Button_2.png") center no-repeat / cover;
+    background:  url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/become_partner/Partner_Button_2.png") center no-repeat;
     border: none;
     cursor: pointer;
 }
@@ -244,7 +237,6 @@
     width: 40px;
     height: 40px;
     background: linear-gradient(to bottom, transparent, #c3b89e);
-    /*background: #c3b89e;*/
     color: #fff;
     padding: 20px 10px 5px;
 }
@@ -253,7 +245,43 @@
     padding: 15px;
 }
 
-@media screen and (max-width: 898px) {
+@media screen and (min-width: 421px) {
+
+    .about-us-frame {
+        width: 70%;
+    }
+
+    .lend-partners-header{
+        background-image: url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/cover_photo.jpg");
+    }
+
+    .about-us-container{
+        background-image: url("/etc/clientlibs/wedding/pages/images/landing_parthner/Desktop/Computer_Assets/about_us_background.jpg");
+    }
+
+}
+
+@media screen and (max-width: 420px) {
+
+    .benifits-title, .with-us-title, .about-us-title, .timer-title, .lend-partners-header-title2,  .lend-partners-header-slogan{
+        font-size: 24px;
+    }
+
+    .timer-board figure span{
+        font-size: 30px;
+    }
+
+    .timer-board figure {
+        padding: 5px;
+    }
+
+    .lend-partners-header-title2 {
+        padding: 120px 0;
+    }
+
+}
+
+@media screen and (min-width: 421px) and (max-width: 898px) {
 
     .with-us-container{
         margin: 2%;
@@ -315,3 +343,11 @@
     }
 
 }
+
+@media screen and (min-width: 1300px){
+    .with-us-div{
+        width: 29.3333333333%;
+    }
+
+}
+
