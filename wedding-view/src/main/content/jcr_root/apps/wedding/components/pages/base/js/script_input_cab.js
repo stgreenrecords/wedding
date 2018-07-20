@@ -18,7 +18,7 @@ var PORTAL = (function (PORTAL, $) {
 
             var dataRegistration = {};
             var userLoginInfo = {};
-            var authType = '';
+            var authType = 'email';
 
             var authStatusFromCookie = Cookies.get('authStatus');
             var authTypeFromCookie = Cookies.get('authType');
