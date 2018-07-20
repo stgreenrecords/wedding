@@ -575,8 +575,9 @@ var PORTAL = (function (PORTAL, $) {
 
         PORTAL.modules.CabinetInput.AUTH.OK = {
 
-            "login": function () {   // Честно - тут хз все работало вчера, а теперь вылетает какой-то ерор!
+            "login": function () {
 
+                document.addEventListener('DOMContentLoaded', function () {
                     var config = {
                         app_id: 1264974848,      // <-- insert APP ID here
                         app_key: 'CBANPGGMEBABABABA'     // <-- insert APP PUBLIC KEY here
@@ -596,10 +597,10 @@ var PORTAL = (function (PORTAL, $) {
                     }, function(error) {
                         alert('OKSDK error' + OKSDK.Util.toString(error));
                     });
+                });
             },
 
             "status": function () {
-
                 var config = {
                     app_id: 1264974848,      // <-- insert APP ID here
                     app_key: 'CBANPGGMEBABABABA'     // <-- insert APP PUBLIC KEY here
