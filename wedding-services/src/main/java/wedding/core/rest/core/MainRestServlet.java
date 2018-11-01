@@ -11,7 +11,6 @@ import org.osgi.framework.BundleContext;
 import org.osgi.service.component.ComponentContext;
 import wedding.core.data.Constants;
 import wedding.core.rest.site.RestFieldCore;
-import wedding.core.rest.util.ServletMapping;
 import wedding.core.utils.WeddingResourceUtil;
 
 import javax.servlet.ServletException;

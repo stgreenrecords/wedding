@@ -12,7 +12,6 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import wedding.core.model.WeddingBaseModel;
-import wedding.core.rest.util.ServletMapping;
 import wedding.core.services.resolver.ResolverProvider;
 
 import javax.jcr.Node;
@@ -65,7 +64,7 @@ public final class SlingModelUtil {
 
     public static Resource createModelResource(SlingHttpServletRequest request, String path, Class aClass) {
         final String id = WeddingResourceUtil.generateId();
-        final String resourceType = ServletMapping.getResourceTypeFromRequest(request);
+        final String resourceType = "";//ServletMapping.getResourceTypeFromRequest(request);
         Resource resource = "rep:User".equals(resourceType)
                 ? createUser(request, id, path)
                 : createResource(request.getResourceResolver(), path + "/" + id, resourceType);
@@ -94,7 +93,7 @@ public final class SlingModelUtil {
             return null;
         }
         final String id = WeddingResourceUtil.generateId();
-        final String resourceType = ServletMapping.getResourceTypeFromRequest(request);
+        final String resourceType = "";//ServletMapping.getResourceTypeFromRequest(request);
         final Resource resource = "rep:User".equals(resourceType)
                 ? createUser(request, id, path)
                 : createResource(request.getResourceResolver(), path + "/" + id, resourceType);

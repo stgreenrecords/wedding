@@ -72,4 +72,8 @@ public class AbstractResFieldCore implements RestFieldCore {
         return model;
     }
 
+    public <T extends WeddingBaseModel> T getModel(){
+        return null;
+    }
+
 }
