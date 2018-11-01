@@ -1,10 +1,11 @@
 package wedding.core.rest.site;
 
 import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Properties;
+import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
 import wedding.core.model.PartnerModel;
-import wedding.core.rest.annotations.ModelGate;
 import wedding.core.utils.WeddingResourceUtil;
 
 import javax.jcr.query.Query;
@@ -17,7 +18,10 @@ import java.util.stream.Stream;
 
 @Component(immediate = true)
 @Service(Partners.class)
-@ModelGate(extension = "catalog-categories", serviceClass = Partners.class, nodeType = "", jcrPath = "")
+@Properties({
+        @Property(name = AbstractResFieldCore.PROPERTY_EXTENSION, value = "partners"),
+        @Property(name = AbstractResFieldCore.PROPERTY_MODEL_CLASS, classValue = PartnerModel.class)
+})
 public class Partners extends AbstractResFieldCore {
 
     @Override

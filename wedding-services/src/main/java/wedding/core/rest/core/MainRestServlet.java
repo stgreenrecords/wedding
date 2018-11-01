@@ -16,13 +16,15 @@ import wedding.core.utils.WeddingResourceUtil;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 
 @SlingServlet(paths = {"/services/rest"})
 public class MainRestServlet extends SlingAllMethodsServlet {
 
     private transient BundleContext bundleContext;
+
+    public static final Map<String, String> servicesMap = new HashMap<>();
 
     @Activate
     public void activate(ComponentContext componentContext) {
@@ -52,7 +54,7 @@ public class MainRestServlet extends SlingAllMethodsServlet {
     private void processMethod(SlingHttpServletRequest request, SlingHttpServletResponse response,
                                Function<RestFieldCore, Object> method) throws IOException {
         writeResponse(
-                processRequest(request.getRequestPathInfo())
+                Optional.of(processRequest(request.getRequestPathInfo()))
                         .map(method)
                         .orElse(StringUtils.EMPTY), response);
     }
@@ -63,17 +65,20 @@ public class MainRestServlet extends SlingAllMethodsServlet {
         response.getWriter().write(responseJson);
     }
 
-    private Optional<RestFieldCore> processRequest(RequestPathInfo pathInfo) {
+    private RestFieldCore processRequest(RequestPathInfo pathInfo) {
         return Optional.ofNullable(pathInfo.getExtension())
-                .map(ServletMapping::getClassByExtension)
-                .map(this::getServesFromContextByClassName);
+                .map(getClassNameByExtension())
+                .map(this::getServesFromContextByClassName)
+                .orElse(null);
     }
 
-    private RestFieldCore getServesFromContextByClassName(Class<RestFieldCore> serviceClass) {
-        return Optional.ofNullable(bundleContext.getServiceReference(serviceClass.getName()))
-                .map(bundleContext::getService)
-                .map(serviceClass::cast)
-                .orElse(null);
+    private RestFieldCore getServesFromContextByClassName(String className) {
+        return (RestFieldCore) Optional.ofNullable(bundleContext.getServiceReference(className))
+                .map(bundleContext::getService).orElse(null);
+    }
+
+    private Function<String, String> getClassNameByExtension(){
+        return ext -> servicesMap.getOrDefault(ext, null);
     }
 
 }

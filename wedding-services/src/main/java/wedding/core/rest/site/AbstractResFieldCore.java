@@ -1,12 +1,28 @@
 package wedding.core.rest.site;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.commons.osgi.PropertiesUtil;
+import org.osgi.service.component.ComponentContext;
 import wedding.core.model.WeddingBaseModel;
+import wedding.core.rest.core.MainRestServlet;
 import wedding.core.utils.SlingModelUtil;
 
-public abstract class AbstractResFieldCore implements RestFieldCore {
+import java.util.Dictionary;
+import java.util.Optional;
+
+@Component(immediate = true)
+@Service(AbstractResFieldCore.class)
+public class AbstractResFieldCore implements RestFieldCore {
 
     static final String PROPERTY_CATALOG_TITLE = "jcr:title";
+
+    public static final String PROPERTY_EXTENSION = "servlet-extension";
+    public static final String PROPERTY_MODEL_CLASS = "model-class";
+    public static final String PROPERTY_SLING_RESOURCE_TYPE = "sling-resource-type";
+    public static final String PROPERTY_JCR_PATH = "jcr-type";
 
     static final String REQUEST_PARAMETER_SORTED_BY = "sortBy";
     static final String REQUEST_PARAMETER_SORT_PRICE_DOWN = "priceDown";
@@ -17,6 +33,15 @@ public abstract class AbstractResFieldCore implements RestFieldCore {
     static final String EVENT_QUERY = "SELECT * FROM [nt:unstructured] AS resource WHERE ISDESCENDANTNODE([/home/users/wedding/partners%s]) %s AND resource.[wedding:resourceType] = 'event'";
     public static final String PARTNER_QUERY = "SELECT * FROM [wedding:resource] AS resource WHERE ISDESCENDANTNODE([/home/users/wedding/partners%s]) %s";
     static final String USER_QUERY = "SELECT * FROM [wedding:resource] AS resource WHERE ISDESCENDANTNODE([/home/users/wedding/users%s]) %s";
+
+    protected void activate(ComponentContext context){
+        Dictionary dictionary = context.getProperties();
+        String serviceClass = PropertiesUtil.toString(dictionary.get("service.pid"), StringUtils.EMPTY);
+        String servletExtension = PropertiesUtil.toString(dictionary.get(PROPERTY_EXTENSION), StringUtils.EMPTY);
+        Optional.of(MainRestServlet.servicesMap)
+                .filter(map -> !map.containsKey(servletExtension))
+                .ifPresent(map -> map.put(servletExtension, serviceClass));
+    }
 
     @Override
     public Object getObject(SlingHttpServletRequest request) {
@@ -46,4 +71,5 @@ public abstract class AbstractResFieldCore implements RestFieldCore {
         SlingModelUtil.updateModel(model);
         return model;
     }
+
 }
