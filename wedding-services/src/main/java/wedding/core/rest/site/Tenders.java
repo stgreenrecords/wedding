@@ -1,50 +1,25 @@
 package wedding.core.rest.site;
 
 import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Properties;
+import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.api.SlingHttpServletRequest;
 import wedding.core.model.TenderModel;
-import wedding.core.utils.WeddingResourceUtil;
 
-import javax.jcr.query.Query;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 @Component(immediate = true)
 @Service(Tenders.class)
+@Properties({
+        @Property(name = AbstractResFieldCore.PROPERTY_EXTENSION, value = "tenders"),
+        @Property(name = AbstractResFieldCore.PROPERTY_REST_RESOURCE_TYPE, value = "tender"),
+        @Property(name = AbstractResFieldCore.PROPERTY_MODEL_CLASS, classValue = TenderModel.class)
+})
 public class Tenders extends AbstractResFieldCore {
-
-    @Override
-    public Object getObject(SlingHttpServletRequest request) {
-        return Optional.of(request.getResourceResolver())
-                .map(resolver -> resolver.findResources(String.format(TENDER_QUERY, WeddingResourceUtil.getSuffixPathFromRequest(request), WeddingResourceUtil.getIdQueryPart(request)), Query.SQL))
-                .map(WeddingResourceUtil::iteratorToOrderedStream)
-                .orElse(Stream.empty())
-                .map(resource -> resource.adaptTo(TenderModel.class))
-                .filter(Objects::nonNull)
-                .sorted(applySorting(request))
-                .limit(getLimit(request))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public Object updateObject(SlingHttpServletRequest request) {
-        return createOrUpdateModel(request, TenderModel.class);
-    }
-
-    @Override
-    public Object createObject(SlingHttpServletRequest request) {
-        return createOrUpdateModel(request, TenderModel.class);
-    }
-
-    @Override
-    public Object deleteObject(SlingHttpServletRequest request) {
-        return null;
-    }
 
     private Comparator<TenderModel> applySorting(final SlingHttpServletRequest request) {
         return Optional.ofNullable(request.getParameter(REQUEST_PARAMETER_SORTED_BY))
