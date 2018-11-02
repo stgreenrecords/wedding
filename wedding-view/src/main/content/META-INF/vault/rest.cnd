@@ -1,0 +1,14 @@
+<rest = 'http://wedding-services.mycloud.by/rest'>
+<sling = 'http://sling.apache.org/jcr/sling/1.0'>
+
+/**
+ * Rest resource
+ */
+[rest:resource] > nt:unstructured
+  - rest:resourceId (string)
+
+[rest:resource] > nt:unstructured
+  - rest:resourceType (string)
+
+[mix:restResource] > rest:resource mixin
+  - rest:resourceId (string)

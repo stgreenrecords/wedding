@@ -11,10 +11,10 @@
         <version>1.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>restextension</artifactId>
+    <artifactId>sling-rest-wrapper</artifactId>
     <packaging>bundle</packaging>
 
-    <name>${project.groupId} - ${project.artifactId}</name>
+    <name>com-sling-rest-wrapper</name>
 
     <description>
         An OSGi Bundle containing all of the backend CQ service implementations for the 'Wedding' project.
@@ -136,9 +136,9 @@
                         <Embed-Dependency>jsoup</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Sling-Model-Packages></Sling-Model-Packages>
+                        <Sling-Model-Packages>com.rest.core.models</Sling-Model-Packages>
                         <Export-Package>
-
+                            com.rest.core.*;
                         </Export-Package>
                         <Import-Package>
                             *;resolution:=optional

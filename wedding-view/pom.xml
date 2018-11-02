@@ -112,7 +112,7 @@
                         </embedded>
                         <embedded>
                             <groupId>com.wedding</groupId>
-                            <artifactId>restextension</artifactId>
+                            <artifactId>sling-rest-wrapper</artifactId>
                             <target>/apps/wedding/install</target>
                         </embedded>
 
@@ -130,7 +130,7 @@
                 <inherited>true</inherited>
                 <configuration>
                     <instructions>
-                        <Sling-Nodetypes>${basedir}/META-INF/vault/wedding.cnd</Sling-Nodetypes>
+                        <Sling-Nodetypes>${basedir}/META-INF/vault/rest.cnd</Sling-Nodetypes>
                     </instructions>
                 </configuration>
             </plugin>
@@ -220,7 +220,7 @@
         </dependency>
         <dependency>
             <groupId>com.wedding</groupId>
-            <artifactId>restextension</artifactId>
+            <artifactId>sling-rest-wrapper</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
