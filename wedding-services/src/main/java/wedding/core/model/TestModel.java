@@ -17,7 +17,7 @@ public class TestModel {
 
     @PostConstruct
     public void init() {
-        System.out.println();
+        //System.out.println();
     }
 
     public String getFirstName() {
