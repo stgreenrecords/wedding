@@ -21,7 +21,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Component(immediate = true)
+@Component(immediate = true, label = "Abstract Res Field Core", metatype = true)
 @Service(AbstractResFieldCore.class)
 @Properties({
         @Property(name = AbstractResFieldCore.PROPERTY_DEFAULT_JCR_PRIMARY_TYPE, value = "nt:unstructured"),
@@ -47,7 +47,7 @@ public class AbstractResFieldCore implements RestFieldCore {
     private String defaultJcrPrimaryType;
     private String defaultJcrPath;
     private String defaultTypeId;
-    private Class modelClass;
+    private Class<?> modelClass;
     private String customJcrPath;
     private String customJcrPrimaryType;
     private String customTypeId;
@@ -59,6 +59,7 @@ public class AbstractResFieldCore implements RestFieldCore {
     private SlingRepository slingRepository;
 
     @Activate
+    @Modified
     protected void activate(ComponentContext componentContext) {
         Dictionary properties = componentContext.getProperties();
 
@@ -74,10 +75,14 @@ public class AbstractResFieldCore implements RestFieldCore {
         restResourceType = PropertiesUtil.toString(properties.get(PROPERTY_REST_RESOURCE_TYPE), StringUtils.EMPTY);
         try {
             Bundle[] bundles = componentContext.getBundleContext().getBundles();
+            Bundle modelBundel = null;
             for(Bundle bundle : bundles){
                 if (bundle.getSymbolicName().contains("wedding-services")){
-                    System.out.println();
+                    modelBundel = bundle;
                 }
+            }
+            if (modelBundel != null) {
+
             }
             //setModelClass(Class.forName(modelClassName));
         } catch (Exception e) {
